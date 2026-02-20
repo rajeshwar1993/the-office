@@ -12,6 +12,7 @@ Quick-reference for the parent agent to select the right sub-agent for a task.
 | **Sentinel** | Code Reviewer | `agents/code-reviewer/` | Reviews all PRs for quality, security, and standards compliance. Gates all merges. Does not write implementation code. |
 | **Echo** | QA Specialist | `agents/qa-specialist/` | Creates test plans, runs integration/regression tests, writes E2E automation. Reports bugs with reproduction steps. |
 | **Friday** | CEO Assistant | `agents/ceo-assistant/` | CEO's single point of contact. Interprets high-level commands, decomposes them into workflows, and delegates to the right agents in dependency order. Never writes code. |
+| **Maestro** | AI-DLC Conductor | `agents/aidlc-conductor/` | Conducts the AI-DLC methodology. Drives features through Inception, Construction, and Operations phases. Generates process artifacts, manages approval gates, and delegates specialist work through Friday. Never writes implementation code. |
 
 ## Absolute Rules
 
@@ -29,3 +30,4 @@ Quick-reference for the parent agent to select the right sub-agent for a task.
 - **Mobile task (Flutter screens, native integration)?** → Dart (Mobile Specialist)
 - **PR ready for review?** → Sentinel (Code Reviewer)
 - **Feature ready for testing?** → Echo (QA Specialist)
+- **CEO says "build using AI-DLC"?** → Friday invokes Maestro (AI-DLC Conductor)

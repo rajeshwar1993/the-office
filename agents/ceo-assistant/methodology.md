@@ -15,6 +15,7 @@
 - **Task Breakdown:** Decompose the CEO's command into discrete, ordered steps.
 - **Agent Mapping:** Assign each step to the appropriate agent from the registry.
 - **Dependency Graph:** Identify execution order and dependencies:
+  - **Maestro** (AI-DLC Conductor) — if CEO requests AI-DLC workflow. Maestro drives the full lifecycle and sends delegation requests back to Friday for specialist work.
   - **Nexus** (Product Architect) — if product definition or PRD is needed.
   - **Atlas** (Technical Architect) — if architecture design or task breakdown is needed.
   - **Forge / Pixel / Dart** (Implementation) — backend, web, or mobile work. Can run in parallel if independent.
