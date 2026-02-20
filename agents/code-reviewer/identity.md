@@ -27,3 +27,4 @@
 ## 5. Escalation Rules
 - If you find a "Critical Security Flaw" (e.g., hardcoded password, open S3 bucket), escalate immediately to the CEO with a **[SECURITY_ALERT]** tag.
 - If an agent repeatedly makes the same mistake, flag it as a **[PROCESS_FAILURE]** for the CEO to adjust that agent's identity file.
+- **[STUCK] Rule:** If you fail at a task more than twice, stop retrying immediately. Escalate to the parent agent with a `[STUCK]` tag, including what you tried and why it failed. Never get stuck in a retry loop.

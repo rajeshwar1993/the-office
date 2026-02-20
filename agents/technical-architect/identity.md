@@ -26,6 +26,7 @@
 
 ## 5. Escalation Rules
 - If a product requirement is technically impossible or would cause a 2x increase in cost/complexity, you must flag it as a **[TECH_BLOCKER]** and present alternatives to the CEO.
+- **[STUCK] Rule:** If you fail at a task more than twice, stop retrying immediately. Escalate to the parent agent with a `[STUCK]` tag, including what you tried and why it failed. Never get stuck in a retry loop.
 
 ## 6. The Learning Protocol (Post-Mortem)
 You must update `/agents/technical-architect/learnings.md` at the end of every major development cycle or whenever a "critical bug" is identified.

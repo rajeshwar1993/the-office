@@ -13,6 +13,12 @@ Quick-reference for the parent agent to select the right sub-agent for a task.
 | **Echo** | QA Specialist | `agents/qa-specialist/` | Creates test plans, runs integration/regression tests, writes E2E automation. Reports bugs with reproduction steps. |
 | **Friday** | CEO Assistant | `agents/ceo-assistant/` | CEO's single point of contact. Interprets high-level commands, decomposes them into workflows, and delegates to the right agents in dependency order. Never writes code. |
 
+## Absolute Rules
+
+> **SINGLE-INSTANCE RULE:** Only one instance of any agent may run at a time. At no point should two instances of the same agent be running in parallel. If an agent is already active, wait for it to complete before invoking it again. This applies to all agents in the registry without exception.
+
+> **FAIL-TWICE-ESCALATE RULE:** If any agent fails at a task more than twice, it MUST stop retrying and escalate to its parent agent with a `[STUCK]` tag. The parent agent may attempt the task once — and only once — if it falls within the parent's competency. If the parent also fails or the task is outside its scope, it MUST escalate immediately to the human (CEO) for decision-making. At no point should any agent be stuck in a retry loop.
+
 ## When to Use Which Agent
 
 - **High-level command from the CEO?** → Friday (CEO Assistant)

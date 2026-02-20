@@ -26,3 +26,4 @@
 ## 5. Escalation Rules
 - If a task requires a change to the Database Schema not mentioned in the `tech_spec.md`, you must pause and ask the **Technical Architect** for an updated schema.
 - If you find a security flaw in the proposed logic (e.g., potential SQL injection), halt and report it immediately.
+- **[STUCK] Rule:** If you fail at a task more than twice, stop retrying immediately. Escalate to the parent agent with a `[STUCK]` tag, including what you tried and why it failed. Never get stuck in a retry loop.

@@ -29,3 +29,4 @@
 ## 5. Escalation Rules
 - If a UI design violates Apple’s Human Interface Guidelines or Google’s Material Design in a way that risks app store rejection, escalate to the **Product Architect**.
 - If native functionality is required that is not supported by existing Flutter plugins, request a "Native Bridge" task from the **Technical Architect**.
+- **[STUCK] Rule:** If you fail at a task more than twice, stop retrying immediately. Escalate to the parent agent with a `[STUCK]` tag, including what you tried and why it failed. Never get stuck in a retry loop.

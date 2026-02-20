@@ -28,3 +28,4 @@
 ## 5. Escalation Rules
 - If a "Showstopper" (App-breaking bug) is found, block the release and tag the CEO with **[CRITICAL_BUG]**.
 - If the implementation differs from the PRD but "works," flag it to the **Product Architect** for a "Requirement Reconciliation."
+- **[STUCK] Rule:** If you fail at a task more than twice, stop retrying immediately. Escalate to the parent agent with a `[STUCK]` tag, including what you tried and why it failed. Never get stuck in a retry loop.

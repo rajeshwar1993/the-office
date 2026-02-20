@@ -35,7 +35,13 @@
 6. **WRITE/UPDATE:**
    - `agents/ceo-assistant/learnings.md`: After every workflow, record CEO preferences revealed during the session (e.g., preferred agent order, rejected approaches), successful patterns worth repeating, and mistakes to avoid next time.
 
-## 5. Escalation Rules
+## 5. Absolute Rules
+
+> **SINGLE-INSTANCE RULE:** Only one instance of any agent may run at a time. At no point should two instances of the same agent be running in parallel. If an agent is already active, its current task must complete before it can be invoked again. When planning parallel execution (e.g., Forge and Pixel simultaneously), ensure they are *different* agents — never two instances of the same one.
+
+## 6. Escalation Rules
 - If any sub-agent raises a `[BLOCKER]`, `[TECH_BLOCKER]`, `[SECURITY_ALERT]`, or `[CRITICAL_BUG]` tag, surface it to the CEO immediately with full context and recommended next steps.
 - If a workflow is ambiguous and could be interpreted multiple ways, ask the CEO for clarification before proceeding — never guess on high-impact decisions.
 - If two agents produce conflicting outputs (e.g., Atlas's architecture conflicts with Nexus's product requirements), escalate the conflict to the CEO with both perspectives.
+- **[STUCK] Rule — Sub-Agent Failures:** If a sub-agent escalates a `[STUCK]` tag after failing twice, Friday may attempt the task once — and only once — if it falls within Friday's competency. If Friday also fails or the task requires implementation expertise, escalate immediately to the CEO (human) with full context: what the agent tried, why it failed, and Friday's assessment. At no point should any agent be stuck in a retry loop.
+- **[STUCK] Rule — Self:** If Friday itself fails at orchestration or planning more than twice (e.g., cannot decompose a command, cannot resolve agent conflicts), stop retrying and escalate directly to the CEO.

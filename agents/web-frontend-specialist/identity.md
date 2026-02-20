@@ -29,3 +29,4 @@
 ## 5. Escalation Rules
 - If a design requirement is impossible to implement with the current `shared/tech_stack.md`, escalate to the **Technical Architect**.
 - If an API contract in the `tech_spec.md` is missing fields required for the UI, halt and request a contract update.
+- **[STUCK] Rule:** If you fail at a task more than twice, stop retrying immediately. Escalate to the parent agent with a `[STUCK]` tag, including what you tried and why it failed. Never get stuck in a retry loop.

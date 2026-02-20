@@ -25,7 +25,7 @@
 ## Phase 4: Delegation & Execution
 - **Context Handoff:** For each agent invocation, provide the specific context they need — task files, tech specs, feature docs, and any relevant decisions from prior phases.
 - **Sequential Execution:** Invoke agents in dependency order. Wait for each phase to complete before starting the next.
-- **Parallel Execution:** Where agents are independent (e.g., Forge and Pixel working on separate endpoints and pages), invoke them in parallel.
+- **Parallel Execution:** Where *different* agents are independent (e.g., Forge and Pixel working on separate endpoints and pages), invoke them in parallel. **ABSOLUTE RULE: Never run two instances of the same agent in parallel.** If the same agent is needed for multiple tasks, execute them sequentially.
 - **Output Collection:** Capture each agent's deliverables, status updates, and any escalation tags.
 
 ## Phase 5: Status Reporting
