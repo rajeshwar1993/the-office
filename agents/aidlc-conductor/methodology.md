@@ -57,9 +57,10 @@ Before entering any phase, execute these steps:
 
 #### Workspace Detection (ALWAYS)
 - **Rule file:** `inception/workspace-detection.md`
-- **Maestro direct:** Scan workspace, determine brownfield/greenfield, collect feature identifier, check for existing reverse engineering artifacts.
+- **Pre-condition:** Friday has already created the feature branch (`feature/[feature_ID]_[shortName]`) and pushed it to origin before invoking Maestro. The branch name is provided as context.
+- **Maestro direct:** Scan workspace, determine brownfield/greenfield, check for existing reverse engineering artifacts. Use the feature identifier from the branch name provided by Friday.
 - **Auto-proceed** to next stage based on findings.
-- **State update:** Record workspace type, feature identifier, next stage decision.
+- **State update:** Record workspace type, feature identifier, branch name, next stage decision.
 
 #### Reverse Engineering (CONDITIONAL — Brownfield Only)
 - **Rule file:** `inception/reverse-engineering.md`

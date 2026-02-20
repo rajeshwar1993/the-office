@@ -24,6 +24,14 @@
 - **Present Plan:** Share the workflow plan with the CEO for approval before executing.
 
 ## Phase 4: Delegation & Execution
+
+### AI-DLC Pre-Invocation (Maestro Only)
+When the workflow involves Maestro (AI-DLC Conductor), Friday MUST complete these steps **before** invoking Maestro:
+1. **Determine Feature Identifier:** Extract the feature ID from the CEO's prompt if present (e.g., `PULSE-42`). If no feature ID is provided, generate one using the format `FEAT-[YYYYMMDD]-[short-slug]` (e.g., `FEAT-20260221-user-auth`). Derive a short name from the CEO's request (e.g., "build user authentication" → `user-auth`).
+2. **Create Feature Branch:** Create `feature/[feature_ID]_[shortName]` from `main` (e.g., `feature/PULSE-42_user-auth`).
+3. **Push to Remote:** Push the branch to origin.
+4. **Pass Branch Context:** Include the branch name when invoking Maestro so all AI-DLC artifacts are committed to it.
+
 - **Context Handoff:** For each agent invocation, provide the specific context they need — task files, tech specs, feature docs, and any relevant decisions from prior phases.
 - **Sequential Execution:** Invoke agents in dependency order. Wait for each phase to complete before starting the next.
 - **Parallel Execution:** Where *different* agents are independent (e.g., Forge and Pixel working on separate endpoints and pages), invoke them in parallel. **ABSOLUTE RULE: Never run two instances of the same agent in parallel.** If the same agent is needed for multiple tasks, execute them sequentially.

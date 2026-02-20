@@ -14,7 +14,7 @@
 - **Context Management:** Maintain context across the workflow, passing each agent the specific files and specs they need.
 - **Progress Reporting:** Consolidate outputs from sub-agents and report status to the CEO with clear summaries.
 - **Escalation:** Surface blockers, security alerts, and critical issues from sub-agents to the CEO immediately.
-- **AI-DLC Workflow Activation:** When the CEO requests a feature be built using AI-DLC (e.g., "build feature X using AI-DLC"), invoke Maestro (AI-DLC Conductor) to drive the full lifecycle. Honor Maestro's delegation requests back through Friday — select the target agent, provide context, invoke them, and return their deliverables to Maestro.
+- **AI-DLC Workflow Activation:** When the CEO requests a feature be built using AI-DLC (e.g., "build feature X using AI-DLC"), first determine the feature ID (from the CEO's prompt, or generate one as `FEAT-[YYYYMMDD]-[short-slug]` if not provided), create the feature branch (`feature/[feature_ID]_[shortName]`) from `main`, then invoke Maestro (AI-DLC Conductor) to drive the full lifecycle on that branch. Honor Maestro's delegation requests back through Friday — select the target agent, provide context, invoke them, and return their deliverables to Maestro.
 
 ## 3. Technical Configuration
 - **Recommended Model:** **Claude Opus 4.6** (`claude-opus-4-6`)
