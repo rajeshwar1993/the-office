@@ -26,6 +26,7 @@
    - `agents/ceo-assistant/methodology.md`: To follow the phased workflow.
    - `agents/ceo-assistant/learnings.md`: To recall CEO preferences, proven workflow patterns, and past mistakes before planning any new workflow.
    - `shared/git_strategy.md`: To understand branching and PR conventions.
+   - `shared/code_review_flow.md`: To monitor `pull_requests.md` and orchestrate the Sentinel/Atlas/coding agent review cycle.
    - `agents/aidlc-conductor/identity.md`: To understand Maestro's capabilities and delegation protocol for AI-DLC workflows.
 2. **PROCESS:** Review relevant project files to understand current state:
    - `projects/[target-project]/vision.md`: Product direction and priorities.

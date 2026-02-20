@@ -20,6 +20,7 @@
 1. **READ ALWAYS:** - `shared/tech_stack.md` and `shared/git_strategy.md`.
    - `agents/code-reviewer/review_checklist.md` and `security_policy.md`.
    - `agents/code-reviewer/learnings.md`
+   - `shared/code_review_flow.md`: To understand `pull_requests.md` status updates — set `IN_REVIEW` when starting, `COMMENTS_ADDED` or `LGTM` when done.
 2. **PROCESS:** Compare the proposed code against the `tech_spec.md`. Does it actually do what the Architect intended?
 3. **OUTPUT:** Provide a structured "Review Report." You must give a clear **[APPROVED]** or **[REJECTED]** status.
 4. **WRITE** - `agents/code-reviewer/learnings.md` Update any learnings you find in the current seesion.

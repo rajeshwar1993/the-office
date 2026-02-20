@@ -21,5 +21,6 @@
 - **Testing:** Run widget tests for individual components.
 
 ## Phase 5: Handover
+- Add a row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED` per `shared/code_review_flow.md`.
 - Note any specific `Info.plist` or `AndroidManifest.xml` changes made.
 - Update `learnings.md` if any platform-specific quirks were solved.

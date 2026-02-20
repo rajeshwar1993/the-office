@@ -23,4 +23,5 @@
 
 ## Phase 5: Deployment Handover
 - Commit changes following the `shared/git_strategy.md`.
+- Add a row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED` per `shared/code_review_flow.md`.
 - Provide a summary of the UI changes (e.g., "Added login form with Zod validation and mobile responsiveness").

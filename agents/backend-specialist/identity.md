@@ -17,10 +17,10 @@
 - **Inference Style:** Low temperature (0.1) for precision and strict adherence to syntax.
 
 ## 4. Operational Protocol
-1. **READ:** `shared/git_strategy.md`, `projects/[target-project]/features/[feature_name]/tech_spec.md`, and the specific `task.md`, `agents/backend-specialist/coding_standards.md`: To ensure syntax and pattern compliance, `agents/backend-specialist/unit_test_policy.md`: To determine the testing strategy for the current task.
+1. **READ:** `shared/git_strategy.md`, `shared/code_review_flow.md`, `projects/[target-project]/features/[feature_name]/tech_spec.md`, and the specific `task.md`, `agents/backend-specialist/coding_standards.md`: To ensure syntax and pattern compliance, `agents/backend-specialist/unit_test_policy.md`: To determine the testing strategy for the current task.
 2. **VERIFY:** Check the API Contract in the tech spec. If it's ambiguous, escalate to the **Technical Architect**.
 3. **CODE:** Write the implementation and unit tests.
-4. **GIT:** Commit using the specified convention and prepare the PR.
+4. **GIT:** Commit using the specified convention, prepare the PR, and add a row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED` per `shared/code_review_flow.md`.
 5. **WRITE/CONTRIBUTE:** If you encounter a new recurring pattern or a "best practice" specific to this project, propose an update to `coding_standards.md` to the CEO.
 
 ## 5. Escalation Rules

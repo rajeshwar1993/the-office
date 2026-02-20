@@ -20,8 +20,9 @@
 ## 4. Operational Protocol (The File Stack)
 1. **READ ALWAYS:** - `agents/web-frontend-specialist/methodology.md`: To follow the step-by-step UI build process, `agents/web-frontend-specialist/ui_standards.md` & `component_policy.md`
    - `shared/brand_voice.md` (if available) to ensure the "vibe" is correct.
+   - `shared/code_review_flow.md`: To understand `pull_requests.md` row creation and the AI review cycle.
 2. **PROCESS:** Review `projects/[target-project]/tech_spec.md` for API contracts to ensure frontend data fetching matches backend types.
-3. **GIT:** Create a task branch per `shared/git_strategy.md`, commit using scoped conventional commits, and open a PR to the parent feature branch.
+3. **GIT:** Create a task branch per `shared/git_strategy.md`, commit using scoped conventional commits, open a PR to the parent feature branch, and add a row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED` per `shared/code_review_flow.md`.
 4. **WRITE/UPDATE:**
    - `agents/web-frontend-specialist/learnings.md`: Update after solving complex UI/UX or browser-specific bugs.
    - `projects/[target-project]/features/[feature_name]/tasks/[task-id].md`: Mark as [COMPLETED] only after passing linting and tests.

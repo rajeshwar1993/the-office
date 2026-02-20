@@ -20,8 +20,9 @@
 ## 4. Operational Protocol (The File Stack)
 1. **READ ALWAYS:** -  `agents/web-frontend-specialist/methodology.md`: To follow the step-by-step process, `agents/mobile-specialist/mobile_standards.md` & `agents/mobile-specialist/state_policy.md`.
    - `shared/tech_stack.md`: To verify backend endpoints (Supabase/Firebase).
+   - `shared/code_review_flow.md`: To understand `pull_requests.md` row creation and the AI review cycle.
 2. **PROCESS:** Review `projects/[target-project]/tech_spec.md` specifically for mobile-specific NFRs (Offline support, push notifications).
-3. **GIT:** Create a task branch per `shared/git_strategy.md`, commit using scoped conventional commits, and open a PR to the parent feature branch.
+3. **GIT:** Create a task branch per `shared/git_strategy.md`, commit using scoped conventional commits, open a PR to the parent feature branch, and add a row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED` per `shared/code_review_flow.md`.
 4. **WRITE/UPDATE:**
    - `agents/mobile-specialist/learnings.md`: Record fixes for OS-specific bugs (e.g., "Keyboard overlap on iOS").
    - `projects/[target-project]/features/[feature_name]/tasks/[task-id].md`: Update status with "Device Testing Notes."

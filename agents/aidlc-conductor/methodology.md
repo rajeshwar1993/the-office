@@ -266,6 +266,7 @@ If any required artifact is missing, do not proceed. Escalate to Friday with `[B
   Expected Deliverable: Code review with findings and approval/rejection
   Acceptance Criteria: No critical or high-severity findings, all standards met
   ```
+- **Code Review Flow:** The post-implementation review follows `shared/code_review_flow.md`. The coding agent adds a row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED`. The review cycle — Sentinel review → Atlas comment triage → coding agent fix iterations — is orchestrated by Friday per the code review flow. The PR must reach `LGTM` before the 2-option approval below is presented.
 - **Approval:** Standardized 2-option message via Friday.
 
 ### Build and Test (ALWAYS — After All Units Complete)

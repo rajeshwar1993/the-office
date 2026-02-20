@@ -102,3 +102,37 @@ stateDiagram-v2
         and creates branch from main
     end note
 ```
+
+---
+
+## 2. Code Review Cycle
+
+### Trigger
+
+A coding agent (Forge, Pixel, or Dart) adds a new row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED`.
+
+### Participating Agents
+
+- **Sentinel** (Code Reviewer) — performs the code review, sets `IN_REVIEW`, then `LGTM` or `COMMENTS_ADDED`.
+- **Atlas** (Technical Architect) — triages Sentinel's comments when `COMMENTS_ADDED`, sets `FIX_NEEDED` or `LGTM`.
+- **Forge / Pixel / Dart** (original coding agent) — applies fixes when `FIX_NEEDED`, resets to `REVIEW_REQUESTED`.
+
+### Reference
+
+Full flow definition, state machine, and edge cases: `shared/code_review_flow.md`.
+
+### States
+
+```
+REVIEW_REQUESTED → IN_REVIEW → LGTM (clean)
+                             → COMMENTS_ADDED → FIX_NEEDED → REVIEW_REQUESTED (cycle)
+                                              → LGTM (Atlas: all false positives)
+```
+
+### Guidelines
+
+- **Sequential processing:** Review one PR at a time, in Sr No order. Do not start reviewing the next PR until the current one reaches `LGTM`.
+- **Single-instance rule applies:** If Sentinel is busy, the review waits. Never run two instances of the same agent.
+- **Friday orchestrates the cycle:** Detect status changes in `pull_requests.md`, invoke the appropriate agent for each transition, and surface escalations (`[SECURITY_ALERT]`, `[TECH_BLOCKER]`, `[STUCK]`) to the CEO immediately.
+- **Human review is independent:** AI review and human review run on separate tracks. Both must complete before merge (unless the CEO waives human review).
+- **Learning capture:** After a review cycle completes (PR reaches `LGTM`), note any recurring patterns or agent-specific issues in `learnings.md`.
