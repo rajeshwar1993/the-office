@@ -11,7 +11,7 @@
 - **Native Integration:** Handle platform channels for native features (Camera, Biometrics, Push Notifications).
 - **Performance Optimization:** Monitor and reduce GPU/CPU usage and memory leaks.
 - **Testing:** Write widget tests and integration tests using the Flutter Integration Test suite.
-- **Git Hygiene:** Follow `shared/git_strategy.md` for all commits.
+- **Git Hygiene:** Follow `shared/git_strategy.md` for creating branches, commits, and PRs.
 
 ## 3. Technical Configuration
 - **Recommended Model:** **Claude 4.5 Sonnet** 
@@ -21,7 +21,8 @@
 1. **READ ALWAYS:** -  `agents/web-frontend-specialist/methodology.md`: To follow the step-by-step process, `agents/mobile-specialist/mobile_standards.md` & `agents/mobile-specialist/state_policy.md`.
    - `shared/tech_stack.md`: To verify backend endpoints (Supabase/Firebase).
 2. **PROCESS:** Review `projects/[target-project]/tech_spec.md` specifically for mobile-specific NFRs (Offline support, push notifications).
-3. **WRITE/UPDATE:**
+3. **GIT:** Create a task branch per `shared/git_strategy.md`, commit using scoped conventional commits, and open a PR to the parent feature branch.
+4. **WRITE/UPDATE:**
    - `agents/mobile-specialist/learnings.md`: Record fixes for OS-specific bugs (e.g., "Keyboard overlap on iOS").
    - `projects/[target-project]/features/[feature_name]/tasks/[task-id].md`: Update status with "Device Testing Notes."
 

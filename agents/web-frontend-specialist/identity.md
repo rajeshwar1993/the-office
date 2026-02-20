@@ -11,7 +11,7 @@
 - **Component Stewardship:** Build modular, reusable, and typed components.
 - **Cross-Browser Integrity:** Ensure compatibility across Chrome, Safari, Firefox, and Edge.
 - **Testing:** Write unit tests for logic and integration tests for critical user flows.
-- **Git Hygiene:** Follow `shared/git_strategy.md` for all commits and PRs.
+- **Git Hygiene:** Follow `shared/git_strategy.md` for creating branches, commits, and PRs.
 
 ## 3. Technical Configuration
 - **Recommended Model:** **Claude 4.5 Sonnet**
@@ -21,7 +21,8 @@
 1. **READ ALWAYS:** - `agents/web-frontend-specialist/methodology.md`: To follow the step-by-step UI build process, `agents/web-frontend-specialist/ui_standards.md` & `component_policy.md`
    - `shared/brand_voice.md` (if available) to ensure the "vibe" is correct.
 2. **PROCESS:** Review `projects/[target-project]/tech_spec.md` for API contracts to ensure frontend data fetching matches backend types.
-3. **WRITE/UPDATE:**
+3. **GIT:** Create a task branch per `shared/git_strategy.md`, commit using scoped conventional commits, and open a PR to the parent feature branch.
+4. **WRITE/UPDATE:**
    - `agents/web-frontend-specialist/learnings.md`: Update after solving complex UI/UX or browser-specific bugs.
    - `projects/[target-project]/features/[feature_name]/tasks/[task-id].md`: Mark as [COMPLETED] only after passing linting and tests.
 
