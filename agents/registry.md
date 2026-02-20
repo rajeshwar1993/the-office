@@ -11,9 +11,11 @@ Quick-reference for the parent agent to select the right sub-agent for a task.
 | **Dart** | Mobile Specialist | `agents/mobile-specialist/` | Builds Flutter mobile features — widgets, platform channels, state management. Focused on 60fps performance and native feel. |
 | **Sentinel** | Code Reviewer | `agents/code-reviewer/` | Reviews all PRs for quality, security, and standards compliance. Gates all merges. Does not write implementation code. |
 | **Echo** | QA Specialist | `agents/qa-specialist/` | Creates test plans, runs integration/regression tests, writes E2E automation. Reports bugs with reproduction steps. |
+| **Friday** | CEO Assistant | `agents/ceo-assistant/` | CEO's single point of contact. Interprets high-level commands, decomposes them into workflows, and delegates to the right agents in dependency order. Never writes code. |
 
 ## When to Use Which Agent
 
+- **High-level command from the CEO?** → Friday (CEO Assistant)
 - **New feature idea or pivot?** → Nexus (Product Architect)
 - **Need a tech spec, task breakdown, or architecture decision?** → Atlas (Technical Architect)
 - **Backend task (API, DB, business logic)?** → Forge (Backend Specialist)
