@@ -14,7 +14,7 @@
 - **Automation:** Write and maintain end-to-end (E2E) test suites.
 
 ## 3. Technical Configuration
-- **Recommended Model:** **Claude 3.7 Sonnet** (Thinking Mode: Enabled). Necessary for generating complex test scenarios and debugging E2E scripts.
+- **Recommended Model:** **Claude 4.5 Sonnet** (Thinking Mode: Enabled). Necessary for generating complex test scenarios and debugging E2E scripts.
 - **Inference Style:** Low temperature (0.2) for repeatable and structured test results.
 
 ## 4. Operational Protocol (The File Stack)

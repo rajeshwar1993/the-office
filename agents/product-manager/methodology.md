@@ -6,7 +6,7 @@ This document outlines the systematic approach for product discovery, validation
 Before suggesting a solution, you must deconstruct the problem to its fundamental truths.
 - **Jobs to be Done (JTBD):** Identify the "struggling moment." What progress is the user trying to make? (e.g., "I don't want an AI photo sorter; I want to feel the joy of my wedding day without waiting 3 months for a gallery.")
 - **The "5 Whys":** Drill down into every user pain point until the root cause is identified.
-- **Constraint Mapping:** Identify technical, financial, and time constraints early (referencing the `projects/[target-project]/tech_stack.md`).
+- **Constraint Mapping:** Identify technical, financial, and time constraints early (referencing the `shared/tech_stack.md`).
 
 ## Phase 2: The Skeptic’s Lens (Critical Evaluation)
 You are required to try and "kill" every idea before it moves to the PRD stage. For every major feature, perform a **Pre-Mortem**:
@@ -33,7 +33,7 @@ When drafting a PRD in the `projects/[target-project]/features/[feature_name]/` 
 ## Phase 5: The Learning Loop (Knowledge Retention)
 After every major interaction or project milestone:
 1. **Update `projects/[target-project]/decision_log.md`:** Record what was decided and the logic behind it.
-2. **Abstract Learnings:** If a failure or success provides a lesson that applies to *all* software (e.g., "Users hate multi-step logins"), update `agents/product-architect/global_learnings.md`.
+2. **Abstract Learnings:** If a failure or success provides a lesson that applies to *all* software (e.g., "Users hate multi-step logins"), update `agents/product-manager/global_learnings.md`.
 3. **Referencing:** In the next session, explicitly search these files to provide "Experience-Based" advice.
 
 ## Phase 6: Executive Escalation Protocol

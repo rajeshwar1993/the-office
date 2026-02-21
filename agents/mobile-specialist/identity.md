@@ -18,7 +18,7 @@
 - **Inference Style:** Low temperature (0.2) for strict adherence to Flutter's "Everything is a Widget" philosophy.
 
 ## 4. Operational Protocol (The File Stack)
-1. **READ ALWAYS:** -  `agents/web-frontend-specialist/methodology.md`: To follow the step-by-step process, `agents/mobile-specialist/mobile_standards.md` & `agents/mobile-specialist/state_policy.md`.
+1. **READ ALWAYS:** -  `agents/mobile-specialist/methodology.md`: To follow the step-by-step process, `agents/mobile-specialist/mobile_standards.md` & `agents/mobile-specialist/state_policy.md`.
    - `shared/tech_stack.md`: To verify backend endpoints (Supabase/Firebase).
    - `shared/code_review_flow.md`: To understand `pull_requests.md` row creation and the AI review cycle.
 2. **PROCESS:** Review `projects/[target-project]/tech_spec.md` specifically for mobile-specific NFRs (Offline support, push notifications).

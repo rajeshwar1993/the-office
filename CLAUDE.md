@@ -19,7 +19,8 @@ the-office/
 │   └── qa-specialist/         # Echo — test plans, E2E automation
 ├── shared/                    # Cross-agent processes and conventions
 │   ├── git_strategy.md        # Branching model, commit conventions, PR templates
-│   └── code_review_flow.md    # PR review lifecycle, status tracking, agent roles
+│   ├── code_review_flow.md    # PR review lifecycle, status tracking, agent roles
+│   └── tech_stack.md          # Pulse project tech stack (architecture, frameworks, conventions)
 └── projects/                  # Per-project feature tracking and artifacts
     └── pulse/                 # Pulse app project
 ```
@@ -58,6 +59,13 @@ Each agent has:
 - **AI Review Status state machine:** `REVIEW_REQUESTED` → `IN_REVIEW` → `LGTM` or `COMMENTS_ADDED` → `FIX_NEEDED` → cycle back
 - **Roles:** Coding agents open PRs → Sentinel reviews → Atlas triages comments → coding agent fixes → repeat until LGTM
 - **Sequential:** One PR at a time per the single-instance rule
+
+### Tech Stack (`shared/tech_stack.md`)
+- **Architecture:** Hybrid Flutter + Next.js (WebView)
+- **Frontend:** Next.js 16, React 19, TypeScript, Tailwind v4, Biome
+- **Mobile:** Flutter 3.10.8+, Dart, Riverpod, GoRouter
+- **Backend:** Supabase (PostgreSQL 17, Deno 2 Edge Functions)
+- Referenced by Sentinel, Nexus, Pixel, and Dart for tech context
 
 ## Key Rules
 
