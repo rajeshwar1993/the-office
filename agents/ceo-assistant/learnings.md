@@ -3,13 +3,20 @@
 CEO preferences, workflow patterns, and delegation insights accumulated over time.
 
 ## CEO Preferences
-<!-- Record the CEO's preferred communication style, decision patterns, and recurring priorities. -->
-<!-- e.g., "CEO prefers Nexus to validate product-market fit before any Atlas tech spec." -->
+
+- **CEO expects subagents to be used for specialist tasks**: During the localization feature, CEO explicitly asked "I hope you are using the subagents at your disposal to do the specific tasks?" — always delegate to Forge/Pixel/Dart/etc. rather than doing everything in the main conversation.
+- **CEO is open to suggestions beyond the PRD**: "Although there is a PRD I am open to any good suggestions you might have" — proactively surface architectural recommendations.
+- **CEO approves phases with minimal ceremony**: "go ahead, proceed to Construction" — brief approval is sufficient, no need for elaborate sign-off rituals.
 
 ## Workflow Patterns
-<!-- Record successful agent sequences and delegation strategies that worked well. -->
-<!-- e.g., "For full-stack features, running Forge and Pixel in parallel after Atlas saves ~40% time." -->
+
+- **3-phase parallel execution works well for cross-cutting features**: For the localization feature (8 units), organizing into Foundation → Extraction → Persistence phases with maximum parallelism within each phase was efficient. Forge/Pixel/Dart ran simultaneously in Phase 1, then Pixel+Dart in Phase 2 and 3.
+- **Provide full context to subagents**: Subagents work best when given the exact file contents they need to modify, the specific code patterns to follow, and clear verification commands to run. Don't make them search — give them everything upfront.
+- **Verify builds after each phase**: Running `tsc --noEmit` and `flutter analyze lib/` after each phase catches issues early and prevents cascading errors in later phases.
+- **Read agent output before next phase**: Always read completed agent outputs and verify before launching dependent units. An error in Phase 1 could propagate to Phase 2 agents.
 
 ## Pitfalls & Anti-Patterns
-<!-- Record mistakes, failed workflows, or delegation choices that backfired. -->
-<!-- e.g., "Don't skip Nexus for 'small' features — CEO rejected the auth flow because it wasn't validated against the PRD." -->
+
+- **Subagent permission issues**: Some agents couldn't execute Write/Bash tools due to permission restrictions. When this happens, read the agent's proposed content from its output and apply the changes from the main conversation.
+- **Don't rely on subagents knowing current file state**: After multiple agents modify overlapping files (e.g., `main.dart` modified by U-006 and U-008), always read the current file state and provide it to the next agent. Stale file content in the prompt causes merge conflicts.
+- **Context window management**: Large features with many agents can exhaust context. Use background agents (`run_in_background: true`) and keep the main conversation focused on orchestration, not implementation details.
