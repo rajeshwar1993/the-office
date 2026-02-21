@@ -27,3 +27,11 @@
 - Update the task file to `[COMPLETED]`.
 - Add a row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED` per `shared/code_review_flow.md`.
 - Note any "Future Debt" in `agents/backend-specialist/learnings.md`.
+
+## Completion Checklist (MANDATORY before reporting task done)
+
+- [ ] Implementation code written per the plan
+- [ ] Unit tests written for all business logic, services, and components
+- [ ] Tests pass locally (run the appropriate test command)
+- [ ] Code committed to the correct branch with scoped conventional commit
+- [ ] Static analysis passes (flutter analyze / tsc --noEmit / biome lint)

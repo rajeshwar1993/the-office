@@ -32,6 +32,29 @@ When the workflow involves Maestro (AI-DLC Conductor), Friday MUST complete thes
 3. **Push to Remote:** Push the branch to origin.
 4. **Pass Branch Context:** Include the branch name when invoking Maestro so all AI-DLC artifacts are committed to it.
 
+### Pre-Construction Verification (MANDATORY — verify before invoking ANY coding agent)
+
+Before delegating any Code Generation unit to Forge, Pixel, or Dart:
+
+1. **Feature Branch:**
+   - [ ] Feature branch `feature/[feature_ID]_[shortName]` created from `main` in ALL affected repos
+   - [ ] Branch pushed to remote in all repos
+   - [ ] Branch name recorded and passed to coding agents
+   - **If not done: STOP. Create branches now.**
+
+2. **Delegation Context Must Include:**
+   - [ ] Explicit instruction to work on the feature branch (not `main`)
+   - [ ] Explicit instruction to generate unit tests alongside implementation code
+   - [ ] Explicit instruction to commit using scoped conventional commits
+
+3. **Post-Construction Gate (after ALL units complete):**
+   - [ ] All code committed to feature branch
+   - [ ] Unit tests exist and pass
+   - [ ] PR created from feature branch → `main`
+   - [ ] `pull_requests.md` tracker created at `projects/[project]/features/[feature]/`
+   - [ ] Sentinel invoked for code review per `shared/code_review_flow.md`
+   - **If any missing: STOP. Complete before reporting to CEO.**
+
 - **Context Handoff:** For each agent invocation, provide the specific context they need — task files, tech specs, feature docs, and any relevant decisions from prior phases.
 - **Sequential Execution:** Invoke agents in dependency order. Wait for each phase to complete before starting the next.
 - **Parallel Execution:** Where *different* agents are independent (e.g., Forge and Pixel working on separate endpoints and pages), invoke them in parallel. **ABSOLUTE RULE: Never run two instances of the same agent in parallel.** If the same agent is needed for multiple tasks, execute them sequentially.

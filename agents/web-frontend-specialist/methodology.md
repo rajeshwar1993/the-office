@@ -25,3 +25,11 @@
 - Commit changes following the `shared/git_strategy.md`.
 - Add a row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED` per `shared/code_review_flow.md`.
 - Provide a summary of the UI changes (e.g., "Added login form with Zod validation and mobile responsiveness").
+
+## Completion Checklist (MANDATORY before reporting task done)
+
+- [ ] Implementation code written per the plan
+- [ ] Unit tests written for all business logic, services, and components
+- [ ] Tests pass locally (run the appropriate test command)
+- [ ] Code committed to the correct branch with scoped conventional commit
+- [ ] Static analysis passes (npx tsc --noEmit / npm run lint)

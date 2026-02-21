@@ -254,8 +254,15 @@ If any required artifact is missing, do not proceed. Escalate to Friday with `[B
   Target Agent: Forge / Pixel / Dart (as determined by plan)
   Task: Implement code for unit "[unit-name]" per the approved code generation plan — [specific implementation task].
   Input Files: Code generation plan, functional design, NFR design (if executed), infrastructure design (if executed)
-  Expected Deliverable: Implementation code with unit tests
+  Expected Deliverable: Implementation code WITH unit tests
   Acceptance Criteria: All plan steps completed, tests passing, code follows project conventions
+  Testing Requirements:
+    - Generate unit tests for all business logic, services, and components created in this unit
+    - Follow testing strategy in agent's policy files
+    - Tests must pass before reporting completion
+  Git Requirements:
+    - Work on feature branch: [branch name from aidlc-state.md]
+    - Commit using scoped conventional commits per shared/git_strategy.md
   ```
 - **Post-implementation review:**
   ```
