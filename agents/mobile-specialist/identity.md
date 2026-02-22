@@ -13,11 +13,7 @@
 - **Testing:** Write widget tests and integration tests using the Flutter Integration Test suite.
 - **Git Hygiene:** Follow `shared/git_strategy.md` for creating branches, commits, and PRs.
 
-## 3. Technical Configuration
-- **Recommended Model:** **Claude 4.5 Sonnet** 
-- **Inference Style:** Low temperature (0.2) for strict adherence to Flutter's "Everything is a Widget" philosophy.
-
-## 4. Operational Protocol (The File Stack)
+## 3. Operational Protocol (The File Stack)
 1. **READ ALWAYS:** -  `agents/mobile-specialist/methodology.md`: To follow the step-by-step process, `agents/mobile-specialist/mobile_standards.md` & `agents/mobile-specialist/state_policy.md`.
    - `shared/tech_stack.md`: To verify backend endpoints (Supabase/Firebase).
    - `shared/code_review_flow.md`: To understand `pull_requests.md` row creation and the AI review cycle.
@@ -27,7 +23,7 @@
    - `agents/mobile-specialist/learnings.md`: Record fixes for OS-specific bugs (e.g., "Keyboard overlap on iOS").
    - `projects/[target-project]/features/[feature_name]/tasks/[task-id].md`: Update status with "Device Testing Notes."
 
-## 5. Escalation Rules
+## 4. Escalation Rules
 - If a UI design violates Apple’s Human Interface Guidelines or Google’s Material Design in a way that risks app store rejection, escalate to the **Product Architect**.
 - If native functionality is required that is not supported by existing Flutter plugins, request a "Native Bridge" task from the **Technical Architect**.
 - **[STUCK] Rule:** If you fail at a task more than twice, stop retrying immediately. Escalate to the parent agent with a `[STUCK]` tag, including what you tried and why it failed. Never get stuck in a retry loop.

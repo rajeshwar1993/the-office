@@ -1,13 +1,37 @@
 # AI-DLC Conductor Methodology: The Maestro Protocol
 
-## Pre-Flight
+## Light Mode Assessment
+
+Before running the full Pre-Flight, assess whether **Light Mode** applies (see `shared/claude-code-adapter.md` section 9).
+
+**Use Light Mode if ALL of these are true:**
+- Single unit of work (no decomposition needed)
+- Clear, unambiguous requirements
+- Low risk / low complexity
+- Bug fix, simple refactor, single-component feature, or documentation change
+
+**Light Mode workflow:**
+1. Requirements Analysis (minimal depth) — ask clarifying questions in conversation
+2. Code Generation (combined plan + execute) — single delegation to specialist agent
+3. Build and Test — verify implementation
+
+**Light Mode skips:** Workspace Detection, Reverse Engineering, User Stories, Workflow Planning, Application Design, Units Generation, Functional Design, NFR stages, Infrastructure Design, `aidlc-state.md`, `audit.md`
+
+**Approval gates:** Maximum 2 (after requirements, after code)
+
+If the CEO or Maestro determines mid-execution that complexity warrants the full process, escalate to full mode.
+
+---
+
+## Pre-Flight (Full Mode)
 
 Before entering any phase, execute these steps:
 
-1. **Load Core References:**
+1. **Load Core References (minimal set per `shared/claude-code-adapter.md`):**
+   - Read `shared/claude-code-adapter.md` for platform rules and precedence.
    - Read `personal-aidlc/aidlc-rules/aidlc-rules/core-workflow.md` for the canonical workflow.
-   - Read all common rule files (`process-overview.md`, `session-continuity.md`, `content-validation.md`, `question-format-guide.md`, `git-operations.md`).
    - Read `agents/registry.md` for delegation targets.
+   - Do NOT preload retired rules (welcome-message, content-validation, question-format-guide, overconfidence-prevention, terminology). Load other common rules on-demand only when needed.
 
 2. **Check for Existing State (Resumption):**
    - Look for `aidlc-docs/aidlc-state.md` in the target project.
@@ -46,12 +70,12 @@ Before entering any phase, execute these steps:
 | Stage | Condition | Delegation | Approval |
 |-------|-----------|------------|----------|
 | Workspace Detection | ALWAYS | None (Maestro direct) | Auto-proceed |
-| Reverse Engineering | Brownfield only | Atlas (via Friday) | CEO via Friday |
-| Requirements Analysis | ALWAYS (adaptive depth) | Nexus (via Friday) | CEO via Friday |
-| User Stories | CONDITIONAL (multi-factor assessment) | Nexus (via Friday) | CEO via Friday |
-| Workflow Planning | ALWAYS | None (Maestro direct) | CEO via Friday |
-| Application Design | CONDITIONAL | Atlas (via Friday) | CEO via Friday |
-| Units Generation | CONDITIONAL | Atlas (via Friday) | CEO via Friday |
+| Reverse Engineering | Brownfield only | Atlas (direct) | CEO (via Friday) |
+| Requirements Analysis | ALWAYS (adaptive depth) | Nexus (direct) | CEO (via Friday) |
+| User Stories | CONDITIONAL (multi-factor assessment) | Nexus (direct) | CEO (via Friday) |
+| Workflow Planning | ALWAYS | None (Maestro direct) | CEO (via Friday) |
+| Application Design | CONDITIONAL | Atlas (direct) | CEO (via Friday) |
+| Units Generation | CONDITIONAL | Atlas (direct) | CEO (via Friday) |
 
 ### Stage Details
 
@@ -74,7 +98,7 @@ Before entering any phase, execute these steps:
   Expected Deliverable: Reverse engineering artifacts (architecture docs, component inventory, API docs, tech stack docs, interaction diagrams)
   Acceptance Criteria: Comprehensive coverage of all packages/components, business transaction overview, technology stack documented
   ```
-- **Approval:** Present findings to CEO via Friday. Do not proceed until explicit approval.
+- **Approval:** Present findings to CEO (via Friday). Do not proceed until explicit approval.
 
 #### Requirements Analysis (ALWAYS — Adaptive Depth)
 - **Rule file:** `inception/requirements-analysis.md`
@@ -88,7 +112,7 @@ Before entering any phase, execute these steps:
   Expected Deliverable: Requirements document with functional requirements, non-functional requirements, and NFR baseline
   Acceptance Criteria: All requirements traceable to user intent, NFR baseline defined, technology stack documented (if greenfield)
   ```
-- **Approval:** Present requirements to CEO via Friday. Do not proceed until explicit approval.
+- **Approval:** Present requirements to CEO (via Friday). Do not proceed until explicit approval.
 
 #### User Stories (CONDITIONAL)
 - **Rule file:** `inception/user-stories.md`
@@ -102,13 +126,13 @@ Before entering any phase, execute these steps:
   Expected Deliverable: User stories with acceptance criteria, persona definitions
   Acceptance Criteria: Stories traceable to requirements, acceptance criteria testable, personas reflect actual user types
   ```
-- **Approval:** Present stories to CEO via Friday. Do not proceed until explicit approval.
+- **Approval:** Present stories to CEO (via Friday). Do not proceed until explicit approval.
 
 #### Workflow Planning (ALWAYS)
 - **Rule file:** `inception/workflow-planning.md`
 - **Maestro direct:** Determine which Construction stages to execute, depth level for each, and multi-package change sequence (if brownfield). Generate workflow visualization.
 - **Inputs:** All prior inception artifacts (reverse engineering, requirements, stories).
-- **Approval:** Present execution plan to CEO via Friday, emphasizing user control to override recommendations. Do not proceed until explicit approval.
+- **Approval:** Present execution plan to CEO (via Friday), emphasizing user control to override recommendations. Do not proceed until explicit approval.
 
 #### Application Design (CONDITIONAL)
 - **Rule file:** `inception/application-design.md`
@@ -122,7 +146,7 @@ Before entering any phase, execute these steps:
   Expected Deliverable: Component and service definitions, cross-cutting concerns documentation, data model overview (if multi-unit)
   Acceptance Criteria: All components defined with clear responsibilities, dependencies mapped, cross-cutting concerns addressed
   ```
-- **Approval:** Present design to CEO via Friday. Do not proceed until explicit approval.
+- **Approval:** Present design to CEO (via Friday). Do not proceed until explicit approval.
 
 #### Units Generation (CONDITIONAL)
 - **Rule file:** `inception/units-generation.md`
@@ -136,7 +160,7 @@ Before entering any phase, execute these steps:
   Expected Deliverable: Unit definitions with story mappings, integration contracts (API contracts, event schemas), data ownership matrix
   Acceptance Criteria: Units are independently implementable, contracts are explicit, data ownership is unambiguous
   ```
-- **Approval:** Present units to CEO via Friday. Do not proceed until explicit approval.
+- **Approval:** Present units to CEO (via Friday). Do not proceed until explicit approval.
 
 ### Inception Exit Checklist
 
@@ -173,13 +197,13 @@ If any required artifact is missing, do not proceed. Escalate to Friday with `[B
 
 | Stage | Condition | Delegation | Approval |
 |-------|-----------|------------|----------|
-| Functional Design | CONDITIONAL | Atlas (via Friday) | 2-option via Friday |
-| NFR Requirements | CONDITIONAL | Atlas (via Friday) | 2-option via Friday |
-| NFR Design | CONDITIONAL | Atlas (via Friday) | 2-option via Friday |
-| Infrastructure Design | CONDITIONAL | Atlas (via Friday) | 2-option via Friday |
-| Code Generation (Plan) | ALWAYS | None (Maestro direct) | CEO via Friday |
-| Code Generation (Execute) | ALWAYS | Forge/Pixel/Dart + Sentinel review (via Friday) | 2-option via Friday |
-| Build and Test | ALWAYS (after all units) | Echo (via Friday) | CEO via Friday |
+| Functional Design | CONDITIONAL | Atlas (direct) | 2-option via Friday |
+| NFR Requirements | CONDITIONAL | Atlas (direct) | 2-option via Friday |
+| NFR Design | CONDITIONAL | Atlas (direct) | 2-option via Friday |
+| Infrastructure Design | CONDITIONAL | Atlas (direct) | 2-option via Friday |
+| Code Generation (Plan) | ALWAYS | None (Maestro direct) | CEO (via Friday) |
+| Code Generation (Execute) | ALWAYS | Forge/Pixel/Dart + Sentinel review (direct) | 2-option via Friday |
+| Build and Test | ALWAYS (after all units) | Echo (direct) | CEO (via Friday) |
 
 ### Per-Unit Loop
 
@@ -197,7 +221,7 @@ If any required artifact is missing, do not proceed. Escalate to Friday with `[B
   Expected Deliverable: Functional design document for this unit
   Acceptance Criteria: All business rules documented, data models defined, error scenarios covered
   ```
-- **Approval:** Standardized 2-option message: "Request Changes" or "Continue to Next Stage." Relay through Friday.
+- **Approval:** Standardized 2-option message: "Request Changes" or "Continue to Next Stage." Relay to Friday for CEO relay.
 
 #### NFR Requirements (CONDITIONAL, per-unit)
 - **Rule file:** `construction/nfr-requirements.md`
@@ -244,7 +268,7 @@ If any required artifact is missing, do not proceed. Escalate to Friday with `[B
 #### Code Generation — Part 1: Planning (ALWAYS, per-unit)
 - **Rule file:** `construction/code-generation.md`
 - **Maestro direct:** Create a detailed code generation plan with explicit steps and checkboxes. The plan maps unit requirements to implementation tasks, identifies which specialist agents are needed (Forge for backend, Pixel for web frontend, Dart for mobile), and defines the execution sequence.
-- **Approval:** Present plan to CEO via Friday. Do not proceed to execution until explicit approval.
+- **Approval:** Present plan to CEO (via Friday). Do not proceed to execution until explicit approval.
 
 #### Code Generation — Part 2: Execution (ALWAYS, per-unit)
 - **Rule file:** `construction/code-generation.md`
@@ -287,7 +311,7 @@ If any required artifact is missing, do not proceed. Escalate to Friday with `[B
   Expected Deliverable: Build and test results — build-instructions.md, unit-test-instructions.md, integration-test-instructions.md, performance-test-instructions.md, build-and-test-summary.md
   Acceptance Criteria: All builds succeed, all tests pass, test coverage meets project standards
   ```
-- **Approval:** Present results to CEO via Friday: "Build and test instructions complete. Ready to proceed to Operations stage?"
+- **Approval:** Present results to CEO (via Friday): "Build and test instructions complete. Ready to proceed to Operations stage?"
 
 ---
 
@@ -304,7 +328,7 @@ If any required artifact is missing, do not proceed. Escalate to Friday with `[B
    - All delegation requests and their outcomes
    - All approval gates and CEO decisions
    - Total units completed
-3. Present the summary to the CEO via Friday.
+3. Present the summary to the CEO (via Friday).
 4. Mark the overall AI-DLC workflow as **COMPLETE** in `aidlc-state.md`.
 5. Log the completion in `audit.md`.
 
@@ -393,7 +417,7 @@ Follow the rules in `personal-aidlc/aidlc-rules/aidlc-rule-details/common/git-op
 
 ### Delegation Request Format
 
-When requesting specialist work through Friday:
+When requesting specialist work to Friday for CEO relay:
 
 ```
 [DELEGATION REQUEST]
@@ -406,7 +430,7 @@ Acceptance Criteria: <How to verify the deliverable is correct>
 
 ### Approval Request Format
 
-When presenting an approval gate to the CEO through Friday:
+When presenting an approval gate to the CEO to Friday for CEO relay:
 
 **Inception stages:**
 ```
