@@ -40,7 +40,7 @@ Intake → Pre-Flight → Maestro Handoff → Inception → Construction → Com
 
 - **Friday owns pre-Maestro work:** Branch creation, feature ID generation, and initial scope clarification happen before Maestro is invoked.
 - **Maestro owns process orchestration:** Stage ordering, conditional stage assessment, artifact generation, and approval gate presentation are Maestro's responsibility.
-- **Friday is the message relay:** All communication between Maestro and specialist agents flows through Friday. All communication between Maestro and the CEO flows through Friday.
+- **Friday relays CEO communication:** All communication between Maestro and the CEO flows through Friday. Maestro may invoke specialist agents directly for stage-specific work without Friday relaying each request. Friday tracks delegation outcomes for status reporting.
 - **Single-instance rule:** Only one Maestro may run at a time. If a previous AI-DLC workflow is in progress, check `aidlc-state.md` for resumption.
 - **[STUCK] handling:** If Maestro sends `[STUCK]`, Friday attempts the task once (if within competency), then escalates to the CEO.
 - **Approval gates are blocking:** Friday must relay CEO approval before Maestro can proceed past any gate. Never auto-approve.
@@ -109,30 +109,95 @@ stateDiagram-v2
 
 ### Trigger
 
-A coding agent (Forge, Pixel, or Dart) adds a new row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED`.
+A coding agent (Forge, Pixel, or Dart) opens a PR on GitHub after completing implementation.
 
-### Participating Agents
+### Participating Agents (Default — Solo Developer)
 
-- **Sentinel** (Code Reviewer) — performs the code review, sets `IN_REVIEW`, then `LGTM` or `COMMENTS_ADDED`.
-- **Atlas** (Technical Architect) — triages Sentinel's comments when `COMMENTS_ADDED`, sets `FIX_NEEDED` or `LGTM`.
-- **Forge / Pixel / Dart** (original coding agent) — applies fixes when `FIX_NEEDED`, resets to `REVIEW_REQUESTED`.
+- **Sentinel** (Code Reviewer) — reviews the PR, approves or leaves comments with fix guidance.
+- **Forge / Pixel / Dart** (original coding agent) — addresses review comments, pushes fixes.
+
+For team settings or high-risk changes, Atlas may be added as a comment triage layer (see `shared/code_review_flow.md` section 3).
 
 ### Reference
 
-Full flow definition, state machine, and edge cases: `shared/code_review_flow.md`.
+Full flow definition: `shared/code_review_flow.md`.
 
-### States
+### Flow
 
 ```
-REVIEW_REQUESTED → IN_REVIEW → LGTM (clean)
-                             → COMMENTS_ADDED → FIX_NEEDED → REVIEW_REQUESTED (cycle)
-                                              → LGTM (Atlas: all false positives)
+PR Opened → Sentinel Reviews → Approved (clean pass)
+                              → Comments Left → Coding Agent Fixes → Sentinel Re-Reviews (cycle)
 ```
 
 ### Guidelines
 
-- **Sequential processing:** Review one PR at a time, in Sr No order. Do not start reviewing the next PR until the current one reaches `LGTM`.
-- **Single-instance rule applies:** If Sentinel is busy, the review waits. Never run two instances of the same agent.
-- **Friday orchestrates the cycle:** Detect status changes in `pull_requests.md`, invoke the appropriate agent for each transition, and surface escalations (`[SECURITY_ALERT]`, `[TECH_BLOCKER]`, `[STUCK]`) to the CEO immediately.
-- **Human review is independent:** AI review and human review run on separate tracks. Both must complete before merge (unless the CEO waives human review).
-- **Learning capture:** After a review cycle completes (PR reaches `LGTM`), note any recurring patterns or agent-specific issues in `learnings.md`.
+- **GitHub is the source of truth:** PR status is tracked via GitHub, not a `pull_requests.md` file.
+- **Sequential processing:** Review one PR at a time. Do not start reviewing the next PR until the current one is approved.
+- **Single-instance rule applies:** If Sentinel is busy, the review waits.
+- **Friday invokes Sentinel** when a PR is ready for review and surfaces escalations (`[SECURITY_ALERT]`, `[STUCK]`) to the CEO immediately.
+- **`[STUCK]` rule:** After 2 failed fix attempts, coding agent escalates to Friday.
+- **Learning capture:** After a review cycle completes, note any recurring patterns in `learnings.md`.
+
+---
+
+## 3. Feature Retrospective
+
+### Trigger
+
+A feature workflow reaches the **Completion** state (Workflow 1) — either successful completion or abort. The CEO may also explicitly request a retrospective at any time.
+
+### Participating Agents
+
+- **Friday** (owns the retrospective) — collects learnings, identifies patterns, proposes rule changes.
+
+### States
+
+```
+Collect → Analyze → Propose → Record
+```
+
+| # | State | Owner | Description |
+|---|-------|-------|-------------|
+| 1 | **Collect** | Friday | Read all agent `learnings.md` files that were updated during the feature. |
+| 2 | **Analyze** | Friday | Identify recurring patterns, process gaps, and methodology friction points across all agents. |
+| 3 | **Propose** | Friday | Present a summary to the CEO with specific, actionable recommendations for rule changes. |
+| 4 | **Record** | Friday | Update `agents/ceo-assistant/learnings.md` with the retrospective findings. Apply CEO-approved rule changes to the relevant files. |
+
+### Retrospective Checklist
+
+Friday reviews:
+- [ ] All agent `learnings.md` files for entries added during this feature
+- [ ] Were all process gates followed (branching, tests, PRs, review)?
+- [ ] Were there any `[STUCK]` escalations? What caused them?
+- [ ] Were approval gates streamlined or did they cause friction?
+- [ ] Did context window exhaustion cause rule-dropping or shortcuts?
+- [ ] Were there any delegation failures (agent invocation issues, missing context)?
+- [ ] Is any methodology rule consistently violated? Should it be simplified or removed?
+
+### Output Format
+
+Present to CEO:
+
+```markdown
+## Feature Retrospective: [Feature Name]
+
+### What Worked
+- [pattern that should be reinforced]
+
+### What Didn't Work
+- [pattern that should be changed]
+
+### Proposed Rule Changes
+1. [Specific change] — [file to modify] — [rationale]
+2. [Specific change] — [file to modify] — [rationale]
+
+### Agent-Specific Notes
+- [Agent]: [observation]
+```
+
+### Guidelines
+
+- **Run after every feature**, not just failures. Successful features reveal good patterns worth reinforcing.
+- **Keep it lightweight:** 5-10 minutes, not a full audit. Focus on actionable changes.
+- **Close the loop:** If a rule change is approved, apply it immediately — don't just log it for later.
+- **Cross-reference:** Check if the same issue appeared in previous retrospectives. Recurring issues indicate structural problems, not one-off mistakes.

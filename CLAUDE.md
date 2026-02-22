@@ -18,8 +18,9 @@ the-office/
 │   ├── code-reviewer/         # Sentinel — PR review, security audit
 │   └── qa-specialist/         # Echo — test plans, E2E automation
 ├── shared/                    # Cross-agent processes and conventions
+│   ├── claude-code-adapter.md # Platform adapter — rule precedence, retired rules, Light Mode
 │   ├── git_strategy.md        # Branching model, commit conventions, PR templates
-│   ├── code_review_flow.md    # PR review lifecycle, status tracking, agent roles
+│   ├── code_review_flow.md    # PR review lifecycle (simplified for solo developer)
 │   └── tech_stack.md          # Pulse project tech stack (architecture, frameworks, conventions)
 └── projects/                  # Per-project feature tracking and artifacts
     └── pulse/                 # Pulse app project
@@ -55,9 +56,9 @@ Each agent has:
 - **Merges:** Squash merge only. Sentinel gates all merges.
 
 ### Code Review Flow (`shared/code_review_flow.md`)
-- **Tracker:** Each feature has a `pull_requests.md` table at `projects/[project]/features/[feature]/pull_requests.md`
-- **AI Review Status state machine:** `REVIEW_REQUESTED` → `IN_REVIEW` → `LGTM` or `COMMENTS_ADDED` → `FIX_NEEDED` → cycle back
-- **Roles:** Coding agents open PRs → Sentinel reviews → Atlas triages comments → coding agent fixes → repeat until LGTM
+- **Default (solo developer):** Single Sentinel review pass. GitHub PR status is the source of truth.
+- **Flow:** Coding agent opens PR → Sentinel reviews → approved or comments → fixes → re-review
+- **Full flow (team setting):** Adds Atlas comment triage between Sentinel and coding agent
 - **Sequential:** One PR at a time per the single-instance rule
 
 ### Tech Stack (`shared/tech_stack.md`)
@@ -67,12 +68,20 @@ Each agent has:
 - **Backend:** Supabase (PostgreSQL 17, Deno 2 Edge Functions)
 - Referenced by Sentinel, Nexus, Pixel, and Dart for tech context
 
+### Claude Code Platform Adapter (`shared/claude-code-adapter.md`)
+- **Rule precedence:** Workspace CLAUDE.md > the-office shared > personal-aidlc > agent identity
+- **Git:** `shared/git_strategy.md` is the ONLY git strategy (AI-DLC `code-branching.md` retired)
+- **Questions:** Ask directly in conversation (AI-DLC question files not used)
+- **Light Mode:** For low-complexity features — 3 stages, 2 approval gates max
+- **Retired rules:** welcome-message, content-validation, overconfidence-prevention, terminology, question-format-guide
+
 ## Key Rules
 
 - **Single-Instance Rule:** Only one instance of any agent may run at a time.
 - **Fail-Twice-Escalate:** Any agent that fails a task twice must stop and escalate with `[STUCK]`.
-- **Friday is the hub:** All inter-agent communication and CEO communication flows through Friday.
-- **Approval gates are blocking:** CEO must explicitly approve before workflows proceed past gates.
+- **Friday is the hub:** CEO communication and escalations flow through Friday. Maestro may invoke specialists directly during AI-DLC workflows.
+- **Approval gates are blocking:** CEO must explicitly approve before workflows proceed past gates. CEO may waive with brief approval.
+- **Retrospectives:** Friday runs a lightweight retrospective after every feature (see `workflows.md` section 3).
 
 ## Conventions When Editing Agent Files
 

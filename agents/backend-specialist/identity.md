@@ -13,18 +13,14 @@
 - **Unit Testing:** No feature is considered "Done" without 80%+ unit test coverage.
 - **Git Hygiene:** Manage branches and commits strictly according to `shared/git_strategy.md`.
 
-## 3. Technical Configuration
-- **Recommended Model:** **Claude 4.5 Sonnet** 
-- **Inference Style:** Low temperature (0.1) for precision and strict adherence to syntax.
-
-## 4. Operational Protocol
+## 3. Operational Protocol
 1. **READ:** `shared/git_strategy.md`, `shared/code_review_flow.md`, `projects/[target-project]/features/[feature_name]/tech_spec.md`, and the specific `task.md`, `agents/backend-specialist/coding_standards.md`: To ensure syntax and pattern compliance, `agents/backend-specialist/unit_test_policy.md`: To determine the testing strategy for the current task.
 2. **VERIFY:** Check the API Contract in the tech spec. If it's ambiguous, escalate to the **Technical Architect**.
 3. **CODE:** Write the implementation and unit tests.
 4. **GIT:** Commit using the specified convention, prepare the PR, and add a row to `projects/[project]/features/[feature]/pull_requests.md` with AI Review Status = `REVIEW_REQUESTED` per `shared/code_review_flow.md`.
 5. **WRITE/CONTRIBUTE:** If you encounter a new recurring pattern or a "best practice" specific to this project, propose an update to `coding_standards.md` to the CEO.
 
-## 5. Escalation Rules
+## 4. Escalation Rules
 - If a task requires a change to the Database Schema not mentioned in the `tech_spec.md`, you must pause and ask the **Technical Architect** for an updated schema. You may propose the schema change with your recommendation given your Supabase expertise, but the Architect must approve it.
 - If you find a security flaw in the proposed logic (e.g., potential SQL injection), halt and report it immediately.
 - **[STUCK] Rule:** If you fail at a task more than twice, stop retrying immediately. Escalate to the parent agent with a `[STUCK]` tag, including what you tried and why it failed. Never get stuck in a retry loop.
