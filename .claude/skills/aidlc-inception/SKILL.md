@@ -32,7 +32,7 @@ Structured inception process that produces planning artifacts for complex featur
 
 ### 1. Check for Existing State (Session Resumption)
 
-Look for `aidlc-docs/aidlc-state.md` in the target project's feature directory.
+Look for `aidlc-state.md` in the feature docs directory (see Initialize Structure below).
 
 **If found:**
 - Parse current phase, stage, and progress.
@@ -59,23 +59,29 @@ Continue where you left off, or review a previous stage?
 ### 2. Load References
 
 - Read `shared/git_strategy.md` for branch and commit conventions.
-- Read feature docs in the project repo's `docs/features/` directory if they exist.
 
-### 3. Initialize aidlc-docs/ Structure
+### 3. Initialize Feature Docs Structure
+
+All inception artifacts are stored in the **workspace root** (the-office/) under:
+
+```
+docs/<project-name>/<feature-name>/
+```
+
+Where `<project-name>` is the target project (e.g., `pulse-web`) and `<feature-name>` is the feature being built. This is referred to as the **feature docs directory** throughout this skill.
 
 If no existing state, create:
 
 ```
-docs/features/<feature-name>/
-└── aidlc-docs/
-    ├── inception/
-    │   ├── plans/
-    │   ├── reverse-engineering/
-    │   ├── requirements/
-    │   ├── user-stories/
-    │   └── application-design/
-    ├── aidlc-state.md
-    └── audit.md
+docs/<project-name>/<feature-name>/
+├── inception/
+│   ├── plans/
+│   ├── reverse-engineering/
+│   ├── requirements/
+│   ├── user-stories/
+│   └── application-design/
+├── aidlc-state.md
+└── audit.md
 ```
 
 Initialize `aidlc-state.md` with the State Management template (below).
@@ -94,7 +100,7 @@ For each stage:
 5. **Log in audit** — Append completion entry to `audit.md`.
 6. **Present results** — Show approval gate to user.
 7. **Wait for approval** — Do NOT proceed until user explicitly approves.
-8. **Git commit** — Auto-commit `aidlc-docs/` after approval.
+8. **Git commit** — Auto-commit the feature docs directory after approval.
 9. **Next stage** — Proceed to the next stage.
 
 **Exception:** Stage 1 (Workspace Detection) auto-proceeds without an approval gate.
@@ -113,7 +119,7 @@ Stages 2–4 and 6–7 delegate analysis work to `/architect`. When invoking:
 - Specific deliverables expected (list the artifact files)
 
 **Expect these deliverables:**
-- Written artifact files in the correct `aidlc-docs/inception/` subdirectory
+- Written artifact files in the correct `inception/` subdirectory within the feature docs directory
 - Structured content following the templates in `inception-stages.md`
 
 **After /architect completes:**
@@ -147,7 +153,7 @@ When a stage executes, ALL its defined artifacts are created. "Depth" refers to 
 Ask directly in chat. Use for quick clarifications during any stage.
 
 ### File-Based (4+ questions)
-Create a question file in the appropriate `aidlc-docs/inception/` subdirectory.
+Create a question file in the appropriate `inception/` subdirectory within the feature docs directory.
 
 **Format:**
 ```markdown
@@ -191,7 +197,7 @@ After each stage (except Workspace Detection), present results in this format:
 
 [Brief bullet-point summary of what was produced — factual, no workflow instructions]
 
-**Review:** Examine artifacts at `aidlc-docs/inception/[subdirectory]/`
+**Review:** Examine artifacts at `inception/[subdirectory]/` in the feature docs directory
 
 **Options:**
 - **Request Changes** — Ask for modifications
@@ -209,7 +215,7 @@ After each stage (except Workspace Detection), present results in this format:
 
 ## State Management
 
-Maintain `aidlc-docs/aidlc-state.md` throughout inception:
+Maintain `aidlc-state.md` (in the feature docs directory root) throughout inception:
 
 ```markdown
 # AI-DLC State
@@ -253,7 +259,7 @@ Maintain `aidlc-docs/aidlc-state.md` throughout inception:
 
 ## Audit Trail
 
-Maintain `aidlc-docs/audit.md` as an append-only log:
+Maintain `audit.md` (in the feature docs directory root) as an append-only log:
 
 ```markdown
 ## [Stage Name or Interaction Type]
@@ -275,10 +281,10 @@ Maintain `aidlc-docs/audit.md` as an append-only log:
 
 ## Git Operations
 
-Auto-commit `aidlc-docs/` after each stage approval:
+Auto-commit the feature docs directory after each stage approval:
 
 ```bash
-git add aidlc-docs/
+git add docs/
 git commit -m "docs(aidlc): complete [stage name]"
 git push origin feature/[identifier]
 ```

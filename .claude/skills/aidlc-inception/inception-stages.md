@@ -2,6 +2,8 @@
 
 Stage-by-stage instructions for the AI-DLC inception phase. See `SKILL.md` for the orchestration overview, state management, and cross-cutting rules.
 
+> **Path convention:** All file paths below are relative to the **feature docs directory** defined in SKILL.md: `docs/<project-name>/<feature-name>/` in the workspace root.
+
 ---
 
 ## Stage 1: Workspace Detection (ALWAYS)
@@ -20,7 +22,7 @@ If working on existing code or the user mentions multiple repos, determine:
 
 #### 1.2 Check for Existing AI-DLC Project
 
-Check if `aidlc-docs/aidlc-state.md` exists:
+Check if `aidlc-state.md` exists:
 - **If exists:** Resume from last stage (see Pre-Flight in SKILL.md)
 - **If not exists:** Continue with new project assessment
 
@@ -29,7 +31,7 @@ Check if `aidlc-docs/aidlc-state.md` exists:
 - Scan for source code files (.ts, .tsx, .js, .dart, .py, .go, .rs, .java, .kt, etc.)
 - Check for build files (package.json, pubspec.yaml, pom.xml, build.gradle, Cargo.toml, etc.)
 - Look for project structure indicators
-- Identify workspace root directory (NOT aidlc-docs/)
+- Identify workspace root directory (NOT the feature docs directory)
 
 Record findings:
 ```markdown
@@ -51,7 +53,7 @@ Record findings:
 
 #### 1.5 Create Initial State File
 
-Create `aidlc-docs/aidlc-state.md` using the template from SKILL.md.
+Create `aidlc-state.md` using the template from SKILL.md.
 
 #### 1.6 Present Findings and Auto-Proceed
 
@@ -69,7 +71,7 @@ Auto-proceed to the determined next stage.
 
 ## Stage 2: Reverse Engineering (CONDITIONAL — Brownfield Only)
 
-**Condition:** Existing codebase detected AND no previous RE artifacts in `aidlc-docs/inception/reverse-engineering/`.
+**Condition:** Existing codebase detected AND no previous RE artifacts in `inception/reverse-engineering/`.
 
 **Skip when:** Greenfield project (no existing code).
 
@@ -93,7 +95,7 @@ Provide `/architect` with:
 
 #### 2.3 Expected Deliverables
 
-`/architect` should produce these files in `aidlc-docs/inception/reverse-engineering/`:
+`/architect` should produce these files in `inception/reverse-engineering/`:
 
 | Artifact | Content |
 |----------|---------|
@@ -230,7 +232,7 @@ The plan must include:
 
 #### 4.5 Store Plan and Collect Answers
 
-Save plan as `aidlc-docs/inception/plans/story-generation-plan.md`.
+Save plan as `inception/plans/story-generation-plan.md`.
 Collect and validate answers. Analyze for ambiguities. Resolve all before proceeding.
 
 #### 4.6 Approval Gate (Plan)
@@ -271,7 +273,7 @@ When a story touches multiple repositories, split into **Story Parts**:
 
 #### 4.10 Expected Deliverables
 
-All in `aidlc-docs/inception/user-stories/`:
+All in `inception/user-stories/`:
 
 | Artifact | Content |
 |----------|---------|
@@ -361,7 +363,7 @@ Always include a text alternative below the Mermaid diagram.
 
 #### 5.5 Create Execution Plan Document
 
-Save as `aidlc-docs/inception/plans/execution-plan.md`:
+Save as `inception/plans/execution-plan.md`:
 
 ```markdown
 # Execution Plan
@@ -452,7 +454,7 @@ Collect answers, analyze for ambiguities, resolve before proceeding.
 
 #### 6.4 Expected Deliverables
 
-All in `aidlc-docs/inception/application-design/`:
+All in `inception/application-design/`:
 
 | Artifact | Content |
 |----------|---------|
@@ -502,7 +504,7 @@ Only ask what's relevant:
 
 #### 7.4 Collect Answers and Get Plan Approval
 
-Save plan as `aidlc-docs/inception/plans/unit-of-work-plan.md`.
+Save plan as `inception/plans/unit-of-work-plan.md`.
 Collect answers, analyze for ambiguities, resolve all.
 Present plan for approval. Do not proceed to generation until approved.
 
@@ -516,7 +518,7 @@ Present plan for approval. Do not proceed to generation until approved.
 
 #### 7.6 Expected Deliverables
 
-All in `aidlc-docs/inception/application-design/`:
+All in `inception/application-design/`:
 
 | Artifact | Content |
 |----------|---------|

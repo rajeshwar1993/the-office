@@ -74,4 +74,4 @@ PR review lifecycle is defined in `shared/code_review_flow.md`:
 
 ## Feature Documentation
 
-Feature artifacts (PRDs, tech specs, AIDLC docs) live in each project repo at `docs/features/<feature-name>/`. This keeps feature docs co-located with the code they describe.
+Feature artifacts (PRDs, tech specs, AIDLC inception docs) live in the workspace root at `docs/<project-name>/<feature-name>/`. This keeps planning docs centralized in the-office rather than cluttering project repos.
