@@ -13,7 +13,7 @@ the-office/                          # Open THIS in Claude Code
 ├── .claude/
 │   ├── settings.json                # Shared plugin config (git-tracked)
 │   └── skills/                      # Git-tracked, shareable skills
-│       ├── aidlc/                   # Structured feature lifecycle
+│       ├── aidlc-inception/          # Inception phase planning
 │       ├── architect/               # Product strategy & technical design
 │       ├── build/                   # Full-stack implementation (TDD)
 │       └── review/                  # Code review & QA
@@ -45,7 +45,7 @@ When a feature spans multiple repos, create separate feature branches, commits, 
 | Architect | `/architect` | Product strategy (JTBD, PRDs, skeptic's lens) + technical design (schema, API contracts, task decomposition) |
 | Build | `/build` | Full-stack implementation with TDD (backend, web, mobile) |
 | Review | `/review` | Code review, security audit, QA, and test automation |
-| AI-DLC | `/aidlc` | Structured feature lifecycle: Inception → Construction → Operations |
+| AI-DLC Inception | `/aidlc-inception` | Inception phase for complex features: workspace detection, requirements, design, and planning artifacts |
 
 ## Git Strategy
 

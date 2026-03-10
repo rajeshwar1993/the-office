@@ -1,0 +1,343 @@
+---
+name: aidlc-inception
+description: "Inception phase for complex features: workspace detection, reverse engineering, requirements, user stories, workflow planning, application design, and units generation. Produces planning artifacts and stops before construction."
+user-invocable: true
+---
+
+# AI-DLC Inception
+
+Structured inception process that produces planning artifacts for complex features. Runs 7 stages (some conditional), each with an approval gate, then **stops** — no code is written. Use `/build` for implementation after inception completes.
+
+**When to use:** Complex features with multiple components, cross-cutting concerns, unclear requirements, or when the user explicitly requests structured planning.
+
+**When NOT to use:** Bug fixes, simple refactors, single-component features, documentation changes. Use `/build` directly for straightforward work.
+
+---
+
+## The 7 Inception Stages
+
+| # | Stage | Condition | Who |
+|---|-------|-----------|-----|
+| 1 | Workspace Detection | ALWAYS | Direct |
+| 2 | Reverse Engineering | Brownfield only | `/architect` |
+| 3 | Requirements Analysis | ALWAYS (adaptive depth) | `/architect` |
+| 4 | User Stories | CONDITIONAL (user-facing features) | `/architect` |
+| 5 | Workflow Planning | ALWAYS | Direct |
+| 6 | Application Design | CONDITIONAL (new components) | `/architect` |
+| 7 | Units Generation | CONDITIONAL (multi-unit) | `/architect` |
+
+---
+
+## Pre-Flight
+
+### 1. Check for Existing State (Session Resumption)
+
+Look for `aidlc-docs/aidlc-state.md` in the target project's feature directory.
+
+**If found:**
+- Parse current phase, stage, and progress.
+- Load artifacts from all completed stages (see Smart Context Loading below).
+- Present resumption summary:
+
+```
+Welcome back. Current status:
+- Feature: [identifier]
+- Current Stage: [stage name]
+- Last Completed: [last completed stage]
+- Next Step: [next action]
+
+Continue where you left off, or review a previous stage?
+```
+
+- Resume from the last incomplete stage.
+
+**Smart Context Loading by Stage:**
+- Workspace Detection / Reverse Engineering: Load workspace analysis
+- Requirements / User Stories: Load RE artifacts + requirements
+- Workflow Planning / Application Design / Units Generation: Load all prior artifacts
+
+### 2. Load References
+
+- Read `shared/git_strategy.md` for branch and commit conventions.
+- Read feature docs in the project repo's `docs/features/` directory if they exist.
+
+### 3. Initialize aidlc-docs/ Structure
+
+If no existing state, create:
+
+```
+docs/features/<feature-name>/
+└── aidlc-docs/
+    ├── inception/
+    │   ├── plans/
+    │   ├── reverse-engineering/
+    │   ├── requirements/
+    │   ├── user-stories/
+    │   └── application-design/
+    ├── aidlc-state.md
+    └── audit.md
+```
+
+Initialize `aidlc-state.md` with the State Management template (below).
+Initialize `audit.md` with the user's original request (complete raw input).
+
+---
+
+## Stage Execution Flow
+
+For each stage:
+
+1. **Check condition** — Is this stage ALWAYS or CONDITIONAL? If conditional, evaluate whether it applies.
+2. **If skipping** — Record skip with rationale in `aidlc-state.md`, proceed to next stage.
+3. **Execute** — Follow the detailed instructions in `inception-stages.md`.
+4. **Update state** — Mark stage complete in `aidlc-state.md` with timestamp.
+5. **Log in audit** — Append completion entry to `audit.md`.
+6. **Present results** — Show approval gate to user.
+7. **Wait for approval** — Do NOT proceed until user explicitly approves.
+8. **Git commit** — Auto-commit `aidlc-docs/` after approval.
+9. **Next stage** — Proceed to the next stage.
+
+**Exception:** Stage 1 (Workspace Detection) auto-proceeds without an approval gate.
+
+---
+
+## Delegation to /architect
+
+Stages 2–4 and 6–7 delegate analysis work to `/architect`. When invoking:
+
+**Provide this context:**
+- The user's original request
+- Current stage name and purpose
+- All relevant artifacts from prior stages (requirements, RE docs, stories, etc.)
+- Feature identifier and branch name
+- Specific deliverables expected (list the artifact files)
+
+**Expect these deliverables:**
+- Written artifact files in the correct `aidlc-docs/inception/` subdirectory
+- Structured content following the templates in `inception-stages.md`
+
+**After /architect completes:**
+- Verify all expected artifacts were created
+- Present results at the approval gate
+- Do not proceed until user approves
+
+---
+
+## Adaptive Depth
+
+When a stage executes, ALL its defined artifacts are created. "Depth" refers to detail level within those artifacts, which adapts to complexity:
+
+| Depth | When | Behavior |
+|-------|------|----------|
+| Minimal | Clear, simple request | Concise artifacts with essential detail |
+| Standard | Normal complexity | Balanced artifacts with functional + NFR coverage |
+| Comprehensive | Complex, high-risk, multi-stakeholder | Extensive artifacts with traceability and edge cases |
+
+**Factors:** Request clarity, problem complexity, scope, risk level, available context, user preferences.
+
+**Principle:** Create exactly the detail needed — no more, no less.
+
+---
+
+## Question Format
+
+**Hybrid approach** — conversational for simple, file-based for complex:
+
+### Conversational (1–3 questions)
+Ask directly in chat. Use for quick clarifications during any stage.
+
+### File-Based (4+ questions)
+Create a question file in the appropriate `aidlc-docs/inception/` subdirectory.
+
+**Format:**
+```markdown
+## Question [Number]
+[Clear, specific question text]
+
+A) [First option]
+B) [Second option]
+C) [Additional options as needed...]
+X) Other (please describe after [Answer]: tag below)
+
+[Answer]:
+```
+
+**Rules:**
+- Always include "Other" as the last option (MANDATORY)
+- Only include meaningful options — don't pad to fill slots
+- Minimum 2 meaningful options + Other
+- Ask user to fill in all `[Answer]:` tags
+
+### Contradiction Detection (MANDATORY)
+
+After receiving answers, check for:
+- **Contradictions:** Logically inconsistent answers (e.g., "bug fix" but "entire codebase affected")
+- **Ambiguities:** Vague responses ("mix of", "somewhere between", "not sure", "depends", "probably")
+- **Missing detail:** Answers that lack specifics needed for the stage
+
+**If contradictions or ambiguities found:**
+- For conversational: Ask targeted follow-up questions
+- For file-based: Create a `{stage}-clarification-questions.md` file
+- Do NOT proceed until all ambiguities are resolved
+
+---
+
+## Approval Gates
+
+After each stage (except Workspace Detection), present results in this format:
+
+```markdown
+## [Stage Name] Complete
+
+[Brief bullet-point summary of what was produced — factual, no workflow instructions]
+
+**Review:** Examine artifacts at `aidlc-docs/inception/[subdirectory]/`
+
+**Options:**
+- **Request Changes** — Ask for modifications
+- [IF applicable] **Add [Skipped Stage]** — Include a stage currently marked as skip
+- **Approve & Continue** — Proceed to [Next Stage Name]
+```
+
+**Rules:**
+- Do NOT proceed without explicit user approval
+- "Go ahead", "proceed", "approved" count as approval
+- Log approval response with timestamp in `audit.md`
+- If changes requested: update artifacts, re-present for approval
+
+---
+
+## State Management
+
+Maintain `aidlc-docs/aidlc-state.md` throughout inception:
+
+```markdown
+# AI-DLC State
+
+## Feature
+- **Identifier:** [feature-id]
+- **Description:** [User's original request]
+- **Started:** [ISO 8601 timestamp]
+- **Last Updated:** [ISO 8601 timestamp]
+
+## Current Position
+- **Phase:** INCEPTION
+- **Stage:** [Current stage name]
+
+## Inception Progress
+- [ ] Workspace Detection — [COMPLETED | SKIPPED | PENDING] — [timestamp]
+- [ ] Reverse Engineering — [COMPLETED | SKIPPED | PENDING] — [timestamp]
+- [ ] Requirements Analysis — [COMPLETED | SKIPPED | PENDING] — [timestamp]
+- [ ] User Stories — [COMPLETED | SKIPPED | PENDING] — [timestamp]
+- [ ] Workflow Planning — [COMPLETED | SKIPPED | PENDING] — [timestamp]
+- [ ] Application Design — [COMPLETED | SKIPPED | PENDING] — [timestamp]
+- [ ] Units Generation — [COMPLETED | SKIPPED | PENDING] — [timestamp]
+
+## Workspace State
+- **Existing Code:** [Yes/No]
+- **Project Type:** [Greenfield/Brownfield]
+- **Workspace Root:** [Absolute path]
+- **Repositories Involved:** [List or "Current workspace only"]
+
+## Decisions
+| Decision | Rationale | User Approved | Timestamp |
+|----------|-----------|---------------|-----------|
+```
+
+**Update rules:**
+- Update in the SAME interaction where work is completed
+- Never skip a state update
+- Include skip rationale for conditional stages that are skipped
+
+---
+
+## Audit Trail
+
+Maintain `aidlc-docs/audit.md` as an append-only log:
+
+```markdown
+## [Stage Name or Interaction Type]
+**Timestamp:** [ISO 8601]
+**User Input:** "[Complete raw user input — never summarized]"
+**AI Response:** "[Action taken or response summary]"
+**Context:** [Stage, action, or decision made]
+
+---
+```
+
+**Rules:**
+- NEVER overwrite existing entries — append only
+- Log EVERY user input with complete raw text
+- Log every approval gate prompt and response
+- Use ISO 8601 timestamps
+
+---
+
+## Git Operations
+
+Auto-commit `aidlc-docs/` after each stage approval:
+
+```bash
+git add aidlc-docs/
+git commit -m "docs(aidlc): complete [stage name]"
+git push origin feature/[identifier]
+```
+
+**Commit message format:** `docs(aidlc): complete [stage name in lowercase]`
+
+**On push failure:**
+1. Log error in `audit.md`
+2. Inform user with error details
+3. Offer: Retry Push / Skip Push (local only) / Help Needed
+4. Wait for response before proceeding
+
+---
+
+## Inception Exit
+
+When all 7 stages are complete (executed or skipped):
+
+### Exit Checklist
+
+**ALWAYS Required:**
+- [ ] Requirements document with NFR baseline
+- [ ] Execution plan with stage decisions (from Workflow Planning)
+- [ ] Technology stack documented
+
+**IF Multi-Unit:**
+- [ ] Data model overview across units
+- [ ] Integration contracts between units
+- [ ] Cross-cutting concerns defined
+
+**IF Brownfield:**
+- [ ] Reverse engineering artifacts
+
+**IF Application Design Executed:**
+- [ ] Component and service definitions
+
+### Exit Actions
+
+1. Verify all checklist items are present. If any missing, report with `[BLOCKER]`.
+2. Mark inception phase as COMPLETE in `aidlc-state.md`.
+3. Log completion in `audit.md`.
+4. Present final summary:
+
+```markdown
+## Inception Complete
+
+All inception stages are finished. Summary:
+- **Stages Executed:** [list]
+- **Stages Skipped:** [list with rationale]
+- **Key Artifacts:** [list with file paths]
+- **Key Decisions:** [list]
+
+Inception artifacts are ready. Use `/build` when ready to begin construction.
+```
+
+5. **STOP.** Do not proceed to construction. Do not invoke `/build`. The user decides when to start building.
+
+---
+
+## Detailed Stage Reference
+
+For complete stage-by-stage instructions (steps, deliverables, templates, conditional logic), see `inception-stages.md` in this skill directory.

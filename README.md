@@ -4,7 +4,7 @@ A portable workspace root for AI-assisted software development with [Claude Code
 
 ## What's Inside
 
-- **`.claude/skills/`** — Shareable skill definitions (architect, build, review, aidlc) that load automatically in Claude Code
+- **`.claude/skills/`** — Shareable skill definitions (architect, build, review, aidlc-inception) that load automatically in Claude Code
 - **`shared/`** — Company-wide process docs (git strategy, code review flow)
 - **`workspaces/`** — Clone your project repos here (gitignored)
 - **`CLAUDE.md`** — Workspace-level instructions for Claude Code
@@ -31,7 +31,7 @@ A portable workspace root for AI-assisted software development with [Claude Code
 | Architect | `/architect` | Product strategy & technical design |
 | Build | `/build` | Full-stack implementation with TDD |
 | Review | `/review` | Code review, security audit, QA |
-| AI-DLC | `/aidlc` | Structured feature lifecycle (Inception → Construction → Operations) |
+| AI-DLC Inception | `/aidlc-inception` | Inception phase for complex features: workspace detection, requirements, design, and planning artifacts |
 
 ## Structure
 
@@ -40,7 +40,7 @@ the-office/
 ├── .claude/
 │   ├── settings.json
 │   └── skills/
-│       ├── aidlc/
+│       ├── aidlc-inception/
 │       ├── architect/
 │       ├── build/
 │       └── review/
