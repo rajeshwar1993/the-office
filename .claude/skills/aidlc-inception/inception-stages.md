@@ -26,12 +26,13 @@ Check if `aidlc-state.md` exists:
 - **If exists:** Resume from last stage (see Pre-Flight in SKILL.md)
 - **If not exists:** Continue with new project assessment
 
-#### 1.3 Scan Workspace for Existing Code
+#### 1.3 Scan Project Repo for Existing Code
+
+Scan the target project repo at `workspaces/<project-name>/`:
 
 - Scan for source code files (.ts, .tsx, .js, .dart, .py, .go, .rs, .java, .kt, etc.)
 - Check for build files (package.json, pubspec.yaml, pom.xml, build.gradle, Cargo.toml, etc.)
 - Look for project structure indicators
-- Identify workspace root directory (NOT the feature docs directory)
 
 Record findings:
 ```markdown
@@ -40,7 +41,7 @@ Record findings:
 - **Programming Languages:** [List if found]
 - **Build System:** [npm/flutter/etc. if found]
 - **Project Structure:** [Monolith/Multi-repo/Library/Empty]
-- **Workspace Root:** [Absolute path]
+- **Project Repo Path:** [Absolute path to project repo, e.g., workspaces/pulse-web]
 ```
 
 #### 1.4 Determine Next Stage
@@ -89,8 +90,9 @@ If user indicated multiple repositories during Workspace Detection:
 #### 2.2 Delegate Analysis to /architect
 
 Provide `/architect` with:
-- Workspace root path(s) and repository paths
+- Project repo path(s) (under `workspaces/`)
 - Feature identifier and description
+- Project CLAUDE.md content (for project-specific conventions)
 - Instruction to analyze: architecture, components, APIs, tech stack
 
 #### 2.3 Expected Deliverables
@@ -243,7 +245,7 @@ Present plan for approval. Do not proceed to generation until approved.
 
 #### 4.7 Execute Plan
 
-- Load approved plan from `story-generation-plan.md`
+- Load approved plan from `inception/plans/story-generation-plan.md`
 - Execute each step, marking checkboxes as completed
 - Generate all artifacts per the plan
 

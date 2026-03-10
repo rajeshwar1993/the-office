@@ -30,9 +30,18 @@ Structured inception process that produces planning artifacts for complex featur
 
 ## Pre-Flight
 
-### 1. Check for Existing State (Session Resumption)
+### 1. Determine Project and Feature Names
 
-Look for `aidlc-state.md` in the feature docs directory (see Initialize Structure below).
+Before anything else, determine the two values needed for the feature docs directory:
+
+- **`<project-name>`** — The target project repo (e.g., `pulse-web`, `pulse-supabase`). Infer from the user's request or ask if ambiguous.
+- **`<feature-name>`** — A short kebab-case name for the feature (e.g., `ghost-calendar`, `user-auth`). Derive from the user's request or ask.
+
+These define the feature docs directory: `docs/<project-name>/<feature-name>/`
+
+### 2. Check for Existing State (Session Resumption)
+
+Scan `docs/` in the workspace root for any existing `aidlc-state.md` files. If the user's request matches an existing feature (by name or description), load that state.
 
 **If found:**
 - Parse current phase, stage, and progress.
@@ -42,6 +51,7 @@ Look for `aidlc-state.md` in the feature docs directory (see Initialize Structur
 ```
 Welcome back. Current status:
 - Feature: [identifier]
+- Feature Docs: docs/<project-name>/<feature-name>/
 - Current Stage: [stage name]
 - Last Completed: [last completed stage]
 - Next Step: [next action]
@@ -56,11 +66,12 @@ Continue where you left off, or review a previous stage?
 - Requirements / User Stories: Load RE artifacts + requirements
 - Workflow Planning / Application Design / Units Generation: Load all prior artifacts
 
-### 2. Load References
+### 3. Load References
 
 - Read `shared/git_strategy.md` for branch and commit conventions.
+- Read the target project's CLAUDE.md (`workspaces/<project-name>/CLAUDE.md`) for project-specific conventions, tech stack, and architecture.
 
-### 3. Initialize Feature Docs Structure
+### 4. Initialize Feature Docs Structure
 
 All inception artifacts are stored in the **workspace root** (the-office/) under:
 
@@ -100,8 +111,7 @@ For each stage:
 5. **Log in audit** — Append completion entry to `audit.md`.
 6. **Present results** — Show approval gate to user.
 7. **Wait for approval** — Do NOT proceed until user explicitly approves.
-8. **Git commit** — Auto-commit the feature docs directory after approval.
-9. **Next stage** — Proceed to the next stage.
+8. **Next stage** — Proceed to the next stage.
 
 **Exception:** Stage 1 (Workspace Detection) auto-proceeds without an approval gate.
 
@@ -223,6 +233,8 @@ Maintain `aidlc-state.md` (in the feature docs directory root) throughout incept
 ## Feature
 - **Identifier:** [feature-id]
 - **Description:** [User's original request]
+- **Project:** [project-name]
+- **Feature Docs:** [docs/<project-name>/<feature-name>/]
 - **Started:** [ISO 8601 timestamp]
 - **Last Updated:** [ISO 8601 timestamp]
 
@@ -242,7 +254,7 @@ Maintain `aidlc-state.md` (in the feature docs directory root) throughout incept
 ## Workspace State
 - **Existing Code:** [Yes/No]
 - **Project Type:** [Greenfield/Brownfield]
-- **Workspace Root:** [Absolute path]
+- **Project Repo Path:** [Absolute path to project repo, e.g., workspaces/pulse-web]
 - **Repositories Involved:** [List or "Current workspace only"]
 
 ## Decisions
@@ -276,26 +288,6 @@ Maintain `audit.md` (in the feature docs directory root) as an append-only log:
 - Log EVERY user input with complete raw text
 - Log every approval gate prompt and response
 - Use ISO 8601 timestamps
-
----
-
-## Git Operations
-
-Auto-commit the feature docs directory after each stage approval:
-
-```bash
-git add docs/
-git commit -m "docs(aidlc): complete [stage name]"
-git push origin feature/[identifier]
-```
-
-**Commit message format:** `docs(aidlc): complete [stage name in lowercase]`
-
-**On push failure:**
-1. Log error in `audit.md`
-2. Inform user with error details
-3. Offer: Retry Push / Skip Push (local only) / Help Needed
-4. Wait for response before proceeding
 
 ---
 
