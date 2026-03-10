@@ -1,6 +1,6 @@
 # Git Branching & Commit Strategy
 
-This document defines the branching model, commit conventions, and PR workflow for all agents working on Pulse projects.
+This document defines the branching model, commit conventions, and PR workflow for all projects in this workspace.
 
 ---
 
@@ -27,7 +27,7 @@ main
 
 - **Feature:** `feature/F001_auth-flow`
 - **Task:** `task/T001_login-screen`
-- IDs must match identifiers from `projects/<project>/features/` and task files.
+- IDs must match identifiers from the project's `docs/features/` directory and task files.
 - Use lowercase kebab-case for the short name.
 
 ## 3. Commit Messages — Scoped Conventional Commits
