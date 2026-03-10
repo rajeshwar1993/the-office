@@ -71,7 +71,7 @@ chore(deps): bump supabase-flutter to 2.x
 1. Agent pushes task branch and opens a PR targeting the parent feature branch.
 2. PR title: `[Task_ID] Short description` (e.g., `[T001] Add login screen`).
 3. PR description must follow the **PR Template** above.
-4. Sentinel (Code Reviewer) reviews and approves or requests changes.
+4. Reviewer reviews and approves or requests changes.
 5. On approval, **squash merge** into the feature branch.
 
 ### Feature PR (feature branch → main)
@@ -79,7 +79,7 @@ chore(deps): bump supabase-flutter to 2.x
 1. Once all task PRs are merged, the feature owner opens a PR targeting `main`.
 2. PR title: `[Feature_ID] Feature name` (e.g., `[F001] Auth Flow`).
 3. PR description must follow the **PR Template** above.
-4. Sentinel (Code Reviewer) reviews the integrated feature.
+4. Reviewer reviews the integrated feature.
 5. On approval, **squash merge** into `main`.
 
 ### PR Template
@@ -104,21 +104,21 @@ Use the following template for all PR descriptions:
 - Never force-push to `main`.
 - Delete the source branch after merge.
 
-## 5. Agent Responsibilities
+## 5. Role Responsibilities
 
-### Atlas (Technical Architect)
+### Architect
 
 - Creates the **feature branch** from `main` when defining a feature's tech spec and tasks.
 - Ensures the feature branch name follows the naming convention.
 
-### Forge (Backend Specialist), Pixel (Web Frontend Specialist), Dart (Mobile Specialist)
+### Builder
 
-- Create a **task branch** from the parent feature branch before starting work.
-- Commit frequently using scoped conventional commits.
-- Open a PR from the task branch to the feature branch when work is complete.
-- Address review feedback from Sentinel promptly.
+- Creates a **task branch** from the parent feature branch before starting work.
+- Commits frequently using scoped conventional commits.
+- Opens a PR from the task branch to the feature branch when work is complete.
+- Addresses review feedback from Reviewer promptly.
 
-### Sentinel (Code Reviewer)
+### Reviewer
 
 - Reviews all PRs (task → feature, feature → main).
 - Verifies commit messages follow conventions.
