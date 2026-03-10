@@ -1,0 +1,5 @@
+workspaces/*/
+!workspaces/.gitkeep
+.claude/settings.local.json
+.claude/plans/
+.DS_Store
