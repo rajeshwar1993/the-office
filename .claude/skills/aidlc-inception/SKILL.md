@@ -69,7 +69,7 @@ Continue where you left off, or review a previous stage?
 ### 3. Load References
 
 - Read `shared/git_strategy.md` for branch and commit conventions.
-- Read the target project's CLAUDE.md (`workspaces/<project-name>/CLAUDE.md`) for project-specific conventions, tech stack, and architecture.
+- Read the target project's CLAUDE.md (`workspaces/<project-name>/CLAUDE.md`) for project-specific conventions, tech stack, and architecture. If the project repo doesn't exist yet (greenfield with no repo), skip this — conventions will be established during Requirements Analysis.
 
 ### 4. Initialize Feature Docs Structure
 
@@ -90,13 +90,28 @@ docs/<project-name>/<feature-name>/
 │   ├── reverse-engineering/
 │   ├── requirements/
 │   ├── user-stories/
-│   └── application-design/
+│   ├── application-design/
+│   └── units/
 ├── aidlc-state.md
 └── audit.md
 ```
 
 Initialize `aidlc-state.md` with the State Management template (below).
-Initialize `audit.md` with the user's original request (complete raw input).
+Initialize `audit.md` with this initial entry:
+
+```markdown
+# Audit Trail — <feature-name>
+
+---
+
+## Inception Started
+**Timestamp:** [ISO 8601]
+**User Input:** "[Complete raw user input — the original request that triggered inception]"
+**AI Response:** "Inception started. Feature docs directory created at docs/<project-name>/<feature-name>/."
+**Context:** Pre-Flight initialization
+
+---
+```
 
 ---
 
@@ -119,21 +134,20 @@ For each stage:
 
 ## Delegation to /architect
 
-Stages 2–4 and 6–7 delegate analysis work to `/architect`. When invoking:
+Stages 2–4 and 6–7 delegate analysis work to `/architect`. Invoke `/architect` using the Skill tool with a prompt that includes all necessary context.
 
-**Provide this context:**
-- The user's original request
-- Current stage name and purpose
-- All relevant artifacts from prior stages (requirements, RE docs, stories, etc.)
-- Feature identifier and branch name
-- Specific deliverables expected (list the artifact files)
+**Context to provide in the prompt:**
+- The user's original request (quote exactly)
+- Current stage name and what it needs (e.g., "Stage 3: Requirements Analysis — produce a requirements document")
+- All relevant artifacts from prior stages (include file contents, not just paths)
+- Feature identifier and project name
+- Specific deliverables: list each artifact filename, what it should contain, and the target directory (e.g., "Write `requirements.md` to `inception/requirements/` in the feature docs directory")
 
-**Expect these deliverables:**
-- Written artifact files in the correct `inception/` subdirectory within the feature docs directory
-- Structured content following the templates in `inception-stages.md`
+**Important:** The `/architect` skill produces its own analysis format (PRDs, tech specs, etc.). In your prompt, explicitly ask it to write output directly as the inception artifact files (e.g., `requirements.md`, `architecture.md`) following the templates in `inception-stages.md`, rather than its default format.
 
 **After /architect completes:**
-- Verify all expected artifacts were created
+- Verify all expected artifact files were created in the correct directory
+- If any artifacts are missing, invoke `/architect` again with a targeted prompt for the missing deliverables
 - Present results at the approval gate
 - Do not proceed until user approves
 
@@ -211,9 +225,14 @@ After each stage (except Workspace Detection), present results in this format:
 
 **Options:**
 - **Request Changes** — Ask for modifications
-- [IF applicable] **Add [Skipped Stage]** — Include a stage currently marked as skip
+- [ONLY at Stage 5+ approval gates] **Add [Stage Name]** — Re-enable a stage marked SKIP in the execution plan (see Re-entering a Skipped Stage)
 - **Approve & Continue** — Proceed to [Next Stage Name]
 ```
+
+**Notes:**
+- The "Add [Stage Name]" option is only available AFTER Workflow Planning (Stage 5) has completed, because Stage 5 is where skip/execute decisions are made. Stages 2–4 approval gates should NOT offer to add/remove future stages.
+- At Stage 5's approval gate, the user can add or remove any remaining stages (Application Design, Units Generation).
+- At Stages 6–7 approval gates, the user can add any remaining skipped stage.
 
 **Rules:**
 - Do NOT proceed without explicit user approval
@@ -266,6 +285,7 @@ Maintain `aidlc-state.md` (in the feature docs directory root) throughout incept
 - Update in the SAME interaction where work is completed
 - Never skip a state update
 - Include skip rationale for conditional stages that are skipped
+- Add a row to the **Decisions** table when: a conditional stage is skipped or included (with rationale), the user overrides a recommendation, a significant technical choice is made (e.g., tech stack selection), or a skipped stage is re-entered
 
 ---
 

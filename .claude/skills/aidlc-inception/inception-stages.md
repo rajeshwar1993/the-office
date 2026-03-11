@@ -14,29 +14,36 @@ Stage-by-stage instructions for the AI-DLC inception phase. See `SKILL.md` for t
 
 ### Steps
 
-#### 1.1 Repository Information (Brownfield Only)
+#### 1.1 Scan Project Repo for Existing Code
 
-If working on existing code or the user mentions multiple repos, determine:
-- Single repository or multiple?
-- If multiple: collect repository names for path collection during Reverse Engineering.
+Check if the target project repo exists at `workspaces/<project-name>/`:
 
-#### 1.2 Scan Project Repo for Existing Code
-
-Scan the target project repo at `workspaces/<project-name>/`:
-
+**If the directory exists:**
 - Scan for source code files (.ts, .tsx, .js, .dart, .py, .go, .rs, .java, .kt, etc.)
 - Check for build files (package.json, pubspec.yaml, pom.xml, build.gradle, Cargo.toml, etc.)
 - Look for project structure indicators
+
+**If the directory does NOT exist:**
+- Mark as greenfield — the project repo will be created during construction
+- Record findings with "N/A" values and skip to step 1.3
 
 Record findings:
 ```markdown
 ## Workspace State
 - **Existing Code:** [Yes/No]
-- **Programming Languages:** [List if found]
-- **Build System:** [npm/flutter/etc. if found]
-- **Project Structure:** [Monolith/Multi-repo/Library/Empty]
-- **Project Repo Path:** [Absolute path to project repo, e.g., workspaces/pulse-web]
+- **Programming Languages:** [List if found, "N/A" if greenfield]
+- **Build System:** [npm/flutter/etc. if found, "N/A" if greenfield]
+- **Project Structure:** [Monolith/Multi-repo/Library/New Project]
+- **Project Repo Path:** [Path if exists, "Not yet created" if greenfield]
 ```
+
+#### 1.2 Determine Repository Information (Brownfield Only)
+
+If existing code was found (brownfield), determine:
+- Single repository or multiple?
+- If multiple: collect repository names for path collection during Reverse Engineering.
+
+Skip this step for greenfield projects.
 
 #### 1.3 Determine Next Stage
 
@@ -46,9 +53,12 @@ Record findings:
 | Has code (brownfield) | No RE artifacts exist | Reverse Engineering |
 | Has code (brownfield) | RE artifacts already exist | Requirements Analysis |
 
-#### 1.4 Create Initial State File
+#### 1.4 Update State with Workspace Findings
 
-Create `aidlc-state.md` using the template from SKILL.md.
+Update `aidlc-state.md` (created during Pre-Flight) with workspace scan results:
+- Set **Existing Code**, **Project Type**, **Project Repo Path**, **Repositories Involved** in the Workspace State section
+- Mark Workspace Detection as COMPLETED with timestamp
+- Set **Stage** to the next stage determined in step 1.3
 
 #### 1.5 Present Findings and Auto-Proceed
 
@@ -168,13 +178,11 @@ Analyze all answers for contradictions/ambiguities. Create follow-up questions i
 |----------|---------|
 | `inception/requirements/requirements.md` | Intent analysis summary, functional requirements, NFR baseline (performance, security, scalability, availability, maintainability) |
 | `inception/requirements/requirement-verification-questions.md` | Clarifying questions (if needed) |
-| `inception/technical-foundation.md` | **Greenfield only** — tech stack decisions, dev standards, shared dependencies, build/test tools, code organization |
+| `inception/requirements/technical-foundation.md` | **Greenfield only** — tech stack decisions, dev standards, shared dependencies, build/test tools, code organization |
 
 #### 3.7 Update State and Approval Gate
 
-Update `aidlc-state.md`. Present requirements summary.
-
-**If User Stories will be skipped**, include option: "Add User Stories — include User Stories stage (currently skipped based on project simplicity)."
+Update `aidlc-state.md`. Present requirements summary and wait for approval.
 
 ---
 
@@ -398,16 +406,20 @@ Save as `inception/plans/execution-plan.md`:
 - **Key Deliverables:** [List]
 ```
 
-#### 5.6 Verify Prerequisites
+#### 5.6 Plan Deliverables Check
 
-Before finalizing, ensure:
-- [ ] Technology stack documented (greenfield: `technical-foundation.md`, brownfield: `technology-stack.md`)
-- [ ] NFR baseline defined in `requirements.md`
-- [ ] If Application Design will execute: plan includes `cross-cutting-concerns.md`
-- [ ] If multi-unit/complex data: plan includes `data-model-overview.md`
-- [ ] If Units Generation will execute: plan includes `integration-contracts.md`, `data-ownership.md`
+Ensure the execution plan accounts for all required deliverables:
 
-Add any missing artifacts to the plan.
+**Already produced (verify these exist from prior stages):**
+- [ ] Technology stack documented (greenfield: `inception/requirements/technical-foundation.md`, brownfield: `inception/reverse-engineering/technology-stack.md`)
+- [ ] NFR baseline defined in `inception/requirements/requirements.md`
+
+If any of the above are missing, flag as `[BLOCKER]` and address before finalizing.
+
+**Planned for upcoming stages (verify the execution plan lists these):**
+- [ ] If Application Design marked EXECUTE: plan includes `inception/application-design/cross-cutting-concerns.md`
+- [ ] If multi-unit or complex data: plan includes `inception/application-design/data-model-overview.md`
+- [ ] If Units Generation marked EXECUTE: plan includes `inception/units/integration-contracts.md` (if multi-unit) and `inception/units/data-ownership.md` (if shared data)
 
 #### 5.7 Update State and Approval Gate
 
@@ -462,7 +474,7 @@ All in `inception/application-design/`:
 
 #### 6.5 Update State and Approval Gate
 
-If Units Generation is skipped, include option: "Add Units Generation — include Units Generation stage (currently skipped)."
+Present application design for approval. If Units Generation was marked SKIP in the execution plan, include option: "Add Units Generation — re-enable Units Generation stage."
 
 ---
 
@@ -514,7 +526,7 @@ Present plan for approval. Do not proceed to generation until approved.
 
 #### 7.6 Expected Deliverables
 
-All in `inception/application-design/`:
+All in `inception/units/`:
 
 | Artifact | Content |
 |----------|---------|
@@ -551,6 +563,29 @@ After receiving any user answers (conversational or file-based), ALWAYS check fo
 - Ask targeted follow-up questions referencing the specific contradiction
 - Create clarification file if file-based questions were used
 - Do NOT proceed until contradictions are resolved
+
+### Re-entering a Skipped Stage
+
+When a user selects "Add [Stage Name]" at an approval gate (only available at Stage 5+ gates):
+
+1. **Update state:** Change the stage status from SKIPPED to PENDING in `aidlc-state.md`
+2. **Update execution plan:** Edit `inception/plans/execution-plan.md` to mark the stage as EXECUTE
+3. **Log in audit:** Record the re-entry decision with rationale in `audit.md`
+4. **Add to Decisions table:** Record in `aidlc-state.md` Decisions table with user approval
+5. **Execute immediately:** Run the newly-added stage before continuing to the next planned stage
+6. **Normal flow resumes:** After the re-entered stage completes and is approved, continue with the stage that was next in the original flow
+
+**Example:** At Stage 6's approval gate, user says "Add Units Generation." Update state, execute Stage 7, get approval, then proceed to inception exit.
+
+### Multi-Repo Feature Handling
+
+When a feature spans multiple project repos (e.g., `pulse-web` + `pulse-supabase`):
+
+- **Project name:** Use the primary repo's name for `<project-name>`. The primary repo is the one most affected by the feature.
+- **State tracking:** Single `aidlc-state.md` tracks the feature across all repos. List all repos in the **Repositories Involved** field.
+- **Reverse Engineering:** Run RE on each repo. Store artifacts in `inception/reverse-engineering/`, prefixed by repo name (e.g., `pulse-web-architecture.md`, `pulse-supabase-architecture.md`).
+- **Requirements:** Single `requirements.md` covering the full feature scope across repos.
+- **User Stories:** Use Story Parts (see Stage 4.8) to split stories across repos with integration contracts.
 
 ### Error Recovery
 
