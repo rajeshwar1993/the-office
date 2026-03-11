@@ -20,13 +20,7 @@ If working on existing code or the user mentions multiple repos, determine:
 - Single repository or multiple?
 - If multiple: collect repository names for path collection during Reverse Engineering.
 
-#### 1.2 Check for Existing AI-DLC Project
-
-Check if `aidlc-state.md` exists:
-- **If exists:** Resume from last stage (see Pre-Flight in SKILL.md)
-- **If not exists:** Continue with new project assessment
-
-#### 1.3 Scan Project Repo for Existing Code
+#### 1.2 Scan Project Repo for Existing Code
 
 Scan the target project repo at `workspaces/<project-name>/`:
 
@@ -44,7 +38,7 @@ Record findings:
 - **Project Repo Path:** [Absolute path to project repo, e.g., workspaces/pulse-web]
 ```
 
-#### 1.4 Determine Next Stage
+#### 1.3 Determine Next Stage
 
 | Workspace | Condition | Next Stage |
 |-----------|-----------|------------|
@@ -52,11 +46,11 @@ Record findings:
 | Has code (brownfield) | No RE artifacts exist | Reverse Engineering |
 | Has code (brownfield) | RE artifacts already exist | Requirements Analysis |
 
-#### 1.5 Create Initial State File
+#### 1.4 Create Initial State File
 
 Create `aidlc-state.md` using the template from SKILL.md.
 
-#### 1.6 Present Findings and Auto-Proceed
+#### 1.5 Present Findings and Auto-Proceed
 
 Present a brief summary:
 ```
@@ -514,7 +508,7 @@ Present plan for approval. Do not proceed to generation until approved.
 
 #### 7.5 Execute Plan
 
-- Load approved plan
+- Load approved plan from `inception/plans/unit-of-work-plan.md`
 - Execute each step, marking checkboxes
 - Generate all unit artifacts per the plan
 
