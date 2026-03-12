@@ -1,0 +1,952 @@
+- generic [active] [ref=e1]:
+  - heading [level=1] [ref=e1213]: Accessibility links
+  - link [ref=e1214] [cursor=pointer]: Skip to main content
+  - link [ref=e1215] [cursor=pointer]:
+    - /url: https://support.google.com/websearch/answer/181196?hl=en-IN
+    - text: Accessibility help
+  - link [ref=e1216] [cursor=pointer]: Accessibility feedback
+  - generic [ref=e10]:
+    - search [ref=e11]:
+      - generic [ref=e13]:
+        - link [ref=e1217] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQPAgJ
+          - img [ref=e16]
+        - generic [ref=e18]:
+          - generic [ref=e19]:
+            - combobox [ref=e1218]: Looks Salon Block K 1, Chittaranjan Park Looks Salon Block K 1, Chittaranjan Park
+            - generic [ref=e23]:
+              - button [ref=e1219] [cursor=pointer]:
+                - img [ref=e27]
+              - generic [ref=e30]:
+                - button [ref=e1220] [cursor=pointer]:
+                  - img [ref=e32]
+                - button [ref=e1221] [cursor=pointer]:
+                  - img [ref=e35]
+          - button [ref=e1222] [cursor=pointer]:
+            - img [ref=e40]
+    - generic [ref=e42]:
+      - button [ref=e1223] [cursor=pointer]:
+        - img [ref=e47]
+      - generic [ref=e50]:
+        - button [ref=e1224] [cursor=pointer]:
+          - img [ref=e53]
+        - link [ref=e1225] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fsca_esv%3Dbb692e0fdf80bd80%26cs%3D1%26output%3Dsearch%26kgmid%3D/g/11fr0v9672%26q%3DLooks%2BSalon%26shndl%3D30%26source%3Dsh/x/kp/local/m1/1%26kgs%3D153f8e0948a7224d%26shem%3Dshrtsdl%26utm_source%3Dshrtsdl,sh/x/kp/local/m1/1&ec=futura_srp_og_si_72236_p
+          - text: Sign in
+  - generic [ref=e59]:
+    - generic [ref=e64]:
+      - heading [level=1] [ref=e1226]: Filters and topics
+      - navigation [ref=e66]:
+        - generic [ref=e70]:
+          - list [ref=e71]:
+            - listitem [ref=e72]:
+              - link [ref=e1227] [cursor=pointer]:
+                - /url: /search?q=Looks+Salon&sca_esv=bb692e0fdf80bd80&cs=1&udm=50&source=sh/x/kp/local/m1/1&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3j2nXl-YQ05KjnWz5SrU93H7yjmEhUi5AUSwdCoCuNwic2C_J_Rcmu3S7Rsfb8A-Hz00-ik_bO8c4MNkKc6tUmrCnhmBBrT29IjzuTXP2Ak-BeDcyqJz7v2k_Ej-hAjAQ0cyri10ggFh9PmGvCeGndjDicMMh169KjzYcYKe285f73kBkA&aep=1&ntc=1&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ2J8OegQIDhAE
+                - generic [ref=e78]: AI Mode
+            - listitem [ref=e79]:
+              - link [disabled] [ref=e1228]:
+                - generic [ref=e82]: All
+            - listitem [ref=e83]:
+              - link [ref=e1229] [cursor=pointer]:
+                - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3j2nXl-YQ05KjnWz5SrU93H7yjmEhUi5AUSwdCoCuNwic2C_J_Rcmu3S7Rsfb8A-Hz00-ik_bO8c4MNkKc6tUmrCnhmBBrT29IjzuTXP2Ak-BeDcyqJz7v2k_Ej-hAjAQ0cyri10ggFh9PmGvCeGndjDicMMh169KjzYcYKe285f73kBkA&q=Looks+Salon+Block+K+1,+Chittaranjan+Park&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQtKgLegQIERAB
+                - generic [ref=e86]: Images
+            - listitem [ref=e87]:
+              - link [ref=e1230] [cursor=pointer]:
+                - /url: https://maps.google.com/maps?sca_esv=bb692e0fdf80bd80&cs=1&output=search&q=Looks+Salon+Block+K+1,+Chittaranjan+Park&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3j2nXl-YQ05KjnWz5SrU93H7yjmEhUi5AUSwdCoCuNwic2C_J_Rcmu3S7Rsfb8A-Hz00-ik_bO8c4MNkKc6tUmrCnhmBBrT29IjzuTXP2Ak-BeDcyqJz7v2k_Ej-hAjAQ0cyri10ggFh9PmGvCeGndjDicMMh169KjzYcYKe285f73kBkA&entry=mc&ved=1t:200715&ictx=111
+                - generic [ref=e90]: Maps
+            - listitem [ref=e91]:
+              - link [ref=e1231] [cursor=pointer]:
+                - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3j2nXl-YQ05KjnWz5SrU93H7yjmEhUi5AUSwdCoCuNwic2C_J_Rcmu3S7Rsfb8A-Hz00-ik_bO8c4MNkKc6tUmrCnhmBBrT29IjzuTXP2Ak-BeDcyqJz7v2k_Ej-hAjAQ0cyri10ggFh9PmGvCeGndjDicMMh169KjzYcYKe285f73kBkA&q=Looks+Salon+Block+K+1,+Chittaranjan+Park&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQtKgLegQIEhAB
+                - generic [ref=e94]: Videos
+            - listitem [ref=e95]:
+              - link [ref=e1232] [cursor=pointer]:
+                - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3j2nXl-YQ05KjnWz5SrU93H7yjmEhUi5AUSwdCoCuNwic2C_J_Rcmu3S7Rsfb8A-Hz00-ik_bO8c4MNkKc6tUmrCnhmBBrT29IjzuTXP2Ak-BeDcyqJz7v2k_Ej-hAjAQ0cyri10ggFh9PmGvCeGndjDicMMh169KjzYcYKe285f73kBkA&q=Looks+Salon+Block+K+1,+Chittaranjan+Park&ved=1t:220175&ictx=111
+                - generic [ref=e98]: Shopping
+            - listitem [ref=e99]:
+              - link [ref=e1233] [cursor=pointer]:
+                - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3j2nXl-YQ05KjnWz5SrU93H7yjmEhUi5AUSwdCoCuNwic2C_J_Rcmu3S7Rsfb8A-Hz00-ik_bO8c4MNkKc6tUmrCnhmBBrT29IjzuTXP2Ak-BeDcyqJz7v2k_Ej-hAjAQ0cyri10ggFh9PmGvCeGndjDicMMh169KjzYcYKe285f73kBkA&q=Looks+Salon+Block+K+1,+Chittaranjan+Park&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQs6gLegQIEBAB
+                - generic [ref=e102]: Forums
+            - listitem [ref=e103]:
+              - button [ref=e1234] [cursor=pointer]:
+                - generic [ref=e106]:
+                  - generic [ref=e107]: More
+                  - img [ref=e109]
+          - button [ref=e1236] [cursor=pointer]:
+            - generic [ref=e114]:
+              - generic [ref=e115]: Tools
+              - img [ref=e117]
+    - main [ref=e124]:
+      - generic [ref=e130]:
+        - heading [level=2] [ref=e1237]:
+          - generic [ref=e132]:
+            - text: Results for
+            - text: New Delhi, Delhi 110019
+        - generic [ref=e134]:
+          - text: ∙
+          - button [ref=e1238] [cursor=pointer]: Choose area
+        - button [ref=e1239] [cursor=pointer]:
+          - img [ref=e140]
+      - generic [ref=e144]:
+        - heading [level=1] [ref=e1240]: Search Results
+        - generic [ref=e157]:
+          - generic [ref=e162]:
+            - generic [ref=e169]:
+              - button [ref=e1241] [cursor=pointer]:
+                - generic [ref=e176]: See photos
+              - generic [ref=e177]:
+                - generic [ref=e178]:
+                  - link [ref=e1242] [cursor=pointer]:
+                    - /url: /maps/place/Looks+Salon/data=!4m2!3m1!1s0x0:0x2f98fdad37e75a11?sa=X&ved=1t:2428&ictx=111
+                    - img [ref=e1243]
+                  - link [ref=e1244] [cursor=pointer]:
+                    - /url: /maps/place/Looks+Salon/data=!4m2!3m1!1s0x0:0x2f98fdad37e75a11?sa=X&ved=1t:2428&ictx=111
+                    - img [ref=e1245]
+                - link [ref=e1246] [cursor=pointer]:
+                  - /url: /local/place/fid/0x390ce398ab07a277:0x2f98fdad37e75a11/photosphere?iu=https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid%3DbdRe3fpd0_XsspRSu1PU5w%26cb_client%3Dsearch.gws-prod.gps%26yaw%3D218.86736%26pitch%3D0%26thumbfov%3D100%26w%3D0%26h%3D0&ik=CAISFmJkUmUzZnBkMF9Yc3NwUlN1MVBVNXc%3D&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQpx96BAgaEBE
+                  - generic [ref=e196]: See outside
+            - generic [ref=e199]:
+              - heading [level=2] [ref=e1247]: Looks Salon
+              - generic [ref=e203]:
+                - generic [ref=e205]:
+                  - text: "4.0"
+                  - img [ref=e1248]
+                  - button [ref=e1249] [cursor=pointer]: 385 Google reviews
+                  - text: Beauty parlour in New Delhi
+                - button [ref=e1250] [cursor=pointer]:
+                  - img [ref=e1251]:
+                    - img [ref=e221]
+          - generic [ref=e226]:
+            - generic [ref=e235]:
+              - link [ref=e1252] [cursor=pointer]:
+                - /url: http://www.lookssalon.in/
+                - generic [ref=e238]:
+                  - img [ref=e240]
+                  - generic [ref=e242]: Website
+              - link [ref=e1253]:
+                - generic [ref=e245] [cursor=pointer]:
+                  - img [ref=e247]
+                  - generic [ref=e252]: Directions
+              - link [ref=e1254] [cursor=pointer]:
+                - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOXOuwdxUfrNaQVBuyI2L1sGDu_Xs5vJhlusvLG2CHQptlzCuqj-FZdIwLCDZp1VonZMBBtSJ77DPEUYDQD5owrl-Ay3J&q=Looks+Salon+Reviews&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ0bkNegQIIRAH
+                - generic [ref=e255]:
+                  - img [ref=e257]
+                  - generic [ref=e259]: Reviews
+              - button [ref=e1255] [cursor=pointer]:
+                - img [ref=e265]
+                - generic [ref=e267]: Save
+              - button [ref=e1256] [cursor=pointer]:
+                - generic [ref=e271]:
+                  - img [ref=e273]
+                  - generic [ref=e275]: Share
+              - button [ref=e1257] [cursor=pointer]:
+                - generic [ref=e278]:
+                  - img [ref=e280]
+                  - generic [ref=e282]: Call
+            - separator [ref=e283]
+          - generic [ref=e287]:
+            - generic [ref=e289]:
+              - generic [ref=e291]:
+                - generic [ref=e292]:
+                  - link [ref=e1258] [cursor=pointer]:
+                    - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=looks+salon+block+k+1,+chittaranjan+park+address&ludocid=3429770036651710993&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ6BN6BAgiEAI
+                    - text: Address
+                  - text: ":"
+                - text: K1/109, CR Park Main Rd, Block K 1, Chittaranjan Park, New Delhi, Delhi 110019
+              - generic [ref=e296]:
+                - generic [ref=e297]: "Phone:"
+                - link [ref=e1259] [cursor=pointer]:
+                  - /url: "#"
+                  - text: 011 4276 5083
+              - generic [ref=e301]:
+                - generic [ref=e302]:
+                  - link [ref=e1260] [cursor=pointer]:
+                    - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=looks+salon+block+k+1,+chittaranjan+park+hours&ludocid=3429770036651710993&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ6BN6BAgjEAI
+                    - text: Hours
+                  - text: ":"
+                - button [ref=e1261]:
+                  - generic [ref=e311]: Closed · Opens 10 am Thu
+              - button [ref=e1262] [cursor=pointer]: Suggest an edit
+            - separator [ref=e320]
+          - generic [ref=e324]:
+            - heading [level=3] [ref=e1263]: Reviews
+            - generic [ref=e332]:
+              - generic [ref=e333]:
+                - heading [level=3] [ref=e1264]: Google reviews
+                - button [ref=e1265] [cursor=pointer]:
+                  - img [ref=e340]
+                - generic [ref=e342]:
+                  - button [ref=e1267] [cursor=pointer]:
+                    - generic [ref=e347]: Write a review
+                  - link [ref=e1268] [cursor=pointer]:
+                    - /url: "#"
+                    - text: Add a photo
+              - generic [ref=e350]:
+                - generic [ref=e351]:
+                  - img [ref=e1269] [cursor=pointer]
+                  - generic [ref=e355]:
+                    - link [ref=e1270] [cursor=pointer]:
+                      - /url: https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s100026145224915444390!2s0x390ce398ab07a277:0x2f98fdad37e75a11?ved=1t:31295&ictx=111
+                      - text: "\"Great staff, best place for hair & skin care services!!\""
+                    - img [ref=e1271]
+                - generic [ref=e361]:
+                  - img [ref=e1272] [cursor=pointer]
+                  - generic [ref=e365]:
+                    - link [ref=e1273] [cursor=pointer]:
+                      - /url: https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s100644318456958586684!2s0x390ce398ab07a277:0x2f98fdad37e75a11?ved=1t:31295&ictx=111
+                      - text: "\"Most pathetic service at looks CR park location.\""
+                    - img [ref=e1274]
+                - generic [ref=e371]:
+                  - img [ref=e1275] [cursor=pointer]
+                  - generic [ref=e375]:
+                    - link [ref=e1276] [cursor=pointer]:
+                      - /url: https://www.google.com/maps/reviews/data=!4m5!14m4!1m3!1m2!1s111115962806479995551!2s0x390ce398ab07a277:0x2f98fdad37e75a11?ved=1t:31295&ictx=111
+                      - text: "\"I absolutely love the experience and work\""
+                    - img [ref=e1277]
+              - button [ref=e1278] [cursor=pointer]: View all Google reviews
+            - separator [ref=e384]
+          - generic [ref=e388]:
+            - heading [level=3] [ref=e1279]: Popular times
+            - generic [ref=e396]:
+              - generic [ref=e397]:
+                - radiogroup [ref=e399]:
+                  - radio [ref=e1280] [cursor=pointer]:
+                    - generic [ref=e401]: Mon
+                  - radio [ref=e1281] [cursor=pointer]:
+                    - generic [ref=e403]: Tue
+                  - radio [checked] [ref=e1282] [cursor=pointer]:
+                    - generic [ref=e405]: Wed
+                  - radio [ref=e1283] [cursor=pointer]:
+                    - generic [ref=e408]: Thu
+                  - radio [ref=e1284] [cursor=pointer]:
+                    - generic [ref=e410]: Fri
+                  - radio [ref=e1285] [cursor=pointer]:
+                    - generic [ref=e412]: Sat
+                  - radio [ref=e1286] [cursor=pointer]:
+                    - generic [ref=e414]: Sun
+                - generic [ref=e415]:
+                  - region [ref=e418]:
+                    - generic [ref=e419]:
+                      - img [ref=e421]
+                      - generic [ref=e1288]: "6 pm:"
+                      - text: Usually a little busy
+                  - radiogroup [ref=e426]:
+                    - radio [disabled] [ref=e428] [cursor=pointer]
+                    - radio [disabled] [ref=e430] [cursor=pointer]
+                    - radio [disabled] [ref=e432] [cursor=pointer]
+                    - radio [disabled] [ref=e434] [cursor=pointer]
+                    - radio [ref=e1289] [cursor=pointer]
+                    - radio [ref=e1290] [cursor=pointer]
+                    - radio [ref=e1291] [cursor=pointer]
+                    - radio [ref=e1292] [cursor=pointer]
+                    - radio [ref=e1293] [cursor=pointer]
+                    - radio [ref=e1294] [cursor=pointer]
+                    - radio [ref=e1295] [cursor=pointer]
+                    - radio [ref=e1296] [cursor=pointer]
+                    - radio [checked] [ref=e1297] [cursor=pointer]
+                    - radio [ref=e1298] [cursor=pointer]
+                    - radio [ref=e1299] [cursor=pointer]
+                    - radio [disabled] [ref=e469] [cursor=pointer]
+                    - radio [disabled] [ref=e471] [cursor=pointer]
+                    - radio [disabled] [ref=e473] [cursor=pointer]
+                  - generic [ref=e475]:
+                    - generic [ref=e482]: 9a
+                    - generic [ref=e488]: 12p
+                    - generic [ref=e494]: 3p
+                    - generic [ref=e500]: 6p
+                    - generic [ref=e506]: 9p
+              - generic [ref=e509]:
+                - img [ref=e510]
+                - generic [ref=e518]: People typically spend 45 min to 4 hr here
+            - separator [ref=e519]
+          - generic [ref=e523]:
+            - generic [ref=e528]:
+              - generic [ref=e529]:
+                - heading [level=3] [ref=e1300]: From Looks Salon
+                - button [ref=e1301]:
+                  - img [ref=e533]
+              - generic [ref=e535]: "\"Hair, beauty and Bridal Makeup\""
+            - separator [ref=e536]
+          - generic [ref=e542]:
+            - heading [level=3] [ref=e1302]: Profiles
+            - generic [ref=e544]:
+              - link [ref=e1303] [cursor=pointer]:
+                - /url: https://www.facebook.com/@Looksunisexsalon/
+                - generic [ref=e554]: Facebook
+              - link [ref=e1304] [cursor=pointer]:
+                - /url: https://twitter.com/lookssalonindia
+                - generic [ref=e564]: X (Twitter)
+              - link [ref=e1305] [cursor=pointer]:
+                - /url: https://www.instagram.com/looksunisexsalon/
+                - generic [ref=e574]: Instagram
+          - generic [ref=e582]:
+            - generic [ref=e585]:
+              - link [ref=e1306] [cursor=pointer]:
+                - /url: https://www.instagram.com/lookssalon.crpark/
+                - heading [level=3] [ref=e1307]: Looks CR Park (@lookssalon.crpark) · Delhi
+                - generic [ref=e593]:
+                  - generic [ref=e595]: Instagram · lookssalon.crpark
+                  - generic [ref=e597]: 7.9K+ followers
+              - button [ref=e1308] [cursor=pointer]:
+                - img [ref=e601]
+            - generic [ref=e604]:
+              - generic [ref=e605]:
+                - text: Come and avail the best beauty, hair and makeup services
+                - emphasis [ref=e606]: 01142765083, 01142765084
+                - text: · @lookssalon. · Makeup for our beautiful thank you so much for choosing us ❤️ @ ...
+              - link [ref=e1309] [cursor=pointer]:
+                - /url: https://www.instagram.com/lookssalon.crpark/#:~:text=Come%20and%20avail%20the%20best,01142765083%2C%2001142765084
+                - text: Read more
+            - link [ref=e1310] [cursor=pointer]:
+              - /url: https://www.instagram.com/lookssalon.crpark/
+              - img [ref=e1311]
+          - generic [ref=e620]:
+            - generic [ref=e623]:
+              - link [ref=e1312] [cursor=pointer]:
+                - /url: https://magicpin.in/New-Delhi/Chittaranjan-Park/Beauty/Looks-Salon/store/789503/?srsltid=AfmBOorHAZiATXug_5-8xnCXbB2Ah5f-XGysHAlxrh7_wldoJhRtRKM5
+                - heading [level=3] [ref=e1313]: Looks Salon - Chittaranjan Park, New Delhi
+                - generic [ref=e631]:
+                  - generic [ref=e633]: Magicpin
+                  - generic [ref=e635]: https://magicpin.in › ... › Chittaranjan Park › Beauty
+              - button [ref=e1314] [cursor=pointer]:
+                - img [ref=e639]
+            - generic [ref=e642]:
+              - generic [ref=e643]:
+                - text: Address.
+                - emphasis [ref=e644]: K1/109, Cr Park Main Rd, Block... K 1, Chittaranjan Park
+                - text: ", New Delhi see more Get Directions ... Salon, Chittaranjan Park Deals Looks Salon, Chittaranjan ..."
+              - link [ref=e1315] [cursor=pointer]:
+                - /url: https://magicpin.in/New-Delhi/Chittaranjan-Park/Beauty/Looks-Salon/store/789503/?srsltid=AfmBOorHAZiATXug_5-8xnCXbB2Ah5f-XGysHAlxrh7_wldoJhRtRKM5#:~:text=Address,see%20more%20Get%20Directions&text=Salon%2C%20Chittaranjan%20Park%20Deals%20Looks,Salon%2C%20Chittaranjan%20Park%2C%20New%20Delhi
+                - text: Read more
+          - generic [ref=e653]:
+            - generic [ref=e656]:
+              - link [ref=e1316] [cursor=pointer]:
+                - /url: https://www.justdial.com/Delhi/Looks-Salon-C-R-Park/011PXX11-XX11-200307142845-D8B3_BZDET
+                - heading [level=3] [ref=e1317]: Looks Salon in C R Park,Delhi
+                - generic [ref=e664]:
+                  - generic [ref=e666]: Justdial
+                  - generic [ref=e668]: https://www.justdial.com › ... › Salons in C R Park
+              - button [ref=e1318] [cursor=pointer]:
+                - img [ref=e672]
+            - generic [ref=e675]:
+              - generic [ref=e676]:
+                - emphasis [ref=e677]: K-1/109, Basement & Ground Floor, Chittranjan Park
+                - text: ", C R Park, Delhi-110019 ... Salons in Chittaranjan Park K Block · Salons in Chittaranjan Park E Block."
+              - link [ref=e1319] [cursor=pointer]:
+                - /url: https://www.justdial.com/Delhi/Looks-Salon-C-R-Park/011PXX11-XX11-200307142845-D8B3_BZDET#:~:text=K%2D1%2F109%2C%20Basement%20%26%20Ground%20Floor%2C,Chittranjan%20Park%2C%20C%20R%20Park%2C%20Delhi%2D110019&text=Salons%20in%20Chittaranjan%20Park%20K,in%20Chittaranjan%20Park%20E%20Block
+                - text: Read more
+            - generic [ref=e681]:
+              - generic [ref=e682]:
+                - img [ref=e1320]:
+                  - text: "4.0"
+                  - img [ref=e684]
+                  - text: (531)
+                - text: ·
+              - text: "Price range: ₹350 - ₹7000"
+          - generic [ref=e694]:
+            - generic [ref=e697]:
+              - link [ref=e1321] [cursor=pointer]:
+                - /url: https://cherryglitz.com/delhi/shop/RrxgMzrm5L-looks-salon
+                - heading [level=3] [ref=e1322]: Looks Salon - Best Beauty Parlour in Delhi
+                - generic [ref=e705]:
+                  - generic [ref=e707]: Cherry Glitz
+                  - generic [ref=e709]: https://cherryglitz.com › RrxgMzrm5L-looks-salon
+              - button [ref=e1323] [cursor=pointer]:
+                - img [ref=e713]
+            - generic [ref=e716]:
+              - generic [ref=e717]:
+                - emphasis [ref=e718]: Looks Salon is physically situated in K1/109, CR Park Main Rd, Block K 1, Chittaranjan Park
+                - text: ", New Delhi, Delhi 110019, India. It is a recognized location within ..."
+              - link [ref=e1324] [cursor=pointer]:
+                - /url: https://cherryglitz.com/delhi/shop/RrxgMzrm5L-looks-salon#:~:text=Looks%20Salon%20is%20physically%20situated,a%20recognized%20location%20within%20the
+                - text: Read more
+          - generic [ref=e727]:
+            - generic [ref=e730]:
+              - link [ref=e1325] [cursor=pointer]:
+                - /url: https://www.lookssalon.in/
+                - heading [level=3] [ref=e1326]: Looks Salon – Top Unisex Hair Salon Chain in India ...
+                - generic [ref=e738]:
+                  - generic [ref=e740]: Looks Salon
+                  - generic [ref=e742]: https://www.lookssalon.in
+              - button [ref=e1327] [cursor=pointer]:
+                - img [ref=e746]
+            - generic [ref=e749]:
+              - generic [ref=e750]:
+                - text: With over 162 branches nationally and internationally,
+                - emphasis [ref=e751]: Looks salon
+                - text: is a premium beauty salon for men and women who desire to look the best every day.
+              - link [ref=e1328] [cursor=pointer]:
+                - /url: https://www.lookssalon.in/#:~:text=With%20over%20162%20branches%20nationally,look%20the%20best%20every%20day
+                - text: Read more
+          - generic [ref=e760]:
+            - generic [ref=e763]:
+              - link [ref=e1329] [cursor=pointer]:
+                - /url: https://www.lookssalon.in/locate-salon/new-delhi/south-delhi
+                - heading [level=3] [ref=e1330]: Best Unisex Salon in South Delhi
+                - generic [ref=e771]:
+                  - generic [ref=e773]: Looks Salon
+                  - generic [ref=e775]: https://www.lookssalon.in › locate-salon › new-delhi › so...
+              - button [ref=e1331] [cursor=pointer]:
+                - img [ref=e779]
+            - generic [ref=e782]:
+              - generic [ref=e783]:
+                - text: ...
+                - emphasis [ref=e784]: Looks Salon
+                - text: ". Loyalty Card. Looks Salon Loyalty Card. e-Shop · Franchise ... 01126110866 01126110865. Timing: 10:00AM - 09:00PM. Map. Chittranjan Park. K-1 ..."
+              - link [ref=e1332] [cursor=pointer]:
+                - /url: https://www.lookssalon.in/locate-salon/new-delhi/south-delhi#:~:text=Find%20Looks%20Salon&text=01126110866%2001126110865,K%2D1%2F109
+                - text: Read more
+            - generic [ref=e787]:
+              - text: "Missing: Chittaranjan ‎| Show results with:"
+              - link [ref=e1333] [cursor=pointer]:
+                - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Looks+Salon+Block+K+1,+%22Chittaranjan%22+Park&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ5t4CegQIdBAB
+                - text: Chittaranjan
+          - generic [ref=e796]:
+            - generic [ref=e799]:
+              - link [ref=e1334] [cursor=pointer]:
+                - /url: https://www.facebook.com/p/Looks-Salon-CR-Park-100063801051812/
+                - heading [level=3] [ref=e1335]: Looks Salon CR Park
+                - generic [ref=e807]:
+                  - generic [ref=e809]: Facebook · Looks Salon CR Park
+                  - generic [ref=e811]: 70+ followers
+              - button [ref=e1336] [cursor=pointer]:
+                - img [ref=e815]
+            - generic [ref=e818]:
+              - generic [ref=e819]:
+                - text: "@lookssalon.crpark Dm or call for makeup booking -"
+                - emphasis [ref=e820]: Contact no 01142765083,01142765084
+                - text: "#makeup #beauty #makeupartist #fashion #love mua photography like ..."
+              - link [ref=e1337] [cursor=pointer]:
+                - /url: https://www.facebook.com/p/Looks-Salon-CR-Park-100063801051812/#:~:text=%40lookssalon.crpark%20Dm%20or%20call%20for,smile%20picoftheday%20bhfyp%20makeupaddict%20bhfyp
+                - text: Read more
+            - img [ref=e1338]:
+              - text: "1.0"
+              - img [ref=e827]
+              - text: (1)
+            - generic [ref=e831]:
+              - text: "Missing: Block ‎| Show results with:"
+              - link [ref=e1339] [cursor=pointer]:
+                - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Looks+Salon+%22Block%22+K+1,+Chittaranjan+Park&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ5t4CegUIggEQAQ
+                - text: Block
+          - generic [ref=e840]:
+            - generic [ref=e843]:
+              - link [ref=e1340] [cursor=pointer]:
+                - /url: https://www.justdial.com/Delhi/Looks-Salons-in-Chittaranjan-Park/nct-11968454
+                - heading [level=3] [ref=e1341]: Find list of Looks Salons in Chittaranjan Park, Delhi near me
+                - generic [ref=e851]:
+                  - generic [ref=e853]: Justdial
+                  - generic [ref=e855]: https://www.justdial.com › ... › Looks Salons in Delhi
+              - button [ref=e1342] [cursor=pointer]:
+                - img [ref=e859]
+            - generic [ref=e862]:
+              - generic [ref=e863]:
+                - emphasis [ref=e864]: Looks Salon is a hygienic salon with clean equipment
+                - text: . They provide excellent results using high-quality products and great offers STAFF ALSO HUMBLE AND KIND ...
+              - link [ref=e1343] [cursor=pointer]:
+                - /url: https://www.justdial.com/Delhi/Looks-Salons-in-Chittaranjan-Park/nct-11968454#:~:text=Looks%20Salon%20is%20a%20hygienic,Hair%20results%20are%20great%20%F0%9F%8C%B8
+                - text: Read more
+          - generic [ref=e869]:
+            - generic [ref=e871]:
+              - heading [level=2] [ref=e1344]: People also ask
+              - button [ref=e1345] [cursor=pointer]:
+                - img [ref=e876]
+            - generic [ref=e881]:
+              - generic [ref=e882]:
+                - button [ref=e1346] [cursor=pointer]:
+                  - generic [ref=e890]: Who is the owner of Looks Salon?
+                  - img [ref=e893]
+                - button [ref=e1347] [cursor=pointer]:
+                  - generic [ref=e904]: How much does a Looks Salon franchise cost?
+                  - img [ref=e907]
+                - button [ref=e1348] [cursor=pointer]:
+                  - generic [ref=e918]: Is Looks Salon a brand?
+                  - img [ref=e921]
+                - button [ref=e1349] [cursor=pointer]:
+                  - generic [ref=e932]: Which is the No 1 salon brand in India?
+                  - img [ref=e935]
+              - group [ref=e941]:
+                - button [ref=e1350] [cursor=pointer]:
+                  - generic [ref=e944]: Feedback
+          - generic [ref=e954]:
+            - generic [ref=e957]:
+              - link [ref=e1351] [cursor=pointer]:
+                - /url: https://www.instagram.com/reel/DRt_bSUkkP_/
+                - heading [level=3] [ref=e1352]: Looks CR Park | @lookssalon.crpark Dm or call for makeup ...
+                - generic [ref=e965]:
+                  - generic [ref=e967]: Instagram · lookssalon.crpark
+                  - generic [ref=e969]: 10+ likes · 3 months ago
+              - button [ref=e1353] [cursor=pointer]:
+                - img [ref=e973]
+            - generic [ref=e975]:
+              - link [ref=e1354] [cursor=pointer]:
+                - /url: https://www.instagram.com/reel/DRt_bSUkkP_/
+                - generic [ref=e978]:
+                  - img [ref=e981]
+                  - generic [ref=e985]: 0:28
+              - generic [ref=e987]: "@lookssalon.crpark. Dm or call for makeup booking - Contact no 01142765083,01142765084 #makeup #beauty #makeupartist #fashion #love mua ..."
+          - generic [ref=e995]:
+            - generic [ref=e998]:
+              - link [ref=e1355] [cursor=pointer]:
+                - /url: https://www.justdial.com/Delhi/Looks-Salon-C-R-Park/011PXX11-XX11-200307142845-D8B3_BZDET/service-catalog
+                - heading [level=3] [ref=e1356]: Services by Looks Salon in C R Park, Delhi
+                - generic [ref=e1006]:
+                  - generic [ref=e1008]: Justdial
+                  - generic [ref=e1010]: https://www.justdial.com › ... › Looks Salon
+              - button [ref=e1357] [cursor=pointer]:
+                - img [ref=e1014]
+            - generic [ref=e1017]:
+              - generic [ref=e1018]:
+                - text: List of Services by Looks Salon in C R Park, Delhi ;
+                - emphasis [ref=e1019]: Hair Styling Services(10
+                - text: ) ; Beard Grooming Services(2) ; Manicure & Pedicure Services(6) ; Face Care Services(3) ...
+              - link [ref=e1358] [cursor=pointer]:
+                - /url: https://www.justdial.com/Delhi/Looks-Salon-C-R-Park/011PXX11-XX11-200307142845-D8B3_BZDET/service-catalog#:~:text=List%20of%20Services%20by%20Looks,Salon%20in%20C%20R%20Park%2C%20Delhi&text=Hair%20Styling%20Services(10)Beard%20Grooming%20Services(2)Manicure&text=Hair%20Styling%20Services(10)Beard%20Grooming%20Services(2)Manicure&text=Hair%20Styling%20Services(10)Beard%20Grooming%20Services(2)Manicure,%26%20Pedicure%20Services(6)&text=Face%20Care%20Services(3)Hair%20Care%20Services(1)Waxing
+                - text: Read more
+            - generic [ref=e1023]:
+              - generic [ref=e1024]:
+                - img [ref=e1359]:
+                  - text: "4.0"
+                  - img [ref=e1026]
+                  - text: (532)
+                - text: ·
+              - text: "Price range: ₹350 - ₹7000"
+          - generic [ref=e1036]:
+            - heading [level=2] [ref=e1360]: People also search for
+            - generic [ref=e1040]:
+              - generic [ref=e1041]:
+                - link [ref=e1361] [cursor=pointer]:
+                  - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Looks+salon+block+k+1+chittaranjan+park+reviews&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ1QJ6BAhfEAE
+                  - generic [ref=e1046]:
+                    - generic [ref=e1051]: Looks salon block k 1 chittaranjan park reviews
+                    - img [ref=e1055]
+                - link [ref=e1362] [cursor=pointer]:
+                  - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Looks+salon+block+k+1+chittaranjan+park+price+list&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ1QJ6BQiEARAB
+                  - generic [ref=e1061]:
+                    - generic [ref=e1066]: Looks salon block k 1 chittaranjan park price list
+                    - img [ref=e1070]
+                - link [ref=e1363] [cursor=pointer]:
+                  - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Services+offered+by+Looks+Salon+block+k+1+chittaranjan+park&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ1QJ6BQiAARAB
+                  - generic [ref=e1076]:
+                    - generic [ref=e1081]: Services offered by Looks Salon block k 1 chittaranjan park
+                    - img [ref=e1085]
+                - link [ref=e1364] [cursor=pointer]:
+                  - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Looks+salon+block+k+1+chittaranjan+park+price&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ1QJ6BAh6EAE
+                  - generic [ref=e1091]:
+                    - generic [ref=e1096]: Looks salon block k 1 chittaranjan park price
+                    - img [ref=e1100]
+              - generic [ref=e1102]:
+                - link [ref=e1365] [cursor=pointer]:
+                  - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Looks+salon+block+k+1+chittaranjan+park+phone+number&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ1QJ6BAhzEAE
+                  - generic [ref=e1107]:
+                    - generic [ref=e1112]: Looks salon block k 1 chittaranjan park phone number
+                    - img [ref=e1116]
+                - link [ref=e1366] [cursor=pointer]:
+                  - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Looks+salon+block+k+1+chittaranjan+park+contact+number&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ1QJ6BAhsEAE
+                  - generic [ref=e1122]:
+                    - generic [ref=e1127]: Looks salon block k 1 chittaranjan park contact number
+                    - img [ref=e1131]
+                - link [ref=e1367] [cursor=pointer]:
+                  - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Looks+salon+block+k+1+chittaranjan+Park+photos&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ1QJ6BAhnEAE
+                  - generic [ref=e1137]:
+                    - generic [ref=e1142]: Looks salon block k 1 chittaranjan Park photos
+                    - img [ref=e1146]
+                - link [ref=e1368] [cursor=pointer]:
+                  - /url: /search?sca_esv=bb692e0fdf80bd80&cs=1&q=Looks+Salon+cr+park+price+list&sa=X&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ1QJ6BAhlEAE
+                  - generic [ref=e1152]:
+                    - generic [ref=e1157]: Looks Salon cr park price list
+                    - img [ref=e1161]
+      - navigation [ref=e1165]:
+        - heading [level=1] [ref=e1369]: Page navigation
+        - text: "1"
+        - link [ref=e1370] [cursor=pointer]:
+          - /url: /search?q=Looks+Salon&sca_esv=bb692e0fdf80bd80&cs=1&ei=0q2xaceJKoO44-EPwOmC0AY&kgmid=/g/11fr0v9672&start=10&sa=N&sstk=Af77f_d1IbMSehbCtNfdiUsuG94KJT8CKgCk0ihVEihsHwnZQPo11lvSDL1bDOuATg0rs8ZZg7_2xHgaLv5pO16YXoQecAZ8uYcAuQ&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ8tMDegQICxAE
+          - text: "2"
+        - link [ref=e1371] [cursor=pointer]:
+          - /url: /search?q=Looks+Salon&sca_esv=bb692e0fdf80bd80&cs=1&ei=0q2xaceJKoO44-EPwOmC0AY&kgmid=/g/11fr0v9672&start=20&sa=N&sstk=Af77f_d1IbMSehbCtNfdiUsuG94KJT8CKgCk0ihVEihsHwnZQPo11lvSDL1bDOuATg0rs8ZZg7_2xHgaLv5pO16YXoQecAZ8uYcAuQ&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ8tMDegQICxAG
+          - text: "3"
+        - link [ref=e1372] [cursor=pointer]:
+          - /url: /search?q=Looks+Salon&sca_esv=bb692e0fdf80bd80&cs=1&ei=0q2xaceJKoO44-EPwOmC0AY&kgmid=/g/11fr0v9672&start=30&sa=N&sstk=Af77f_d1IbMSehbCtNfdiUsuG94KJT8CKgCk0ihVEihsHwnZQPo11lvSDL1bDOuATg0rs8ZZg7_2xHgaLv5pO16YXoQecAZ8uYcAuQ&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ8tMDegQICxAI
+          - text: "4"
+        - link [ref=e1373] [cursor=pointer]:
+          - /url: /search?q=Looks+Salon&sca_esv=bb692e0fdf80bd80&cs=1&ei=0q2xaceJKoO44-EPwOmC0AY&kgmid=/g/11fr0v9672&start=40&sa=N&sstk=Af77f_d1IbMSehbCtNfdiUsuG94KJT8CKgCk0ihVEihsHwnZQPo11lvSDL1bDOuATg0rs8ZZg7_2xHgaLv5pO16YXoQecAZ8uYcAuQ&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ8tMDegQICxAK
+          - text: "5"
+        - link [ref=e1374] [cursor=pointer]:
+          - /url: /search?q=Looks+Salon&sca_esv=bb692e0fdf80bd80&cs=1&ei=0q2xaceJKoO44-EPwOmC0AY&kgmid=/g/11fr0v9672&start=50&sa=N&sstk=Af77f_d1IbMSehbCtNfdiUsuG94KJT8CKgCk0ihVEihsHwnZQPo11lvSDL1bDOuATg0rs8ZZg7_2xHgaLv5pO16YXoQecAZ8uYcAuQ&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ8tMDegQICxAM
+          - text: "6"
+        - link [ref=e1375] [cursor=pointer]:
+          - /url: /search?q=Looks+Salon&sca_esv=bb692e0fdf80bd80&cs=1&ei=0q2xaceJKoO44-EPwOmC0AY&kgmid=/g/11fr0v9672&start=60&sa=N&sstk=Af77f_d1IbMSehbCtNfdiUsuG94KJT8CKgCk0ihVEihsHwnZQPo11lvSDL1bDOuATg0rs8ZZg7_2xHgaLv5pO16YXoQecAZ8uYcAuQ&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ8tMDegQICxAO
+          - text: "7"
+        - link [ref=e1376] [cursor=pointer]:
+          - /url: /search?q=Looks+Salon&sca_esv=bb692e0fdf80bd80&cs=1&ei=0q2xaceJKoO44-EPwOmC0AY&kgmid=/g/11fr0v9672&start=70&sa=N&sstk=Af77f_d1IbMSehbCtNfdiUsuG94KJT8CKgCk0ihVEihsHwnZQPo11lvSDL1bDOuATg0rs8ZZg7_2xHgaLv5pO16YXoQecAZ8uYcAuQ&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ8tMDegQICxAQ
+          - text: "8"
+        - heading [level=2] [ref=e1377]:
+          - link [ref=e1378] [cursor=pointer]:
+            - /url: /search?q=Looks+Salon&sca_esv=bb692e0fdf80bd80&cs=1&ei=0q2xaceJKoO44-EPwOmC0AY&kgmid=/g/11fr0v9672&start=10&sa=N&sstk=Af77f_d1IbMSehbCtNfdiUsuG94KJT8CKgCk0ihVEihsHwnZQPo11lvSDL1bDOuATg0rs8ZZg7_2xHgaLv5pO16YXoQecAZ8uYcAuQ&ved=2ahUKEwjHutDUtpiTAxUD3DgGHcC0AGoQ8NMDegQICxAS
+            - generic [ref=e1186]: Next
+    - contentinfo [ref=e1188]:
+      - heading [level=1] [ref=e1379]: Footer links
+      - generic [ref=e1193]:
+        - generic [ref=e1195]:
+          - text: India
+          - generic [ref=e1197]:
+            - button [ref=e1380] [cursor=pointer]:
+              - generic [ref=e1200]: 110019, New Delhi, Delhi
+              - generic [ref=e1202]:
+                - text: "-"
+                - generic [ref=e1203]: From your IP address
+            - text: "-"
+            - button [ref=e1381] [cursor=pointer]: Update location
+        - generic [ref=e1208]:
+          - link [ref=e1382] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en-IN&fg=1
+            - text: Help
+          - link [ref=e1383] [cursor=pointer]:
+            - /url: "#"
+            - text: Send feedback
+          - link [ref=e1384] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en-IN&fg=1
+            - text: Privacy
+          - link [ref=e1385] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en-IN&fg=1
+            - text: Terms
+  - dialog [ref=e1387]:
+    - generic [ref=e1390]:
+      - generic [ref=e1391]:
+        - generic [ref=e1392]:
+          - generic [ref=e1393]: Looks Salon
+          - generic [ref=e1394]: K1/109, CR Park Main Rd, Block K 1, Chittaranjan Park, New Delhi, Delhi 110019, India
+        - button "Write a review" [ref=e1397]:
+          - generic [ref=e1400]: Write a review
+      - generic [ref=e1401]:
+        - text: "4.0"
+        - img "Rated 4.0 out of 5," [ref=e1403]
+        - generic [ref=e1405]: 385 reviews
+        - button "More info" [ref=e1409] [cursor=pointer]:
+          - img [ref=e1411]
+      - generic [ref=e1414]:
+        - radiogroup "Filter reviews" [ref=e1416]:
+          - radio "All" [checked] [ref=e1417] [cursor=pointer]:
+            - generic [ref=e1419]: All
+          - generic [ref=e1420]:
+            - radio "hair spa 19 reviews" [ref=e1421] [cursor=pointer]:
+              - generic "hair spa 19 reviews" [ref=e1424]: hair spa19
+            - radio "botox treatment 2 reviews" [ref=e1425] [cursor=pointer]:
+              - generic "botox treatment 2 reviews" [ref=e1428]: botox treatment2
+            - radio "blow dry 8 reviews" [ref=e1429] [cursor=pointer]:
+              - generic "blow dry 8 reviews" [ref=e1432]: blow dry8
+            - radio "facial clean up 2 reviews" [ref=e1433] [cursor=pointer]:
+              - generic "facial clean up 2 reviews" [ref=e1436]: facial clean up2
+            - button "+6" [ref=e1437] [cursor=pointer]:
+              - generic [ref=e1439]: "+6"
+        - generic [ref=e1441]: Sort by
+        - radiogroup "Sort reviews" [ref=e1446]:
+          - radio "Most relevant" [checked] [ref=e1447] [cursor=pointer]:
+            - generic [ref=e1449]: Most relevant
+          - radio "Newest" [ref=e1450] [cursor=pointer]:
+            - generic [ref=e1452]: Newest
+          - radio "Highest rating" [ref=e1453] [cursor=pointer]:
+            - generic [ref=e1455]: Highest rating
+          - radio "Lowest rating" [ref=e1456] [cursor=pointer]:
+            - generic [ref=e1458]: Lowest rating
+        - generic [ref=e1461]:
+          - generic [ref=e1462]:
+            - generic [ref=e1463]:
+              - link "Anurupa Das Gupta Anurupa Das Gupta 7 reviews16 photos" [ref=e1464] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/110871913923184162322/reviews?hl=en-GB
+                - img "Anurupa Das Gupta" [ref=e1465]
+                - generic [ref=e1467]:
+                  - generic [ref=e1468]: Anurupa Das Gupta
+                  - generic [ref=e1469]: 7 reviews·16 photos
+              - button "Review options for review by Anurupa Das Gupta" [ref=e1475] [cursor=pointer]:
+                - img [ref=e1476]
+            - generic [ref=e1478]:
+              - img "Rated 5.0 out of 5" [ref=e1479]:
+                - img [ref=e1480]
+                - img [ref=e1482]
+                - img [ref=e1484]
+                - img [ref=e1486]
+                - img [ref=e1488]
+              - generic [ref=e1490]: 3 months ago
+            - generic [ref=e1491]:
+              - generic [ref=e1492]:
+                - text: Got my hair coloured at Looks (by Shyam) and I couldn’t be happier! Shyam was so patient, attentive, and genuinely tried to understand what I wanted. The end result was exactly what I had pictured. Thank you for such a great experience! :)
+                - text: "Services: …"
+                - button "Read more of Anurupa Das Gupta's review" [ref=e1493] [cursor=pointer]: More
+              - list [ref=e1498]:
+                - listitem [ref=e1499]:
+                  - button "Photo 1 in review by Anurupa Das Gupta" [ref=e1500] [cursor=pointer]
+            - generic [ref=e1501]:
+              - button "React" [ref=e1505] [cursor=pointer]:
+                - img [ref=e1508]
+                - generic [ref=e1510]: Hover to react
+              - button "Share" [ref=e1513]:
+                - img [ref=e1514]
+          - generic [ref=e1518]:
+            - generic [ref=e1519]:
+              - link "Shilpi Tyagi Shilpi Tyagi 1 review" [ref=e1520] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/116226983415829545160/reviews?hl=en-GB
+                - img "Shilpi Tyagi" [ref=e1521]
+                - generic [ref=e1523]:
+                  - generic [ref=e1524]: Shilpi Tyagi
+                  - generic [ref=e1525]: 1 review
+              - button "Review options for review by Shilpi Tyagi" [ref=e1531] [cursor=pointer]:
+                - img [ref=e1532]
+            - generic [ref=e1534]:
+              - img "Rated 5.0 out of 5" [ref=e1535]:
+                - img [ref=e1536]
+                - img [ref=e1538]
+                - img [ref=e1540]
+                - img [ref=e1542]
+                - img [ref=e1544]
+              - generic [ref=e1546]: 2 weeks ago
+              - generic [ref=e1548]: New
+            - generic [ref=e1550]: Since 3 yrs I am getting waxing done by Anita at their Cr park branch. She is the best one till date. Very cooperative and very calm. She understands client’s needs and does everything accordingly. Anita you are doing great job !!!
+            - generic [ref=e1551]:
+              - button "React" [ref=e1555] [cursor=pointer]:
+                - img [ref=e1558]
+                - generic [ref=e1560]: Hover to react
+              - button "Share" [ref=e1563]:
+                - img [ref=e1564]
+          - generic [ref=e1568]:
+            - generic [ref=e1569]:
+              - link "Jeannyfe Spary Jeannyfe Spary Local Guide18 reviews22 photos" [ref=e1570] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/114243404408576530450/reviews?hl=en-GB
+                - img "Jeannyfe Spary" [ref=e1571]
+                - generic [ref=e1573]:
+                  - generic [ref=e1574]: Jeannyfe Spary
+                  - generic [ref=e1575]: Local Guide·18 reviews·22 photos
+              - button "Review options for review by Jeannyfe Spary" [ref=e1581] [cursor=pointer]:
+                - img [ref=e1582]
+            - generic [ref=e1584]:
+              - img "Rated 5.0 out of 5" [ref=e1585]:
+                - img [ref=e1586]
+                - img [ref=e1588]
+                - img [ref=e1590]
+                - img [ref=e1592]
+                - img [ref=e1594]
+              - generic [ref=e1596]: a month ago
+            - generic [ref=e1598]:
+              - text: Had my body polishing, body massage, shampoo and hair cut at this please.
+              - text: My first time in Delhi India receiving beauty services and they have an excellent service most specially Muskan. What a relaxing experienced it was. Thank you so much.
+            - generic [ref=e1599]:
+              - button "React" [ref=e1603] [cursor=pointer]:
+                - img [ref=e1606]
+                - generic [ref=e1608]: Hover to react
+              - button "Share" [ref=e1611]:
+                - img [ref=e1612]
+          - generic [ref=e1616]:
+            - generic [ref=e1617]:
+              - link "Khushboo Dhingra Khushboo Dhingra Local Guide14 reviews4 photos" [ref=e1618] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/106580958455780158717/reviews?hl=en-GB
+                - img "Khushboo Dhingra" [ref=e1619]
+                - generic [ref=e1621]:
+                  - generic [ref=e1622]: Khushboo Dhingra
+                  - generic [ref=e1623]: Local Guide·14 reviews·4 photos
+              - button "Review options for review by Khushboo Dhingra" [ref=e1629] [cursor=pointer]:
+                - img [ref=e1630]
+            - generic [ref=e1632]:
+              - img "Rated 5.0 out of 5" [ref=e1633]:
+                - img [ref=e1634]
+                - img [ref=e1636]
+                - img [ref=e1638]
+                - img [ref=e1640]
+                - img [ref=e1642]
+              - generic [ref=e1644]: a year ago
+            - generic [ref=e1645]:
+              - generic [ref=e1646]:
+                - text: I recently visited Looks salon and had an amazing experience! Mohan Kumar went above and beyond to ensure I was satisfied with their services. Initially, my mom was unhappy with her hair color, but Mohan Kumar promptly addressed the issue …
+                - button "Read more of Khushboo Dhingra's review" [ref=e1647] [cursor=pointer]: More
+              - list [ref=e1652]:
+                - listitem [ref=e1653]:
+                  - button "Photo 1 in review by Khushboo Dhingra" [ref=e1654] [cursor=pointer]
+                - listitem [ref=e1655]:
+                  - button "Photo 2 in review by Khushboo Dhingra" [ref=e1656] [cursor=pointer]
+                - listitem [ref=e1657]:
+                  - button "Photo 3 in review by Khushboo Dhingra" [ref=e1658] [cursor=pointer]
+            - generic [ref=e1659]:
+              - generic [ref=e1660]:
+                - button "React" [ref=e1663] [cursor=pointer]:
+                  - img [ref=e1666]
+                - button "3 reactions. Expand reaction summary" [ref=e1668] [cursor=pointer]:
+                  - img "3 reactions. Expand reaction summary" [ref=e1669]:
+                    - generic [ref=e1670]: 🙏❤️
+                    - text: "3"
+              - button "Share" [ref=e1673]:
+                - img [ref=e1674]
+            - generic [ref=e1678]:
+              - generic [ref=e1680]:
+                - img "Looks Salon (owner)" [ref=e1681]
+                - generic [ref=e1683]:
+                  - generic [ref=e1684]: Looks Salon (owner)
+                  - generic [ref=e1685]: a year ago
+              - generic [ref=e1686]: Thank you MS. KHUSHBOO DHINGRA, we value your feedback and are very happy that you enjoyed the services at the salon. We look forward to your next visit. Please call on 011-42765083/84 to make your appointment. Warm regard
+          - generic [ref=e1688]:
+            - generic [ref=e1689]:
+              - link "Shermishtta Shermishtta 1 review" [ref=e1690] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/109904946299351774681/reviews?hl=en-GB
+                - img "Shermishtta" [ref=e1691]
+                - generic [ref=e1693]:
+                  - generic [ref=e1694]: Shermishtta
+                  - generic [ref=e1695]: 1 review
+              - button "Review options for review by Shermishtta" [ref=e1701] [cursor=pointer]:
+                - img [ref=e1702]
+            - generic [ref=e1704]:
+              - img "Rated 1.0 out of 5" [ref=e1705]:
+                - img [ref=e1706]
+                - img [ref=e1708]
+                - img [ref=e1710]
+                - img [ref=e1712]
+                - img [ref=e1714]
+              - generic [ref=e1716]: a month ago
+            - generic [ref=e1718]:
+              - text: They have completely ruined my hair. I went to Looks, CR Park, and got my haircut done by Vivek. When I asked him to shorten my flicks slightly more, he refused out of sheer ego. To take revenge, he deliberately destroyed my haircut and …
+              - button "Read more of Shermishtta's review" [ref=e1719] [cursor=pointer]: More
+            - generic [ref=e1720]:
+              - generic [ref=e1721]:
+                - button "React" [ref=e1724] [cursor=pointer]:
+                  - img [ref=e1727]
+                - generic [ref=e1729]: ❤️1
+              - button "Share" [ref=e1732]:
+                - img [ref=e1733]
+          - generic [ref=e1737]:
+            - generic [ref=e1738]:
+              - link "Ishita Maji Ishita Maji 5 reviews" [ref=e1739] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/107630010091793494712/reviews?hl=en-GB
+                - img "Ishita Maji" [ref=e1740]
+                - generic [ref=e1742]:
+                  - generic [ref=e1743]: Ishita Maji
+                  - generic [ref=e1744]: 5 reviews
+              - button "Review options for review by Ishita Maji" [ref=e1750] [cursor=pointer]:
+                - img [ref=e1751]
+            - generic [ref=e1753]:
+              - img "Rated 5.0 out of 5" [ref=e1754]:
+                - img [ref=e1755]
+                - img [ref=e1757]
+                - img [ref=e1759]
+                - img [ref=e1761]
+                - img [ref=e1763]
+              - generic [ref=e1765]: 3 months ago
+            - generic [ref=e1767]:
+              - text: The services provided was really great. Staff is really polite and good at their job. Priya did such a painless eyebrow threading and Ashwin did such a beautiful job with my hair. Really happy with the service! …
+              - button "Read more of Ishita Maji's review" [ref=e1768] [cursor=pointer]: More
+            - generic [ref=e1769]:
+              - generic [ref=e1770]:
+                - button "React" [ref=e1773] [cursor=pointer]:
+                  - img [ref=e1776]
+                - generic [ref=e1778]: ❤️1
+              - button "Share" [ref=e1781]:
+                - img [ref=e1782]
+            - generic [ref=e1786]:
+              - generic [ref=e1788]:
+                - img "Looks Salon (owner)" [ref=e1789]
+                - generic [ref=e1791]:
+                  - generic [ref=e1792]: Looks Salon (owner)
+                  - generic [ref=e1793]: 3 months ago
+              - generic [ref=e1794]: Thank you MS. ISHITA MAJI , we value your feedback and are very happy that you enjoyed the services at the salon. We look forward to your next visit. Please call on 011-42765083/84 to make your appointment. Warm regard
+          - generic [ref=e1796]:
+            - generic [ref=e1797]:
+              - link "Anonymous 1 Anonymous 1 9 reviews" [ref=e1798] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/104560290823068084556/reviews?hl=en-GB
+                - img "Anonymous 1" [ref=e1799]
+                - generic [ref=e1801]:
+                  - generic [ref=e1802]: Anonymous 1
+                  - generic [ref=e1803]: 9 reviews
+              - button "Review options for review by Anonymous 1" [ref=e1809] [cursor=pointer]:
+                - img [ref=e1810]
+            - generic [ref=e1812]:
+              - img "Rated 5.0 out of 5" [ref=e1813]:
+                - img [ref=e1814]
+                - img [ref=e1816]
+                - img [ref=e1818]
+                - img [ref=e1820]
+                - img [ref=e1822]
+              - generic [ref=e1824]: 4 months ago
+            - generic [ref=e1826]:
+              - text: I have been to many big and fancy salons across South Delhi, but I found the staff at Looks Salon, C.R. Park, to be exceptionally warm and courteous.
+              - text: Special mention to Sonu bhaiya, who colours my mom’s hair and recently did a …
+              - button "Read more of Anonymous 1's review" [ref=e1827] [cursor=pointer]: More
+            - generic [ref=e1828]:
+              - generic [ref=e1829]:
+                - button "React" [ref=e1832] [cursor=pointer]:
+                  - img [ref=e1835]
+                - generic [ref=e1837]: ❤️1
+              - button "Share" [ref=e1840]:
+                - img [ref=e1841]
+          - generic [ref=e1845]:
+            - generic [ref=e1846]:
+              - link "Anindita Barua Anindita Barua 4 reviews" [ref=e1847] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/117218208978912358138/reviews?hl=en-GB
+                - img "Anindita Barua" [ref=e1848]
+                - generic [ref=e1850]:
+                  - generic [ref=e1851]: Anindita Barua
+                  - generic [ref=e1852]: 4 reviews
+              - button "Review options for review by Anindita Barua" [ref=e1858] [cursor=pointer]:
+                - img [ref=e1859]
+            - generic [ref=e1861]:
+              - img "Rated 5.0 out of 5" [ref=e1862]:
+                - img [ref=e1863]
+                - img [ref=e1865]
+                - img [ref=e1867]
+                - img [ref=e1869]
+                - img [ref=e1871]
+              - generic [ref=e1873]: a month ago
+            - generic [ref=e1875]: Have been doing eyebrow threading and facials with Muskan for over a year now and she is amazing at her job! She is also very sweet
+            - generic [ref=e1876]:
+              - button "React" [ref=e1880] [cursor=pointer]:
+                - img [ref=e1883]
+                - generic [ref=e1885]: Hover to react
+              - button "Share" [ref=e1888]:
+                - img [ref=e1889]
+          - generic [ref=e1893]:
+            - generic [ref=e1894]:
+              - link "Bhumika Singh Bhumika Singh 2 reviews4 photos" [ref=e1895] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/111303736236253674817/reviews?hl=en-GB
+                - img "Bhumika Singh" [ref=e1896]
+                - generic [ref=e1898]:
+                  - generic [ref=e1899]: Bhumika Singh
+                  - generic [ref=e1900]: 2 reviews·4 photos
+              - button "Review options for review by Bhumika Singh" [ref=e1906] [cursor=pointer]:
+                - img [ref=e1907]
+            - generic [ref=e1909]:
+              - img "Rated 5.0 out of 5" [ref=e1910]:
+                - img [ref=e1911]
+                - img [ref=e1913]
+                - img [ref=e1915]
+                - img [ref=e1917]
+                - img [ref=e1919]
+              - generic [ref=e1921]: a month ago
+            - generic [ref=e1923]:
+              - text: Pratiksha Mua is very Talented makeup artist. She did my makeup and did very good makeup …
+              - button "Read more of Bhumika Singh's review" [ref=e1924] [cursor=pointer]: More
+            - generic [ref=e1925]:
+              - button "React" [ref=e1929] [cursor=pointer]:
+                - img [ref=e1932]
+                - generic [ref=e1934]: Hover to react
+              - button "Share" [ref=e1937]:
+                - img [ref=e1938]
+          - generic [ref=e1942]:
+            - generic [ref=e1943]:
+              - link "Leena Magnani Leena Magnani 4 reviews1 photo" [ref=e1944] [cursor=pointer]:
+                - /url: https://www.google.com/maps/contrib/112577125680666697475/reviews?hl=en-GB
+                - img "Leena Magnani" [ref=e1945]
+                - generic [ref=e1947]:
+                  - generic [ref=e1948]: Leena Magnani
+                  - generic [ref=e1949]: 4 reviews·1 photo
+              - button "Review options for review by Leena Magnani" [ref=e1955] [cursor=pointer]:
+                - img [ref=e1956]
+            - generic [ref=e1958]:
+              - img "Rated 5.0 out of 5" [ref=e1959]:
+                - img [ref=e1960]
+                - img [ref=e1962]
+                - img [ref=e1964]
+                - img [ref=e1966]
+                - img [ref=e1968]
+              - generic [ref=e1970]: a month ago
+            - generic [ref=e1972]:
+              - text: Muskan was very nice and gentle for my facial clean up and did an amazing job , thank you ! I recommend her …
+              - button "Read more of Leena Magnani's review" [ref=e1973] [cursor=pointer]: More
+            - generic [ref=e1974]:
+              - button "React" [ref=e1978] [cursor=pointer]:
+                - img [ref=e1981]
+                - generic [ref=e1983]: Hover to react
+              - button "Share" [ref=e1986]:
+                - img [ref=e1987]

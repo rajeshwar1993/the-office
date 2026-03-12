@@ -23,9 +23,19 @@ the-office/                          # Open THIS in Claude Code
 ├── shared/                          # Company-wide process docs
 │   ├── git_strategy.md              # Branch & commit conventions
 │   └── code_review_flow.md          # PR review lifecycle
+├── workflows/                       # Task-oriented automations (git-tracked)
+│   └── reputation-audit/            # Google Maps scraping & PDF audit reports
 └── workspaces/                      # Gitignored — clone project repos here
     └── .gitkeep
 ```
+
+## Workflows
+
+Task-oriented automations live in `workflows/`. Unlike project repos (which are cloned into `workspaces/`), workflows are git-tracked as part of the-office.
+
+| Workflow | Purpose |
+|----------|---------|
+| `reputation-audit` | Scrapes Google Maps listings, classifies businesses, generates PDF audit reports via Puppeteer |
 
 ## Workspaces
 

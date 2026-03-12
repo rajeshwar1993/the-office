@@ -6,6 +6,7 @@ A portable workspace root for AI-assisted software development with [Claude Code
 
 - **`.claude/skills/`** — Shareable skill definitions (architect, build, review, aidlc-inception) that load automatically in Claude Code
 - **`shared/`** — Company-wide process docs (git strategy, code review flow)
+- **`workflows/`** — Task-oriented automations (git-tracked)
 - **`workspaces/`** — Clone your project repos here (gitignored)
 - **`CLAUDE.md`** — Workspace-level instructions for Claude Code
 
@@ -48,6 +49,8 @@ the-office/
 ├── shared/
 │   ├── git_strategy.md
 │   └── code_review_flow.md
+├── workflows/           # git-tracked automations
+│   └── reputation-audit/
 └── workspaces/          # gitignored
     └── .gitkeep
 ```
