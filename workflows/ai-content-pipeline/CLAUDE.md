@@ -357,7 +357,146 @@ After all scripts are generated, proceed to Phase 4.
 
 ---
 
-## Section 8 — Phase 4: Review Summary
+## Section 8 — Phase 4: Script Review
+
+After Phase 3 generates all scripts, launch a **dedicated reviewer subagent** to adversarially review every script. The reviewer gets the character bible fresh in its context window, eliminating voice drift.
+
+### How It Works
+
+Use the **Agent tool** to launch a foreground general-purpose subagent:
+
+```
+Agent(
+  subagent_type: "general-purpose",
+  description: "Review Neha scripts",
+  prompt: <fill in the template below>
+)
+```
+
+### Reviewer Agent Prompt Template
+
+Construct the subagent prompt by filling in this template. Copy Section 2 (Character Bible) **verbatim** into the prompt so the reviewer has it fresh — do not summarize or truncate it.
+
+````
+You are a strict editorial reviewer for Neha's personal finance video scripts.
+
+## Character Bible
+{paste full Section 2 here verbatim}
+
+## Your Task
+Review every script file listed below. For each script, run the full checklist. Return a single JSON report.
+
+## Script Files to Review
+{list each file path, e.g. output/YYYY-MM-DD/scripts/topic_01.md through topic_NN.md}
+
+## Review Checklist
+
+For each script, check ALL of the following:
+
+1. **Forbidden phrases** — scan for: "In today's video", "Let's dive in", "Hit the bell icon", "Hey guys!", "as per my analysis", "in conclusion", "like and subscribe" as sole CTA, "As always, consult a financial advisor" as opener/closer
+2. **Sentence length** — flag any sentence over 20 words
+3. **Passive voice** — flag passive constructions
+4. **Math verification** — if the script claims a specific number (SIP returns, tax percentages, etc.), verify the math is correct or flag for manual check
+5. **Genre delivery** — does the script actually execute its assigned genre throughout, or does it just use the genre in the hook and revert to informational?
+6. **Hinglish naturalness** — are Hindi phrases dropped naturally or do they feel forced/tokenistic?
+7. **Cross-contamination** — do any two scripts share the same analogy, hook structure, or phrasing?
+8. **Word count** — verify YouTube 130–150 words, Instagram 55–70 words
+9. **Topic fidelity** — does the script match topics.json data exactly? If general_hook is null, was one invented?
+10. **Audience fit** — is this topic accessible to Neha's target audience (young Indians, early career, beginners)?
+
+## Output
+
+Read topics.json first to cross-reference topic data, then read each script file and review it.
+
+Save your report to `{output_dir}/review_report.json` using this exact format:
+
+```json
+{
+  "review_date": "YYYY-MM-DD",
+  "scripts_reviewed": N,
+  "passed": N,
+  "failed": N,
+  "scripts": [
+    {
+      "file": "scripts/topic_NN.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "file": "scripts/topic_NN.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Claims 18 lakh but actual calculation yields ~13.5 lakh",
+          "fix": "Replace 'eighteen lakh' with 'thirteen lakh' in both versions"
+        }
+      ]
+    }
+  ],
+  "batch_issues": [
+    "Scripts 02 and 04 both use Swiggy analogy — deduplicate"
+  ]
+}
+```
+
+Severity levels:
+- **high** — factual error, forbidden phrase, or genre failure (must fix)
+- **medium** — sentence too long, passive voice, word count out of range (should fix)
+- **low** — minor Hinglish awkwardness, audience fit concern (nice to fix)
+
+A script **fails** if it has any high-severity issue. Medium-severity issues alone result in a pass with warnings.
+
+Be adversarial. Your job is to catch mistakes the writer missed. Do not rubber-stamp scripts.
+````
+
+### After the Reviewer Returns
+
+1. Read `review_report.json` from the reviewer's output
+2. If **all scripts passed**: present a brief summary and proceed to Phase 6 (Review Summary)
+3. If **any scripts failed**: proceed to Phase 5 (Revision)
+4. Present the review results to the user (no checkpoint — do not wait for approval)
+
+---
+
+## Section 9 — Phase 5: Revision
+
+Revise scripts that failed the reviewer's checks. This phase only runs if `review_report.json` contains scripts with `verdict: "fail"`.
+
+### Process
+
+1. **Re-read Section 2 (Character Bible)** before revising any script
+2. Read `review_report.json`
+3. For each script with `verdict: "fail"`:
+   - Read the script file
+   - Address every issue listed in `issues[]`, applying the reviewer's `fix` suggestions
+   - For high-severity issues: fix exactly as described
+   - For medium/low issues included on a failed script: fix while you're in there
+   - Overwrite the script file with the revised version
+   - Maintain word count targets after revision
+4. For `batch_issues` (cross-contamination, shared analogies, etc.):
+   - Fix across all affected scripts — typically change the analogy/phrasing in one script, keep the other
+5. After all revisions, present a revision summary to the user:
+
+```
+Scripts revised: N of M total
+
+Revisions:
+  - topic_NN.md: [brief description of what changed]
+  - topic_NN.md: [brief description of what changed]
+
+Batch fixes:
+  - [description of cross-script fix, if any]
+```
+
+6. Proceed to Phase 6 (Review Summary)
+
+**Note:** Do NOT re-run the reviewer after revision. One review pass is sufficient — the reviewer catches issues, the main agent fixes them, and the batch moves forward.
+
+---
+
+## Section 10 — Phase 6: Review Summary
 
 Generate `output/YYYY-MM-DD/review_summary.md` with this exact template:
 
@@ -398,7 +537,7 @@ Generate `output/YYYY-MM-DD/review_summary.md` with this exact template:
 
 ---
 
-## Section 9 — Phase 5: Completion
+## Section 11 — Phase 7: Completion
 
 Present a completion summary to the user:
 
@@ -409,6 +548,7 @@ Output directory: output/YYYY-MM-DD/
 Files generated:
   - research.json (trend research data)
   - topics.json (synthesized topic list)
+  - review_report.json (reviewer agent verdicts)
   - review_summary.md (start here)
   - scripts/topic_01.md through topic_NN.md
 
@@ -421,18 +561,21 @@ Review workflow:
 
 ---
 
-## Section 10 — Error Handling
+## Section 12 — Error Handling
 
 - **WebSearch unavailable:** Report the error to the user and halt. Do not proceed without real search data.
 - **Fewer than 10 results per category:** Include what was found, note the shortfall in the research.json, and continue.
 - **User re-run request:** If the user asks to re-run a specific phase, re-execute that phase and overwrite the corresponding output files.
+- **Reviewer agent fails to launch:** Continue without review, note in review_summary.md that scripts are unreviewed. Add a warning line: `⚠️ Scripts were NOT reviewed — reviewer agent failed to launch.`
+- **All scripts fail review:** Present the review report to the user and ask whether to revise all or proceed as-is. Do not auto-revise if every script failed — this may indicate a systemic issue worth discussing.
 
 ---
 
-## Section 11 — Quality Rules
+## Section 13 — Quality Rules
 
 1. **No fabrication** — every topic must come from real WebSearch results, every script must use data from topics.json
 2. **Character fidelity** — re-read Section 2 (Character Bible) before writing each script
 3. **Genre consistency** — the genre assigned in Phase 2 must be the genre used in Phase 3
 4. **Output integrity** — valid JSON files, correct file paths, verify files are written after saving
 5. **No cross-contamination** — each script is independent; do not reuse hooks, phrasing, or analogies across scripts
+6. **Adversarial review** — every script must pass the reviewer agent (Phase 4) before the batch is finalized. The reviewer is a separate agent with fresh context, ensuring objective quality checks independent of the writer
