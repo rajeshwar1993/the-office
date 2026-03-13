@@ -16,6 +16,7 @@ the-office/                          # Open THIS in Claude Code
 │       ├── aidlc-inception/          # Inception phase planning
 │       ├── architect/               # Product strategy & technical design
 │       ├── build/                   # Full-stack implementation (TDD)
+│       ├── neha-content-pipeline/    # Neha's finance content pipeline
 │       └── review/                  # Code review & QA
 ├── CLAUDE.md                        # This file
 ├── README.md
@@ -24,6 +25,7 @@ the-office/                          # Open THIS in Claude Code
 │   ├── git_strategy.md              # Branch & commit conventions
 │   └── code_review_flow.md          # PR review lifecycle
 ├── workflows/                       # Task-oriented automations (git-tracked)
+│   ├── ai-content-pipeline/         # Neha's personal finance video scripts
 │   └── reputation-audit/            # Google Maps scraping & PDF audit reports
 └── workspaces/                      # Gitignored — clone project repos here
     └── .gitkeep
@@ -36,6 +38,7 @@ Task-oriented automations live in `workflows/`. Unlike project repos (which are 
 | Workflow | Purpose |
 |----------|---------|
 | `reputation-audit` | Scrapes Google Maps listings, classifies businesses, generates PDF audit reports via Puppeteer |
+| `ai-content-pipeline` | Researches trending topics, synthesizes content ideas, generates dual-format video scripts for Neha's personal finance channel |
 
 ## Workspaces
 
@@ -56,6 +59,7 @@ When a feature spans multiple repos, create separate feature branches, commits, 
 | Build | `/build` | Full-stack implementation with TDD (backend, web, mobile) |
 | Review | `/review` | Code review, security audit, QA, and test automation |
 | AI-DLC Inception | `/aidlc-inception` | Inception phase for complex features: workspace detection, requirements, design, and planning artifacts |
+| Neha Content Pipeline | `/neha-content-pipeline` | Research trending topics, synthesize content ideas, generate video scripts for Neha's finance channel |
 
 ## Git Strategy
 
