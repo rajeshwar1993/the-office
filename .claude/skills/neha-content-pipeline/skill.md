@@ -1,6 +1,6 @@
 ---
 name: neha-content-pipeline
-description: "Research trending topics, synthesize content ideas, and generate dual-format video scripts for Neha's personal finance channel."
+description: "Research trending topics, synthesize content ideas, and generate multi-format video scripts (YouTube Long-Form, Shorts, Instagram Reels) for Neha's personal finance channel."
 user-invocable: true
 ---
 

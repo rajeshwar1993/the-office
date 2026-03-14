@@ -4,3 +4,4 @@ workspaces/*/
 .claude/plans/
 .DS_Store
 *.log
+/workflows/*
