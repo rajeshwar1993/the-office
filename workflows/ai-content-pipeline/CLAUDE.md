@@ -68,6 +68,58 @@ Neha is a 28-year-old Indian woman based in a metro city (think Mumbai or Bangal
 - Finance information is educational — Neha shares what she knows as a friend, not as a SEBI-registered advisor
 - When referencing real products (Zerodha, Groww, etc.) — neutral and informational, not promotional unless it's a paid integration
 
+### Visual Direction Bible
+
+This section defines Neha's on-screen presence for the Director Agent (Phase 6). The director uses this to generate shot-by-shot production prompts for HeyGen.
+
+#### Signature Gestures & Body Language
+- **Leans in** when sharing something conspiratorial or surprising ("Nobody talks about this but...")
+- **Counts on fingers** when listing points — max 3 fingers per script
+- **Points to camera** briefly during CTAs or direct challenges ("Your bank is counting on you NOT knowing this")
+- **Head tilt + slight squint** when questioning a myth or bad advice
+- **Small nod** when delivering a confident conclusion
+- **Open palm gesture** when explaining something simply ("It sounds complicated. It's really not.")
+- **Never:** crosses arms, looks away from camera for more than 1 second, fidgets, or does exaggerated YouTuber reactions
+
+#### Background Templates
+
+| Mood | Background | When to Use |
+|------|-----------|-------------|
+| `casual_advice` | Modern apartment living room — warm lighting, bookshelf with books visible, cozy couch partially in frame | `big_sister_advice`, `storytelling` |
+| `data_serious` | Clean desk setup — laptop slightly visible, minimal decor, neutral tones | `shock_and_awe`, `myth_busting` |
+| `playful` | Bright cafe or kitchen counter — colourful, natural light, coffee mug as prop | `comedy_satire`, `hot_take` |
+| `default` | Soft gradient or blurred modern interior — uncluttered, professional | Fallback for any genre |
+
+#### Outfit × Genre Mapping
+
+| Genre | Outfit | Vibe |
+|-------|--------|------|
+| `big_sister_advice` | Casual — soft kurta or oversized shirt, minimal jewelry | Approachable, warm |
+| `storytelling` | Casual — same as above | Relatable |
+| `comedy_satire` | Slightly quirky — graphic tee or bold colour top | Fun, energetic |
+| `shock_and_awe` | Smart casual — structured top, stud earrings | Credible, sharp |
+| `myth_busting` | Smart casual — same as above | Authoritative but friendly |
+| `hot_take` | Bold — solid colour statement top, confident accessories | Opinionated, stylish |
+
+#### Energy × Section Mapping
+
+| Script Section | Energy Level | Pace | Expression |
+|----------------|-------------|------|------------|
+| HOOK | **High** — attention-grabbing | Fast, punchy | Expressive — raised eyebrows, conspiratorial smile, or shock |
+| CONTEXT | **Medium** — settling in | Moderate, conversational | Informative — slight nod, open expression |
+| CORE | **Medium-High** — delivering value | Steady, clear | Engaged — hand gestures for emphasis, direct eye contact |
+| CTA | **Warm** — personal, direct | Slightly slower | Sincere — small smile, points to camera or nods |
+| PAYOFF (IG) | **High** — compressed value | Fast but clear | Sharp — confident, emphasizing the one key point |
+
+#### HeyGen-Specific Constraints
+- **Avatar:** Use the configured Neha avatar ID (user provides this)
+- **Voice:** Use the configured voice clone ID (user provides this)
+- **Framing:** Medium close-up (chest up), slightly off-center right — consistent across all videos
+- **Aspect ratio:** 9:16 (vertical) for both YouTube Shorts and Instagram Reels
+- **Max gestures per section:** 2 — more looks robotic with current avatar tech
+- **Transition between sections:** Brief [beat] with neutral expression before energy shift
+- **Text overlays:** The director does NOT generate text overlay instructions — those are handled separately in post-production
+
 ---
 
 ## Section 3 — Configuration
@@ -113,7 +165,7 @@ All output goes to `output/YYYY-MM-DD/` (today's date). Previous runs are archiv
    ```
 3. **Create today's directories:**
    ```bash
-   mkdir -p output/$(date +%Y-%m-%d)/scripts
+   mkdir -p output/$(date +%Y-%m-%d)/{scripts,productions}
    ```
 4. Confirm setup is complete, then proceed to Phase 1.
 
@@ -454,7 +506,7 @@ Be adversarial. Your job is to catch mistakes the writer missed. Do not rubber-s
 ### After the Reviewer Returns
 
 1. Read `review_report.json` from the reviewer's output
-2. If **all scripts passed**: present a brief summary and proceed to Phase 6 (Review Summary)
+2. If **all scripts passed**: present a brief summary and proceed to Phase 6 (Video Direction)
 3. If **any scripts failed**: proceed to Phase 5 (Revision)
 4. Present the review results to the user (no checkpoint — do not wait for approval)
 
@@ -490,13 +542,164 @@ Batch fixes:
   - [description of cross-script fix, if any]
 ```
 
-6. Proceed to Phase 6 (Review Summary)
+6. Proceed to Phase 6 (Video Direction)
 
 **Note:** Do NOT re-run the reviewer after revision. One review pass is sufficient — the reviewer catches issues, the main agent fixes them, and the batch moves forward.
 
 ---
 
-## Section 10 — Phase 6: Review Summary
+## Section 10 — Phase 6: Video Direction
+
+After scripts are finalized (post-review and revision), launch a **dedicated director subagent** to generate shot-by-shot production prompts for HeyGen. The director gets the Visual Direction Bible fresh in its context, ensuring consistent on-screen Neha.
+
+### How It Works
+
+Use the **Agent tool** to launch a foreground general-purpose subagent:
+
+```
+Agent(
+  subagent_type: "general-purpose",
+  description: "Direct Neha videos",
+  prompt: <fill in the template below>
+)
+```
+
+### Director Agent Prompt Template
+
+Construct the subagent prompt by filling in this template. Copy the **Visual Direction Bible** (from Section 2) and the **Character Bible core** (Who She Is, Voice & Tone, Personality Traits) **verbatim** into the prompt.
+
+````
+You are a video director for Neha's personal finance short-form content. Your job is to transform finalized scripts into shot-by-shot production prompts that can be fed directly to HeyGen (AI video generation).
+
+## Character Reference
+{paste Character Bible: Who She Is, Voice & Tone, Personality Traits}
+
+## Visual Direction Bible
+{paste full Visual Direction Bible subsection verbatim}
+
+## Your Task
+For each script file listed below, generate a production prompt file with shot-by-shot direction for both the YouTube and Instagram versions.
+
+## Script Files to Direct
+{list each file path, e.g. output/YYYY-MM-DD/scripts/topic_01.md through topic_NN.md}
+
+## Process
+
+For each script file:
+
+1. Read the script file — note the GENRE, then look up the correct background, outfit, and energy mapping from the Visual Direction Bible
+2. Break the script into its sections (HOOK, CONTEXT, CORE, CTA for YouTube; HOOK, PAYOFF, CTA for Instagram)
+3. For each section, specify:
+   - **Script text** — copied exactly from the script file (preserve [beat], [pause], *emphasis* markers)
+   - **Duration** — estimated seconds for this section
+   - **Expression** — what Neha's face is doing (e.g., "conspiratorial half-smile", "raised eyebrows", "direct eye contact")
+   - **Gesture** — what Neha's hands/body are doing (max 2 per section, from the signature gestures list)
+   - **Energy** — from the Energy × Section mapping
+   - **Pace** — speaking pace (fast/moderate/slow)
+   - **Notes** — any section-specific direction (e.g., "lean in on the word *five*", "slight pause before the reveal")
+
+## Direction Rules
+- **Max 2 gestures per section** — more looks robotic with current avatar tech
+- **Transitions:** insert a [beat] with neutral expression between sections that shift energy levels
+- **Eye contact:** Neha maintains direct camera eye contact throughout — only brief glances away (< 1 second) are allowed, and only during thinking moments
+- **Hinglish delivery:** when Hindi phrases appear in the script, note natural delivery — slightly warmer tone, don't over-enunciate
+- **Genre must drive the visual tone** — a `comedy_satire` script should have more animated expressions and playful gestures; `shock_and_awe` should open with wide eyes or jaw drop moment
+- **Consistency within a script** — don't mix casual and formal visual tones in the same video
+- Do NOT modify the script text. Your job is direction only.
+
+## Output Format
+
+Save one file per topic to `{output_dir}/productions/topic_NN_production.md` using this exact format:
+
+```
+---
+TOPIC: {title}
+GENRE: {genre}
+BACKGROUND: {background template name}
+OUTFIT: {outfit description}
+FRAMING: Medium close-up, slightly off-center right
+ASPECT RATIO: 9:16
+
+--- YOUTUBE VERSION ({duration} seconds) ---
+
+[HOOK — 0:00–0:05]
+  Script: "{exact script text}"
+  Duration: 5s
+  Expression: {description}
+  Gesture: {description}
+  Energy: {level}
+  Pace: {speed}
+  Notes: {any specific direction}
+
+[CONTEXT — 0:05–0:15]
+  Script: "{exact script text}"
+  Duration: 10s
+  Expression: {description}
+  Gesture: {description}
+  Energy: {level}
+  Pace: {speed}
+  Notes: {any specific direction}
+
+[CORE — 0:15–0:50]
+  Script: "{exact script text}"
+  Duration: 35s
+  Expression: {description}
+  Gesture: {description}
+  Energy: {level}
+  Pace: {speed}
+  Notes: {any specific direction}
+
+[CTA — 0:50–0:55]
+  Script: "{exact script text}"
+  Duration: 5s
+  Expression: {description}
+  Gesture: {description}
+  Energy: {level}
+  Pace: {speed}
+  Notes: {any specific direction}
+
+--- INSTAGRAM VERSION ({duration} seconds) ---
+
+[HOOK — 0:00–0:03]
+  Script: "{exact script text}"
+  Duration: 3s
+  Expression: {description}
+  Gesture: {description}
+  Energy: {level}
+  Pace: {speed}
+  Notes: {any specific direction}
+
+[PAYOFF — 0:03–0:21]
+  Script: "{exact script text}"
+  Duration: 18s
+  Expression: {description}
+  Gesture: {description}
+  Energy: {level}
+  Pace: {speed}
+  Notes: {any specific direction}
+
+[CTA — 0:21–0:25]
+  Script: "{exact script text}"
+  Duration: 4s
+  Expression: {description}
+  Gesture: {description}
+  Energy: {level}
+  Pace: {speed}
+  Notes: {any specific direction}
+```
+
+Make each production prompt feel like a real director's shot list — specific, actionable, and true to Neha's character. Avoid generic direction like "looks happy" — instead use "warm half-smile, slight head tilt as if sharing a secret with a friend".
+````
+
+### After the Director Returns
+
+1. Verify production files exist in `output/YYYY-MM-DD/productions/`
+2. Present a brief summary: how many production prompts were generated
+3. Proceed to Phase 7 (Review Summary)
+
+---
+
+## Section 11 — Phase 7: Review Summary
 
 Generate `output/YYYY-MM-DD/review_summary.md` with this exact template:
 
@@ -537,7 +740,7 @@ Generate `output/YYYY-MM-DD/review_summary.md` with this exact template:
 
 ---
 
-## Section 11 — Phase 7: Completion
+## Section 12 — Phase 8: Completion
 
 Present a completion summary to the user:
 
@@ -551,27 +754,30 @@ Files generated:
   - review_report.json (reviewer agent verdicts)
   - review_summary.md (start here)
   - scripts/topic_01.md through topic_NN.md
+  - productions/topic_NN_production.md (HeyGen-ready prompts)
 
 Review workflow:
   1. Open review_summary.md for an overview
   2. Read individual scripts in scripts/
-  3. Rename approved scripts: topic_NN.md → topic_NN_APPROVED.md
-  4. Rejected files need no action — they archive automatically on next run
+  3. Check production prompts in productions/
+  4. Rename approved scripts: topic_NN.md → topic_NN_APPROVED.md
+  5. Rejected files need no action — they archive automatically on next run
 ```
 
 ---
 
-## Section 12 — Error Handling
+## Section 13 — Error Handling
 
 - **WebSearch unavailable:** Report the error to the user and halt. Do not proceed without real search data.
 - **Fewer than 10 results per category:** Include what was found, note the shortfall in the research.json, and continue.
 - **User re-run request:** If the user asks to re-run a specific phase, re-execute that phase and overwrite the corresponding output files.
 - **Reviewer agent fails to launch:** Continue without review, note in review_summary.md that scripts are unreviewed. Add a warning line: `⚠️ Scripts were NOT reviewed — reviewer agent failed to launch.`
 - **All scripts fail review:** Present the review report to the user and ask whether to revise all or proceed as-is. Do not auto-revise if every script failed — this may indicate a systemic issue worth discussing.
+- **Director agent fails to launch:** Continue without production prompts. Scripts are still usable — note in review_summary.md that production prompts were not generated. Add: `⚠️ Production prompts were NOT generated — director agent failed to launch.`
 
 ---
 
-## Section 13 — Quality Rules
+## Section 14 — Quality Rules
 
 1. **No fabrication** — every topic must come from real WebSearch results, every script must use data from topics.json
 2. **Character fidelity** — re-read Section 2 (Character Bible) before writing each script
@@ -579,3 +785,4 @@ Review workflow:
 4. **Output integrity** — valid JSON files, correct file paths, verify files are written after saving
 5. **No cross-contamination** — each script is independent; do not reuse hooks, phrasing, or analogies across scripts
 6. **Adversarial review** — every script must pass the reviewer agent (Phase 4) before the batch is finalized. The reviewer is a separate agent with fresh context, ensuring objective quality checks independent of the writer
+7. **Visual consistency** — every production prompt must use the Visual Direction Bible mappings (background, outfit, energy) for its genre. The director does not improvise visual identity — it follows the bible
