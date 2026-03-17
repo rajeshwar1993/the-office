@@ -185,7 +185,7 @@ Style: clean sans-serif, brand colors, 3-5 second display, center or upper-third
 mutual funds, SIP, stock market India, UPI, income tax India, credit score India, RBI, SEBI, NSE, BSE, Zerodha, Groww, salary, EMI, home loan India, term insurance India, NPS, PPF, FD
 
 ### Output Paths
-All output goes to `output/YYYY-MM-DD/` (today's date). Previous runs are archived to `archive/`.
+All output goes to `output/YYYY-MM-DD/` (today's date). Topics follow a status lifecycle: Draft → Approved → Video_Generated → Published (or Rejected). Published topics are archived to `archive/`. Rejected topics are deleted. All other statuses stay in place.
 
 Batch-level files (`research.json`, `topics.json`, `review_summary.md`, `review_report.json`) live at the root of the date directory. Per-topic artifacts live in `Topics/Topic_NN_Description/` subdirectories:
 
@@ -201,7 +201,7 @@ output/YYYY-MM-DD/
 │   │   ├── script.md                    # All scripts: YT Shorts + IG Reel
 │   │   ├── research.md                  # Research sources for this topic
 │   │   ├── review_report.md             # Review audit: issues + rectification
-│   │   ├── status.json                  # {"status": "Draft"} → user sets "Approved"
+│   │   ├── status.json                  # Lifecycle: Draft → Approved → Video_Generated → Published | Rejected
 │   │   ├── YTShorts_Production.md       # 9:16 YouTube Shorts production prompt
 │   │   └── InstaReel_Production.md      # 9:16 Instagram Reel production prompt
 │   │
@@ -209,7 +209,7 @@ output/YYYY-MM-DD/
 │   │   ├── script.md                    # All scripts: YT Shorts teaser + IG teaser + YT Long
 │   │   ├── research.md                  # Research sources
 │   │   ├── review_report.md             # Review audit
-│   │   ├── status.json                  # {"status": "Draft"}
+│   │   ├── status.json                  # Lifecycle: Draft → Approved → Video_Generated → Published | Rejected
 │   │   ├── YTShorts_Production.md       # 9:16 short-form teaser
 │   │   ├── InstaReel_Production.md      # 9:16 short-form teaser
 │   │   └── YTLong_Production.md         # 16:9 long-form production prompt
@@ -224,23 +224,86 @@ output/YYYY-MM-DD/
 ## Section 4 — Phase 0: Setup
 
 1. **Ask user for topic count and long-form count.** Default topic count is 10, default long-form count is 0. If user specified counts at invocation (e.g. "generate 5 topics, 2 long-form"), use those.
-2. **Archive old runs.** Using Bash, move any subdirectory inside `output/` that does NOT match today's date into `archive/`:
+2. **Archive/clean old runs by status.** Using Bash, process each previous date directory's topics based on their `status.json`:
    ```bash
    mkdir -p archive
    today=$(date +%Y-%m-%d)
-   for dir in output/*/; do
-     dirname=$(basename "$dir")
-     if [ "$dirname" != "$today" ] && [ -d "$dir" ]; then
-       mv "$dir" "archive/$dirname"
+   for datedir in output/*/; do
+     dirname=$(basename "$datedir")
+     [ "$dirname" = "$today" ] && continue
+     [ ! -d "$datedir" ] && continue
+
+     # Process each topic folder by status
+     if [ -d "$datedir/Topics" ]; then
+       for topicdir in "$datedir"/Topics/*/; do
+         [ ! -d "$topicdir" ] && continue
+         status=$(cat "$topicdir/status.json" 2>/dev/null | grep -o '"status"[[:space:]]*:[[:space:]]*"[^"]*"' | grep -o '"[^"]*"$' | tr -d '"')
+
+         if [ "$status" = "Published" ]; then
+           mkdir -p "archive/$dirname/Topics"
+           mv "$topicdir" "archive/$dirname/Topics/"
+         elif [ "$status" = "Rejected" ]; then
+           rm -rf "$topicdir"
+         fi
+         # Draft, Approved, Video_Generated → stay in place
+       done
+
+       # If Topics/ is now empty, archive batch-level files and remove date dir
+       remaining=$(ls -A "$datedir/Topics/" 2>/dev/null)
+       if [ -z "$remaining" ]; then
+         mkdir -p "archive/$dirname"
+         # Move batch-level files (research.json, topics.json, etc.)
+         for f in "$datedir"/*; do
+           [ "$(basename "$f")" = "Topics" ] && continue
+           mv "$f" "archive/$dirname/"
+         done
+         rm -rf "$datedir"
+       fi
      fi
    done
    ```
-3. **Create today's directories:**
+   **Logic:** Published → archive, Rejected → delete, Draft/Approved/Video_Generated → stay in place. If all topics from a date are resolved, batch-level files are archived and the date directory is removed.
+3. **Build dedup list** — scan recent runs to prevent cross-batch topic repetition:
+   ```bash
+   # Build list of recent non-Rejected topic titles (last 30 days)
+   cutoff=$(date -v-30d +%Y-%m-%d 2>/dev/null || date -d "30 days ago" +%Y-%m-%d)
+   dedup_file="output/previous_topics.txt"
+   > "$dedup_file"
+
+   for base in output archive; do
+     [ ! -d "$base" ] && continue
+     for datedir in "$base"/*/; do
+       dirname=$(basename "$datedir")
+       # Skip if not a date dir or older than 30 days
+       [[ "$dirname" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || continue
+       [ "$dirname" \< "$cutoff" ] && continue
+
+       # Check each topic's status — include unless Rejected
+       if [ -d "$datedir/Topics" ]; then
+         for topicdir in "$datedir"/Topics/*/; do
+           [ ! -d "$topicdir" ] && continue
+           status=$(cat "$topicdir/status.json" 2>/dev/null | grep -o '"status"[[:space:]]*:[[:space:]]*"[^"]*"' | grep -o '"[^"]*"$' | tr -d '"')
+           [ "$status" = "Rejected" ] && continue
+           # Extract title from topics.json for this folder
+           folder=$(basename "$topicdir")
+           title=$(cat "$datedir/topics.json" 2>/dev/null | grep -A2 "\"folder_name\": \"$folder\"" | grep '"title"' | sed 's/.*"title": "//;s/".*//')
+           [ -n "$title" ] && echo "$dirname | $title" >> "$dedup_file"
+         done
+       fi
+     done
+   done
+   ```
+   This produces `output/previous_topics.txt` — a flat file with lines like:
+   ```
+   2026-03-15 | Why SIPs Beat Lump Sum Investing
+   2026-03-10 | UPI Credit Line Hidden Fees
+   ```
+4. **Create today's directories:**
    ```bash
    mkdir -p output/$(date +%Y-%m-%d)/Topics
    ```
    Topic subdirectories are created in Phase 2 after topics are known.
-4. Confirm setup is complete, then proceed to Phase 1.
+5. Confirm setup is complete, then proceed to Phase 1.
 
 ---
 
@@ -307,7 +370,7 @@ After saving `research.json`, present the results as a table to the user:
 | Finance Trending | N | topic1, topic2, ... |
 | Finance Evergreen | N | topic1, topic2, ... |
 
-**Wait for user approval before proceeding to Phase 2.**
+**Present the table, then proceed to Phase 2 automatically (no approval gate).**
 
 ---
 
@@ -338,6 +401,7 @@ Select the configured number of topics (default 10) for this content batch.
    - Single-tip topics, simple myths, or quick hacks should stay `"short"`.
    - Long-form count must equal the user's requested `LONG_FORM_TOPICS_PER_RUN` (default 0).
    - Long-form count must NOT exceed total topics.
+7. **No repeat topics.** Read `output/previous_topics.txt` (built in Phase 0). Do NOT select any topic that substantially overlaps with a title in this list — same core subject, same angle, or same specific claim. A topic is a duplicate if a viewer would say "didn't she already cover this?" Minor framing differences (e.g., "SIP myths" vs "Why SIPs work") still count as duplicates. If a trending topic was already covered in the last 30 days, skip it.
 
 ### Good Hook Example
 - Finance topic: "UPI credit line feature"
@@ -394,7 +458,7 @@ Present the ranked topic table to the user:
 | 1 | ... | finance_trending | myth_busting | long | Yes: "..." |
 | 2 | ... | finance_evergreen | storytelling | short | No |
 
-**Wait for user approval before proceeding to Phase 3.**
+**Present the table, then proceed to Phase 3 automatically (no approval gate).**
 
 ---
 
@@ -1091,7 +1155,8 @@ Generate `output/YYYY-MM-DD/review_summary.md` with this exact template:
 2. Open any topic folder at `output/{date}/Topics/{folder_name}/`
 3. Review `script.md`, `research.md`, `review_report.md`, and production files
 4. Set `status.json` to `{"status": "Approved"}` for approved topics
-5. Unapproved topics stay as `"Draft"` — archived automatically on next run
+5. Set `status.json` to `{"status": "Rejected"}` for topics you want to discard
+6. Topics left as `"Draft"` will stay in place on next run
 
 ---
 
@@ -1135,7 +1200,7 @@ Per-topic folders (Topics/Topic_NN_Description/):
   - script.md (all format scripts in one file)
   - research.md (research sources and rationale)
   - review_report.md (review audit with issue/resolution table)
-  - status.json (Draft → set to Approved after review)
+  - status.json (Draft → Approved → Video_Generated → Published | Rejected)
   - YTShorts_Production.md (YouTube Shorts HeyGen prompt)
   - InstaReel_Production.md (Instagram Reel HeyGen prompt)
   - YTLong_Production.md (long-form topics only)
@@ -1145,7 +1210,9 @@ Review workflow:
   2. Browse Topics/ folders — each has script, research, review, and production files
   3. Review each topic's artifacts in its folder
   4. Set status.json to {"status": "Approved"} for approved topics
-  5. Unapproved topics stay as Draft — archived automatically on next run
+  5. Set status.json to {"status": "Rejected"} to discard a topic
+  6. Status lifecycle: Draft → Approved → Video_Generated → Published
+  7. On next run: Published topics archived, Rejected deleted, others stay
 ```
 
 ---
