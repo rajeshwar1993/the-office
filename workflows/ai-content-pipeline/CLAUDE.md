@@ -9,10 +9,11 @@ You are a **Content Pipeline Agent**. You research trending topics, synthesize c
 **Context variables** (set by the skill launcher):
 - `{AVATAR_NAME}` — lowercase avatar identifier (e.g., `neha`)
 - `{TOPIC_COUNT}` — number of topics to generate (default: 10)
+- `{OUTPUT_DIR}` — resolved at runtime to `output/{AVATAR_NAME}/YYYY-MM-DD` (today's date). Use this in all file paths.
 
 ---
 
-## Section 3 — Configuration
+## Section 1 — Configuration
 
 | Setting | Default | Notes |
 |---------|---------|-------|
@@ -60,7 +61,7 @@ output/{AVATAR_NAME}/YYYY-MM-DD/
 
 ---
 
-## Section 4 — Phase 0: Setup
+## Section 2 — Phase 0: Setup
 
 1. **Validate topic count.** Use `{TOPIC_COUNT}` from the skill launcher.
 2. **Archive/clean old runs by status.** Using Bash, process each previous date directory's topics based on their `status.json`:
@@ -153,7 +154,7 @@ output/{AVATAR_NAME}/YYYY-MM-DD/
 
 ---
 
-## Section 5 — Phase 1: Trend Research
+## Section 3 — Phase 1: Trend Research
 
 You are a research assistant helping build content for the avatar's channel. Read the avatar's profile to understand the niche and market.
 
@@ -203,7 +204,7 @@ After saving `research.json`, present the results as a table to the user:
 
 ---
 
-## Section 6 — Phase 2: Topic Synthesis
+## Section 4 — Phase 2: Topic Synthesis
 
 You are a content strategist for the avatar's channel. **Re-read the avatar's Character Bible from their profile before proceeding.**
 
@@ -281,7 +282,7 @@ Present the ranked topic table to the user:
 
 ---
 
-## Section 7 — Phase 3: Script Generation
+## Section 5 — Phase 3: Script Generation
 
 You are writing scripts for the avatar. **Re-read the avatar's Character Bible from their profile before writing any script.** Follow it precisely.
 
@@ -289,15 +290,7 @@ You are writing scripts for the avatar. **Re-read the avatar's Character Bible f
 Read `output/{AVATAR_NAME}/YYYY-MM-DD/topics.json` from Phase 2.
 
 ### Genre Guidance
-Apply the genre throughout the entire script — not just the hook. Reference the avatar's genre descriptions from their profile:
-- `myth_busting`: Start with the myth. Debunk it with evidence. End with the truth.
-- `storytelling`: Open with a specific, relatable character scenario. Bring it back to the lesson.
-- `comedy_satire`: Use exaggeration, irony, relatable frustration. Keep it punchy, not slapstick.
-- `shock_and_awe`: Lead with the most surprising fact. Build context around it.
-- `big_sister_advice`: Personal, warm, slightly confessional. "I wish someone had told me..."
-- `hot_take`: State the take boldly upfront. Defend it. Don't hedge.
-
-(If the avatar defines different/additional genres, use those instead.)
+Apply the genre throughout the entire script — not just the hook. Read the avatar's **Niche Configuration > Genres** table from their profile to understand each genre's intent and style. The genre should shape the script's structure, tone, and delivery from hook to CTA — not just the opening line.
 
 ### Script Rules
 - Write exactly as the avatar would SPEAK — not read
@@ -534,7 +527,7 @@ After all scripts and research files are generated, proceed to Phase 4.
 
 ---
 
-## Section 8 — Phase 4: Script Review
+## Section 6 — Phase 4: Script Review
 
 After Phase 3 generates all scripts, launch a **dedicated reviewer subagent** to adversarially review every script. The reviewer gets the character bible fresh in its context window, eliminating voice drift.
 
@@ -549,6 +542,17 @@ Agent(
   prompt: <fill in the template below>
 )
 ```
+
+### Scaling for Large Batches
+
+For batches of **6+ topics** (42+ scripts), split the review across multiple subagent calls to avoid context degradation:
+- Group topics into batches of 3-5 topics per reviewer subagent
+- Each reviewer gets the same Character Bible and checklist
+- Each reviewer writes per-topic `review_report.md` files (these don't collide since each topic has its own folder)
+- **Important:** Each batched reviewer must NOT write `review_report.json` to disk — instead, include the JSON report content in its response. The main agent collects all responses, merges the `scripts` arrays and `batch_issues` into a single `review_report.json`, and writes it once to `{OUTPUT_DIR}/review_report.json`
+- Adapt the reviewer prompt template: replace the "Save the batch-level report" instruction with "Return the following JSON in your response (do NOT write it to a file)"
+
+For batches of **5 or fewer topics**, a single reviewer subagent is sufficient and writes `review_report.json` directly.
 
 ### Reviewer Agent Prompt Template
 
@@ -602,9 +606,9 @@ For each script, check ALL of the following:
 
 ## Output
 
-Read topics.json first to cross-reference topic data, then read each script file and review it.
+Read `{OUTPUT_DIR}/topics.json` first to cross-reference topic data, then read each script file and review it.
 
-**Step 1:** Save the batch-level report to `{output_dir}/review_report.json` using this exact format:
+**Step 1:** Save the batch-level report to `{OUTPUT_DIR}/review_report.json` using this exact format:
 
 ```json
 {
@@ -641,7 +645,7 @@ Read topics.json first to cross-reference topic data, then read each script file
 }
 ```
 
-**Step 2:** For each topic, write a per-topic `review_report.md` to `{output_dir}/Topics/{folder_name}/review_report.md` using this format:
+**Step 2:** For each topic, write a per-topic `review_report.md` to `{OUTPUT_DIR}/Topics/{folder_name}/review_report.md` using this format:
 
 ```markdown
 # Review Report — {title}
@@ -697,7 +701,7 @@ Be adversarial. Your job is to catch mistakes the writer missed. Do not rubber-s
 
 ---
 
-## Section 9 — Phase 5: Revision
+## Section 7 — Phase 5: Revision
 
 Revise scripts that failed the reviewer's checks. This phase only runs if `review_report.json` contains scripts with `verdict: "fail"`.
 
@@ -735,7 +739,7 @@ Batch fixes:
 
 ---
 
-## Section 10 — Phase 6: Video Direction
+## Section 8 — Phase 6: Video Direction
 
 After scripts are finalized (post-review and revision), launch a **dedicated director subagent** to generate shot-by-shot production prompts for HeyGen. The director gets the Visual Direction Bible fresh in its context, ensuring consistent on-screen presence.
 
@@ -750,6 +754,10 @@ Agent(
   prompt: <fill in the template below>
 )
 ```
+
+### Scaling for Large Batches
+
+Same batching rule as Phase 4: for **6+ topics** (42+ scripts), split across multiple director subagents (3-5 topics each). Each director gets the same Visual Direction Bible and Character Reference. After all directors return, verify all 7 production files exist per topic.
 
 ### Director Agent Prompt Template
 
@@ -825,7 +833,7 @@ Generate **one production file per script** in the same topic folder.
 
 ### YouTube Short Production Format
 
-Save to `{output_dir}/Topics/{folder_name}/YTShort_NN_Production.md`:
+Save to `{OUTPUT_DIR}/Topics/{folder_name}/YTShort_NN_Production.md`:
 
 ```
 ---
@@ -882,7 +890,7 @@ ASPECT RATIO: 9:16
 
 ### Instagram Reel Production Format
 
-Save to `{output_dir}/Topics/{folder_name}/InstaReel_NN_Production.md`:
+Save to `{OUTPUT_DIR}/Topics/{folder_name}/InstaReel_NN_Production.md`:
 
 ```
 ---
@@ -929,7 +937,7 @@ ASPECT RATIO: 9:16
 
 ### YouTube Long-Form Production Format
 
-Save to `{output_dir}/Topics/{folder_name}/YTLong_Production.md`:
+Save to `{OUTPUT_DIR}/Topics/{folder_name}/YTLong_Production.md`:
 
 ```
 ---
@@ -1043,7 +1051,7 @@ Make each production prompt feel like a real director's shot list — specific, 
 
 ---
 
-## Section 11 — Phase 7: Review Summary
+## Section 9 — Phase 7: Review Summary
 
 Generate `output/{AVATAR_NAME}/YYYY-MM-DD/review_summary.md` with this exact template:
 
@@ -1089,7 +1097,7 @@ Generate `output/{AVATAR_NAME}/YYYY-MM-DD/review_summary.md` with this exact tem
 
 ---
 
-## Section 12 — Phase 8: Completion
+## Section 10 — Phase 8: Completion
 
 Present a completion summary to the user:
 
@@ -1136,7 +1144,7 @@ Review workflow:
 
 ---
 
-## Section 13 — Error Handling
+## Section 11 — Error Handling
 
 - **Avatar profile not found:** List available avatars from the `avatars/` directory (excluding `_template/`) and ask the user to specify a valid avatar. Do not proceed without a valid profile.
 - **WebSearch unavailable:** Report the error to the user and halt. Do not proceed without real search data.
@@ -1149,7 +1157,7 @@ Review workflow:
 
 ---
 
-## Section 14 — Quality Rules
+## Section 12 — Quality Rules
 
 1. **No fabrication** — every topic must come from real WebSearch results, every script must use data from topics.json
 2. **Character fidelity** — re-read the avatar's Character Bible from their profile before writing each script

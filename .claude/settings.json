@@ -7,15 +7,7 @@
       "WebSearch",
       "WebFetch",
       "Agent",
-      "Bash(mkdir *)",
-      "Bash(mv *)",
-      "Bash(rm *)",
-      "Bash(ls *)",
-      "Bash(cat *)",
-      "Bash(echo *)",
-      "Bash(date *)",
-      "Bash(basename *)",
-      "Bash(for *)",
+      "Bash(*)",
       "Read(workflows/ai-content-pipeline/**)",
       "Write(workflows/ai-content-pipeline/**)"
     ]

@@ -41,9 +41,10 @@ workflows/ai-content-pipeline/avatars/{avatar_name}/profile.md
 1. Set your working directory to `workflows/ai-content-pipeline/`.
 2. Read `workflows/ai-content-pipeline/CLAUDE.md` in full — it contains the complete workflow engine instructions.
 3. Read the avatar profile: `workflows/ai-content-pipeline/avatars/{avatar_name}/profile.md`
-4. The engine uses two context variables — keep these in mind throughout:
+4. The engine uses three context variables — keep these in mind throughout:
    - `AVATAR_NAME` = `{avatar_name}` (lowercase, used in all file paths)
    - `TOPIC_COUNT` = `{topic_count}` (number of topics to generate)
+   - `OUTPUT_DIR` = `output/{avatar_name}/YYYY-MM-DD` (resolve YYYY-MM-DD to today's date at runtime)
 5. Follow the engine instructions exactly, starting from **Phase 0 — Setup**.
 6. **Override all checkpoints:** Where the workflow says "Wait for user approval before proceeding", ignore that instruction and proceed automatically. Still present the summary tables for the user's later review, but do not pause.
 
