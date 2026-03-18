@@ -40,12 +40,12 @@ output/{AVATAR_NAME}/YYYY-MM-DD/
 │       ├── research.md                  # Research sources for this topic
 │       ├── review_report.md             # Review audit: issues + rectification
 │       ├── yt_long.md                   # Long-form script (3-5 min)
-│       ├── yt_short_01.md               # YT Short — standalone angle 1
-│       ├── yt_short_02.md               # YT Short — different angle 2
-│       ├── yt_short_03.md               # YT Short — teaser for long-form
-│       ├── ig_reel_01.md                # Reel — standalone angle 1
-│       ├── ig_reel_02.md                # Reel — different angle 2
-│       ├── ig_reel_03.md                # Reel — teaser for long-form
+│       ├── yt_short_01.md               # YT Short — angle 1
+│       ├── yt_short_02.md               # YT Short — angle 2
+│       ├── yt_short_03.md               # YT Short — angle 3
+│       ├── ig_reel_01.md                # Reel — angle 1
+│       ├── ig_reel_02.md                # Reel — angle 2
+│       ├── ig_reel_03.md                # Reel — angle 3
 │       ├── YTLong_Production.md         # 16:9 long-form production prompt
 │       ├── YTShort_01_Production.md     # 9:16 production prompt
 │       ├── YTShort_02_Production.md     # 9:16 production prompt
@@ -345,15 +345,20 @@ Each Short targets **55 seconds (130-150 words)**. Structure:
 HOOK (5s): Pattern interrupt or bold claim — make them stop scrolling
 CONTEXT (10s): Brief setup — why does this matter right now
 CORE (35s): The actual value — 2-3 sharp points, simply explained
-CTA (5s): One clear action tied to the content, not generic
+CTA (5s): Subscribe + watch full video — adapted to the specific content
 ```
 
 **Cross-video differentiation rules:**
-- **YT Short 01 — Standalone angle 1:** Pick the strongest single point from the long-form. Write a self-contained short that works without watching the long-form. Use a different hook angle than the long-form's COLD OPEN.
-- **YT Short 02 — Standalone angle 2:** Pick a *different* point or perspective from the long-form. Must feel like a completely different video to a viewer who saw Short 01. Different hook, different core insight, different CTA.
-- **YT Short 03 — Teaser for long-form:** Hook with the most compelling fact from the long-form and motivate viewers to watch the full video. Use the same topic and facts (don't invent new ones). Should leave the audience wanting more — e.g., reveal one shocking number but withhold the full breakdown.
+- **YT Short 01 — Angle 1:** Pick the strongest single point from the long-form. Self-contained content. Different hook angle than the long-form's COLD OPEN.
+- **YT Short 02 — Angle 2:** Pick a *different* point or perspective. Must feel like a completely different video from Short 01. Different hook, different core insight.
+- **YT Short 03 — Angle 3:** Pick a *third* distinct point or perspective. Must feel different from both Short 01 and 02.
 
-**Each Short must stand alone as a complete video (except Short 03 which teases the long-form).** No two Shorts should share the same hook, analogy, or core phrasing.
+**CTA rule for ALL YouTube Shorts:** Every Short must end with a CTA that (a) encourages subscription and (b) directs viewers to the full long-form video. The exact wording must be adapted to the video's specific content — not a copy-paste line. Example patterns:
+- "If this blew your mind, subscribe — and catch the full breakdown, link's right there."
+- "Hit subscribe so you don't miss stuff like this. Full deep-dive is in the description."
+- "Subscribe for more — and the complete version of this? Link below."
+
+**Each Short must stand alone as a complete video.** No two Shorts should share the same hook, analogy, or core phrasing. CTA wording should also be varied across the three Shorts.
 
 #### Step 3: Derive 3 Instagram Reels (`ig_reel_01.md`, `ig_reel_02.md`, `ig_reel_03.md`)
 
@@ -361,15 +366,20 @@ Each Reel targets **25 seconds (55-70 words)**. Structure:
 ```
 HOOK (3s): Same or stronger opening — even less time to earn attention
 PAYOFF (18s): Single sharpest point only — no room for multiple points
-CTA (4s): Adapted CTA — optimised for saves and follows
+CTA (4s): Drive to bio link for the full video — adapted to the specific content
 ```
 
 **Cross-video differentiation rules:**
-- **IG Reel 01 — Standalone angle 1:** Compress the strongest point into Reel format. Different hook/angle than YT Short 01 (avoid identical content across platforms).
-- **IG Reel 02 — Standalone angle 2:** Different point/perspective, different from both Reel 01 and the corresponding YT Short 02. Must feel fresh.
-- **IG Reel 03 — Teaser for long-form:** Same teaser concept as YT Short 03 but adapted for Instagram's audience and format. Optimise CTA for saves and profile visits rather than YouTube clicks.
+- **IG Reel 01 — Angle 1:** Compress the strongest point into Reel format. Different hook/angle than YT Short 01 (avoid identical content across platforms).
+- **IG Reel 02 — Angle 2:** Different point/perspective, different from both Reel 01 and the corresponding YT Short 02. Must feel fresh.
+- **IG Reel 03 — Angle 3:** Third distinct angle. Different from Reels 01 and 02.
 
-**Each Reel must stand alone (except Reel 03 which teases). No two Reels should share the same hook or core phrasing. No Reel should be a word-for-word copy of any Short.**
+**CTA rule for ALL Instagram Reels:** Every Reel must end with a CTA that directs viewers to the bio link where they can find the full video. The exact wording must be adapted to the content. Example patterns:
+- "Full breakdown in my bio — go watch."
+- "Want the whole story? Link in bio."
+- "I broke this down properly — link in bio."
+
+**Each Reel must stand alone as a complete video.** No two Reels should share the same hook or core phrasing. No Reel should be a word-for-word copy of any Short. CTA wording should also be varied across the three Reels.
 
 ### Anti-Hallucination Rule
 **Topic data must match topics.json exactly. If general_hook is null, do NOT invent one.** Use the title, angle, trend_context, and genre exactly as specified.
@@ -428,6 +438,11 @@ CTA:
 ---
 WORD COUNT: [X words (~Y minutes)]
 TEXT OVERLAYS: [count] markers ([N] term_card, [N] number_card, [N] math_breakdown, [N] key_takeaway)
+DESCRIPTION: |
+  {Informative YouTube description: 1-sentence hook summary, 3-5 key takeaways as bullet points, timestamps matching script structure, 3-5 hashtags}
+
+  ---
+  Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.
 ```
 
 **Short-form (`yt_short_NN.md`):**
@@ -439,7 +454,7 @@ TREND CONTEXT: {trend_context}
 GENERAL HOOK USED: {general_hook or "None"}
 GENRE: {genre}
 FORMAT: YouTube Short ({video_number}/3)
-DIFFERENTIATION: {standalone_angle_1 | standalone_angle_2 | teaser_for_longform}
+DIFFERENTIATION: {angle_1 | angle_2 | angle_3}
 
 --- YOUTUBE SHORT ---
 
@@ -457,6 +472,11 @@ CTA:
 
 ---
 WORD COUNT: [X words (~Y seconds)]
+DESCRIPTION: |
+  {Punchy 1-2 sentence summary of this Short's angle. "Watch the full breakdown: [link]". 3-5 hashtags}
+
+  ---
+  Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.
 ```
 
 **Reel (`ig_reel_NN.md`):**
@@ -468,7 +488,7 @@ TREND CONTEXT: {trend_context}
 GENERAL HOOK USED: {general_hook or "None"}
 GENRE: {genre}
 FORMAT: Instagram Reel ({video_number}/3)
-DIFFERENTIATION: {standalone_angle_1 | standalone_angle_2 | teaser_for_longform}
+DIFFERENTIATION: {angle_1 | angle_2 | angle_3}
 
 --- INSTAGRAM REEL ---
 
@@ -483,6 +503,11 @@ CTA:
 
 ---
 WORD COUNT: [X words (~Y seconds)]
+DESCRIPTION: |
+  {Conversational Instagram caption complementing the video. "Full video in bio 👆". 5-10 Instagram-optimized hashtags}
+
+  ---
+  Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.
 ```
 
 ### Per-Topic Research (`research.md`)
@@ -522,6 +547,35 @@ For each topic in `topics.json`:
 5. Validate word counts for all 7 scripts
 6. Write `research.md`
 7. Move to next topic
+
+### Video Descriptions
+
+After writing each script, generate a platform-appropriate description in the script file's DESCRIPTION field. Descriptions must be ready to paste directly as the video description/caption on the platform.
+
+**YouTube Long-Form Description (max 500 words):**
+- Opening: 1-sentence hook summary
+- Key takeaways: 3-5 bullet points
+- Timestamps: matched to script sections (COLD OPEN 0:00, INTRO, SEGMENT 1, etc.)
+- 3-5 relevant hashtags
+- AI Disclaimer (mandatory — see below)
+
+**YouTube Short Description (max 150 words):**
+- 1-2 sentence punchy summary of the specific angle
+- "Watch the full breakdown: [link]"
+- 3-5 relevant hashtags
+- AI Disclaimer (mandatory — see below)
+
+**Instagram Reel Caption (max 150 words):**
+- Conversational caption that complements the video
+- "Full video in bio"
+- 5-10 Instagram-optimized hashtags
+- AI Disclaimer (mandatory — see below)
+
+**AI Disclaimer (end of EVERY description, all formats):**
+```
+---
+Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.
+```
 
 After all scripts and research files are generated, proceed to Phase 4.
 
@@ -601,8 +655,10 @@ For each script, check ALL of the following:
     - No two YT Shorts share the same hook, analogy, or core phrasing
     - No two IG Reels share the same hook or core phrasing
     - No Reel is a word-for-word copy of any Short
-    - Short 03 and Reel 03 effectively tease the long-form without repeating each other
-    - Standalone scripts (01, 02) each highlight a different aspect of the topic
+    - All three Shorts use genuinely different hooks, angles, and CTA wording; all include subscribe + full video elements
+    - All three Reels use genuinely different hooks and angles; all include bio-link CTA
+17. **CTA compliance** — verify all YouTube Shorts include both subscribe and full-video-link elements in their CTA. Verify all Instagram Reels include bio-link CTA. CTA wording must be varied across the three videos of each format (no copy-paste CTAs).
+18. **Description quality** — does each script include a DESCRIPTION field? Is it platform-appropriate (YouTube long-form has timestamps, Shorts reference full video link, Reels reference bio link)? Does every description include the AI disclaimer? Is the description informative and usable as-is?
 
 ## Output
 
@@ -814,6 +870,7 @@ For each script file:
 - **Consistency within a script** — don't mix casual and formal visual tones in the same video
 - **Running captions in ALL formats** — every section in every production prompt must include caption text (lower-third, synced to dialogue)
 - **Text overlays in long-form** — convert `[TEXT:]`, `[NUMBER:]`, `[MATH:]`, `[TAKEAWAY:]` markers from the script into overlay instructions with timing, type, text, and position
+- **Video Description** — each script file contains a DESCRIPTION field. Copy this description verbatim into the production file's `## Video Description` section at the bottom. Do not modify the description — it was authored by the scriptwriter.
 - Do NOT modify the script text. Your job is direction only.
 
 ## Output Format
@@ -886,6 +943,11 @@ ASPECT RATIO: 9:16
   Pace: {speed}
   Captions: {running caption text}
   Notes: {any specific direction}
+
+---
+
+## Video Description
+{copy DESCRIPTION field from the script file verbatim}
 ```
 
 ### Instagram Reel Production Format
@@ -933,6 +995,11 @@ ASPECT RATIO: 9:16
   Pace: {speed}
   Captions: {running caption text}
   Notes: {any specific direction}
+
+---
+
+## Video Description
+{copy DESCRIPTION field from the script file verbatim}
 ```
 
 ### YouTube Long-Form Production Format
@@ -1038,6 +1105,11 @@ ASPECT RATIO: 16:9
   Pace: Slightly slower
   Captions: {running caption text}
   Notes: {any specific direction}
+
+---
+
+## Video Description
+{copy DESCRIPTION field from the script file verbatim}
 ```
 
 Make each production prompt feel like a real director's shot list — specific, actionable, and true to the avatar's character. Avoid generic direction like "looks happy" — instead use specific expressions from the Visual Direction Bible.
@@ -1117,13 +1189,13 @@ Batch-level files:
 Per-topic folders (Topics/Topic_NN_Description/):
   Scripts (7 per topic):
     - yt_long.md (YouTube Long-Form, 3-5 min)
-    - yt_short_01.md (YouTube Short — standalone angle 1)
-    - yt_short_02.md (YouTube Short — standalone angle 2)
-    - yt_short_03.md (YouTube Short — teaser for long-form)
-    - ig_reel_01.md (Instagram Reel — standalone angle 1)
-    - ig_reel_02.md (Instagram Reel — standalone angle 2)
-    - ig_reel_03.md (Instagram Reel — teaser for long-form)
-  Production prompts (7 per topic):
+    - yt_short_01.md (YouTube Short — angle 1)
+    - yt_short_02.md (YouTube Short — angle 2)
+    - yt_short_03.md (YouTube Short — angle 3)
+    - ig_reel_01.md (Instagram Reel — angle 1)
+    - ig_reel_02.md (Instagram Reel — angle 2)
+    - ig_reel_03.md (Instagram Reel — angle 3)
+  Production prompts (7 per topic — each includes video description with AI disclaimer):
     - YTLong_Production.md
     - YTShort_01_Production.md, YTShort_02_Production.md, YTShort_03_Production.md
     - InstaReel_01_Production.md, InstaReel_02_Production.md, InstaReel_03_Production.md
@@ -1168,5 +1240,7 @@ Review workflow:
 7. **Visual consistency** — every production prompt must use the Visual Direction Bible mappings (background, outfit, energy) for its genre. The director does not improvise visual identity — it follows the bible
 8. **Engagement pacing** — long-form scripts must maintain setup → evidence → payoff in every segment, with genuinely disruptive pattern interrupts between segments
 9. **Text overlay fidelity** — every `[TEXT:]`, `[NUMBER:]`, `[MATH:]`, `[TAKEAWAY:]` marker in a long-form script must be accurately converted to overlay instructions in the production prompt. Numbers and terms must match the script exactly.
-10. **Cross-video differentiation** — within each topic, all 7 scripts must feel like genuinely different videos. No two scripts should share the same hook, the same core analogy, or the same phrasing. Standalone scripts highlight different aspects; teasers motivate without duplicating standalone content.
+10. **Cross-video differentiation** — within each topic, all 7 scripts must feel like genuinely different videos. No two scripts should share the same hook, the same core analogy, or the same phrasing. Each of the three Shorts and each of the three Reels must highlight a different aspect of the topic. CTA wording must be varied — no copy-paste CTAs.
 11. **Caption coverage** — every section in every production prompt (short-form AND long-form) must include running caption text. No section should be missing captions.
+12. **Description completeness** — every script must include a DESCRIPTION field with platform-appropriate text and the mandatory AI disclaimer. Every production prompt must include a `## Video Description` section copied from the script. Descriptions must be informative and ready to paste directly as the video description/caption.
+13. **CTA standardization** — all YouTube Shorts must end with subscribe + full-video-link CTA. All Instagram Reels must end with bio-link CTA. Long-form CTA remains content-specific. CTA wording must be adapted to each video's content — never generic copy-paste.
