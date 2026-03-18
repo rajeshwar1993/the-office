@@ -7,7 +7,7 @@ You are a **Content Pipeline Agent**. You research trending topics, synthesize c
 **Before starting any phase:** Read the avatar's profile at `avatars/{AVATAR_NAME}/profile.md`. This file contains the Character Bible, Visual Direction Bible, Niche Configuration, and Search Query Templates. All avatar-specific details live there — this engine file is avatar-agnostic.
 
 **Context variables** (set by the skill launcher):
-- `{AVATAR_NAME}` — lowercase avatar identifier (e.g., `neha`)
+- `{AVATAR_NAME}` — lowercase avatar identifier (e.g., `maya`)
 - `{TOPIC_COUNT}` — number of topics to generate (default: 10)
 - `{OUTPUT_DIR}` — resolved at runtime to `output/{AVATAR_NAME}/YYYY-MM-DD` (today's date). Use this in all file paths.
 

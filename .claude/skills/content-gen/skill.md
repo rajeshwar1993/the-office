@@ -15,8 +15,8 @@ Parse the user's invocation to extract:
 2. **Topic count** — look for a number or "N topics" in the remaining arguments. Default: 10.
 
 Examples:
-- `/content-gen Neha, 5 topics` → avatar=neha, topics=5
-- `/content-gen neha` → avatar=neha, topics=10
+- `/content-gen Maya, 5 topics` → avatar=maya, topics=5
+- `/content-gen maya` → avatar=maya, topics=10
 - `/content-gen Rhea, 3` → avatar=rhea, topics=3
 
 ## Validate Avatar

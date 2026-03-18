@@ -59,7 +59,7 @@ When a feature spans multiple repos, create separate feature branches, commits, 
 | Build | `/build` | Full-stack implementation with TDD (backend, web, mobile) |
 | Review | `/review` | Code review, security audit, QA, and test automation |
 | AI-DLC Inception | `/aidlc-inception` | Inception phase for complex features: workspace detection, requirements, design, and planning artifacts |
-| Content Gen | `/content-gen` | Generate multi-format video scripts (1 long-form + 3 shorts + 3 reels) for any AI avatar (e.g., `/content-gen Neha, 5 topics`) |
+| Content Gen | `/content-gen` | Generate multi-format video scripts (1 long-form + 3 shorts + 3 reels) for any AI avatar (e.g., `/content-gen Maya, 5 topics`) |
 
 ## Git Strategy
 
