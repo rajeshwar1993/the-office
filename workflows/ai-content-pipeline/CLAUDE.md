@@ -21,6 +21,7 @@ You are a **Content Pipeline Agent**. You research trending topics, synthesize c
 | `YOUTUBE_SHORT_TARGET_SECONDS` | 55 | Range: 50–60s |
 | `INSTAGRAM_TARGET_SECONDS` | 25 | Range: 20–30s |
 | `LONG_FORM_TARGET_MINUTES` | 3-5 | Range: 3-7. Can exceed 5 if topic demands |
+| `LANGUAGES` | ["en", "hi"] | Language variants to generate per script |
 
 ### Output Paths
 All output goes to `output/{AVATAR_NAME}/YYYY-MM-DD/` (today's date). Topics follow a status lifecycle: Draft → Approved → Video_Generated → Published (or Rejected). Published topics are archived to `archive/{AVATAR_NAME}/`. Rejected topics are deleted. All other statuses stay in place.
@@ -37,25 +38,41 @@ output/{AVATAR_NAME}/YYYY-MM-DD/
 ├── Topics/
 │   └── Topic_01_Description/
 │       ├── status.json                  # Lifecycle: Draft → Approved → Video_Generated → Published | Rejected
-│       ├── research.md                  # Research sources for this topic
-│       ├── review_report.md             # Review audit: issues + rectification
-│       ├── yt_long.md                   # Long-form script (3-5 min)
-│       ├── yt_short_01.md               # YT Short — angle 1
-│       ├── yt_short_02.md               # YT Short — angle 2
-│       ├── yt_short_03.md               # YT Short — angle 3
-│       ├── ig_reel_01.md                # Reel — angle 1
-│       ├── ig_reel_02.md                # Reel — angle 2
-│       ├── ig_reel_03.md                # Reel — angle 3
-│       ├── YTLong_Production.md         # 16:9 long-form production prompt
-│       ├── YTShort_01_Production.md     # 9:16 production prompt
-│       ├── YTShort_02_Production.md     # 9:16 production prompt
-│       ├── YTShort_03_Production.md     # 9:16 production prompt
-│       ├── InstaReel_01_Production.md   # 9:16 production prompt
-│       ├── InstaReel_02_Production.md   # 9:16 production prompt
-│       └── InstaReel_03_Production.md   # 9:16 production prompt
+│       ├── research.md                  # Research sources for this topic (language-independent)
+│       ├── review_report.md             # Review audit: covers both languages
+│       ├── en/
+│       │   ├── yt_long.md               # English long-form script (3-5 min)
+│       │   ├── yt_short_01.md           # English YT Short — angle 1
+│       │   ├── yt_short_02.md           # English YT Short — angle 2
+│       │   ├── yt_short_03.md           # English YT Short — angle 3
+│       │   ├── ig_reel_01.md            # English Reel — angle 1
+│       │   ├── ig_reel_02.md            # English Reel — angle 2
+│       │   ├── ig_reel_03.md            # English Reel — angle 3
+│       │   ├── YTLong_Production.md     # English 16:9 long-form production prompt
+│       │   ├── YTShort_01_Production.md # English 9:16 production prompt
+│       │   ├── YTShort_02_Production.md # English 9:16 production prompt
+│       │   ├── YTShort_03_Production.md # English 9:16 production prompt
+│       │   ├── InstaReel_01_Production.md # English 9:16 production prompt
+│       │   ├── InstaReel_02_Production.md # English 9:16 production prompt
+│       │   └── InstaReel_03_Production.md # English 9:16 production prompt
+│       └── hi/
+│           ├── yt_long.md               # Hinglish long-form script (3-5 min)
+│           ├── yt_short_01.md           # Hinglish YT Short — angle 1
+│           ├── yt_short_02.md           # Hinglish YT Short — angle 2
+│           ├── yt_short_03.md           # Hinglish YT Short — angle 3
+│           ├── ig_reel_01.md            # Hinglish Reel — angle 1
+│           ├── ig_reel_02.md            # Hinglish Reel — angle 2
+│           ├── ig_reel_03.md            # Hinglish Reel — angle 3
+│           ├── YTLong_Production.md     # Hinglish 16:9 long-form production prompt
+│           ├── YTShort_01_Production.md # Hinglish 9:16 production prompt
+│           ├── YTShort_02_Production.md # Hinglish 9:16 production prompt
+│           ├── YTShort_03_Production.md # Hinglish 9:16 production prompt
+│           ├── InstaReel_01_Production.md # Hinglish 9:16 production prompt
+│           ├── InstaReel_02_Production.md # Hinglish 9:16 production prompt
+│           └── InstaReel_03_Production.md # Hinglish 9:16 production prompt
 ```
 
-**7 videos per topic:** Every topic gets a full-suite of 7 scripts (1 long-form + 3 YouTube Shorts + 3 Instagram Reels) and 7 matching production prompts.
+**14 videos per topic: 7 per language (English + Hinglish).** Every topic gets a full-suite of 7 scripts per language (1 long-form + 3 YouTube Shorts + 3 Instagram Reels) and 7 matching production prompts per language.
 
 **Folder naming:** `Topic_NN_Short_Description` — NN is zero-padded (01, 02, ...), description is the topic title converted to PascalCase with underscores (e.g., "Why SIPs beat lump sum" → `Topic_01_SIP_vs_Lumpsum`).
 
@@ -149,7 +166,7 @@ output/{AVATAR_NAME}/YYYY-MM-DD/
    ```bash
    mkdir -p output/{AVATAR_NAME}/$(date +%Y-%m-%d)/Topics
    ```
-   Topic subdirectories are created in Phase 2 after topics are known.
+   Topic subdirectories (including `en/` and `hi/` subfolders) are created in Phase 2 after topics are known.
 5. Confirm setup is complete, then proceed to Phase 1.
 
 ---
@@ -266,7 +283,8 @@ After saving `topics.json`, create a subdirectory for each topic and initialize 
 
 ```bash
 # For each topic in topics.json:
-mkdir -p output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}
+mkdir -p output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/en
+mkdir -p output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/hi
 echo '{"status": "Draft"}' > output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/status.json
 ```
 
@@ -396,7 +414,7 @@ After writing each script, count the words and verify they fall within range. If
 
 Each script file follows this format:
 
-**Long-form (`yt_long.md`):**
+**Long-form (`en/yt_long.md` or `hi/yt_long.md`):**
 ```
 ---
 TOPIC: {title}
@@ -404,6 +422,7 @@ ANGLE: {angle}
 TREND CONTEXT: {trend_context}
 GENERAL HOOK USED: {general_hook or "None"}
 GENRE: {genre}
+LANGUAGE: {en | hi}
 FORMAT: YouTube Long-Form (3-5 minutes)
 
 --- YOUTUBE LONG-FORM VERSION ---
@@ -438,14 +457,17 @@ CTA:
 ---
 WORD COUNT: [X words (~Y minutes)]
 TEXT OVERLAYS: [count] markers ([N] term_card, [N] number_card, [N] math_breakdown, [N] key_takeaway)
+CLICKBAIT_TITLE: {Clickbait YouTube title — max 70 chars, curiosity-driven, uses CAPS on 1-2 key words for emphasis}
 DESCRIPTION: |
-  {Informative YouTube description: 1-sentence hook summary, 3-5 key takeaways as bullet points, timestamps matching script structure, 3-5 hashtags}
+  {Informative YouTube description: 1-sentence hook summary, 3-5 key takeaways as bullet points, timestamps matching script structure}
+
+  {3-5 niche-relevant hashtags + avatar channel hashtag}
 
   ---
   Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.
 ```
 
-**Short-form (`yt_short_NN.md`):**
+**Short-form (`en/yt_short_NN.md` or `hi/yt_short_NN.md`):**
 ```
 ---
 TOPIC: {title}
@@ -453,6 +475,7 @@ ANGLE: {specific angle for THIS short}
 TREND CONTEXT: {trend_context}
 GENERAL HOOK USED: {general_hook or "None"}
 GENRE: {genre}
+LANGUAGE: {en | hi}
 FORMAT: YouTube Short ({video_number}/3)
 DIFFERENTIATION: {angle_1 | angle_2 | angle_3}
 
@@ -472,14 +495,17 @@ CTA:
 
 ---
 WORD COUNT: [X words (~Y seconds)]
+CLICKBAIT_TITLE: {Clickbait Shorts title — max 70 chars, scroll-stopping, append #shorts}
 DESCRIPTION: |
-  {Punchy 1-2 sentence summary of this Short's angle. "Watch the full breakdown: [link]". 3-5 hashtags}
+  {Punchy 1-2 sentence summary of this Short's angle. "Watch the full breakdown: [link]"}
+
+  {3-5 niche-relevant hashtags + avatar channel hashtag}
 
   ---
   Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.
 ```
 
-**Reel (`ig_reel_NN.md`):**
+**Reel (`en/ig_reel_NN.md` or `hi/ig_reel_NN.md`):**
 ```
 ---
 TOPIC: {title}
@@ -487,6 +513,7 @@ ANGLE: {specific angle for THIS reel}
 TREND CONTEXT: {trend_context}
 GENERAL HOOK USED: {general_hook or "None"}
 GENRE: {genre}
+LANGUAGE: {en | hi}
 FORMAT: Instagram Reel ({video_number}/3)
 DIFFERENTIATION: {angle_1 | angle_2 | angle_3}
 
@@ -503,8 +530,11 @@ CTA:
 
 ---
 WORD COUNT: [X words (~Y seconds)]
+CLICKBAIT_TITLE: {Clickbait Reel title — max 70 chars, scroll-stopping}
 DESCRIPTION: |
-  {Conversational Instagram caption complementing the video. "Full video in bio 👆". 5-10 Instagram-optimized hashtags}
+  {Conversational Instagram caption complementing the video. "Full video in bio 👆"}
+
+  {5-10 Instagram-optimized hashtags (mix broad reach + niche) + avatar channel hashtag}
 
   ---
   Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.
@@ -541,12 +571,51 @@ Save to `output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/research.md`:
 ### Process Summary
 For each topic in `topics.json`:
 1. Read the topic data (including `folder_name`)
-2. Write `yt_long.md` — the long-form anchor script
-3. Write `yt_short_01.md`, `yt_short_02.md`, `yt_short_03.md` — derived from long-form, each with a different angle
-4. Write `ig_reel_01.md`, `ig_reel_02.md`, `ig_reel_03.md` — derived from long-form, each with a different angle
-5. Validate word counts for all 7 scripts
-6. Write `research.md`
-7. Move to next topic
+2. Write `en/yt_long.md` — English long-form anchor script
+3. Write `hi/yt_long.md` — Hinglish adaptation of the long-form
+4. Write `en/yt_short_01.md`, `en/yt_short_02.md`, `en/yt_short_03.md` — 3 English Shorts
+5. Write `hi/yt_short_01.md`, `hi/yt_short_02.md`, `hi/yt_short_03.md` — 3 Hinglish Shorts (adapt from English)
+6. Write `en/ig_reel_01.md`, `en/ig_reel_02.md`, `en/ig_reel_03.md` — 3 English Reels
+7. Write `hi/ig_reel_01.md`, `hi/ig_reel_02.md`, `hi/ig_reel_03.md` — 3 Hinglish Reels (adapt from English)
+8. Validate word counts for all 14 scripts
+9. Write `research.md`
+10. Move to next topic
+
+### Clickbait Titles
+
+Every script must include a CLICKBAIT_TITLE field. This is the video title viewers see on the platform — it must stop the scroll and earn the click.
+
+**Title Rules:**
+- Max 70 characters (YouTube truncates longer titles)
+- Use CAPS sparingly for 1-2 key words (not ALL CAPS sentences)
+- Include a number or specific claim when possible
+- Create curiosity gap — promise a revelation without giving it away
+- YouTube Shorts: append `#shorts` to the title
+- No two videos in the same topic should have similar titles
+- Must match the video's actual content — no misleading clickbait
+
+**Hashtag Rules:**
+- YouTube (long-form + shorts): 3-5 niche-relevant hashtags + avatar channel hashtag (e.g., `#FinanceWithMaya`)
+- Instagram Reels: 5-10 hashtags (mix of broad reach + niche-specific) + avatar channel hashtag
+- Use trending/high-volume hashtags for the avatar's market
+- Hashtags go inside the DESCRIPTION field, not the CLICKBAIT_TITLE (except `#shorts` for YT Shorts titles)
+
+### Hinglish Adaptation
+
+After writing each English script, immediately write its Hinglish adaptation into the `hi/` subfolder.
+Read the avatar's **Hinglish Adaptation Rules** from their profile before writing the first Hinglish script.
+
+**Adaptation process:**
+1. Keep the same structure (HOOK/CONTEXT/CORE/CTA or COLD OPEN/INTRO/SEGMENT/etc.)
+2. Keep the same information, facts, numbers, and argument flow
+3. Rewrite the dialogue in conversational Hinglish following the tone rules
+4. Keep all technical terms in English — only adapt conversational language
+5. Adapt the CLICKBAIT_TITLE to Hinglish
+6. Adapt the DESCRIPTION body to Hinglish (hashtags stay the same, AI disclaimer stays in English)
+7. Verify word count falls within the same target range
+8. Script markers ([beat], [pause], *emphasis*) and text overlay markers ([TEXT:], [NUMBER:], etc.) apply identically
+
+**This is adaptation, not translation.** The Hinglish version should feel like the avatar recorded it in Hinglish from scratch.
 
 ### Video Descriptions
 
@@ -599,14 +668,14 @@ Agent(
 
 ### Scaling for Large Batches
 
-For batches of **6+ topics** (42+ scripts), split the review across multiple subagent calls to avoid context degradation:
-- Group topics into batches of 3-5 topics per reviewer subagent
+For batches of **3+ topics** (42+ scripts), split the review across multiple subagent calls to avoid context degradation:
+- Group topics into batches of 2-3 topics per reviewer subagent
 - Each reviewer gets the same Character Bible and checklist
 - Each reviewer writes per-topic `review_report.md` files (these don't collide since each topic has its own folder)
 - **Important:** Each batched reviewer must NOT write `review_report.json` to disk — instead, include the JSON report content in its response. The main agent collects all responses, merges the `scripts` arrays and `batch_issues` into a single `review_report.json`, and writes it once to `{OUTPUT_DIR}/review_report.json`
 - Adapt the reviewer prompt template: replace the "Save the batch-level report" instruction with "Return the following JSON in your response (do NOT write it to a file)"
 
-For batches of **5 or fewer topics**, a single reviewer subagent is sufficient and writes `review_report.json` directly.
+For batches of **2 or fewer topics**, a single reviewer subagent is sufficient and writes `review_report.json` directly.
 
 ### Reviewer Agent Prompt Template
 
@@ -622,14 +691,21 @@ You are a strict editorial reviewer for {AVATAR_NAME}'s video scripts.
 Review every script file listed below. For each script, run the full checklist. Return a single JSON report.
 
 ## Script Files to Review
-{list each file path — for each topic folder, list all 7 script files:
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/yt_long.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/yt_short_01.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/yt_short_02.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/yt_short_03.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/ig_reel_01.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/ig_reel_02.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/ig_reel_03.md
+{list each file path — for each topic folder, list all 14 script files (7 en + 7 hi):
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/yt_long.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/yt_short_01.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/yt_short_02.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/yt_short_03.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/ig_reel_01.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/ig_reel_02.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/ig_reel_03.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/yt_long.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/yt_short_01.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/yt_short_02.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/yt_short_03.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/ig_reel_01.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/ig_reel_02.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/ig_reel_03.md
   ... repeat for each topic folder}
 
 ## Review Checklist
@@ -658,7 +734,9 @@ For each script, check ALL of the following:
     - All three Shorts use genuinely different hooks, angles, and CTA wording; all include subscribe + full video elements
     - All three Reels use genuinely different hooks and angles; all include bio-link CTA
 17. **CTA compliance** — verify all YouTube Shorts include both subscribe and full-video-link elements in their CTA. Verify all Instagram Reels include bio-link CTA. CTA wording must be varied across the three videos of each format (no copy-paste CTAs).
-18. **Description quality** — does each script include a DESCRIPTION field? Is it platform-appropriate (YouTube long-form has timestamps, Shorts reference full video link, Reels reference bio link)? Does every description include the AI disclaimer? Is the description informative and usable as-is?
+18. **Title & description quality** — does each script include CLICKBAIT_TITLE and DESCRIPTION fields? Is the title under 70 chars, curiosity-driven, and accurate to content? Do Shorts titles include `#shorts`? Are hashtags platform-appropriate (3-5 for YouTube, 5-10 for Instagram)? Does every description include the AI disclaimer? No two titles in the same topic should be similar.
+19. **Hinglish naturalness** — flag Hinglish scripts that contain (a) pure Hindi sentences with zero English, (b) pure English sentences with zero Hindi, (c) formal/difficult Hindi words when simpler alternatives exist, or (d) feel like literal translation rather than natural speech.
+20. **Cross-language fidelity** — the Hinglish version must deliver the same information and follow the same structure as the English version. Flag if the Hinglish version drops key facts or changes the argument.
 
 ## Output
 
@@ -676,13 +754,13 @@ Read `{OUTPUT_DIR}/topics.json` first to cross-reference topic data, then read e
   "scripts": [
     {
       "folder": "Topics/Topic_01_Desc",
-      "file": "yt_long.md",
+      "file": "en/yt_long.md",
       "verdict": "pass",
       "issues": []
     },
     {
       "folder": "Topics/Topic_02_Desc",
-      "file": "yt_short_01.md",
+      "file": "hi/yt_short_01.md",
       "verdict": "fail",
       "issues": [
         {
@@ -706,36 +784,63 @@ Read `{OUTPUT_DIR}/topics.json` first to cross-reference topic data, then read e
 ```markdown
 # Review Report — {title}
 
-## Per-Script Results
+## Per-Script Results — English (en/)
 
-### yt_long.md
+### en/yt_long.md
 | Check | Severity | Issue | Resolution |
 |-------|----------|-------|------------|
 | {check_name} | {high/medium/low} | {detail} | {pending — filled after Phase 5} |
 
-### yt_short_01.md
+### en/yt_short_01.md
 | Check | Severity | Issue | Resolution |
 |-------|----------|-------|------------|
 
-### yt_short_02.md
+### en/yt_short_02.md
 ...
 
-### yt_short_03.md
+### en/yt_short_03.md
 ...
 
-### ig_reel_01.md
+### en/ig_reel_01.md
 ...
 
-### ig_reel_02.md
+### en/ig_reel_02.md
 ...
 
-### ig_reel_03.md
+### en/ig_reel_03.md
+...
+
+## Per-Script Results — Hinglish (hi/)
+
+### hi/yt_long.md
+| Check | Severity | Issue | Resolution |
+|-------|----------|-------|------------|
+
+### hi/yt_short_01.md
+...
+
+### hi/yt_short_02.md
+...
+
+### hi/yt_short_03.md
+...
+
+### hi/ig_reel_01.md
+...
+
+### hi/ig_reel_02.md
+...
+
+### hi/ig_reel_03.md
 ...
 
 ## Cross-Video Differentiation
-{Assessment of whether the 7 scripts feel like genuinely different videos}
+{Assessment of whether the 14 scripts (7 en + 7 hi) feel like genuinely different videos per language}
 
-{If all checks passed for all scripts: "All 7 scripts passed all checks."}
+## Cross-Language Fidelity
+{Assessment of whether Hinglish versions deliver the same information and structure as English versions}
+
+{If all checks passed for all scripts: "All 14 scripts passed all checks."}
 ```
 
 Severity levels:
@@ -766,7 +871,7 @@ Revise scripts that failed the reviewer's checks. This phase only runs if `revie
 1. **Re-read the avatar's Character Bible** from their profile before revising any script
 2. Read `review_report.json`
 3. For each script with `verdict: "fail"`:
-   - Read the specific script file (e.g., `output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/yt_short_01.md`)
+   - Read the specific script file (e.g., `output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/en/yt_short_01.md` or `hi/yt_short_01.md`)
    - Address every issue listed in `issues[]`, applying the reviewer's `fix` suggestions
    - For high-severity issues: fix exactly as described
    - For medium/low issues included on a failed script: fix while you're in there
@@ -782,8 +887,8 @@ Revise scripts that failed the reviewer's checks. This phase only runs if `revie
 Scripts revised: N of M total
 
 Revisions:
-  - Topic_NN_Desc/yt_short_01.md: [brief description of what changed]
-  - Topic_NN_Desc/ig_reel_02.md: [brief description of what changed]
+  - Topic_NN_Desc/en/yt_short_01.md: [brief description of what changed]
+  - Topic_NN_Desc/hi/ig_reel_02.md: [brief description of what changed]
 
 Batch fixes:
   - [description of cross-script fix, if any]
@@ -813,7 +918,7 @@ Agent(
 
 ### Scaling for Large Batches
 
-Same batching rule as Phase 4: for **6+ topics** (42+ scripts), split across multiple director subagents (3-5 topics each). Each director gets the same Visual Direction Bible and Character Reference. After all directors return, verify all 7 production files exist per topic.
+Same batching rule as Phase 4: for **3+ topics** (42+ scripts per language), split across multiple director subagents (2-3 topics each). Each director gets the same Visual Direction Bible and Character Reference. After all directors return, verify all 14 production files exist per topic (7 in `en/` + 7 in `hi/`).
 
 ### Director Agent Prompt Template
 
@@ -832,14 +937,21 @@ You are a video director for {AVATAR_NAME}'s content (short-form and long-form).
 For each script file listed below, generate a production prompt file with shot-by-shot direction.
 
 ## Script Files to Direct
-{list each script file path — 7 per topic folder:
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/yt_long.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/yt_short_01.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/yt_short_02.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/yt_short_03.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/ig_reel_01.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/ig_reel_02.md
-  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/ig_reel_03.md
+{list each script file path — 14 per topic folder (7 en + 7 hi):
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/yt_long.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/yt_short_01.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/yt_short_02.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/yt_short_03.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/ig_reel_01.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/ig_reel_02.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/en/ig_reel_03.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/yt_long.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/yt_short_01.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/yt_short_02.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/yt_short_03.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/ig_reel_01.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/ig_reel_02.md
+  output/{AVATAR_NAME}/YYYY-MM-DD/Topics/Topic_01_Desc/hi/ig_reel_03.md
   ... repeat for each topic folder}
 
 ## Process
@@ -870,7 +982,8 @@ For each script file:
 - **Consistency within a script** — don't mix casual and formal visual tones in the same video
 - **Running captions in ALL formats** — every section in every production prompt must include caption text (lower-third, synced to dialogue)
 - **Text overlays in long-form** — convert `[TEXT:]`, `[NUMBER:]`, `[MATH:]`, `[TAKEAWAY:]` markers from the script into overlay instructions with timing, type, text, and position
-- **Video Description** — each script file contains a DESCRIPTION field. Copy this description verbatim into the production file's `## Video Description` section at the bottom. Do not modify the description — it was authored by the scriptwriter.
+- **Clickbait Title & Video Description** — each script file contains CLICKBAIT_TITLE and DESCRIPTION fields. Copy both verbatim into the production file's `## Clickbait Title` and `## Video Description` sections at the bottom. Do not modify either — they were authored by the scriptwriter.
+- **Hinglish production prompts** — for `hi/` scripts, clone the `en/` production file's visual direction (expression, gesture, energy, framing, pace, notes) and replace only the Script: and Captions: fields with the Hinglish text. Recalculate section durations if Hinglish word count differs. Do not re-direct from scratch — visual performance is identical across languages.
 - Do NOT modify the script text. Your job is direction only.
 
 ## Output Format
@@ -878,19 +991,28 @@ For each script file:
 Generate **one production file per script** in the same topic folder.
 
 ### Naming Convention
+Production files are saved in the same language subfolder as the script (`en/` or `hi/`):
+
 | Script File | Production File |
 |-------------|----------------|
-| `yt_long.md` | `YTLong_Production.md` |
-| `yt_short_01.md` | `YTShort_01_Production.md` |
-| `yt_short_02.md` | `YTShort_02_Production.md` |
-| `yt_short_03.md` | `YTShort_03_Production.md` |
-| `ig_reel_01.md` | `InstaReel_01_Production.md` |
-| `ig_reel_02.md` | `InstaReel_02_Production.md` |
-| `ig_reel_03.md` | `InstaReel_03_Production.md` |
+| `en/yt_long.md` | `en/YTLong_Production.md` |
+| `en/yt_short_01.md` | `en/YTShort_01_Production.md` |
+| `en/yt_short_02.md` | `en/YTShort_02_Production.md` |
+| `en/yt_short_03.md` | `en/YTShort_03_Production.md` |
+| `en/ig_reel_01.md` | `en/InstaReel_01_Production.md` |
+| `en/ig_reel_02.md` | `en/InstaReel_02_Production.md` |
+| `en/ig_reel_03.md` | `en/InstaReel_03_Production.md` |
+| `hi/yt_long.md` | `hi/YTLong_Production.md` |
+| `hi/yt_short_01.md` | `hi/YTShort_01_Production.md` |
+| `hi/yt_short_02.md` | `hi/YTShort_02_Production.md` |
+| `hi/yt_short_03.md` | `hi/YTShort_03_Production.md` |
+| `hi/ig_reel_01.md` | `hi/InstaReel_01_Production.md` |
+| `hi/ig_reel_02.md` | `hi/InstaReel_02_Production.md` |
+| `hi/ig_reel_03.md` | `hi/InstaReel_03_Production.md` |
 
 ### YouTube Short Production Format
 
-Save to `{OUTPUT_DIR}/Topics/{folder_name}/YTShort_NN_Production.md`:
+Save to `{OUTPUT_DIR}/Topics/{folder_name}/{lang}/YTShort_NN_Production.md` (where `{lang}` is `en` or `hi`):
 
 ```
 ---
@@ -946,13 +1068,16 @@ ASPECT RATIO: 9:16
 
 ---
 
+## Clickbait Title
+{copy CLICKBAIT_TITLE field from the script file verbatim}
+
 ## Video Description
 {copy DESCRIPTION field from the script file verbatim}
 ```
 
 ### Instagram Reel Production Format
 
-Save to `{OUTPUT_DIR}/Topics/{folder_name}/InstaReel_NN_Production.md`:
+Save to `{OUTPUT_DIR}/Topics/{folder_name}/{lang}/InstaReel_NN_Production.md` (where `{lang}` is `en` or `hi`):
 
 ```
 ---
@@ -998,13 +1123,16 @@ ASPECT RATIO: 9:16
 
 ---
 
+## Clickbait Title
+{copy CLICKBAIT_TITLE field from the script file verbatim}
+
 ## Video Description
 {copy DESCRIPTION field from the script file verbatim}
 ```
 
 ### YouTube Long-Form Production Format
 
-Save to `{OUTPUT_DIR}/Topics/{folder_name}/YTLong_Production.md`:
+Save to `{OUTPUT_DIR}/Topics/{folder_name}/{lang}/YTLong_Production.md` (where `{lang}` is `en` or `hi`):
 
 ```
 ---
@@ -1108,6 +1236,9 @@ ASPECT RATIO: 16:9
 
 ---
 
+## Clickbait Title
+{copy CLICKBAIT_TITLE field from the script file verbatim}
+
 ## Video Description
 {copy DESCRIPTION field from the script file verbatim}
 ```
@@ -1117,7 +1248,7 @@ Make each production prompt feel like a real director's shot list — specific, 
 
 ### After the Director Returns
 
-1. Verify production files exist in each topic folder under `output/{AVATAR_NAME}/YYYY-MM-DD/Topics/` — 7 production files per topic (`YTLong_Production.md`, `YTShort_01_Production.md`, `YTShort_02_Production.md`, `YTShort_03_Production.md`, `InstaReel_01_Production.md`, `InstaReel_02_Production.md`, `InstaReel_03_Production.md`)
+1. Verify production files exist in each topic folder under `output/{AVATAR_NAME}/YYYY-MM-DD/Topics/` — 14 production files per topic (7 in `en/` + 7 in `hi/`: `YTLong_Production.md`, `YTShort_01_Production.md`, `YTShort_02_Production.md`, `YTShort_03_Production.md`, `InstaReel_01_Production.md`, `InstaReel_02_Production.md`, `InstaReel_03_Production.md` in each language subfolder)
 2. Present a brief summary: how many production prompts were generated
 3. Proceed to Phase 7 (Review Summary)
 
@@ -1131,14 +1262,14 @@ Generate `output/{AVATAR_NAME}/YYYY-MM-DD/review_summary.md` with this exact tem
 # Content Batch — YYYY-MM-DD
 **Avatar:** {AVATAR_NAME}
 **Niche:** {niche from avatar profile}
-**Topics:** {count} topics × 7 videos = {count × 7} total videos
+**Topics:** {count} topics × 7 videos × 2 languages = {count × 14} total videos
 
 ---
 
 ## How To Review
 1. Scan the topics below
 2. Open any topic folder at `output/{AVATAR_NAME}/{date}/Topics/{folder_name}/`
-3. Review scripts (yt_long.md, yt_short_01-03.md, ig_reel_01-03.md), research.md, review_report.md, and production files
+3. Review scripts in `en/` and `hi/` subfolders (yt_long.md, yt_short_01-03.md, ig_reel_01-03.md), research.md, review_report.md, and production files
 4. Set `status.json` to `{"status": "Approved"}` for approved topics
 5. Set `status.json` to `{"status": "Rejected"}` for topics you want to discard
 6. Topics left as `"Draft"` will stay in place on next run
@@ -1152,8 +1283,10 @@ Generate `output/{AVATAR_NAME}/YYYY-MM-DD/review_summary.md` with this exact tem
 - **Genre:** `{genre}`  |  **Source:** `{source}`
 - {hook_label: "**Hook:** {general_hook}" if hook else "No general hook"}
 - **Folder:** `Topics/{folder_name}/`
-- **Scripts:** `yt_long.md` | `yt_short_01.md` | `yt_short_02.md` | `yt_short_03.md` | `ig_reel_01.md` | `ig_reel_02.md` | `ig_reel_03.md`
-- **Production:** `YTLong_Production.md` | `YTShort_01_Production.md` | `YTShort_02_Production.md` | `YTShort_03_Production.md` | `InstaReel_01_Production.md` | `InstaReel_02_Production.md` | `InstaReel_03_Production.md`
+- **Scripts (en/):** `yt_long.md` | `yt_short_01.md` | `yt_short_02.md` | `yt_short_03.md` | `ig_reel_01.md` | `ig_reel_02.md` | `ig_reel_03.md`
+- **Scripts (hi/):** `yt_long.md` | `yt_short_01.md` | `yt_short_02.md` | `yt_short_03.md` | `ig_reel_01.md` | `ig_reel_02.md` | `ig_reel_03.md`
+- **Production (en/):** `YTLong_Production.md` | `YTShort_01_Production.md` | `YTShort_02_Production.md` | `YTShort_03_Production.md` | `InstaReel_01_Production.md` | `InstaReel_02_Production.md` | `InstaReel_03_Production.md`
+- **Production (hi/):** `YTLong_Production.md` | `YTShort_01_Production.md` | `YTShort_02_Production.md` | `YTShort_03_Production.md` | `InstaReel_01_Production.md` | `InstaReel_02_Production.md` | `InstaReel_03_Production.md`
 
 [repeat for each topic]
 
@@ -1164,7 +1297,7 @@ Generate `output/{AVATAR_NAME}/YYYY-MM-DD/review_summary.md` with this exact tem
 - Genre breakdown:
   - `{genre}`: {count}
   [sorted by count descending]
-- Total videos: **{total_topics × 7}** ({total_topics} long-form, {total_topics × 3} shorts, {total_topics × 3} reels)
+- Total videos: **{total_topics × 14}** ({total_topics × 2} long-form, {total_topics × 6} shorts, {total_topics × 6} reels) — 7 English + 7 Hinglish per topic
 ```
 
 ---
@@ -1178,7 +1311,7 @@ Pipeline complete!
 
 Avatar: {AVATAR_NAME}
 Output directory: output/{AVATAR_NAME}/YYYY-MM-DD/
-Total: {N} topics × 7 videos = {N × 7} videos
+Total: {N} topics × 14 videos = {N × 14} videos
 
 Batch-level files:
   - research.json (trend research data)
@@ -1187,26 +1320,26 @@ Batch-level files:
   - review_summary.md (start here)
 
 Per-topic folders (Topics/Topic_NN_Description/):
-  Scripts (7 per topic):
-    - yt_long.md (YouTube Long-Form, 3-5 min)
-    - yt_short_01.md (YouTube Short — angle 1)
-    - yt_short_02.md (YouTube Short — angle 2)
-    - yt_short_03.md (YouTube Short — angle 3)
-    - ig_reel_01.md (Instagram Reel — angle 1)
-    - ig_reel_02.md (Instagram Reel — angle 2)
-    - ig_reel_03.md (Instagram Reel — angle 3)
-  Production prompts (7 per topic — each includes video description with AI disclaimer):
-    - YTLong_Production.md
-    - YTShort_01_Production.md, YTShort_02_Production.md, YTShort_03_Production.md
-    - InstaReel_01_Production.md, InstaReel_02_Production.md, InstaReel_03_Production.md
+  Scripts (14 per topic — 7 English + 7 Hinglish):
+    en/ (English):
+      - yt_long.md (YouTube Long-Form, 3-5 min)
+      - yt_short_01.md, yt_short_02.md, yt_short_03.md (YouTube Shorts)
+      - ig_reel_01.md, ig_reel_02.md, ig_reel_03.md (Instagram Reels)
+    hi/ (Hinglish):
+      - yt_long.md (YouTube Long-Form, 3-5 min)
+      - yt_short_01.md, yt_short_02.md, yt_short_03.md (YouTube Shorts)
+      - ig_reel_01.md, ig_reel_02.md, ig_reel_03.md (Instagram Reels)
+  Production prompts (14 per topic — 7 English + 7 Hinglish, each includes clickbait title, video description with hashtags, and AI disclaimer):
+    en/: YTLong_Production.md, YTShort_01-03_Production.md, InstaReel_01-03_Production.md
+    hi/: YTLong_Production.md, YTShort_01-03_Production.md, InstaReel_01-03_Production.md
   Supporting files:
-    - research.md (research sources and rationale)
-    - review_report.md (review audit with issue/resolution table)
+    - research.md (research sources and rationale — shared, language-independent)
+    - review_report.md (review audit with issue/resolution table — covers both languages)
     - status.json (Draft → Approved → Video_Generated → Published | Rejected)
 
 Review workflow:
   1. Open review_summary.md for an overview
-  2. Browse Topics/ folders — each has 7 scripts, 7 production prompts, research, and review files
+  2. Browse Topics/ folders — each has en/ and hi/ subfolders with 7 scripts + 7 production prompts each, plus shared research and review files
   3. Review each topic's artifacts in its folder
   4. Set status.json to {"status": "Approved"} for approved topics
   5. Set status.json to {"status": "Rejected"} to discard a topic
@@ -1242,5 +1375,6 @@ Review workflow:
 9. **Text overlay fidelity** — every `[TEXT:]`, `[NUMBER:]`, `[MATH:]`, `[TAKEAWAY:]` marker in a long-form script must be accurately converted to overlay instructions in the production prompt. Numbers and terms must match the script exactly.
 10. **Cross-video differentiation** — within each topic, all 7 scripts must feel like genuinely different videos. No two scripts should share the same hook, the same core analogy, or the same phrasing. Each of the three Shorts and each of the three Reels must highlight a different aspect of the topic. CTA wording must be varied — no copy-paste CTAs.
 11. **Caption coverage** — every section in every production prompt (short-form AND long-form) must include running caption text. No section should be missing captions.
-12. **Description completeness** — every script must include a DESCRIPTION field with platform-appropriate text and the mandatory AI disclaimer. Every production prompt must include a `## Video Description` section copied from the script. Descriptions must be informative and ready to paste directly as the video description/caption.
+12. **Title & description completeness** — every script (both `en/` and `hi/` variants) must include CLICKBAIT_TITLE and DESCRIPTION fields. Every production prompt must include `## Clickbait Title` and `## Video Description` sections copied from the script. Titles must be under 70 characters and clickbait-worthy. Descriptions must include platform-appropriate hashtags (3-5 for YouTube, 5-10 for Instagram) plus the avatar's channel hashtag, and the mandatory AI disclaimer.
 13. **CTA standardization** — all YouTube Shorts must end with subscribe + full-video-link CTA. All Instagram Reels must end with bio-link CTA. Long-form CTA remains content-specific. CTA wording must be adapted to each video's content — never generic copy-paste.
+14. **Hinglish adaptation quality** — every Hinglish script must feel like native Hinglish speech, not a translated English script. Technical terms stay in English. No Sanskrit-heavy or formal Hindi. Hinglish scripts must deliver the same information and structure as their English counterparts.
