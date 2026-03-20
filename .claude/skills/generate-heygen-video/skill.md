@@ -268,10 +268,13 @@ For each step in `playbook.steps`:
 After the final "Generate/Submit" step:
 1. Take a screenshot for the user's reference
 2. Tell the user: "Video generation submitted for: {title}"
-3. If the production file path can be traced to a topic folder, update `status.json`:
-   ```json
-   {"status": "Video_Generating", "heygen_submitted": "YYYY-MM-DD HH:MM"}
-   ```
+3. If the production file path can be traced to a topic folder, update `status.json` for that specific production file:
+   - Parse the production file path to extract the status key:
+     - If the topic has `en/`/`hi/` subfolders: key = `en/YTShort_01_Production.md` (language prefix + filename)
+     - If the topic is legacy flat: key = `YTShort_01_Production.md` (filename only)
+   - Read the existing `status.json` from the topic folder
+   - Update only that key's value: `{ "status": "Video_Generating", "heygen_submitted": "YYYY-MM-DD HH:MM" }`
+   - Write back the full JSON (preserving all other keys unchanged)
 
 ### Assist Mode (Element Not Found)
 

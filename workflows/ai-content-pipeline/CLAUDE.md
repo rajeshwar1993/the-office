@@ -37,7 +37,7 @@ output/{AVATAR_NAME}/YYYY-MM-DD/
 │
 ├── Topics/
 │   └── Topic_01_Description/
-│       ├── status.json                  # Lifecycle: Draft → Approved → Video_Generated → Published | Rejected
+│       ├── status.json                  # Per-file status: keys are production file paths (e.g., "en/YTShort_01_Production.md"), values are { "status": "Draft" }
 │       ├── research.md                  # Research sources for this topic (language-independent)
 │       ├── review_report.md             # Review audit: covers both languages
 │       ├── en/
@@ -99,15 +99,21 @@ output/{AVATAR_NAME}/YYYY-MM-DD/
      if [ -d "$datedir/Topics" ]; then
        for topicdir in "$datedir"/Topics/*/; do
          [ ! -d "$topicdir" ] && continue
-         status=$(cat "$topicdir/status.json" 2>/dev/null | grep -o '"status"[[:space:]]*:[[:space:]]*"[^"]*"' | grep -o '"[^"]*"$' | tr -d '"')
+         all_status=$(node -e "
+           const s=JSON.parse(require('fs').readFileSync('$topicdir/status.json','utf8'));
+           const v=Object.values(s).map(x=>typeof x==='string'?x:x.status);
+           if(v.every(x=>x==='Published'))console.log('Published');
+           else if(v.every(x=>x==='Rejected'))console.log('Rejected');
+           else console.log('InProgress');
+         " 2>/dev/null || echo "Draft")
 
-         if [ "$status" = "Published" ]; then
+         if [ "$all_status" = "Published" ]; then
            mkdir -p "$archdir/$dirname/Topics"
            mv "$topicdir" "$archdir/$dirname/Topics/"
-         elif [ "$status" = "Rejected" ]; then
+         elif [ "$all_status" = "Rejected" ]; then
            rm -rf "$topicdir"
          fi
-         # Draft, Approved, Video_Generated → stay in place
+         # InProgress (any mix of Draft/Approved/Video_Generated/etc.) → stay in place
        done
 
        # If Topics/ is now empty, archive batch-level files and remove date dir
@@ -146,8 +152,13 @@ output/{AVATAR_NAME}/YYYY-MM-DD/
        if [ -d "$datedir/Topics" ]; then
          for topicdir in "$datedir"/Topics/*/; do
            [ ! -d "$topicdir" ] && continue
-           status=$(cat "$topicdir/status.json" 2>/dev/null | grep -o '"status"[[:space:]]*:[[:space:]]*"[^"]*"' | grep -o '"[^"]*"$' | tr -d '"')
-           [ "$status" = "Rejected" ] && continue
+           all_status=$(node -e "
+           const s=JSON.parse(require('fs').readFileSync('$topicdir/status.json','utf8'));
+           const v=Object.values(s).map(x=>typeof x==='string'?x:x.status);
+           if(v.every(x=>x==='Rejected'))console.log('Rejected');
+           else console.log('Active');
+         " 2>/dev/null || echo "Active")
+           [ "$all_status" = "Rejected" ] && continue
            # Extract title from topics.json for this folder
            folder=$(basename "$topicdir")
            title=$(cat "$datedir/topics.json" 2>/dev/null | grep -A2 "\"folder_name\": \"$folder\"" | grep '"title"' | sed 's/.*"title": "//;s/".*//')
@@ -285,7 +296,12 @@ After saving `topics.json`, create a subdirectory for each topic and initialize 
 # For each topic in topics.json:
 mkdir -p output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/en
 mkdir -p output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/hi
-echo '{"status": "Draft"}' > output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/status.json
+node -e "
+const files=['YTLong_Production.md','YTShort_01_Production.md','YTShort_02_Production.md','YTShort_03_Production.md','InstaReel_01_Production.md','InstaReel_02_Production.md','InstaReel_03_Production.md'];
+const s={};
+for(const l of ['en','hi'])for(const f of files)s[l+'/'+f]={status:'Draft'};
+require('fs').writeFileSync('output/{AVATAR_NAME}/YYYY-MM-DD/Topics/{folder_name}/status.json',JSON.stringify(s,null,2));
+"
 ```
 
 ### Checkpoint
@@ -1270,9 +1286,14 @@ Generate `output/{AVATAR_NAME}/YYYY-MM-DD/review_summary.md` with this exact tem
 1. Scan the topics below
 2. Open any topic folder at `output/{AVATAR_NAME}/{date}/Topics/{folder_name}/`
 3. Review scripts in `en/` and `hi/` subfolders (yt_long.md, yt_short_01-03.md, ig_reel_01-03.md), research.md, review_report.md, and production files
-4. Set `status.json` to `{"status": "Approved"}` for approved topics
-5. Set `status.json` to `{"status": "Rejected"}` for topics you want to discard
-6. Topics left as `"Draft"` will stay in place on next run
+4. **Bulk approve** all production files in a topic:
+   ```bash
+   cd output/{AVATAR_NAME}/{date}/Topics/{folder_name}
+   node -e "const s=JSON.parse(require('fs').readFileSync('status.json','utf8'));for(const k in s)s[k].status='Approved';require('fs').writeFileSync('status.json',JSON.stringify(s,null,2))"
+   ```
+5. **Or edit individual entries** in `status.json` — each key is a production file path (e.g., `"en/YTShort_01_Production.md"`)
+6. To reject an entire topic, set all entries to `"Rejected"`
+7. Topics stay in place until ALL production files reach "Published" (then archived) or ALL reach "Rejected" (then deleted)
 
 ---
 
@@ -1335,16 +1356,16 @@ Per-topic folders (Topics/Topic_NN_Description/):
   Supporting files:
     - research.md (research sources and rationale — shared, language-independent)
     - review_report.md (review audit with issue/resolution table — covers both languages)
-    - status.json (Draft → Approved → Video_Generated → Published | Rejected)
+    - status.json (per-file tracking: 14 keys for en/hi production files)
 
 Review workflow:
   1. Open review_summary.md for an overview
   2. Browse Topics/ folders — each has en/ and hi/ subfolders with 7 scripts + 7 production prompts each, plus shared research and review files
   3. Review each topic's artifacts in its folder
-  4. Set status.json to {"status": "Approved"} for approved topics
-  5. Set status.json to {"status": "Rejected"} to discard a topic
-  6. Status lifecycle: Draft → Approved → Video_Generated → Published
-  7. On next run: Published topics archived, Rejected deleted, others stay
+  4. Bulk approve: node -e "const s=JSON.parse(require('fs').readFileSync('status.json','utf8'));for(const k in s)s[k].status='Approved';require('fs').writeFileSync('status.json',JSON.stringify(s,null,2))"
+  5. Or edit individual entries in status.json to approve/reject specific production files
+  6. Per-file lifecycle: Draft → Approved → Video_Generating → Video_Generated → Published | Rejected
+  7. On next run: ALL Published → topic archived, ALL Rejected → topic deleted, otherwise stays
 ```
 
 ---
