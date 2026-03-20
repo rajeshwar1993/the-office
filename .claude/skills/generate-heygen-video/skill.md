@@ -1,6 +1,6 @@
 ---
 name: generate-heygen-video
-description: "Automate HeyGen video generation from production prompts. Usage: /generate-heygen-video learn | /generate-heygen-video run <production-file-path>"
+description: "Automate HeyGen video generation from production prompts. Usage: /generate-heygen-video learn | /generate-heygen-video run <topic-folder-or-file>"
 user-invocable: true
 ---
 
@@ -15,17 +15,67 @@ You are automating video generation on HeyGen using Playwright browser automatio
 Parse the user's invocation to determine the mode:
 
 1. **Learn mode:** `/generate-heygen-video learn` — Record the HeyGen workflow interactively
-2. **Run mode:** `/generate-heygen-video run <path>` — Execute the recorded workflow with a production prompt file
+2. **Run mode:** `/generate-heygen-video run <path>` — Execute the recorded workflow with a production file or entire topic folder
 3. **Config mode:** `/generate-heygen-video config` — Update HeyGen avatar/voice mappings
 
 Examples:
 - `/generate-heygen-video learn` → learn mode
-- `/generate-heygen-video run output/maya/2026-03-20/Topics/Topic_01_Desc/en/YTShort_01_Production.md` → run mode
+- `/generate-heygen-video run output/maya/2026-03-20/Topics/Topic_02_SGB_Returns_Tax_Trap` → run mode (batch — processes all production files in topic folder)
+- `/generate-heygen-video run output/maya/2026-03-20/Topics/Topic_01_Desc/en/YTShort_01_Production.md` → run mode (single file)
 - `/generate-heygen-video config` → config mode
 
 If no mode specified, check if playbook exists and has steps:
 - If playbook is empty → suggest learn mode
 - If playbook exists → suggest run mode
+
+---
+
+## Resolve Input Path
+
+After parsing the run mode path, determine whether this is a single-file or batch invocation:
+
+1. **Path ends with `_Production.md`** → **Single-file mode.** Build a one-item queue with that file.
+2. **Path is a directory containing `status.json`** → **Batch topic-folder mode.** Build the full queue from status.json.
+3. **Neither** → Error: "Path must be a `_Production.md` file or a topic folder containing `status.json`."
+
+For batch mode, detect the language structure from status.json keys:
+- Keys contain `/` (e.g., `en/YTShort_01_Production.md`) → **Multilingual** with `en/` and `hi/` subfolders
+- Keys have no `/` (e.g., `YTShort_01_Production.md`) → **Legacy flat** topic (no language subfolders)
+
+---
+
+## Batch Queue Construction
+
+When in batch topic-folder mode:
+
+1. Read `status.json` from the topic folder
+2. **Filter** to keys whose status is one of: `"Draft"`, `"Approved"`, `"Video_Failed"`
+   - **Skip** keys with status: `"Video_Generating"`, `"Video_Generated"`, `"Published"`, `"Rejected"`
+3. **Sort** the filtered keys:
+   - All `en/` keys first, then all `hi/` keys
+   - Within each language group, order: `YTLong` → `YTShort_01` → `YTShort_02` → `YTShort_03` → `InstaReel_01` → `InstaReel_02` → `InstaReel_03`
+4. **Build queue** — an ordered list of items, each with:
+   - `key` — the status.json key (e.g., `en/YTShort_01_Production.md`)
+   - `file_path` — full path to the production file (topic folder + key)
+   - `language` — `"en"` or `"hi"` (extracted from key prefix); `null` for legacy flat topics
+5. If queue is empty → tell user: "All production files in this topic are already processed (Video_Generated/Video_Generating/Published). Nothing to do." Stop.
+6. **Show batch plan** and proceed:
+
+```
+Batch plan: {topic_name} — {queue_length} videos to generate
+
+  en/ (7 files):
+    · YTLong_Production.md — Draft
+    · YTShort_01_Production.md — Draft
+    ...
+  hi/ (7 files):
+    · YTLong_Production.md — Draft
+    ...
+
+Proceeding with video generation...
+```
+
+For single-file mode, build a one-item queue using the same structure. Derive `language` from the path: if the parent folder is `en/` or `hi/`, use that; otherwise `null`.
 
 ---
 
@@ -169,7 +219,7 @@ Write the final playbook to `workflows/ai-content-pipeline/heygen/playbook.json`
 }
 ```
 
-Tell the user: "Playbook saved with N steps. You can now use `/generate-heygen-video run <production-file>` to generate videos automatically."
+Tell the user: "Playbook saved with N steps. You can now use `/generate-heygen-video run <topic-folder-or-file>` to generate videos automatically."
 
 ---
 
@@ -183,23 +233,25 @@ Tell the user: "Playbook saved with N steps. You can now use `/generate-heygen-v
 
 2. Read `workflows/ai-content-pipeline/heygen/config.json`
 
-3. Parse the production file path from the user's command
-   - Read the production file (e.g., `YTShort_01_Production.md`)
-   - Extract: script text, aspect ratio, genre, title, clickbait title, description
-   - Determine avatar from the file path (e.g., `output/maya/...` → avatar=maya)
+3. **Resolve Input Path** (see section above) to determine single-file or batch mode
+
+4. **Build the queue** (see Batch Queue Construction above)
 
 ### Extract Data from Production Prompt
 
-Parse the production file to extract these fields:
+For each item in the queue, read the production file and parse these fields:
 
 ```
 TOPIC         → {{video_title}} (used for naming the video in HeyGen)
 ASPECT RATIO  → {{aspect_ratio}} ("9:16" or "16:9")
 Avatar name   → {{avatar_name}} (from path + config.json mapping)
 Voice name    → {{voice_name}} (from config.json mapping)
+Language      → {{folder_language}} ("en" or "hi", extracted from key prefix; null for legacy flat)
 
 Script text   → {{script_text}} (see cleaning rules below)
 ```
+
+**Folder date** — extracted from the topic folder path (e.g., `output/maya/2026-03-20/Topics/...` → `{{folder_date}}` = `2026-03-20`).
 
 **Script text cleaning rules:**
 
@@ -212,7 +264,7 @@ The production prompt contains the script inside `Script: "..."` fields across m
 5. Collapse multiple spaces into single spaces
 6. Trim leading/trailing whitespace
 
-### Execution
+### Execution — Phase A: Session Setup (once)
 
 **Step 1 — Open HeyGen**
 
@@ -226,55 +278,136 @@ Check if logged in. If login page detected:
 - Wait for navigation away from login
 - Snapshot to confirm
 
-**Step 2 — Execute Playbook Steps**
+**Step 2 — Confirm session is ready**
 
-For each step in `playbook.steps`:
+Take a snapshot to verify we're on the HeyGen dashboard/home page. This completes session setup.
+
+### Execution — Phase B: Per-Video Loop
+
+For each item in the queue:
 
 ```
-1. Take a snapshot:
-   mcp__plugin_playwright_playwright__browser_snapshot()
+for each item in queue (index i, total N):
 
-2. Find the target element using the step's element_strategy:
-   a. Search the snapshot's accessibility tree for an element matching:
-      - role matches step.element_strategy.primary.role
-      - name/label contains step.element_strategy.primary.name_pattern
-   b. If not found, try fallback strategy
-   c. If still not found → ENTER ASSIST MODE (see below)
+  ── 1. Update status.json ──
+  Read status.json from topic folder.
+  Set item.key → { "status": "Video_Generating", "heygen_submitted": "YYYY-MM-DD HH:MM" }
+  Write back full JSON (preserve all other keys).
 
-3. Resolve variables in the step's value:
-   - Replace {{script_text}} with cleaned script
-   - Replace {{aspect_ratio}} with extracted aspect ratio
-   - Replace {{avatar_name}} with mapped name from config.json
-   - etc.
+  ── 2. Extract production data ──
+  Read item.file_path.
+  Parse all variables: {{video_title}}, {{aspect_ratio}}, {{script_text}}, etc.
+  Set {{folder_language}} from item.language.
 
-4. Execute the action:
-   - "click" → mcp__plugin_playwright_playwright__browser_click({ element: step.description, ref: matched_ref })
-   - "fill" → mcp__plugin_playwright_playwright__browser_fill_form({ ref: matched_ref, value: resolved_value })
-   - "type" → mcp__plugin_playwright_playwright__browser_type({ ref: matched_ref, text: resolved_value, submit: false })
-   - "select" → mcp__plugin_playwright_playwright__browser_select_option(...)
-   - "navigate" → mcp__plugin_playwright_playwright__browser_navigate({ url: step.url })
-   - "wait" → mcp__plugin_playwright_playwright__browser_wait_for(...)
-   - "scroll" → mcp__plugin_playwright_playwright__browser_evaluate({ expression: "window.scrollBy(0, 500)" })
+  ── 3. Execute playbook Steps 3–18 ──
+  For each step in playbook.steps:
 
-5. Wait for UI to settle (use step.wait_after or default 2 seconds)
+    a. Take a snapshot:
+       mcp__plugin_playwright_playwright__browser_snapshot()
 
-6. Take verification snapshot
+    b. Find the target element using the step's element_strategy:
+       - Search snapshot accessibility tree for matching role + name_pattern
+       - If not found, try fallback strategy
+       - If still not found → ENTER ASSIST MODE (see below)
 
-7. Brief status update to user: "Step N/M: {description} — done"
+    c. Resolve variables in the step's value:
+       - Replace {{script_text}} with cleaned script
+       - Replace {{aspect_ratio}} with extracted aspect ratio
+       - Replace {{avatar_name}} with mapped name from config.json
+       - Replace {{voice_name}} with mapped voice from config.json
+       - Replace {{video_title}} with extracted title
+       - etc.
+
+    d. Execute the action:
+       - "click" → mcp__plugin_playwright_playwright__browser_click(...)
+       - "fill" → mcp__plugin_playwright_playwright__browser_fill_form(...)
+       - "type" → mcp__plugin_playwright_playwright__browser_type(...)
+       - "select" → mcp__plugin_playwright_playwright__browser_select_option(...)
+       - "navigate" → mcp__plugin_playwright_playwright__browser_navigate(...)
+       - "wait" → mcp__plugin_playwright_playwright__browser_wait_for(...)
+       - "scroll" → mcp__plugin_playwright_playwright__browser_evaluate(...)
+
+    e. Wait for UI to settle (use step.wait_after or default 2 seconds)
+
+    f. Take verification snapshot
+
+    g. Brief status: "Step S/M: {description} — done"
+
+    **Step 16 — Folder Navigation (3-level nesting):**
+
+    When the playbook reaches the folder selection step, navigate using 3-level nesting:
+
+    1. Click LEFT chevron on the avatar folder (e.g., "Finance-Maya") to expand it
+    2. Find or create the date subfolder ({{folder_date}}), expand it via LEFT chevron
+    3. If {{folder_language}} is set (multilingual topic):
+       - Find or create the language subfolder ("en" or "hi")
+       - Click the FOLDER ICON on the language subfolder to select it as destination
+    4. If {{folder_language}} is null (legacy flat topic):
+       - Click the date folder ICON to select it as destination (unchanged from original behavior)
+
+    **Optimization:** Between consecutive videos in the SAME language, the folder may already
+    be correct. Take a snapshot to check the current folder selection before re-navigating.
+    If the correct folder is already selected, skip folder navigation for this video.
+
+  ── 4. On success ──
+  Update status.json: item.key → { "status": "Video_Generated", "heygen_completed": "YYYY-MM-DD HH:MM" }
+  Show progress table (see below).
+
+  ── 5. On failure ──
+  Update status.json: item.key → { "status": "Video_Failed", "error": "description of what went wrong" }
+  Ask user: "Video {i}/{N} failed: {error}. Continue to next video? (y/n)"
+  If no → stop batch, show completion summary.
+
+  ── 6. Navigate back for next video ──
+  Execute playbook Step 19 (navigate back to video creation page for the next video).
+
+  ── 7. Compact context ──
+  Run /compact to compress the conversation context before starting the next video.
+  This prevents context window exhaustion over 14 videos (each uses ~19 Playwright tool calls).
+  The compacted context retains: batch queue, current position, status.json state, config/playbook references.
 ```
 
-**Step 3 — Post-generation**
+Single-file mode follows the same flow — the queue simply has 1 item.
 
-After the final "Generate/Submit" step:
-1. Take a screenshot for the user's reference
-2. Tell the user: "Video generation submitted for: {title}"
-3. If the production file path can be traced to a topic folder, update `status.json` for that specific production file:
-   - Parse the production file path to extract the status key:
-     - If the topic has `en/`/`hi/` subfolders: key = `en/YTShort_01_Production.md` (language prefix + filename)
-     - If the topic is legacy flat: key = `YTShort_01_Production.md` (filename only)
-   - Read the existing `status.json` from the topic folder
-   - Update only that key's value: `{ "status": "Video_Generating", "heygen_submitted": "YYYY-MM-DD HH:MM" }`
-   - Write back the full JSON (preserving all other keys unchanged)
+### Progress Table
+
+After each video completes (success or failure), display a progress table:
+
+```
+[3/14] Topic: SGB_Returns_Tax_Trap
+
+  en/:
+    ✓ YTLong_Production.md — Video_Generated
+    ✓ YTShort_01_Production.md — Video_Generated
+    → YTShort_02_Production.md — Video_Generating (current)
+    · YTShort_03_Production.md — Draft
+    · InstaReel_01_Production.md — Draft
+    · InstaReel_02_Production.md — Draft
+    · InstaReel_03_Production.md — Draft
+  hi/:
+    · YTLong_Production.md — Draft
+    · YTShort_01_Production.md — Draft
+    · YTShort_02_Production.md — Draft
+    · YTShort_03_Production.md — Draft
+    · InstaReel_01_Production.md — Draft
+    · InstaReel_02_Production.md — Draft
+    · InstaReel_03_Production.md — Draft
+
+Legend: ✓ done  → current  ✗ failed  · pending  ○ skipped
+```
+
+For legacy flat topics (no language subfolders), omit the `en:/hi:` grouping.
+
+### Batch Completion Summary
+
+After processing all items in the queue (or stopping early due to user choosing not to continue):
+
+```
+Batch complete: {topic_name}
+  Total: 14 | Generated: 12 ✓ | Failed: 1 ✗ | Skipped: 1 ○
+
+  Failed videos can be retried: /generate-heygen-video run {topic_folder}
+```
 
 ### Assist Mode (Element Not Found)
 
@@ -322,12 +455,22 @@ When an element from the playbook can't be found in the current snapshot:
 | HeyGen shows error/modal | Take screenshot, report to user, ask whether to retry or abort |
 | Production file not found | List available production files in the topic folder, ask user to pick |
 | Network timeout | Retry once, then report to user |
+| `status.json` not found | If path is a directory without `status.json`, error: "No status.json found in {path}. Is this a valid topic folder?" |
+| All files already processed | Show status summary: "All N production files are already Video_Generated/Video_Generating/Published. Nothing to do." |
+| Video fails mid-batch | Mark as `Video_Failed` in status.json with error description. Ask user whether to continue to next video or stop. |
+| Session expires mid-batch | Detect login page on any snapshot. Pause and ask user to re-login. Resume from current queue position after login confirmed. |
+| Folder creation fails in HeyGen | Take screenshot, report to user. Ask whether to use existing folder or retry. |
 
 ---
 
 ## Important Notes
 
-- **One video at a time.** This skill processes a single production file per invocation. For batch processing, the user should call it multiple times or a future batch mode can be added.
+- **Batch mode supported.** Pass a topic folder to process all production files in one invocation. The skill loops through the queue, generating videos one-by-one using the recorded playbook.
+- **Login persists** across the batch. If the session expires mid-batch, the skill detects the login page and re-prompts the user.
+- **Failure handling.** Failed videos are marked `Video_Failed` in status.json. The user can continue to the next video or stop. Re-running the same topic folder retries only failed/unprocessed files.
+- **Language subfolders in HeyGen.** For multilingual topics, videos are organized as `{avatar_folder}/{date}/{language}/` (e.g., `Finance-Maya/2026-03-20/en/`). Legacy flat topics use `{avatar_folder}/{date}/`.
+- **Context management.** The skill runs `/compact` between videos to prevent context window exhaustion over long batches (14+ videos).
 - **Browser state.** The Playwright browser may or may not persist sessions between Claude Code conversations. If login is required each time, the skill handles it gracefully by asking the user to log in.
 - **Playbook maintenance.** If HeyGen updates its UI, some playbook steps may break. The assist mode + self-healing update mechanism handles this — the user guides through the changed step once and the playbook updates itself.
 - **Script cleaning is critical.** HeyGen's TTS engine needs clean text without formatting markers. Always clean the script before pasting.
+- **Single-file backward compatibility.** Passing a `_Production.md` file path still works — it runs as a one-item batch with the same flow.
