@@ -17,6 +17,7 @@ the-office/                          # Open THIS in Claude Code
 │       ├── architect/               # Product strategy & technical design
 │       ├── build/                   # Full-stack implementation (TDD)
 │       ├── content-gen/              # Multi-avatar content pipeline
+│       ├── generate-heygen-video/    # Browser automation for HeyGen video gen
 │       └── review/                  # Code review & QA
 ├── CLAUDE.md                        # This file
 ├── README.md
@@ -60,6 +61,7 @@ When a feature spans multiple repos, create separate feature branches, commits, 
 | Review | `/review` | Code review, security audit, QA, and test automation |
 | AI-DLC Inception | `/aidlc-inception` | Inception phase for complex features: workspace detection, requirements, design, and planning artifacts |
 | Content Gen | `/content-gen` | Generate multi-format video scripts (1 long-form + 3 shorts + 3 reels) for any AI avatar (e.g., `/content-gen Maya, 5 topics`) |
+| HeyGen Video | `/generate-heygen-video` | Automate HeyGen video generation via Playwright browser automation. Learn mode records workflow, run mode replays it |
 
 ## Git Strategy
 
