@@ -104,9 +104,9 @@ Walk the user through HeyGen step-by-step. At each step, take a browser snapshot
 
 **Step 1 — Open HeyGen**
 
-Navigate to the HeyGen URL from config.json using Playwright:
+Navigate to the HeyGen create page from config.json using Playwright:
 ```
-mcp__plugin_playwright_playwright__browser_navigate({ url: config.heygen_url })
+mcp__plugin_playwright_playwright__browser_navigate({ url: config.create_video_url })
 ```
 
 Take a snapshot to check if we're logged in:
@@ -197,11 +197,15 @@ After recording, review all steps and identify which ones need dynamic data from
 Does this look right?"
 
 Mark variable steps with `{{variable_name}}` in the value field:
-- `{{script_text}}` — cleaned script text (markers removed)
-- `{{aspect_ratio}}` — from production prompt header
-- `{{avatar_name}}` — from config.json mapping
-- `{{voice_name}}` — from config.json mapping
-- `{{video_title}}` — from CLICKBAIT_TITLE in production prompt
+- `{{avatar_look_name}}` — from production file `AVATAR LOOK` header (e.g., "Curly Cascade Beauty"); falls back to config.json `heygen_avatar_look_name`
+- `{{voice_name}}` — from config.json `heygen_voice_name` (e.g., "Kanika")
+- `{{aspect_ratio}}` — from production file `ASPECT RATIO` header field ("9:16" or "16:9")
+- `{{background_search_term}}` — search-friendly term extracted from production file `BACKGROUND` field
+- `{{video_title}}` — production filename without extension (e.g., "YTShort_01_Production")
+- `{{script_text}}` — cleaned script text (all markers removed, see cleaning rules)
+- `{{caption_style}}` — from config.json `heygen_caption_style` (e.g., "bold")
+- `{{folder_name}}` — from config.json `heygen_folder_name` (e.g., "Finance-Maya")
+- `{{folder_date}}` — extracted from topic folder path (e.g., "2026-03-20")
 
 **Step 4 — Save Playbook**
 
@@ -213,7 +217,7 @@ Write the final playbook to `workflows/ai-content-pipeline/heygen/playbook.json`
   "status": "recorded",
   "recorded_date": "YYYY-MM-DD",
   "total_steps": N,
-  "variables_used": ["script_text", "aspect_ratio", "avatar_name"],
+  "variables_used": ["avatar_look_name", "voice_name", "aspect_ratio", "background_search_term", "video_title", "script_text", "caption_style", "folder_name", "folder_date"],
   "notes": "Recorded from learn session",
   "steps": [...]
 }
@@ -239,39 +243,56 @@ Tell the user: "Playbook saved with N steps. You can now use `/generate-heygen-v
 
 ### Extract Data from Production Prompt
 
-For each item in the queue, read the production file and parse these fields:
+For each item in the queue, read the production file and extract all 9 playbook variables:
 
+**From production file header fields:**
 ```
-TOPIC         → {{video_title}} (used for naming the video in HeyGen)
-ASPECT RATIO  → {{aspect_ratio}} ("9:16" or "16:9")
-Avatar name   → {{avatar_name}} (from path + config.json mapping)
-Voice name    → {{voice_name}} (from config.json mapping)
-Language      → {{folder_language}} ("en" or "hi", extracted from key prefix; null for legacy flat)
-
-Script text   → {{script_text}} (see cleaning rules below)
+ASPECT RATIO   → {{aspect_ratio}} ("9:16" or "16:9")
+BACKGROUND     → {{background_search_term}} (extract a search-friendly term, e.g., "casual_advice — Modern apartment, warm lighting" → "modern apartment warm lighting")
+AVATAR LOOK    → {{avatar_look_name}} (e.g., "Curly Cascade Beauty" or "Wavy-Haired Professional in Blue" — each production file may specify a different look)
 ```
 
-**Folder date** — extracted from the topic folder path (e.g., `output/maya/2026-03-20/Topics/...` → `{{folder_date}}` = `2026-03-20`).
+**From config.json (avatar section):**
 
-**Script text cleaning rules:**
+Resolve the avatar name from the topic folder path: `output/{avatar_name}/...` → extract `{avatar_name}` (e.g., `maya`). Then look up `config.avatars.{avatar_name}` to get all avatar-specific settings:
 
-The production prompt contains the script inside `Script: "..."` fields across multiple sections (HOOK, CONTEXT, CORE, CTA or HOOK, PAYOFF, CTA). Concatenate all section scripts in order, then clean:
+```
+config.avatars.{avatar_name}.heygen_avatar_look_name → {{avatar_look_name}} fallback if production file AVATAR LOOK is missing
+config.avatars.{avatar_name}.heygen_voice_name       → {{voice_name}} (e.g., "Kanika")
+config.avatars.{avatar_name}.heygen_caption_style    → {{caption_style}} (e.g., "bold")
+config.avatars.{avatar_name}.heygen_folder_name      → {{folder_name}} (e.g., "Finance-Maya")
+config.avatars.{avatar_name}.heygen_motion_engine    → used to verify/set motion engine (e.g., "Avatar III")
+```
+
+**From path derivation:**
+```
+Production filename     → {{video_title}} (basename without extension, e.g., "YTShort_01_Production")
+Topic folder path       → {{folder_date}} (e.g., "output/maya/2026-03-20/Topics/..." → "2026-03-20")
+Queue item language     → {{folder_language}} ("en" or "hi"; null for legacy flat topics)
+```
+
+**From production file body — Script text → {{script_text}}:**
+
+The production file contains `Script: "..."` fields across multiple sections. Concatenate all section scripts in order, then clean:
 
 1. Remove `[beat]` → replace with `. ` (period + space, creates a natural pause in TTS)
 2. Remove `[pause]` → replace with `... ` (ellipsis + space, creates a longer TTS pause)
 3. Remove `*...*` emphasis markers → keep the inner text (TTS doesn't need emphasis markers)
 4. Remove `[TEXT: "..."]`, `[NUMBER: "..."]`, `[MATH: "..."]`, `[TAKEAWAY: "..."]` overlay markers → these are visual, not spoken
 5. Collapse multiple spaces into single spaces
-6. Trim leading/trailing whitespace
+6. Collapse consecutive periods (e.g., `". ."` → `". "`) — prevents double periods when `[beat]` follows a sentence-ending period
+7. Trim leading/trailing whitespace
 
 ### Execution — Phase A: Session Setup (once)
 
-**Step 1 — Open HeyGen**
+**Step 1 — Open HeyGen Create Page**
 
 ```
-mcp__plugin_playwright_playwright__browser_navigate({ url: config.heygen_url })
+mcp__plugin_playwright_playwright__browser_navigate({ url: config.create_video_url })
 mcp__plugin_playwright_playwright__browser_snapshot()
 ```
+
+Navigate to `config.create_video_url` (currently `https://app.heygen.com/create-v4`), NOT `config.heygen_url` (which is the home page). The create URL goes directly to the video editor.
 
 Check if logged in. If login page detected:
 - Tell user: "Please log in to HeyGen. I'll wait."
@@ -280,7 +301,7 @@ Check if logged in. If login page detected:
 
 **Step 2 — Confirm session is ready**
 
-Take a snapshot to verify we're on the HeyGen dashboard/home page. This completes session setup.
+Take a snapshot to verify we're on the HeyGen editor or dashboard. This completes session setup.
 
 ### Execution — Phase B: Per-Video Loop
 
@@ -299,55 +320,131 @@ for each item in queue (index i, total N):
   Parse all variables: {{video_title}}, {{aspect_ratio}}, {{script_text}}, etc.
   Set {{folder_language}} from item.language.
 
-  ── 3. Execute playbook Steps 3–18 ──
-  For each step in playbook.steps:
+  ── 3. Execute video creation steps ──
 
-    a. Take a snapshot:
-       mcp__plugin_playwright_playwright__browser_snapshot()
+  Each step below is prescriptive — follow it exactly. Take a snapshot before and after
+  each step to verify the UI state. If an element can't be found, enter ASSIST MODE.
 
-    b. Find the target element using the step's element_strategy:
-       - Search snapshot accessibility tree for matching role + name_pattern
-       - If not found, try fallback strategy
-       - If still not found → ENTER ASSIST MODE (see below)
+  **Step 3A — Open in AI Studio**
+  Snapshot. Look for "Open in AI Studio" link/button.
+  - If found: click it, wait for network_idle, snapshot to verify editor loaded.
+  - If not found (already in AI Studio): skip this step.
 
-    c. Resolve variables in the step's value:
-       - Replace {{script_text}} with cleaned script
-       - Replace {{aspect_ratio}} with extracted aspect ratio
-       - Replace {{avatar_name}} with mapped name from config.json
-       - Replace {{voice_name}} with mapped voice from config.json
-       - Replace {{video_title}} with extracted title
-       - etc.
+  **Step 3B — Dismiss popups**
+  Snapshot. Look for any modal dialog (e.g., "Brand Systems", "What's New").
+  - If a Close button is visible: click it, wait 1s.
+  - If no dialog: skip.
 
-    d. Execute the action:
-       - "click" → mcp__plugin_playwright_playwright__browser_click(...)
-       - "fill" → mcp__plugin_playwright_playwright__browser_fill_form(...)
-       - "type" → mcp__plugin_playwright_playwright__browser_type(...)
-       - "select" → mcp__plugin_playwright_playwright__browser_select_option(...)
-       - "navigate" → mcp__plugin_playwright_playwright__browser_navigate(...)
-       - "wait" → mcp__plugin_playwright_playwright__browser_wait_for(...)
-       - "scroll" → mcp__plugin_playwright_playwright__browser_evaluate(...)
+  **Step 3C — Select avatar look**
+  Snapshot. Click "Avatar" button in the right sidebar panel.
+  Wait 2s, snapshot. Click on the avatar preview area to open the looks/search panel.
+  Search for {{avatar_look_name}} (e.g., "Curly Cascade Beauty") and click on the matching result.
+  **IMPORTANT:** Click the avatar look's CONTAINER div (the card/thumbnail area), NOT the small
+  button overlaid on it. The small button toggles **favorites** (heart icon), not selection.
+  Wait 2s, snapshot to verify the avatar look changed.
 
-    e. Wait for UI to settle (use step.wait_after or default 2 seconds)
+  **Step 3D — Set voice**
+  Snapshot. Click the "Voice" area/button to open voice selection.
+  Search for {{voice_name}} (e.g., "Kanika") and select it.
+  Wait 2s, snapshot to verify voice is set.
 
-    f. Take verification snapshot
+  **Step 3E — Set aspect ratio**
+  Snapshot. Look for the aspect ratio buttons in the top toolbar.
+  - If {{aspect_ratio}} is "9:16": click "Portrait (9:16)" button.
+  - If {{aspect_ratio}} is "16:9": click "Landscape (16:9)" button.
+  Wait 1s, snapshot to verify.
 
-    g. Brief status: "Step S/M: {description} — done"
+  **Step 3F — Set Motion Engine to Avatar III**
+  Snapshot. Find the "Motion Engine" dropdown in the avatar settings panel.
+  - Check current value. If already "Avatar III": skip.
+  - If set to "Avatar IV" or anything else: click dropdown, select "Avatar III".
+  Wait 2s, snapshot to verify.
+  **CRITICAL:** Avatar IV costs ~79 credits per video. Avatar III costs ~1 credit.
+  Always verify this is set to Avatar III before proceeding.
 
-    **Step 16 — Folder Navigation (3-level nesting):**
+  **Step 3G — Set background**
+  Snapshot. Click "Background" in the right sidebar.
+  Wait 1s. Switch to the "Stock" tab. Search for {{background_search_term}}.
+  Wait 2s for results. Select the first relevant result.
+  If no good match: keep the default background.
+  Wait 1s, snapshot to verify.
 
-    When the playbook reaches the folder selection step, navigate using 3-level nesting:
+  **Step 3H — Set video title**
+  Snapshot. Find the title textbox (shows "Untitled Video" or previous title).
+  Click it, select all (Ctrl+A / Cmd+A), then type {{video_title}}.
+  Wait 1s, snapshot to verify title is set.
+  **IMPORTANT:** Set the title BEFORE pasting the script (Step 3I).
 
-    1. Click LEFT chevron on the avatar folder (e.g., "Finance-Maya") to expand it
-    2. Find or create the date subfolder ({{folder_date}}), expand it via LEFT chevron
-    3. If {{folder_language}} is set (multilingual topic):
-       - Find or create the language subfolder ("en" or "hi")
-       - Click the FOLDER ICON on the language subfolder to select it as destination
-    4. If {{folder_language}} is null (legacy flat topic):
-       - Click the date folder ICON to select it as destination (unchanged from original behavior)
+  **Step 3I — Paste script**
+  Snapshot. Find the script area — look for placeholder text "Type your script or use '/' for commands".
+  - Click DIRECTLY on the placeholder text. Do NOT click "Script Writer".
+  - Once cursor is active in the rich text editor, type/paste {{script_text}}.
+  - Click somewhere else outside the script area to deselect.
+  - Snapshot to verify the script text persists AND the timeline duration is > 0:00.
+  **CRITICAL:** NEVER press Enter in the script area — it triggers HeyGen AI rewrite
+  which changes the script content. Use fill/type only.
+  **RETRY:** If after pasting the timeline still shows 00:00 or the placeholder reappears,
+  the paste didn't stick (intermittent HeyGen rich text editor issue). Re-click the placeholder
+  and re-paste. Verify duration > 0 before proceeding.
 
-    **Optimization:** Between consecutive videos in the SAME language, the folder may already
-    be correct. Take a snapshot to check the current folder selection before re-navigating.
-    If the correct folder is already selected, skip folder navigation for this video.
+  **Step 3J — Enable Auto-enhance**
+  Snapshot. Click "Delivery style" to expand delivery options.
+  Wait 1s. Click "Auto-enhance" to enable it.
+  Wait 2s, snapshot to verify auto-enhance is on (adds emotion tags like [surprised], [excited]).
+
+  **Step 3K — Set captions**
+  Snapshot. Click "Captions" in the right sidebar panel.
+  Wait 1s. Look for the caption style matching {{caption_style}} (e.g., "bold").
+  Click the caption style button (matches pattern '{style_name} caption preview' in Other Styles).
+  Wait 2s, snapshot to verify caption style is applied.
+
+  **Step 3L — Click Generate**
+  Snapshot. Click the "Generate" button in the top-right toolbar.
+  Wait 2s. Snapshot to verify the "Generate Video" dialog opened.
+  Check the dialog shows the correct video title.
+
+  **Step 3M — Open folder selection**
+  In the Generate Video dialog, click the "My Videos" button (next to "Add to folder").
+  Wait 1s. Snapshot to verify the folder tree selection dialog opened.
+
+  **Step 3N — Navigate folder tree (3-level nesting)**
+  In the folder tree dialog:
+
+  1. Find the avatar folder ({{folder_name}}, e.g., "Finance-Maya").
+     Click the LEFT chevron/arrow next to it to expand — do NOT click the folder name text
+     (that activates rename mode) and do NOT click the right "+" button (that creates a subfolder).
+
+  2. Look for a date subfolder matching {{folder_date}} (e.g., "2026-03-20").
+     - If it exists: click the LEFT chevron to expand it.
+     - If it doesn't exist: click the "+" button on the avatar folder to create it, name it {{folder_date}}.
+
+  3. If {{folder_language}} is set (multilingual topic):
+     - Look for a language subfolder ("en" or "hi") inside the date folder.
+     - If it doesn't exist: click "+" on the date folder to create it, name it {{folder_language}}.
+     - Click the language subfolder's FOLDER ICON to select it as destination.
+  4. If {{folder_language}} is null (legacy flat):
+     - Click the date folder's FOLDER ICON to select it.
+
+  **CRITICAL:** NEVER click folder name text directly — it activates rename mode.
+  Always click the folder ICON (left side) or the container div to select.
+
+  **VERIFICATION:** After clicking a folder to select it, use `browser_take_screenshot` (not just
+  `browser_snapshot`) to verify the blue checkmark appears. The accessibility tree may not
+  reflect the selected state, but the screenshot will show the visual checkmark.
+
+  **Optimization:** Between consecutive videos in the SAME language, the folder may already
+  be correct. Before clicking "My Videos" in Step 3M, check if the folder path already shows
+  the correct destination. If so, skip Steps 3M-3O entirely.
+
+  **Step 3O — Confirm folder selection**
+  Click "Confirm" button in the folder selection dialog.
+  Wait 1s. Snapshot to verify we're back in the Generate Video dialog with the correct folder shown.
+
+  **Step 3P — Submit video generation**
+  Click "Submit" button in the Generate Video dialog.
+  Wait for network_idle. Snapshot to verify submission succeeded.
+  Default settings: 1080p, 25fps, MP4 format.
+  After submission, HeyGen navigates to the Projects page showing the video in progress.
 
   ── 4. On success ──
   Update status.json: item.key → { "status": "Video_Generated", "heygen_completed": "YYYY-MM-DD HH:MM" }
@@ -359,7 +456,11 @@ for each item in queue (index i, total N):
   If no → stop batch, show completion summary.
 
   ── 6. Navigate back for next video ──
-  Execute playbook Step 19 (navigate back to video creation page for the next video).
+  After Submit, HeyGen redirects to the Projects page. Navigate back to the create page:
+  ```
+  mcp__plugin_playwright_playwright__browser_navigate({ url: config.create_video_url })
+  ```
+  Wait for network_idle. Snapshot to verify we're on the create page (should show "Open in AI Studio" or the editor directly).
 
   ── 7. Compact context ──
   Run /compact to compress the conversation context before starting the next video.
@@ -411,16 +512,15 @@ Batch complete: {topic_name}
 
 ### Assist Mode (Element Not Found)
 
-When an element from the playbook can't be found in the current snapshot:
+When an expected element can't be found during any prescriptive step (3A–3P):
 
 1. Take a screenshot for visual context
-2. Show the user: "I couldn't find the element for step N: '{description}'. The playbook expects a {role} matching '{name_pattern}'."
+2. Show the user: "Step {step_id} ({description}): I couldn't find the expected element. I was looking for '{element description}'."
 3. Show a summary of what IS visible on the page
 4. Ask: "Can you help me find the right element? Describe what to click/fill, or say 'skip' to skip this step."
 5. If user provides guidance:
    - Execute the action with the user's guidance
-   - Ask: "Should I update the playbook with this new element identification?"
-   - If yes, update the step in playbook.json (self-healing)
+   - Note the updated element identification for future reference
 
 ---
 
@@ -460,6 +560,7 @@ When an element from the playbook can't be found in the current snapshot:
 | Video fails mid-batch | Mark as `Video_Failed` in status.json with error description. Ask user whether to continue to next video or stop. |
 | Session expires mid-batch | Detect login page on any snapshot. Pause and ask user to re-login. Resume from current queue position after login confirmed. |
 | Folder creation fails in HeyGen | Take screenshot, report to user. Ask whether to use existing folder or retry. |
+| Insufficient credits | Take screenshot showing credit count. Report to user: "HeyGen shows insufficient credits ({N} available). Avatar III costs ~1 credit per video, Avatar IV costs ~79. Verify Motion Engine is set to Avatar III (Step 3F). If credits are genuinely exhausted, stop batch." |
 
 ---
 
@@ -474,3 +575,6 @@ When an element from the playbook can't be found in the current snapshot:
 - **Playbook maintenance.** If HeyGen updates its UI, some playbook steps may break. The assist mode + self-healing update mechanism handles this — the user guides through the changed step once and the playbook updates itself.
 - **Script cleaning is critical.** HeyGen's TTS engine needs clean text without formatting markers. Always clean the script before pasting.
 - **Single-file backward compatibility.** Passing a `_Production.md` file path still works — it runs as a one-item batch with the same flow.
+- **Credit checking.** Avatar III costs ~1 credit per video; Avatar IV costs ~79 credits. Step 3F explicitly verifies Motion Engine is set to Avatar III. If the Generate dialog shows insufficient credits, stop and report — do not submit.
+- **Motion Engine enforcement.** Always verify and set Motion Engine to Avatar III (from `config.json`) at Step 3F. The v4 editor may default to Avatar IV which is 79x more expensive.
+- **Navigation URL.** Always use `config.create_video_url` (the editor URL, currently `/create-v4`) to navigate — never `config.heygen_url` (the home page). The create URL goes directly to the editor.
