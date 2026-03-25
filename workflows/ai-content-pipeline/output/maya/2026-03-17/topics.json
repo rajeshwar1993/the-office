@@ -1,0 +1,28 @@
+{
+  "batch_date": "2026-03-17",
+  "avatar": "maya",
+  "topics": [
+    {
+      "id": 1,
+      "title": "SEBI Just Changed Mutual Fund Rules — What It Actually Means For Your Money",
+      "folder_name": "Topic_01_SEBI_MF_Rules_2026",
+      "source": "niche_trending",
+      "angle": "Break down the new SEBI Mutual Fund Regulations 2026 (effective April 1) in plain language — what's the base expense ratio change, why brokerage limits got halved, and how this saves the average SIP investor real money over time",
+      "trend_context": "SEBI approved new MF regulations replacing 30-year-old 1996 rules; expense ratio restructured with new BER concept; brokerage limits cut from 12bps to 6bps; takes effect April 1, 2026",
+      "general_hook": "Your Sensex is down 10% this year and everyone's panicking — but while you're watching red screens, SEBI quietly made a change that could save you lakhs over your investing lifetime",
+      "genre": "shock_and_awe",
+      "hook_fit": "high"
+    },
+    {
+      "id": 2,
+      "title": "RBI's New Zero-Balance Account Rules — Free Banking Most Indians Don't Know About",
+      "folder_name": "Topic_02_RBI_BSBD_Free_Banking",
+      "source": "niche_trending",
+      "angle": "Explain the April 2026 BSBD account overhaul — unlimited free UPI/NEFT/RTGS, free debit card, free chequebook — and why this is a game-changer for anyone still paying bank charges they shouldn't be",
+      "trend_context": "RBI announced major BSBD upgrade: unlimited free digital transactions, free debit card issuance and renewal, free internet/mobile banking, positioned as normal banking for all customers from April 1, 2026",
+      "general_hook": "LPG prices are up, petrol is up, everything costs more — but your bank just got ordered to stop charging you for basic stuff you've been paying for this whole time",
+      "genre": "big_sister_advice",
+      "hook_fit": "high"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "batch_date": "2026-03-20",
+  "avatar": "maya",
+  "topics": [
+    {
+      "id": 1,
+      "title": "SEBI Just Changed Mutual Fund Rules — Your Expense Ratio Is About to Drop",
+      "folder_name": "Topic_01_SEBI_MF_Expense_Ratio",
+      "source": "niche_trending",
+      "angle": "SEBI's new Base Expense Ratio framework effective April 1 — what changes, how much you save, and the hidden costs now shown separately",
+      "trend_context": "SEBI approved new Mutual Fund Regulations 2026 replacing 1996 rules. BER introduced, TER restructured, 10-15 bps reduction, brokerage limits halved",
+      "general_hook": null,
+      "genre": "shock_and_awe",
+      "hook_fit": "none"
+    },
+    {
+      "id": 2,
+      "title": "SGB Investors Made 312% Returns — But There's a Tax Trap Coming",
+      "folder_name": "Topic_02_SGB_Returns_Tax_Trap",
+      "source": "niche_trending",
+      "angle": "SGB 2019-20 Series IV turned ₹1 lakh into ₹4.12 lakh. But Budget 2026 kills the tax exemption for secondary market buyers from April 1 — who wins, who loses",
+      "trend_context": "RBI set premature redemption at ₹15,814/gram vs ₹3,840 purchase price. Tax exemption removal for secondary buyers changes the calculus",
+      "general_hook": "Gold prices crashing in March 2026 amid Middle East tensions — is this a buy-the-dip moment or a trap?",
+      "genre": "storytelling",
+      "hook_fit": "high"
+    },
+    {
+      "id": 3,
+      "title": "8 Tax Changes Hitting Your Salary from April 1 — Are You Ready?",
+      "folder_name": "Topic_03_New_Tax_Act_Salary",
+      "source": "niche_trending",
+      "angle": "New Income Tax Act 2025 effective April 1 — Tax Year replaces Assessment Year, HRA cities expanded, commute benefit now tax-free, sections cut from 800+ to 536",
+      "trend_context": "Major tax law overhaul after 64 years. Most salaried employees don't know what's changing and what stays the same",
+      "general_hook": null,
+      "genre": "big_sister_advice",
+      "hook_fit": "none"
+    },
+    {
+      "id": 4,
+      "title": "Crude Oil Just Hit $100 — Here's How It's Quietly Wrecking Your Budget",
+      "folder_name": "Topic_04_Oil_Crisis_Your_Wallet",
+      "source": "niche_trending",
+      "angle": "Oil at $100+, rupee at 92.94, FIIs pulling ₹60,000 crore — the chain reaction from barrel to your grocery bill, EMI, and mutual fund returns",
+      "trend_context": "Iran-Middle East escalation pushed crude past $100. India imports 88% crude. Rupee at record low. Sensex crashed 2,500 points",
+      "general_hook": "Sensex crashing 2,500 points and rupee at record low — the oil crisis connects to everything in your financial life",
+      "genre": "shock_and_awe",
+      "hook_fit": "high"
+    },
+    {
+      "id": 5,
+      "title": "Your FD Is Losing You Money — The Math Your Bank Won't Show You",
+      "folder_name": "Topic_05_FD_Real_Returns",
+      "source": "niche_evergreen",
+      "angle": "Post-tax, post-inflation real returns on FDs are often negative. Walk through the actual math with current rates, compare to alternatives",
+      "trend_context": "With inflation rising due to oil crisis and FD rates unchanged, the real returns gap is widening — making this evergreen topic urgently relevant",
+      "general_hook": null,
+      "genre": "myth_busting",
+      "hook_fit": "none"
+    },
+    {
+      "id": 6,
+      "title": "Markets Crashed — Should You Panic-Sell or Double Down on Your SIP?",
+      "folder_name": "Topic_06_Market_Crash_SIP",
+      "source": "niche_trending",
+      "angle": "FII selling ₹60,000 crore, Sensex down 2,500 points — what history says about SIP returns after crashes, why rupee-cost averaging works in your favour during dips",
+      "trend_context": "Massive FII outflows, oil-driven market crash creating panic among retail investors. SIP stoppage rates spike during crashes",
+      "general_hook": null,
+      "genre": "hot_take",
+      "hook_fit": "none"
+    }
+  ]
+}

@@ -1,0 +1,1339 @@
+{
+  "review_date": "2026-03-20",
+  "avatar": "maya",
+  "scripts_reviewed": 84,
+  "passed": 34,
+  "failed": 50,
+  "scripts": [
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "en/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format. Says 'This content is AI-generated and for educational purposes only...' instead of the required AI avatar disclaimer: 'This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.'",
+          "fix": "Replace the entire Disclaimer line with the required format."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "SEGMENT 2: 'Some AMCs were churning their portfolios \u2014 buying and selling stocks frequently \u2014 and burying that cost inside your TER.' is 22 words.",
+          "fix": "Split into two sentences: 'Some AMCs were churning their portfolios \u2014 buying and selling stocks way more than needed. And burying that cost inside your TER.'"
+        },
+        {
+          "check": "math_verification",
+          "severity": "medium",
+          "detail": "Claims 'Over 20 years with compounding, that's several lakhs.' 15 bps (1,500/yr) saved on a static 10L portfolio compounded at 12% for 20 years is approximately 1.2 lakh, not 'several lakhs.' Overstatement unless portfolio growth is factored in, which is not stated.",
+          "fix": "Change 'several lakhs' to 'over a lakh' or add context about growing portfolio size."
+        },
+        {
+          "check": "text_overlay_count",
+          "severity": "low",
+          "detail": "Metadata says 'TEXT OVERLAYS: 3 markers' but actual count is 3 [TEXT:] + 1 [NUMBER:] + 1 [MATH:] + 2 [TAKEAWAY:] = 7 markers.",
+          "fix": "Update to 'TEXT OVERLAYS: 7 markers (3 term_card, 1 number_card, 1 math_breakdown, 2 key_takeaway)'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "en/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format \u2014 missing AI avatar language.",
+          "fix": "Replace with required disclaimer."
+        },
+        {
+          "check": "math_verification",
+          "severity": "medium",
+          "detail": "Claims 'Over twenty years of SIPs, we're talking *lakhs* in difference' \u2014 same overstatement as long-form.",
+          "fix": "Change to 'tens of thousands in difference' or qualify with growing portfolio assumption."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "en/yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "en/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "en/ig_reel_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "en/ig_reel_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "en/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "hi/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer is in Hinglish. Per spec, AI disclaimer must stay in English for all scripts including hi/ variants.",
+          "fix": "Replace Hinglish disclaimer with English: 'Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "hi/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "hi/yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "hi/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "hi/ig_reel_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "hi/ig_reel_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Expense_Ratio",
+      "file": "hi/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "en/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format \u2014 'AI-generated and for educational purposes' instead of the required AI avatar disclaimer.",
+          "fix": "Replace with required disclaimer."
+        },
+        {
+          "check": "math_verification",
+          "severity": "medium",
+          "detail": "Claims 'total effective return crosses three hundred and thirty percent.' Actual calculation: 311.8% capital appreciation + ~16.25% cumulative interest = ~328%. Crosses 330% is a ~2% overstatement.",
+          "fix": "Change to 'approaches three hundred and thirty percent' or 'around three hundred and twenty-eight percent.'"
+        },
+        {
+          "check": "text_overlay_count",
+          "severity": "low",
+          "detail": "Metadata says 'TEXT OVERLAYS: 3 markers' but actual count is 3 [TEXT:] + 1 [NUMBER:] + 1 [MATH:] + 3 [TAKEAWAY:] = 8 markers.",
+          "fix": "Update metadata to reflect actual count."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "en/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        },
+        {
+          "check": "math_verification",
+          "severity": "low",
+          "detail": "Same ~330% overstatement as long-form. Minor.",
+          "fix": "Align with corrected long-form figure."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "en/yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "'On a three lakh twelve thousand capital gain, you could owe thirty-nine thousand in tax at twelve and a half percent LTCG.' \u2014 24 words, exceeds 20-word limit.",
+          "fix": "Split: 'On a three lakh twelve thousand capital gain? At twelve and a half percent LTCG, that's thirty-nine thousand in tax.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "en/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "'So you're buying gold at potentially high prices, through the only route available, that just lost its biggest tax advantage.' \u2014 21 words, exceeds 20-word limit.",
+          "fix": "Split: 'So you're buying gold at potentially high prices. Through the only route available. That just lost its biggest tax advantage.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "en/ig_reel_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "en/ig_reel_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "en/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Uses wrong disclaimer format.",
+          "fix": "Replace with required disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "hi/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        },
+        {
+          "check": "hinglish_naturalness",
+          "severity": "low",
+          "detail": "'khoobsurat' in Segment 1 is slightly formal Hindi. 'Acchi' would be more natural conversational Hinglish.",
+          "fix": "Replace 'khoobsurat' with 'acchi'."
+        },
+        {
+          "check": "gender_consistency",
+          "severity": "medium",
+          "detail": "Pattern Interrupt after Segment 2 uses 'de deta hoon' (masculine) but Maya is female \u2014 should be 'de deti hoon'.",
+          "fix": "Change 'de deta hoon' to 'de deti hoon'."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "hi/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "hi/yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "hi/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "hi/ig_reel_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "hi/ig_reel_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_SGB_Returns_Tax_Trap",
+      "file": "hi/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "high",
+          "detail": "Disclaimer in Hinglish instead of required English.",
+          "fix": "Replace with English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "en/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "SEGMENT 2: 'This matters because most people were accidentally staying in the old regime without enough deductions to make it worth it.' \u2014 21 words",
+          "fix": "Split into two sentences: 'This matters. Most people were accidentally staying in the old regime without enough deductions to make it worth it.'"
+        },
+        {
+          "check": "text_overlay_accuracy",
+          "severity": "medium",
+          "detail": "Metadata claims '8 markers' but actual count is 11 markers",
+          "fix": "Update metadata to 'TEXT OVERLAYS: 11 markers'"
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "AI disclaimer text does not match mandated format. Says 'This content is AI-generated and for educational purposes only' instead of required avatar disclaimer.",
+          "fix": "Replace disclaimer with: 'Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "en/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "CORE: 'But anyone who's ever stared at a tax form wondering wait which year am I filing for \u2014 this one's for you.' \u2014 22 words",
+          "fix": "Split: 'Anyone who's stared at a tax form wondering which year they're filing for \u2014 this one's for you.'"
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format. Also description says 'April 1, 2025' \u2014 should be 'April 1' (no year, or 2026 given batch context).",
+          "fix": "Fix disclaimer to mandated format. Fix year to remove '2025' or change to '2026'."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "en/yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "high",
+          "detail": "CORE: 'That means if you're salaried, paying rent in one of these cities, and claiming HRA \u2014 your exemption just jumped ten percentage points.' \u2014 24 words",
+          "fix": "Split: 'If you're salaried and paying rent in one of these cities? Your HRA exemption just jumped ten percentage points.'"
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "en/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "high",
+          "detail": "CORE: 'But if you earn more and have heavy deductions \u2014 home loan, NPS, tuition fees \u2014 the old regime might still save you more.' \u2014 24 words",
+          "fix": "Split: 'But if you earn more and have heavy deductions \u2014 home loan, NPS, tuition fees? The old regime might still save you more.'"
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "en/ig_reel_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "en/ig_reel_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "en/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "hi/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "text_overlay_accuracy",
+          "severity": "medium",
+          "detail": "Metadata claims '8 markers' but actual count is 11",
+          "fix": "Update metadata to '11 markers'"
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer in Hindi deviates from mandated English format.",
+          "fix": "Replace with mandated English disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "hi/yt_short_01.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "hi/yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "high",
+          "detail": "CORE: 'Matlab agar tum salaried ho, in cities mein rent de rahe ho, aur HRA claim karte ho \u2014 tumhara exemption das percentage points badh gaya.' \u2014 25 words",
+          "fix": "Split: 'Salaried ho aur in cities mein rent de rahe ho? Tumhara HRA exemption das percentage points badh gaya.'"
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "hi/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "high",
+          "detail": "Same 25-word sentence as English counterpart in Hinglish form.",
+          "fix": "Split the deductions sentence into two shorter sentences."
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "hi/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "hi/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_03_New_Tax_Act_Salary",
+      "file": "hi/ig_reel_03.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "en/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "high",
+          "detail": "WRAP-UP: 'Oil at a hundred dollars means a weaker rupee, higher import costs, rising food prices, FII exits crashing the stock market, and possibly higher EMIs.' \u2014 26 words",
+          "fix": "Split: 'Oil at a hundred dollars means a weaker rupee and higher import costs. It means rising food prices, FII exits crashing the market, and possibly higher EMIs.'"
+        },
+        {
+          "check": "sentence_length",
+          "severity": "high",
+          "detail": "SEGMENT 3: 'Last time crude stayed above a hundred dollars for an extended period \u2014 2022 \u2014 RBI raised the repo rate by two hundred and fifty basis points over eighteen months.' \u2014 30 words",
+          "fix": "Split: 'Last time crude stayed above a hundred dollars \u2014 2022. RBI raised the repo rate by two hundred and fifty basis points. Took them about ten months.'"
+        },
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Claims RBI rate hike took 'eighteen months' \u2014 actual cycle was May 2022 to Feb 2023 (~10 months). Also claims '2-3 thousand per month' extra EMI on 50L loan from 250 bps \u2014 actual impact is closer to 8,000-10,000/month depending on tenor. Significant underestimate.",
+          "fix": "Change 'eighteen months' to 'about ten months'. Change '2-3 thousand' to 'eight to ten thousand' or verify exact figures for chosen loan tenor."
+        },
+        {
+          "check": "text_overlay_accuracy",
+          "severity": "medium",
+          "detail": "Metadata claims '6 markers' but actual count is 8",
+          "fix": "Update to '8 markers'"
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "en/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "'When crude crosses a hundred dollars for a country that imports almost ninety percent of it \u2014 it's not an oil crisis.' \u2014 21 words",
+          "fix": "Split: 'When crude crosses a hundred dollars for a country that imports ninety percent of it? It's not just an oil crisis.'"
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "medium",
+          "detail": "Swiggy reference in CORE ('Your Swiggy order') \u2014 same analogy used in yt_long pattern interrupt and ig_reel_03 entire premise.",
+          "fix": "Replace Swiggy reference with a different relatable example (e.g., 'Your Amazon order' or 'Your monthly electricity bill')."
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "en/yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "cross_contamination",
+          "severity": "medium",
+          "detail": "'Your broker is counting on you being emotional. Don't be.' \u2014 identical phrasing in en/ig_reel_02.md",
+          "fix": "Rephrase in one of the two scripts (e.g., ig_reel_02: 'Stay rational. That's your edge right now.')"
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "en/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Same math errors as long-form: 'eighteen months' (should be ~10 months) and '2-3 thousand extra per month' on 50L loan (should be ~8-10 thousand).",
+          "fix": "Correct both figures to match verified data."
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "en/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "en/ig_reel_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "cross_contamination",
+          "severity": "medium",
+          "detail": "'Your broker is counting on you being emotional. Don't be.' \u2014 verbatim copy from en/yt_short_02.md",
+          "fix": "Rephrase: 'Stay rational. That's your advantage in a crash.'"
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "en/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "cross_contamination",
+          "severity": "high",
+          "detail": "Entire Reel premise is the Swiggy analogy \u2014 same analogy used in yt_long pattern interrupt and yt_short_01 core. Three scripts share this framing.",
+          "fix": "Replace Swiggy angle with a different everyday example (e.g., 'your electricity bill explains the oil crisis' or 'your cab fare just explained geopolitics')."
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "hi/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "high",
+          "detail": "WRAP-UP: 23 words. SEGMENT 3: 28 words. Same violations as English.",
+          "fix": "Split both sentences as per English fix."
+        },
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Same math errors: 'athaarah mahine' and 'do se teen hazaar rupaye' \u2014 propagated from English.",
+          "fix": "Correct to 'das mahine' and 'aath se das hazaar rupaye'."
+        },
+        {
+          "check": "text_overlay_accuracy",
+          "severity": "medium",
+          "detail": "Claims 6 markers, actual is 8.",
+          "fix": "Update to 8."
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "hi/yt_short_01.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "hi/yt_short_02.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "hi/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Same math errors as English: 'athaarah mahine' and 'do se teen hazaar rupaye per month'.",
+          "fix": "Correct to accurate figures."
+        },
+        {
+          "check": "description_quality",
+          "severity": "high",
+          "detail": "Disclaimer uses wrong format.",
+          "fix": "Replace with mandated disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "hi/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "hi/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_04_Oil_Crisis_Your_Wallet",
+      "file": "hi/ig_reel_03.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "en/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Claims debt mutual funds offer indexation benefits after 3 years. Finance Act 2023 removed indexation for debt MFs purchased after April 1, 2023. This is factually incorrect for any new investment in 2026.",
+          "fix": "Replace debt MF indexation claim with current tax treatment: 'Debt mutual funds held over three years used to get indexation. That changed in 2023. But they still avoid TDS on every interest payment \u2014 and if you pick the right fund, post-tax returns still beat FDs.' Or replace with a different alternative altogether."
+        },
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Disclaimer uses wrong format and includes 'Consult a qualified financial advisor' which echoes Maya's forbidden pattern. Required format: 'This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.'",
+          "fix": "Replace entire disclaimer with the mandated format."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "en/yt_short_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "en/yt_short_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "en/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Claims 'Debt mutual funds. Tax-efficient after three years thanks to indexation.' Indexation benefit for debt MFs was removed by Finance Act 2023. Factually incorrect.",
+          "fix": "Remove or correct the indexation claim. Replace with: 'Debt mutual funds. No TDS deducted every year like FDs. And you only pay tax when you actually redeem \u2014 not annually.' This preserves the tax-efficiency angle without the false indexation claim."
+        },
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "en/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "en/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "en/ig_reel_03.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "hi/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Same debt MF indexation error: 'Teen saal hold karo toh indexation benefit milta hai' is factually incorrect post-Finance Act 2023.",
+          "fix": "Mirror the fix applied to en/yt_long.md in Hinglish. Replace with correct tax treatment."
+        },
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format. Also contains 'consult karein' financial advisor language.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "hi/yt_short_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "hi/yt_short_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "hi/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Same debt MF indexation error: 'Teen saal ke baad indexation ka benefit milta hai. Tax-efficient.' Factually incorrect post-2023.",
+          "fix": "Mirror the fix applied to en/yt_short_03.md in Hinglish."
+        },
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "hi/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "hi/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_05_FD_Real_Returns",
+      "file": "hi/ig_reel_03.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "en/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Self-reports 720 words but actual body word count is closer to 750-800. Likely exceeds the 750-word cap.",
+          "fix": "Trim Segment 2 or Segment 3 to bring total under 750 words. Remove redundant sentences."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Segment 3: 'But if you have surplus sitting in your savings account, a market crash is one of the better times to deploy it' is 22 words (max 20).",
+          "fix": "Split: 'Got surplus sitting in your savings account? A crash is one of the better times to deploy it.'"
+        },
+        {
+          "check": "passive_voice",
+          "severity": "low",
+          "detail": "INTRO: 'Every headline is designed to make you panic.' Passive construction.",
+          "fix": "Rewrite: 'Every headline tries to make you panic.' or 'Every headline wants you to panic.'"
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "medium",
+          "detail": "Swiggy sale analogy in PATTERN INTERRUPT is repeated nearly verbatim in yt_short_01.md. The Short should use a unique analogy.",
+          "fix": "Keep the Swiggy analogy in the long-form pattern interrupt. Change yt_short_01.md to use a different analogy/hook."
+        },
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format with 'consult a qualified financial advisor' language.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        },
+        {
+          "check": "math_verification",
+          "severity": "low",
+          "detail": "Claims 'SIPs through March 2020 crash gave 18-22% CAGR over next 3 years.' Plausible but range is wide. Flag for manual verification.",
+          "fix": "Consider adding 'roughly' or 'approximately' qualifier, or narrow the range."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "en/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "cross_contamination",
+          "severity": "high",
+          "detail": "Entire hook and framing is the Swiggy sale analogy, identical to the long-form's pattern interrupt. A viewer who watches both sees the same analogy twice. The Short does not stand alone as a genuinely different video.",
+          "fix": "Replace the Swiggy hook with a different analogy. Suggestion: use a 'buying groceries on sale' or 'black friday' frame, or drop the analogy entirely and lead with the 2008 data point."
+        },
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "en/yt_short_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "en/yt_short_03.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "en/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "en/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "en/ig_reel_03.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        },
+        {
+          "check": "math_verification",
+          "severity": "low",
+          "detail": "'Domestic investors bought almost as much back' \u2014 vague, no specific number. Acceptable for Reel format but imprecise.",
+          "fix": "Optional: add approximate number if available."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "hi/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Self-reports 730 words but actual body count is ~828 words. Exceeds the 750-word cap.",
+          "fix": "Trim to match the en/ version's content. Remove redundant elaboration in Segments."
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "medium",
+          "detail": "Same Swiggy analogy reuse issue in pattern interrupt, mirroring English version.",
+          "fix": "Same fix as en/ \u2014 keep Swiggy in long-form, change hi/yt_short_01.md."
+        },
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format with 'consult karein' language.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "hi/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "cross_contamination",
+          "severity": "high",
+          "detail": "Same Swiggy analogy recycled from long-form pattern interrupt. Does not stand alone as a different video.",
+          "fix": "Replace Swiggy hook with a different analogy in Hinglish, matching whatever replacement is chosen for en/yt_short_01.md."
+        },
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "hi/yt_short_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "hi/yt_short_03.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "hi/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "hi/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_06_Market_Crash_SIP",
+      "file": "hi/ig_reel_03.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Self-reports 70 words (upper boundary). Actual count with markers is ~88. Borderline overshoot.",
+          "fix": "Trim 2-3 words from PAYOFF to comfortably fit within 70-word cap."
+        },
+        {
+          "check": "disclaimer_format",
+          "severity": "medium",
+          "detail": "Wrong disclaimer format.",
+          "fix": "Replace with mandated AI avatar disclaimer."
+        }
+      ]
+    }
+  ],
+  "batch_issues": [
+    "SYSTEMIC: All 28 scripts use the wrong AI disclaimer format. English scripts use a shortened 'educational purposes / not financial advice' disclaimer. Hinglish scripts translate the disclaimer into Hindi. The required format per spec is: 'Disclaimer: This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.' This must be in English for ALL scripts including hi/ variants.",
+    "Topic 01 en/yt_long.md and en/yt_short_01.md both overstate the compounding benefit of 15 bps savings \u2014 claim 'several lakhs' / 'lakhs in difference' when the actual figure on a static 10L portfolio is ~1.2 lakh over 20 years.",
+    "Topic 02 en/yt_long.md and en/yt_short_01.md both overstate total effective return as 'crosses 330%' when actual calculation yields ~328%.",
+    "Topic 02 en/yt_short_02.md has a 24-word sentence and en/yt_short_03.md has a 21-word sentence \u2014 both exceed the 20-word limit.",
+    "Topic 02 hi/yt_long.md uses masculine verb form 'de deta hoon' instead of feminine 'de deti hoon' for Maya.",
+    "Both long-form scripts (Topic 01 and Topic 02, en and hi) have inaccurate text overlay counts in their metadata.",
+    "Topic 01 hi/yt_short_03.md CLICKBAIT_TITLE is 71 characters \u2014 exceeds the 70-character limit by 1 character.",
+    "SYSTEMIC: AI disclaimer text is non-standard across ALL 28 scripts. Every script uses 'AI-generated content for educational purposes only' or similar instead of the mandated format: 'This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.' All 28 scripts need disclaimer replacement.",
+    "Topic 04: Swiggy analogy used in 3 scripts (yt_long pattern interrupt, yt_short_01 core, ig_reel_03 entire premise) + their Hinglish counterparts. Deduplicate \u2014 keep in yt_long only, replace in yt_short_01 and ig_reel_03.",
+    "Topic 04: 'Your broker is counting on you being emotional. Don't be.' \u2014 identical phrasing in en/yt_short_02 and en/ig_reel_02 (and Hinglish counterparts). Rephrase in one.",
+    "Topic 04: Math errors propagated across 4 scripts (en/yt_long, en/yt_short_03, hi/yt_long, hi/yt_short_03): (1) RBI 2022 rate hike timeframe stated as 'eighteen months' but actual was ~10 months. (2) EMI increase of '2-3 thousand per month' on 50L home loan from 250 bps hike significantly underestimates reality (~8-10K/month).",
+    "Topic 03: Text overlay count mismatch in both en/ and hi/ long-form \u2014 claims 8 markers, actual is 11.",
+    "Topic 04: Text overlay count mismatch in both en/ and hi/ long-form \u2014 claims 6 markers, actual is 8.",
+    "Topic 03 en/yt_short_01 description says 'April 1, 2025' \u2014 year is wrong, should be omitted or changed to 2026.",
+    "ALL 28 scripts use incorrect disclaimer format. Required: 'This content was created with the help of AI. The presenter in this video is an AI-generated avatar and does not represent a real person.' Actual: varies between 'AI-generated and for educational purposes only' and 'AI-generated content for educational purposes only.' Some also include 'Consult a qualified financial advisor' which echoes Maya's forbidden patterns. Systematic fix needed across all scripts.",
+    "Topic 05: Debt MF indexation benefit claim is factually wrong (removed by Finance Act 2023). Appears in en/yt_long.md, hi/yt_long.md, en/yt_short_03.md, hi/yt_short_03.md \u2014 4 scripts affected.",
+    "Topic 06: Swiggy sale analogy used in both yt_long.md (pattern interrupt) and yt_short_01.md (entire hook/framing) in both en/ and hi/ \u2014 4 scripts share the same analogy. yt_short_01 should use a different hook to stand alone as a genuinely different video.",
+    "Topic 06: Both long-form scripts (en/ and hi/) likely exceed the 750-word cap. Self-reported counts (720 and 730) appear understated compared to actual body text."
+  ]
+}

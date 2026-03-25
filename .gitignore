@@ -1,8 +1,18 @@
-workspaces/*/
-!workspaces/.gitkeep
-.claude/settings.local.json
-.claude/plans/
+# === System ===
 .DS_Store
 *.log
-/workflows/*
-/.playwright-mcp
+!workflows/**/*.log
+
+# === Claude Code local state ===
+.claude/settings.local.json
+.claude/plans/
+.playwright-mcp/
+
+# === Projects (separate repos, cloned here) ===
+projects/*/
+!projects/.gitkeep
+
+# === Workflow tooling artifacts ===
+workflows/*/node_modules/
+workflows/*/.puppeteer-cache/
+workflows/*/.playwright-mcp/

@@ -16,7 +16,7 @@ Stage-by-stage instructions for the AI-DLC inception phase. See `SKILL.md` for t
 
 #### 1.1 Scan Project Repo for Existing Code
 
-Check if the target project repo exists at `workspaces/<project-name>/`:
+Check if the target project repo exists at `projects/<project-name>/`:
 
 **If the directory exists:**
 - Scan for source code files (.ts, .tsx, .js, .dart, .py, .go, .rs, .java, .kt, etc.)
@@ -94,7 +94,7 @@ If user indicated multiple repositories during Workspace Detection:
 #### 2.2 Delegate Analysis to /architect
 
 Provide `/architect` with:
-- Project repo path(s) (under `workspaces/`)
+- Project repo path(s) (under `projects/`)
 - Feature identifier and description
 - Project CLAUDE.md content (for project-specific conventions)
 - Instruction to analyze: architecture, components, APIs, tech stack

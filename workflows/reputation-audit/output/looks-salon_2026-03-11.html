@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reputation Audit — Looks Salon</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --paper: #FAFAF8;
+  --white: #FFFFFF;
+  --ink: #111118;
+  --ink-2: #3C3C4E;
+  --ink-3: #7C7C96;
+  --ink-4: #B8B8CC;
+  --rule: #E4E4EE;
+  --green-accent: #0F6E4A;
+  --green-bg: #EAF4EE;
+  --red-accent: #C0392B;
+  --red-bg: #FBF0EE;
+  --amber-accent: #B45309;
+  --amber-bg: #FEF3E0;
+  --score-color: #B45309;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: #D8D8E0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 24px;
+  min-height: 100vh;
+}
+
+.page {
+  width: 760px;
+  background: var(--white);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 24px 64px rgba(0,0,0,0.12);
+}
+
+/* ─── MASTHEAD ─── */
+.masthead {
+  background: var(--ink);
+  padding: 0 44px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  min-height: 56px;
+}
+
+.masthead-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.brand-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: white;
+}
+
+.brand-logo span { color: #F59E0B; }
+
+.brand-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,0.2);
+}
+
+.brand-report-type {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+.masthead-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  padding: 36px 44px 32px;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  background: var(--paper);
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 10px;
+}
+
+.hero-name {
+  font-family: 'Fraunces', serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+}
+
+.hero-details {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.hero-detail {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* SCORE DISPLAY */
+.score-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-left: 32px;
+  border-left: 1px solid var(--rule);
+}
+
+.score-number-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+}
+
+.score-number-wrap svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 96px; height: 96px;
+  transform: rotate(-90deg);
+}
+
+.score-number-wrap circle {
+  fill: none;
+  stroke-width: 5;
+}
+
+.score-track { stroke: var(--rule); }
+.score-fill {
+  stroke: var(--score-color);
+  stroke-dasharray: 270;
+  stroke-dashoffset: 83.7;
+  stroke-linecap: round;
+}
+
+.score-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-val {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.score-denom {
+  font-size: 11px;
+  color: var(--ink-3);
+  margin-top: 1px;
+}
+
+.score-grade {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--score-color);
+  background: var(--amber-bg);
+  padding: 3px 12px;
+  border: 1px solid rgba(180,83,9,0.2);
+}
+
+/* ─── CRITICAL FINDINGS ─── */
+.critical-findings {
+  background: var(--red-bg);
+  border-top: 3px solid var(--red-accent);
+  border-bottom: 1px solid rgba(192,57,43,0.15);
+  padding: 24px 44px;
+}
+
+.cf-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.cf-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--red-accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.cf-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--red-accent);
+}
+
+.cf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.cf-item {
+  background: white;
+  border: 1px solid rgba(192,57,43,0.15);
+  padding: 14px 16px;
+}
+
+.cf-item-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 6px;
+}
+
+.cf-item-value {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--red-accent);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.cf-item-desc {
+  font-size: 11.5px;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+/* ─── BODY ─── */
+.body { background: var(--white); }
+
+/* SECTION */
+.section {
+  padding: 28px 44px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title::before {
+  content: '';
+  width: 14px;
+  height: 2px;
+  background: var(--ink-4);
+  display: inline-block;
+}
+
+/* STATS ROW */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+
+.stat-cell {
+  background: var(--white);
+  padding: 16px 14px;
+  text-align: center;
+}
+
+.stat-val {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-val.red { color: var(--red-accent); }
+.stat-val.amber { color: var(--amber-accent); }
+.stat-val.green { color: var(--green-accent); }
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-3);
+  margin-bottom: 3px;
+}
+
+.stat-note {
+  font-size: 10px;
+  color: var(--ink-4);
+  font-style: italic;
+}
+
+/* COMPETITOR TABLE */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.comp-table thead tr {
+  border-bottom: 2px solid var(--ink);
+}
+
+.comp-table th {
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 0 12px 10px;
+}
+
+.comp-table th:first-child { padding-left: 0; }
+
+.comp-table td {
+  padding: 12px 12px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-2);
+  vertical-align: middle;
+}
+
+.comp-table td:first-child { padding-left: 0; color: var(--ink); font-weight: 500; }
+
+.comp-table tr.highlight-row td {
+  background: var(--amber-bg);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.comp-table tr.highlight-row td:first-child { padding-left: 12px; }
+
+.you-pill {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: var(--amber-accent);
+  color: white;
+  padding: 2px 7px;
+  margin-left: 8px;
+  border-radius: 2px;
+}
+
+.rating-val { font-weight: 600; color: var(--ink); }
+.gap-text { font-size: 11.5px; font-weight: 600; }
+.gap-text.behind { color: var(--red-accent); }
+.gap-text.ahead { color: var(--green-accent); }
+
+.respond-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.dot-y { background: var(--green-accent); }
+.dot-n { background: var(--red-accent); }
+
+/* INSIGHT STRIP */
+.insight-strip {
+  background: var(--ink);
+  padding: 18px 44px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.insight-quote-mark {
+  font-family: 'Fraunces', serif;
+  font-size: 48px;
+  color: rgba(255,255,255,0.1);
+  line-height: 1;
+  margin-top: -8px;
+  flex-shrink: 0;
+}
+
+.insight-text {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.insight-text strong { color: #F59E0B; font-style: normal; font-weight: 600; }
+
+/* REVIEW ISSUES */
+.review-issues { display: flex; flex-direction: column; gap: 2px; }
+
+.review-issue-row {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 0;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.issue-star-col {
+  background: var(--red-bg);
+  border-right: 1px solid rgba(192,57,43,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red-accent);
+  font-family: 'Fraunces', serif;
+  padding: 12px 0;
+}
+
+.issue-content {
+  padding: 12px 16px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.issue-author {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  display: block;
+  margin-top: 4px;
+}
+
+.issue-date-col {
+  padding: 12px 16px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+
+.unanswered-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--red-accent);
+  background: var(--red-bg);
+  border: 1px solid rgba(192,57,43,0.2);
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+
+.issue-date { font-size: 11px; color: var(--ink-4); }
+
+/* CONTENT PREVIEW */
+.content-preview {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.content-preview-header {
+  padding: 12px 18px;
+  background: var(--green-accent);
+  color: white;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.best-review-body {
+  padding: 14px 18px;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-2);
+  line-height: 1.6;
+  border-bottom: 1px solid var(--rule);
+  background: var(--green-bg);
+}
+
+.content-channels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.channel {
+  padding: 14px 16px;
+  border-right: 1px solid var(--rule);
+  font-size: 12px;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.channel:last-child { border-right: none; }
+
+.channel-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green-accent);
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ─── ENROLLMENT CTA ─── */
+.enrollment {
+  background: var(--ink);
+  padding: 36px 44px;
+  position: relative;
+  overflow: hidden;
+}
+
+.enrollment::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 44px; right: 44px;
+  height: 3px;
+  background: linear-gradient(90deg, #F59E0B, #C0392B);
+}
+
+.enrollment-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.enrollment-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #F59E0B;
+  margin-bottom: 10px;
+}
+
+.enrollment-headline {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 14px;
+}
+
+.enrollment-headline em {
+  font-style: italic;
+  color: #F59E0B;
+}
+
+.enrollment-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+}
+
+.benefit-check {
+  width: 16px;
+  height: 16px;
+  background: rgba(245,158,11,0.15);
+  border: 1px solid rgba(245,158,11,0.4);
+  color: #F59E0B;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.enrollment-price {
+  color: rgba(255,255,255,0.4);
+  font-size: 12px;
+}
+
+.enrollment-price strong { color: white; font-size: 14px; }
+
+.enrollment-cta-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.cta-button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: #F59E0B;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 16px 28px;
+  cursor: pointer;
+  border: none;
+  min-width: 180px;
+  gap: 2px;
+}
+
+.cta-button-main {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+}
+
+.cta-button-sub {
+  font-size: 10.5px;
+  color: rgba(17,17,24,0.65);
+  font-weight: 500;
+}
+
+.cta-trust {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* FOOTER */
+.footer {
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  padding: 10px 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.footer-brand span { color: #F59E0B; }
+
+.footer-meta {
+  font-size: 10.5px;
+  color: var(--ink-4);
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-brand">
+      <div class="brand-logo">Reputation<span>Flow</span></div>
+      <div class="brand-divider"></div>
+      <div class="brand-report-type">Reputation Audit · Scenario A</div>
+    </div>
+    <div class="masthead-meta">
+      <span>Chittaranjan Park, New Delhi</span>
+      <span>·</span>
+      <span>March 2026</span>
+      <span>·</span>
+      <span>Confidential</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Business Reputation Report</div>
+      <div class="hero-name">Looks Salon</div>
+      <div class="hero-details">
+        <span class="hero-detail">📍 Chittaranjan Park, New Delhi</span>
+        <span class="hero-detail">💇 Unisex Salon &amp; Beauty Parlour</span>
+        <span class="hero-detail">🌐 Google Business · Active Listing</span>
+      </div>
+    </div>
+    <div class="score-display">
+      <div class="score-number-wrap">
+        <svg viewBox="0 0 96 96">
+          <circle class="score-track" cx="48" cy="48" r="43"/>
+          <circle class="score-fill" cx="48" cy="48" r="43"/>
+        </svg>
+        <div class="score-inner">
+          <div class="score-val">69</div>
+          <div class="score-denom">/ 100</div>
+        </div>
+      </div>
+      <div class="score-grade">Grade B — Good</div>
+    </div>
+  </div>
+
+  <!-- CRITICAL FINDINGS -->
+  <div class="critical-findings">
+    <div class="cf-header">
+      <div class="cf-icon">!</div>
+      <div class="cf-title">Critical Findings — Immediate Attention Required</div>
+    </div>
+    <div class="cf-grid">
+      <div class="cf-item">
+        <div class="cf-item-label">Response Rate</div>
+        <div class="cf-item-value">0%</div>
+        <div class="cf-item-desc">Not a single review — positive or negative — has received an owner response. Google penalises unresponsive businesses in local rankings.</div>
+      </div>
+      <div class="cf-item">
+        <div class="cf-item-label">Rating Gap</div>
+        <div class="cf-item-value">−0.8★</div>
+        <div class="cf-item-desc">Lakme Salon leads at 4.8★ with 1,153 reviews — nearly 3× your volume. They dominate "salon near CR Park" searches.</div>
+      </div>
+      <div class="cf-item">
+        <div class="cf-item-label">Negative Reviews</div>
+        <div class="cf-item-value">Unaddressed</div>
+        <div class="cf-item-desc">Recent 1–2★ reviews mention rushed service and overpricing. Without replies, these shape your first impression for new customers.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPUTATION SNAPSHOT -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Reputation Snapshot</div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-val amber">4.0</div>
+        <div class="stat-label">Google Rating</div>
+        <div class="stat-note">Below area avg of 4.5★</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val green">385</div>
+        <div class="stat-label">Total Reviews</div>
+        <div class="stat-note">Good volume, but competitors lead</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val red">0%</div>
+        <div class="stat-label">Response Rate</div>
+        <div class="stat-note">No replies to any review</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-val green">Today</div>
+        <div class="stat-label">Last Review</div>
+        <div class="stat-note">Fresh activity is a positive sign</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPETITOR BENCHMARKING -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Competitor Benchmarking — CR Park Area</div>
+    </div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Business</th>
+          <th>Rating</th>
+          <th>Reviews</th>
+          <th>Responding</th>
+          <th>vs. You</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td>Looks Salon <span class="you-pill">You</span></td>
+          <td><span class="rating-val">4.0★</span></td>
+          <td>385</td>
+          <td><span class="respond-dot dot-n"></span>No</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Lakme Salon CR Park</td>
+          <td><span class="rating-val">4.8★</span></td>
+          <td>1,153</td>
+          <td>—</td>
+          <td><span class="gap-text behind">−0.8★, −768 reviews</span></td>
+        </tr>
+        <tr>
+          <td>KRASIVA Hair &amp; Makeup Studio</td>
+          <td><span class="rating-val">4.6★</span></td>
+          <td>462</td>
+          <td>—</td>
+          <td><span class="gap-text behind">−0.6★, −77 reviews</span></td>
+        </tr>
+        <tr>
+          <td>CUT&amp;STYLE Salon CR Park</td>
+          <td><span class="rating-val">4.4★</span></td>
+          <td>326</td>
+          <td>—</td>
+          <td><span class="gap-text behind">−0.4★, +59 reviews</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- INSIGHT -->
+  <div class="insight-strip">
+    <div class="insight-quote-mark">"</div>
+    <div class="insight-text">
+      <strong>Lakme Salon</strong> outranks Looks Salon with a <strong>4.8★ rating and 1,153 reviews</strong> — nearly 3× your review volume. Their dominant position in "salon near CR Park" searches means they capture the majority of new walk-in customers searching online. Your <strong>0% response rate</strong> further hurts your ranking, as Google actively rewards businesses that engage with reviewers. Even <strong>KRASIVA</strong> (4.6★, 462 reviews) and <strong>CUT&amp;STYLE</strong> (4.4★, 326 reviews) are outperforming you on rating despite being smaller operations.
+    </div>
+  </div>
+
+  <!-- UNANSWERED REVIEWS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Unanswered Reviews Damaging Your Ranking</div>
+    </div>
+    <div class="review-issues">
+      <div class="review-issue-row">
+        <div class="issue-star-col">2★</div>
+        <div class="issue-content">
+          "Not worth coming here. Better going to other LOOKS salons with professionals who actually know what they're doing. Paid 3k+ for a very mediocre mani pedi. It was rushed. Felt as if the technician was in a hurry. Did not buff the nails. Left filing them incomplete."
+          <span class="issue-author">— Sid</span>
+        </div>
+        <div class="issue-date-col">
+          <span class="unanswered-badge">No Reply</span>
+          <span class="issue-date">2 hours ago</span>
+        </div>
+      </div>
+      <div class="review-issue-row">
+        <div class="issue-star-col">1★</div>
+        <div class="issue-content">
+          "Most pathetic service at looks CR park location."
+          <span class="issue-author">— Moushmi Das</span>
+        </div>
+        <div class="issue-date-col">
+          <span class="unanswered-badge">No Reply</span>
+          <span class="issue-date">Recent</span>
+        </div>
+      </div>
+      <div class="review-issue-row">
+        <div class="issue-star-col">1★</div>
+        <div class="issue-content">
+          "Terrible experience at this branch. Would not recommend to anyone."
+          <span class="issue-author">— Shermishtta</span>
+        </div>
+        <div class="issue-date-col">
+          <span class="unanswered-badge">No Reply</span>
+          <span class="issue-date">a month ago</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT PREVIEW -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">What Your Best Review Could Be Doing For You</div>
+    </div>
+    <div class="content-preview">
+      <div class="content-preview-header">⭐⭐⭐⭐⭐ Mona Sharma · 5 days ago — Currently Unused</div>
+      <div class="best-review-body">
+        "I always have a wonderful experience with Anita ji! She is very professional, patient and pays great attention while providing service. She is very talented and I absolutely recommend her for offering services. Thank you Anita ji for always making me feel amazing!"
+      </div>
+      <div class="content-channels">
+        <div class="channel">
+          <div class="channel-label">📸 Instagram</div>
+          When your clients feel like family 💛 Mona ji has been trusting Anita with her beauty care, and the love shows! "She is very professional, patient and pays great attention while providing service." That's the Looks Salon promise ✨ #LooksSalon #CRPark #BeautyExperts #SalonLife #HappyClient #Delhi #SkinCare #HairCare
+        </div>
+        <div class="channel">
+          <div class="channel-label">💬 WhatsApp Status</div>
+          Real talk from our client Mona ji 💛 "Anita ji is very professional, patient and very talented. She always makes me feel amazing!" — That's what we live for ✨ Visit us at CR Park!
+        </div>
+        <div class="channel">
+          <div class="channel-label">🔍 Google Post</div>
+          Our team member Anita ji continues to make our clients feel special! Mona ji shared: "She is very professional, patient and pays great attention while providing service. She is very talented." Visit Looks Salon CR Park for the best beauty, hair, and skin care services. Book your appointment today!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENROLLMENT CTA -->
+  <div class="enrollment">
+    <div class="enrollment-inner">
+      <div>
+        <div class="enrollment-label">Enroll in ReputationFlow</div>
+        <div class="enrollment-headline">
+          We fix this for you —<br><em>every week, automatically.</em>
+        </div>
+        <div class="enrollment-benefits">
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            AI-drafted responses to every new review, ready for your approval
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            Best reviews auto-converted into Instagram, WhatsApp &amp; Google Business content
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            Weekly competitor tracking — know the moment they pull ahead
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            Monthly Reputation Score report sent to your WhatsApp
+          </div>
+        </div>
+        <div class="enrollment-price">Starts at <strong>₹1,999/month</strong> · Cancel anytime</div>
+      </div>
+      <div class="enrollment-cta-col">
+        <a class="cta-button" href="#">
+          <span class="cta-button-main">Start Free Trial</span>
+          <span class="cta-button-sub">14 days · No card required</span>
+        </a>
+        <div class="cta-trust">No credit card · No contract<br>WhatsApp setup in under 5 mins</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Reputation<span>Flow</span> · reputationflow.in</div>
+    <div class="footer-meta">Looks Salon · Chittaranjan Park, New Delhi · March 2026 · Based on publicly available Google data</div>
+  </div>
+
+</div>
+</body>
+</html>

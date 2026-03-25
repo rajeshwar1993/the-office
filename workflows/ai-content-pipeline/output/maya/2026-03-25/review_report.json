@@ -1,0 +1,575 @@
+{
+  "review_date": "2026-03-25",
+  "avatar": "maya",
+  "scripts_reviewed": 28,
+  "passed": 8,
+  "failed": 20,
+  "scripts": [
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "en/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Claims '1 lakh invested in small-caps in 1995 became 4 crores' and '1 lakh in large-caps = 2 crores'. Nifty50 (large-cap proxy) went from ~1000 to ~22000 in 31 years = ~22x, meaning 1L became ~22L, not 2Cr. 2Cr requires ~18.6% CAGR and 4Cr requires ~21.3% CAGR sustained for 31 years — no broad index has delivered this. These are cherry-picked best-case fund returns presented as category-level facts.",
+          "fix": "Either cite a specific fund with verifiable returns, or use realistic index-level numbers (e.g., 1L in Nifty50 became ~22L, Nifty SmallCap became ~80L-1Cr). Alternatively, disclaim these as top-quartile fund returns, not category averages."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "6 sentences exceed 20 words: (1) 32w 'The whole country is screaming...park their entire salary in an FD earning two and a half percent'; (2) 28w 'Today I'm going to show you real math...'; (3) 23w 'And you spend the next thirty years...'; (4) 30w 'The Dhurandhar move is this...'; (5) 27w 'Don't be the person who watches...'; (6) 27w 'If this math changed how you think...'",
+          "fix": "Break each sentence at the em-dash or comma. E.g., split 'The Dhurandhar move is this — before you take any EMI...' into two sentences."
+        },
+        {
+          "check": "passive_voice",
+          "severity": "medium",
+          "detail": "Passive construction 'are trapped' appears in metadata (minor) but body text is clean.",
+          "fix": "Metadata only — no script body fix needed."
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "high",
+          "detail": "Segment 1 uses the savings account 2.5% vs 6% inflation angle with 'Your bank is counting on you NOT knowing this' — this is nearly identical to Topic 2's entire thesis. The savings-account-as-leaking-bucket concept is the core of Topic 2, yet it appears here as a full segment.",
+          "fix": "Remove or minimize the savings account inflation angle from this script. Keep focus on SIP-vs-EMI and the Dhurandhar cultural hook. The savings exposé belongs exclusively to Topic 2."
+        },
+        {
+          "check": "genre_delivery",
+          "severity": "low",
+          "detail": "Comedy/satire genre is established well in Cold Open and Segment 1 (Chhuchhundar metaphor, builder joke) but fades in Segment 2-3 into straight educational content. The 'Bihar Boy Math' label is funny but the delivery around it is lecture-mode.",
+          "fix": "Add a comedy beat or satirical aside in Segment 2 (e.g., mock the relationship manager) and Segment 3 (e.g., roast a specific Chhuchhundar EMI scenario with more absurdist detail)."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "en/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Repeats the 15% CAGR = 6.5Cr SIP math (verified correct at 6.57Cr). However, also cites 'Sundaram Small Cap did seventeen point nine percent over five years. Invesco Small Cap did twenty-four percent.' — these are trailing 5-year returns used to justify a 25-year forward projection at 15%. Past 5-year returns do not validate a 25-year assumption. This is misleading framing.",
+          "fix": "Add a qualifier: 'Past returns don't guarantee future performance, but historically small-caps have rewarded patience.' Or cite a longer track record (15-20 year CAGR)."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "25-word sentence: 'The question is whether you want to spend twenty-five years as an EMI slave — or twenty-five years building a corpus that buys you freedom.'",
+          "fix": "Split at the dash: 'Do you want twenty-five years as an EMI slave? [beat] Or twenty-five years building a corpus that buys you freedom.'"
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "low",
+          "detail": "The SIP math (20K/month, 25yr, 15%, 6.5Cr) and fund names (Sundaram, Invesco) are identical to the long-form script. While the differentiation note says 'No historical data, no savings accounts', it actually includes Sundaram and Invesco fund data.",
+          "fix": "Remove the specific fund citations to honor the differentiation promise. Let the 15% CAGR stand on its own or use a different evidence point."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "en/yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Claims '1 lakh in large-caps in 1995 = 2 crores today' and '1 lakh in small-caps in 1995 = 4 crores'. As verified, Nifty50 delivered ~10.5% CAGR over this period (1L -> ~22L). 2Cr requires ~18.6% CAGR and 4Cr requires ~21.3% CAGR for 31 years — grossly overstated for index-level returns.",
+          "fix": "Use verifiable numbers. E.g., '1L in Nifty50 in 1995 became ~22L. 1L in a top-quartile small-cap fund became ~80L-1Cr.' The directional point (small > large) is valid; the magnitude is fabricated."
+        },
+        {
+          "check": "word_count",
+          "severity": "low",
+          "detail": "148 words — within 130-150 range but at the high end. Tight.",
+          "fix": "No action needed, but note for editing flexibility."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "en/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "cross_contamination",
+          "severity": "high",
+          "detail": "This script's entire angle (savings account 2.5% vs inflation, bank lending spreads at 14%/36%, 'that's charity', 17% XIRR gap) is virtually identical to Topic 2's core thesis. Topic 2 is 'Your Savings Account Is Quietly Robbing You' and this Short 3 is literally about the same thing. A viewer who sees both will recognize the duplicate.",
+          "fix": "Replace this Short 3 entirely with a different angle. Suggestions: (1) Good EMI vs Bad EMI rapid-fire, (2) The Dhurandhar move checklist, (3) What happens if you start a 5K SIP today."
+        },
+        {
+          "check": "math_verification",
+          "severity": "medium",
+          "detail": "Claims the gap between savings (2.5%) and small-cap XIRR (17%) is '14.5%'. Actual: 17 - 2.5 = 14.5. Math is correct, but comparing a savings rate to XIRR is apples-to-oranges (XIRR accounts for timing of flows, simple interest rate does not).",
+          "fix": "Use 'CAGR' instead of 'XIRR' for a like-for-like comparison, or note the comparison is approximate."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "22-word sentence: 'The gap between what your savings account pays you and what the market can give you is fourteen and a half percent.'",
+          "fix": "Split: 'The gap? Fourteen and a half percent. That's what you're leaving on the table every single year.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "en/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "genre_delivery",
+          "severity": "low",
+          "detail": "The compounding-as-box-office metaphor is creative and fits comedy_satire. Solid execution.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "en/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "low",
+          "detail": "68 words — at the upper boundary of the 55-70 range. Acceptable.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "en/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "21-word sentence: 'Most people will look at this and still park their salary in a savings account at two and a half percent.'",
+          "fix": "Split: 'Most people will hear this and still park their salary at two and a half percent. [beat] They'll stay Chhuchhundars forever.'"
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "medium",
+          "detail": "Uses the same 20K/month, 25yr, 15%, 6.5Cr math as Short 1 and the long-form. While the framing differs (aspirational vs comparative), the core data point is identical across 3 of 4 English shorts/reels.",
+          "fix": "Consider using different numbers (e.g., 5K/month for 20 years) to show the concept is not amount-dependent."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "hi/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Same 1L->2Cr/4Cr claims as English version. These are factually unsupportable at an index level.",
+          "fix": "Same fix as English version — use verifiable numbers."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "6 sentences exceed 20 words (Hinglish word count). The sentences mirror the English version's structure.",
+          "fix": "Break at dashes and commas, same as English counterpart."
+        },
+        {
+          "check": "hinglish_naturalness",
+          "severity": "medium",
+          "detail": "The word 'dhwast' (destroy) in the intro is formal/literary Hindi — not WhatsApp voice note register. 'Barbad' or 'khatam' would be more natural.",
+          "fix": "Replace 'dhwast' with 'barbad' or 'khatam kar sakta hai'."
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "high",
+          "detail": "Same savings account inflation angle overlap with Topic 2 as the English version.",
+          "fix": "Same fix as English — remove or minimize savings account angle."
+        },
+        {
+          "check": "hinglish_naturalness",
+          "severity": "low",
+          "detail": "'Nobody talks about this lekin do tarah ke EMIs hote hain' — starts with English phrase 'Nobody talks about this' before switching to Hindi. Natural Hinglish would be 'Yeh koi nahi bolta lekin...' or the English phrase should be shorter.",
+          "fix": "Change to 'Yeh baat koi nahi karta lekin do tarah ke EMIs hote hain.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "hi/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Same fund citation issue — 5-year trailing returns used to justify 25-year projection.",
+          "fix": "Same fix as English Short 1."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "22-word sentence: 'Sawaal yeh hai — pachees saal EMI ka ghulaam ban ke rehna hai, ya pachees saal corpus build karke azaad hona hai.'",
+          "fix": "Split at the comma/dash."
+        },
+        {
+          "check": "cross_language_fidelity",
+          "severity": "low",
+          "detail": "Hindi version uses 'EMI ka ghulaam' (EMI slave) and 'azaad' (free) which are more emotionally charged than the English 'EMI slave' and 'freedom'. This is an improvement, not a problem.",
+          "fix": "No fix needed — the Hindi version is stronger."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "hi/yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Same 1L->2Cr/4Cr factual error as English Short 2.",
+          "fix": "Same fix — use verifiable index-level numbers."
+        },
+        {
+          "check": "hinglish_naturalness",
+          "severity": "low",
+          "detail": "'Literally double paisa' — 'literally' mid-Hindi sentence feels natural for Hinglish. Acceptable.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "hi/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "cross_contamination",
+          "severity": "high",
+          "detail": "Same cross-topic contamination as English Short 3 — entire angle duplicates Topic 2's thesis.",
+          "fix": "Replace with a different angle, same as English Short 3."
+        },
+        {
+          "check": "hinglish_naturalness",
+          "severity": "low",
+          "detail": "'real paisa table pe chhod rahe ho' — 'table pe chhod' is literal translation of 'leaving money on the table'. Not a natural Hindi idiom.",
+          "fix": "Use 'real paisa haath se nikal raha hai' (real money is slipping through your hands) — more natural Hinglish."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "hi/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "cross_language_fidelity",
+          "severity": "low",
+          "detail": "Faithful adaptation of English Reel 1. Same structure, same data points, natural Hinglish.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "hi/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "hinglish_naturalness",
+          "severity": "low",
+          "detail": "'vaade pe' (on a promise) — natural and punchy.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_Dhurandhar_SmallCap_Strategy",
+      "file": "hi/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Hook sentence 'Bas ek number chahiye tumhari paison ke baare mein soch hamesha ke liye badalne ke liye' is 15 words but grammatically convoluted — hard to speak in one breath due to nested 'ke liye' repetition.",
+          "fix": "Simplify: 'Ek number. Bas itna kaafi hai tumhari soch badalne ke liye. [beat] Saadhe chhe crore.'"
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "medium",
+          "detail": "Same 20K/25yr/6.5Cr math as Short 1 and Long-form — 3rd repetition of identical data point across the topic.",
+          "fix": "Use different example amounts to show flexibility of the concept."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "en/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "7 sentences exceed 20 words, including a 41-word monster: 'Right now, with oil at a hundred and seventy dollars a barrel because of the Iran war, fuel prices rising, and everything from dal to diesel getting more expensive — your two and a half percent savings rate isn't keeping up.' Also a 38-word sentence in the Wrap-Up.",
+          "fix": "The 41-word sentence must be split into at least 3 sentences. E.g., 'Oil is at a hundred and seventy dollars a barrel. Iran war. Fuel prices rising. Dal to diesel — everything is getting more expensive. [beat] Your two and a half percent? Not keeping up.'"
+        },
+        {
+          "check": "math_verification",
+          "severity": "medium",
+          "detail": "Uses 8% inflation figure in calculations. The topics.json says 'RBI repo at 5.25% but bank savings rates lagging behind real inflation'. CPI inflation in India has historically been 5-7%, and even with oil shock, 8-10% is the upper bound. The math is internally consistent (1L + 2.5% = 1.025L vs cost of 1.08L = 5500 gap) but presenting 8% as the definitive rate when it could be 6-7% overstates the shock.",
+          "fix": "Use a range: 'Inflation is running at six to eight percent — maybe higher with oil prices. Even at six percent, you're losing thirty-five hundred per lakh per year.' This is more honest and still shocking."
+        },
+        {
+          "check": "forbidden_phrases",
+          "severity": "medium",
+          "detail": "Description section uses bullet points (- marks). The character bible says 'No bullet points' — though this applies to script formatting, the description being a viewer-facing element should also avoid them.",
+          "fix": "Replace bullet points in description with flowing prose or numbered items."
+        },
+        {
+          "check": "genre_delivery",
+          "severity": "medium",
+          "detail": "Genre is 'shock_and_awe' but the ice cream metaphor, screen guard analogy, and leaking bucket are more 'explainer with analogies' than genuinely shocking. The numbers are shocking but the delivery wraps them in soft metaphors that cushion the blow.",
+          "fix": "Lean harder into the shock. Open Segment 1 with the raw number first ('You lost five thousand five hundred rupees last year. On one lakh. Not invested. Just sitting there.') before the metaphors."
+        },
+        {
+          "check": "pattern_interrupt_quality",
+          "severity": "medium",
+          "detail": "Pattern interrupt 1 ('if someone told me at 22...') is a personal reflection, not a genuine disruption. It's a soft aside. Pattern interrupt 2 (bucket with tap vs bucket with hole) is just restating the same metaphor in slightly different words.",
+          "fix": "PI1: Use a real shocker — 'Check your bank statement right now. Seriously. Open the app. Look at the interest you earned last quarter. Now multiply that by four. That's your yearly gain. Now look at your grocery bill increase. [beat] See the problem?' PI2: Use a concrete example instead of repeating the metaphor."
+        },
+        {
+          "check": "cold_open_quality",
+          "severity": "low",
+          "detail": "Cold open is competent but generic for the shock_and_awe genre. 'Every month you put money into your savings account' is a statement of fact, not a shock. Compare to T1's cold open which immediately drops the Dhurandhar 559 Cr number.",
+          "fix": "Lead with the number: 'You lost five thousand five hundred rupees last year. [beat] Not on a bad investment. Not on a scam. On your savings account.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "en/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "22-word sentence: 'And with oil at a hundred and seventy dollars pushing prices up even faster — that leak is getting worse, not better.'",
+          "fix": "Split: 'Oil is at a hundred and seventy dollars. Prices are climbing faster than ever. [beat] That leak? Getting worse.'"
+        },
+        {
+          "check": "genre_delivery",
+          "severity": "low",
+          "detail": "shock_and_awe genre is well-executed here. The math-first approach with escalating scale (1L -> 5L -> 10L) builds genuine shock.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "en/yt_short_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "audience_fit",
+          "severity": "low",
+          "detail": "Strong script. Screen guard analogy is immediately relatable. Netflix/Swiggy comparisons ground the cost. Age-based urgency is genuine.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "en/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Hook claims 'One retires with sixty lakh. The other with over a crore.' But the Core section shows Friend A (savings) at 34L and Friend B (SIP) at 99L after 20 years. 34L is not 60L. The hook numbers don't match the body. Also, the claimed 34L for savings is overstated — actual calculation shows 31.2L at 2.5% for 20 years.",
+          "fix": "Fix the hook to match the body: 'One ends up with thirty-one lakh. The other with nearly a crore.' Or extend to 25 years and recalculate. The 34L claim should be corrected to ~31L."
+        },
+        {
+          "check": "math_verification",
+          "severity": "medium",
+          "detail": "States 'Friend A has thirteen lakh in savings' at 10 years — actual is 13.6L, rounds acceptably. 'Friend B has twenty-three lakh' at 10 years — actual is 23.2L, acceptable. 'Friend A thirty-four lakh' at 20 years — actual is 31.2L, overstated by ~9%. 'Friend B ninety-nine lakh' — actual 99.9L, correct.",
+          "fix": "Correct Friend A 20-year figure from 34L to 31L."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "en/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "genre_delivery",
+          "severity": "low",
+          "detail": "Ice cream metaphor is vivid and punchy. Good shock_and_awe execution in 68 words.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "en/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "genre_delivery",
+          "severity": "low",
+          "detail": "Oil crisis urgency is well-timed and genuinely shocking. 'Dal. Diesel. Delivery.' is a great rhythmic triplet.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "en/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "genre_delivery",
+          "severity": "high",
+          "detail": "Genre is shock_and_awe but this script is warm/inspirational (Memory Fund = spend on experiences). There is zero shock element. The hook ('best financial advice had nothing to do with investing') is a gentle reveal, not a shock. This reads as a feel-good motivational reel, not shock_and_awe.",
+          "fix": "Add a shock framing: 'Most people who start investing quit within three years. [beat] Not because the market crashed. Because they forgot to live.' Then pivot to the Memory Fund. The shock is the quit rate, not the spending advice."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "hi/yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "4 sentences exceed 20 words, mirroring the English version's long sentences.",
+          "fix": "Same splits as English version."
+        },
+        {
+          "check": "math_verification",
+          "severity": "medium",
+          "detail": "Same 8% inflation assumption issue as English version.",
+          "fix": "Same fix — use a range."
+        },
+        {
+          "check": "genre_delivery",
+          "severity": "medium",
+          "detail": "Same genre softness issue as English — metaphors cushion the shock.",
+          "fix": "Same fix — lead with raw numbers."
+        },
+        {
+          "check": "pattern_interrupt_quality",
+          "severity": "medium",
+          "detail": "Same weak pattern interrupts as English version. Direct translations.",
+          "fix": "Same fix — make PIs genuinely disruptive."
+        },
+        {
+          "check": "hinglish_naturalness",
+          "severity": "medium",
+          "detail": "'purchasing power seeched gayi' — 'seeched' is not a natural Hindi/Hinglish word. Should be 'purchasing power ghatt gayi' or 'kharid-ne ki taakat kam ho gayi'. Also 'Memory Fund' section uses 'achhi si dinner' — 'dinner' is fine in Hinglish but 'achhi si' before an English noun sounds slightly off. 'Achhi dinner' or 'ek acchi dinner' is more natural.",
+          "fix": "Replace 'seeched gayi' with 'ghatt gayi'. Change 'achhi si dinner' to 'ek acchi dinner'."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "hi/yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "hinglish_naturalness",
+          "severity": "medium",
+          "detail": "'purchasing power seeched gayi' appears in this script too — same unnatural word 'seeched'.",
+          "fix": "Replace with 'ghatt gayi' or 'kam ho gayi'."
+        },
+        {
+          "check": "cross_language_fidelity",
+          "severity": "low",
+          "detail": "Faithful adaptation with same structure and data. The Hindi is natural except for 'seeched'.",
+          "fix": "Fix 'seeched' and the script is solid."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "hi/yt_short_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "hinglish_naturalness",
+          "severity": "low",
+          "detail": "Well-adapted. 'Screen guard' metaphor works naturally in Hindi context. Swiggy reference grounds it.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "hi/yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "math_verification",
+          "severity": "high",
+          "detail": "Same hook mismatch as English version. Hindi hook says 'sixty lakh' and 'crore se upar' but body shows 34L and 99L. Also, the 34L (chauntes lakh) figure is overstated — actual is ~31L.",
+          "fix": "Same fix as English — align hook with body numbers and correct 34L to 31L."
+        },
+        {
+          "check": "word_count",
+          "severity": "low",
+          "detail": "149 words — just under the 150 ceiling. Very tight.",
+          "fix": "Acceptable but leaves no room for editing."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "hi/ig_reel_01.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "cross_language_fidelity",
+          "severity": "low",
+          "detail": "Faithful adaptation. 'Power cut mein ice cream' is a vivid natural Hinglish metaphor.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "hi/ig_reel_02.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "low",
+          "detail": "68 words — at the upper boundary but acceptable.",
+          "fix": "No fix needed."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_Savings_Inflation_Shield",
+      "file": "hi/ig_reel_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "genre_delivery",
+          "severity": "high",
+          "detail": "Same issue as English Reel 3 — warm/inspirational tone completely misses shock_and_awe genre. Zero shock element in the Memory Fund angle.",
+          "fix": "Same fix as English — open with the investor burnout/quit stat as the shock, then pivot to Memory Fund as the solution."
+        }
+      ]
+    }
+  ],
+  "batch_issues": [
+    "CRITICAL: Topic 1 Short 3 (en + hi) duplicates Topic 2's core thesis. The savings-account-is-charity angle with bank lending spreads (14%/36%), repo rate (5.25%), and 17% XIRR gap is the ENTIRE premise of Topic 2. These 2 scripts must be replaced with a different angle.",
+    "CRITICAL: The 1L-in-1995 claims (2Cr large-cap, 4Cr small-cap) appear in Topic 1 Long-form and Short 2 (both en and hi = 4 scripts). These numbers are factually unsupportable at an index level and risk credibility damage if fact-checked by viewers.",
+    "CRITICAL: Topic 2 Short 3 hook says 'sixty lakh' but body says '34 lakh' for Friend A — internal inconsistency in 2 scripts (en + hi).",
+    "MEDIUM: Topic 2 Reel 3 (en + hi) fails the shock_and_awe genre — it's a warm motivational piece about the Memory Fund with no shock element.",
+    "MEDIUM: Both long-form scripts have multiple sentences over 20 words. Topic 2 long-form has a 41-word sentence that is completely unspeakable in one breath.",
+    "MEDIUM: Topic 1 uses the 20K/25yr/6.5Cr SIP calculation in 5 of 7 English scripts (long, short 1, reel 1, reel 3, and partially in short 3). This repetition makes the shorts/reels feel like excerpts rather than standalone content.",
+    "LOW: The 'Chhuchhundar' callback is used in ALL 7 Topic 1 scripts (en). While it's the through-line, it risks feeling like a one-note joke by the 7th repetition. Consider varying the callback language in 1-2 scripts.",
+    "LOW: Hindi scripts use 'seeched' (a nonstandard word) for 'shrinking' in Topic 2 — appears in at least 2 scripts."
+  ]
+}

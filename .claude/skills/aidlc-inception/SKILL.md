@@ -69,7 +69,7 @@ Continue where you left off, or review a previous stage?
 ### 3. Load References
 
 - Read `shared/git_strategy.md` for branch and commit conventions.
-- Read the target project's CLAUDE.md (`workspaces/<project-name>/CLAUDE.md`) for project-specific conventions, tech stack, and architecture. If the project repo doesn't exist yet (greenfield with no repo), skip this — conventions will be established during Requirements Analysis.
+- Read the target project's CLAUDE.md (`projects/<project-name>/CLAUDE.md`) for project-specific conventions, tech stack, and architecture. If the project repo doesn't exist yet (greenfield with no repo), skip this — conventions will be established during Requirements Analysis.
 
 ### 4. Initialize Feature Docs Structure
 
@@ -273,7 +273,7 @@ Maintain `aidlc-state.md` (in the feature docs directory root) throughout incept
 ## Workspace State
 - **Existing Code:** [Yes/No]
 - **Project Type:** [Greenfield/Brownfield]
-- **Project Repo Path:** [Absolute path to project repo, e.g., workspaces/pulse-web]
+- **Project Repo Path:** [Absolute path to project repo, e.g., projects/pulse-web]
 - **Repositories Involved:** [List or "Current workspace only"]
 
 ## Decisions

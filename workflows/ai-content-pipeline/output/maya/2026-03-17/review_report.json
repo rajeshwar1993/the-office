@@ -1,0 +1,279 @@
+{
+  "review_date": "2026-03-17",
+  "avatar": "maya",
+  "scripts_reviewed": 14,
+  "passed": 4,
+  "failed": 10,
+  "scripts": [
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Rules_2026",
+      "file": "yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Sentence over 20 words (25 words): 'Think of it like a restaurant bill that now has to show the food cost, the GST, and the service charge as different line items.'",
+          "fix": "Split into two sentences: 'Think of it like a restaurant bill. Food cost, GST, service charge — all shown as different line items.'"
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Sentence over 20 words (25 words): 'The mutual fund industry was running on rules designed for a world where you had to physically go to an office to buy a fund.'",
+          "fix": "Split: 'The mutual fund industry was running on rules from a different era. Back then, you had to physically walk into an office to buy a fund.'"
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Sentence over 20 words (25 words): 'So while everyone's panicking about Sensex numbers — just know that the system quietly got a little more fair for people like you and me.'",
+          "fix": "Split: 'So while everyone's panicking about Sensex numbers? The system quietly got a little more fair. For people like you and me.'"
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Sentence over 20 words (22 words): 'If you know someone who does SIPs but has no idea what an expense ratio even is — send them this video.'",
+          "fix": "Split: 'Know someone who does SIPs but has no idea what an expense ratio is? Send them this video.'"
+        },
+        {
+          "check": "pattern_interrupt_quality",
+          "severity": "high",
+          "detail": "First pattern interrupt 'But wait — that's just the transparency part' uses a near-exact 'but wait' filler pattern. This is a banned construction — it reads as generic hype, not a genuine disruption.",
+          "fix": "Replace with something genuinely disruptive, e.g.: 'Okay so transparency is great. But SEBI didn't stop there. They actually cut the fees too.' — use a tonal shift or surprising reveal, not 'but wait'."
+        },
+        {
+          "check": "math_verification",
+          "severity": "medium",
+          "detail": "Cold open claims '40-50K lost in hidden charges over 5 years on a 10K/month SIP'. At 1.5% expense ratio on a 10K/month SIP over 5 years (~7.3L corpus), total expenses would be roughly 5-7K per year, or 25-35K total. The 40-50K figure may be inflatable depending on assumptions but is not transparently derived. Needs manual verification.",
+          "fix": "Either show the math explicitly or soften the claim to 'tens of thousands' if exact math is unclear."
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "medium",
+          "detail": "The 'restaurant bill' analogy appears in both yt_long.md and yt_short_01.md. While they are within the same topic, the short should feel distinct from the long-form rather than lifting the same analogy verbatim.",
+          "fix": "Replace the restaurant bill analogy in yt_short_01 with a different comparison (e.g., 'Like your phone bill finally showing data, calls, and taxes separately')."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Rules_2026",
+      "file": "yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Word count is approximately 157 words, exceeding the 130-150 word target for YouTube Shorts.",
+          "fix": "Trim by 7-10 words. Cut redundant phrases in the CORE section."
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "medium",
+          "detail": "Uses the 'restaurant bill that finally shows GST and service charge as different lines' analogy — same as the long-form script.",
+          "fix": "Replace with a different analogy to differentiate from the long-form."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Rules_2026",
+      "file": "yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Word count is approximately 162 words, exceeding the 130-150 word target for YouTube Shorts.",
+          "fix": "Trim by 12-15 words. The CORE section can be tightened — e.g., remove 'Not to your fund manager. Not to the market. Just — gone.' (repetitive)."
+        },
+        {
+          "check": "math_verification",
+          "severity": "medium",
+          "detail": "Claims 70-80K saved over 20 years from a 6bps brokerage cut on a 10K/month SIP at 12% returns. The math is plausible but not transparently derivable — brokerage is not charged on the full corpus annually, only on transactions. The actual savings depend on portfolio turnover. Flag for manual check.",
+          "fix": "Add qualifier: 'depending on how actively your fund trades' or soften to 'tens of thousands'."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Rules_2026",
+      "file": "yt_short_03.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Hook sentence is 23 words: 'If you've been doing a SIP for five years — you've probably lost around forty to fifty thousand in charges you never saw.'",
+          "fix": "Split: 'Been doing a SIP for five years? You've probably lost forty to fifty thousand in charges you never saw.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Rules_2026",
+      "file": "ig_reel_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Word count is approximately 77 words, exceeding the 55-70 word target for Instagram Reels.",
+          "fix": "Trim by 7-10 words. Cut 'For the first time ever' and tighten the payoff section."
+        },
+        {
+          "check": "cross_contamination",
+          "severity": "high",
+          "detail": "Hook is very similar to yt_short_01 — both open with 'Your mutual fund has been [hiding/charging] fees you [cannot see/literally cannot see]'. A viewer on both platforms would recognize this as the same video.",
+          "fix": "Rewrite hook to use a different entry point, e.g., 'One number on your mutual fund statement has been lying to you.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Rules_2026",
+      "file": "ig_reel_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Word count is approximately 71 words, slightly exceeding the 55-70 word target for Instagram Reels.",
+          "fix": "Trim by 1-2 words. Remove 'And' from 'And it happens automatically from April first.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_01_SEBI_MF_Rules_2026",
+      "file": "ig_reel_03.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_02_RBI_BSBD_Free_Banking",
+      "file": "yt_long.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Sentence over 20 words (23 words): 'And while all of that is happening, your bank has been quietly charging you for stuff that should've been free this whole time.'",
+          "fix": "Split: 'And while all that's happening? Your bank has been quietly charging you. For stuff that should've been free this whole time.'"
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Sentence over 20 words (30 words): 'If you're someone who primarily uses UPI — which, let's be honest, is most of urban India now — your account basically has no transaction limits that matter to you.'",
+          "fix": "Split: 'If you primarily use UPI — and let's be honest, most of urban India does — your account basically has no limits that matter.'"
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Sentence over 20 words (22 words): 'But if you're paying even five hundred rupees a year in charges you shouldn't be — that's money back in your pocket.'",
+          "fix": "Split: 'But if you're paying even five hundred rupees a year in charges you shouldn't be? That's money back in your pocket.'"
+        },
+        {
+          "check": "passive_voice",
+          "severity": "medium",
+          "detail": "'BSBD accounts are being positioned as normal banking' — passive construction.",
+          "fix": "Rewrite active: 'The RBI is positioning BSBD accounts as normal banking.'"
+        },
+        {
+          "check": "passive_voice",
+          "severity": "low",
+          "detail": "'All digital transactions are unlimited and completely free' — while structurally passive, this reads naturally. Low priority.",
+          "fix": "Could rewrite as 'You get unlimited digital transactions. Completely free.' but current version is acceptable."
+        },
+        {
+          "check": "pattern_interrupt_quality",
+          "severity": "low",
+          "detail": "First pattern interrupt 'Ek baar suno — I haven't even gotten to the best part yet' is a mild tease rather than a genuinely disruptive moment. It works but is the weakest interrupt in the batch.",
+          "fix": "Consider replacing with a surprising stat or rhetorical reversal, e.g., 'And here's the part that should make you angry.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_RBI_BSBD_Free_Banking",
+      "file": "yt_short_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Word count is approximately 157 words, exceeding the 130-150 word target for YouTube Shorts.",
+          "fix": "Trim by 7-10 words. The free services list is long — condense 'Internet banking. Mobile banking. Monthly statements.' into fewer words."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_RBI_BSBD_Free_Banking",
+      "file": "yt_short_02.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Word count is approximately 163 words, exceeding the 130-150 word target for YouTube Shorts.",
+          "fix": "Trim by 13+ words. Cut the RBI quote paraphrase at the end — 'The RBI explicitly said banks should stop treating these as restricted accounts. Same features as your regular savings account. Just without the penalties.' can be condensed."
+        },
+        {
+          "check": "sentence_length",
+          "severity": "medium",
+          "detail": "Sentence over 20 words (25 words): 'So if your digital transactions are unlimited — and you still get four free cash withdrawals a month — what are you actually paying for?'",
+          "fix": "Split: 'Your digital transactions are unlimited. You still get four free cash withdrawals a month. So what are you actually paying for?'"
+        },
+        {
+          "check": "passive_voice",
+          "severity": "low",
+          "detail": "'all digital transactions are unlimited and free' — structurally passive but reads naturally in conversational tone.",
+          "fix": "Low priority — acceptable in spoken form."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_RBI_BSBD_Free_Banking",
+      "file": "yt_short_03.md",
+      "verdict": "pass",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "low",
+          "detail": "Word count is approximately 139 words, slightly below the 130-150 target but within acceptable range.",
+          "fix": "No action needed — within range."
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_RBI_BSBD_Free_Banking",
+      "file": "ig_reel_01.md",
+      "verdict": "fail",
+      "issues": [
+        {
+          "check": "word_count",
+          "severity": "medium",
+          "detail": "Word count is approximately 92 words, significantly exceeding the 55-70 word target for Instagram Reels. This is 22 words over the maximum.",
+          "fix": "Major trim needed. Cut the payoff section substantially — remove 'Bas itna hi chahiye tha — just ask.' and condense feature list."
+        },
+        {
+          "check": "passive_voice",
+          "severity": "medium",
+          "detail": "'Banks have been ordered to stop restricting it' — passive construction.",
+          "fix": "Rewrite: 'The RBI told banks — stop restricting this.'"
+        }
+      ]
+    },
+    {
+      "folder": "Topics/Topic_02_RBI_BSBD_Free_Banking",
+      "file": "ig_reel_02.md",
+      "verdict": "pass",
+      "issues": []
+    },
+    {
+      "folder": "Topics/Topic_02_RBI_BSBD_Free_Banking",
+      "file": "ig_reel_03.md",
+      "verdict": "pass",
+      "issues": []
+    }
+  ],
+  "batch_issues": [
+    "CROSS-TOPIC: Topic 01 ig_reel_01 CTA 'Follow for money stuff your bank won't tell you' and Topic 02 ig_reel_01 CTA 'Follow for money stuff they hope you'll never find out' — nearly identical phrasing pattern across topics. Deduplicate by changing one CTA.",
+    "CROSS-TOPIC: Both long-form scripts use the 'Nobody talks about this but' pattern as a pattern interrupt — feels formulaic across the batch. Vary the phrasing in one of them.",
+    "CROSS-TOPIC: Both topics share the 'April first' effective date and 'your bank won't tell you' framing, which is factually accurate but risks the batch feeling repetitive to a viewer watching both. Consider varying the framing angle for Topic 02 away from 'banks hiding info'.",
+    "WITHIN-TOPIC (Topic 01): The 'restaurant bill' analogy appears in both yt_long.md and yt_short_01.md — the short should use a different comparison to feel distinct.",
+    "WITHIN-TOPIC (Topic 01): ig_reel_01 hook ('Your mutual fund has been hiding charges inside one number') is too similar to yt_short_01 hook ('Your mutual fund has been charging you fees you literally cannot see') — a cross-platform viewer would notice the overlap."
+  ]
+}

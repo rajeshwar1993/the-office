@@ -1,0 +1,23 @@
+2026-03-13 13:06:51,218  INFO  ════════════════════════════════════════════════════════════
+2026-03-13 13:06:51,218  INFO    NEHA CONTENT PIPELINE — 2026-03-13
+2026-03-13 13:06:51,218  INFO    Niche: Personal Finance (India)  |  Topics: 3
+2026-03-13 13:06:51,218  INFO  ════════════════════════════════════════════════════════════
+2026-03-13 13:06:51,218  INFO  Run directory: /Users/rajeshwarrudra/Documents/DevWork/the-office-workspace/the-office/workflows/ai-content-pipeline/output/2026-03-13
+2026-03-13 13:06:51,218  INFO  ─── STEP 1: Trend Research ───
+2026-03-13 13:06:51,218  INFO  Calling Claude — trend_research
+2026-03-13 13:07:03,281  ERROR  Failed to parse research JSON: Expecting value: line 1 column 1 (char 0)
+2026-03-13 13:07:03,281  ERROR  Pipeline failed: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "/Users/rajeshwarrudra/Documents/DevWork/the-office-workspace/the-office/workflows/ai-content-pipeline/pipeline.py", line 322, in main
+    research_data = step_research()
+  File "/Users/rajeshwarrudra/Documents/DevWork/the-office-workspace/the-office/workflows/ai-content-pipeline/pipeline.py", line 102, in step_research
+    data = extract_json(response)
+  File "/Users/rajeshwarrudra/Documents/DevWork/the-office-workspace/the-office/workflows/ai-content-pipeline/pipeline.py", line 78, in extract_json
+    return json.loads(text.strip())
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

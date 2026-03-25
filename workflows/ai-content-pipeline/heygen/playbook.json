@@ -1,0 +1,360 @@
+{
+  "version": 1,
+  "status": "recorded",
+  "recorded_date": "2026-03-20",
+  "total_steps": 19,
+  "variables_used": [
+    "avatar_look_name",
+    "voice_name",
+    "aspect_ratio",
+    "background_search_term",
+    "video_title",
+    "script_text",
+    "caption_style",
+    "folder_name",
+    "folder_date"
+  ],
+  "notes": "Recorded from learn session on 2026-03-20. Key findings: (1) Script must be pasted into the rich text editor by clicking the 'Type your script...' placeholder text directly — do NOT click 'Script Writer'. (2) Never press Enter in the script area — it triggers HeyGen AI rewrite. (3) Set video title BEFORE pasting script. (4) Auto-enhance adds emotion tags like [surprised], [excited] automatically. (5) Folder selection: click 'My Videos' button → expand Finance-Maya via LEFT chevron → select date folder by clicking folder icon (not text) → Confirm. (6) Do NOT click folder name text directly — it activates rename mode. Click the folder icon instead.",
+  "steps": [
+    {
+      "step_number": 1,
+      "action": "navigate",
+      "description": "Navigate to HeyGen create page",
+      "element_strategy": null,
+      "url": "{{heygen_create_url}}",
+      "value": null,
+      "wait_after": "network_idle",
+      "notes": "Uses create_video_url from config.json"
+    },
+    {
+      "step_number": 2,
+      "action": "wait",
+      "description": "Wait for user to log in if login page detected",
+      "element_strategy": null,
+      "value": null,
+      "wait_after": "element_visible",
+      "notes": "Check if login form is present. If so, ask user to log in manually and wait for navigation away from login page."
+    },
+    {
+      "step_number": 3,
+      "action": "click",
+      "description": "Click 'Open in AI Studio' for full editor control",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "link",
+          "name_pattern": "Open in AI Studio"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Open in AI Studio"
+        }
+      },
+      "value": null,
+      "wait_after": "network_idle",
+      "notes": "This opens the full AI Studio editor instead of the simplified create page. May not appear if already in AI Studio."
+    },
+    {
+      "step_number": 4,
+      "action": "click",
+      "description": "Close any popup dialogs (e.g., Brand Systems)",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Close"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Close"
+        }
+      },
+      "value": null,
+      "wait_after": "seconds:1",
+      "notes": "Dismiss any modal dialogs that appear after opening AI Studio. Skip if no dialog present."
+    },
+    {
+      "step_number": 5,
+      "action": "click",
+      "description": "Open Avatar panel and select avatar look",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Avatar"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Avatar"
+        }
+      },
+      "value": "{{avatar_look_name}}",
+      "wait_after": "seconds:2",
+      "notes": "Click Avatar in the right panel sidebar, then click on the avatar area to open looks panel, then search/select the avatar look by name from config.json. The avatar look name maps to the heygen_avatar_look_name in config.json (e.g., 'Curly Cascade Beauty')."
+    },
+    {
+      "step_number": 6,
+      "action": "click",
+      "description": "Check and set voice",
+      "element_strategy": {
+        "primary": {
+          "method": "text_content",
+          "text": "Voice"
+        },
+        "fallback": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Voice"
+        }
+      },
+      "value": "{{voice_name}}",
+      "wait_after": "seconds:2",
+      "notes": "Click voice area to open voice selection. Search for and select the voice name from config.json (heygen_voice_name). Currently using 'Kanika'."
+    },
+    {
+      "step_number": 7,
+      "action": "click",
+      "description": "Set aspect ratio (Portrait 9:16 or Landscape 16:9)",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Portrait (9:16)"
+        },
+        "fallback": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Landscape (16:9)"
+        }
+      },
+      "value": "{{aspect_ratio}}",
+      "wait_after": "seconds:1",
+      "notes": "Click the appropriate aspect ratio button in the top toolbar. For 9:16 click 'Portrait (9:16)', for 16:9 click 'Landscape (16:9)'. Value comes from production file ASPECT RATIO field."
+    },
+    {
+      "step_number": 8,
+      "action": "select",
+      "description": "Set Motion Engine to Avatar III",
+      "element_strategy": {
+        "primary": {
+          "method": "text_content",
+          "text": "Motion Engine"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Avatar III"
+        }
+      },
+      "value": "Avatar III",
+      "wait_after": "seconds:2",
+      "notes": "Find the Motion Engine dropdown (in avatar settings panel), click it, and select 'Avatar III'. This is a static setting — always use Avatar III."
+    },
+    {
+      "step_number": 9,
+      "action": "click",
+      "description": "Customize background using stock image search",
+      "element_strategy": {
+        "primary": {
+          "method": "text_content",
+          "text": "Background"
+        },
+        "fallback": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Background"
+        }
+      },
+      "value": "{{background_search_term}}",
+      "wait_after": "seconds:3",
+      "notes": "Open background settings, switch to Stock tab, search for a relevant background based on the production file BACKGROUND field. Extract a search-friendly term from the background description. Select the first relevant result. If no good match found, keep the default background."
+    },
+    {
+      "step_number": 10,
+      "action": "fill",
+      "description": "Set video title from production filename",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "textbox",
+          "name_pattern": "Untitled Video"
+        },
+        "fallback": {
+          "method": "placeholder",
+          "text": "Untitled Video"
+        }
+      },
+      "value": "{{video_title}}",
+      "wait_after": "seconds:1",
+      "notes": "IMPORTANT: Set the title BEFORE pasting the script. Click the title textbox at the top of the editor, clear it, and type the production filename (e.g., 'InstaReel_01_Production'). The title is derived from the production file's basename without extension."
+    },
+    {
+      "step_number": 11,
+      "action": "fill",
+      "description": "Paste cleaned script into the rich text editor",
+      "element_strategy": {
+        "primary": {
+          "method": "text_content",
+          "text": "Type your script or use '/' for commands"
+        },
+        "fallback": {
+          "method": "role_and_name",
+          "role": "textbox",
+          "name_pattern": ""
+        }
+      },
+      "value": "{{script_text}}",
+      "wait_after": "seconds:2",
+      "notes": "CRITICAL: (1) Click on the 'Type your script or use / for commands' placeholder text DIRECTLY — do NOT click on 'Script Writer'. (2) Once cursor is active in the rich text editor, fill/type the cleaned script text. (3) Click somewhere else to confirm the text persists. (4) NEVER press Enter in the script area — it triggers HeyGen AI rewrite which changes the script. Script text is cleaned by combining all Script: fields from production file sections, removing [beat] → '. ', [pause] → '... ', *emphasis* → plain text, and [TEXT:]/[NUMBER:]/[MATH:]/[TAKEAWAY:] overlay markers."
+    },
+    {
+      "step_number": 12,
+      "action": "click",
+      "description": "Click 'Delivery style' then enable 'Auto-enhance'",
+      "element_strategy": {
+        "primary": {
+          "method": "text_content",
+          "text": "Delivery style"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Auto-enhance"
+        }
+      },
+      "value": null,
+      "wait_after": "seconds:2",
+      "notes": "First click 'Delivery style' to expand the delivery options, then click 'Auto-enhance' to enable it. This automatically adds emotion tags like [surprised], [excited] to the script for more natural delivery."
+    },
+    {
+      "step_number": 13,
+      "action": "click",
+      "description": "Open Captions panel and select caption style",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Captions"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Captions"
+        }
+      },
+      "value": "{{caption_style}}",
+      "wait_after": "seconds:2",
+      "notes": "Click 'Captions' in the right sidebar panel. Then select a caption style — currently using 'bold'. The caption style name matches the button name pattern '{style_name} caption preview' in the Other Styles section."
+    },
+    {
+      "step_number": 14,
+      "action": "click",
+      "description": "Click Generate button to open generation dialog",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Generate"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Generate"
+        }
+      },
+      "value": null,
+      "wait_after": "seconds:2",
+      "notes": "Click the Generate button in the top-right toolbar. This opens the Generate Video dialog with settings for title, folder, resolution, FPS, format, and watermark."
+    },
+    {
+      "step_number": 15,
+      "action": "click",
+      "description": "Click 'My Videos' to open folder selection dialog",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "My Videos"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "My Videos"
+        }
+      },
+      "value": null,
+      "wait_after": "seconds:1",
+      "notes": "In the Generate Video dialog, click the 'My Videos' button next to 'Add to folder' to open the folder tree selection dialog."
+    },
+    {
+      "step_number": 16,
+      "action": "click",
+      "description": "Expand avatar folder and select date subfolder",
+      "element_strategy": {
+        "primary": {
+          "method": "text_content",
+          "text": "{{folder_name}}"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Finance-Maya"
+        }
+      },
+      "value": "{{folder_date}}",
+      "wait_after": "seconds:1",
+      "notes": "3-LEVEL NESTING: avatar_folder/date/language (e.g., Finance-Maya/2026-03-20/en/). In the folder tree dialog: (1) Click the LEFT chevron/arrow next to the avatar folder (e.g., 'Finance-Maya') to expand it — do NOT click the folder name text (that activates rename mode) and do NOT click the right button (that creates a subfolder). (2) Look for a subfolder matching the date from the production file path (e.g., '2026-03-20'). If it does not exist, click '+' on the avatar folder to create it. (3) Expand the date folder via LEFT chevron. (4) For multilingual topics ({{folder_language}} is set): find or create a language subfolder ('en' or 'hi') inside the date folder. Click the language subfolder's FOLDER ICON to select it. (5) For legacy flat topics ({{folder_language}} is null): click the date folder's FOLDER ICON to select it. (6) NEVER click folder name text directly — it activates rename mode. Always click the folder icon."
+    },
+    {
+      "step_number": 17,
+      "action": "click",
+      "description": "Confirm folder selection",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Confirm"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Confirm"
+        }
+      },
+      "value": null,
+      "wait_after": "seconds:1",
+      "notes": "Click Confirm to save the folder selection and return to the Generate Video dialog."
+    },
+    {
+      "step_number": 18,
+      "action": "click",
+      "description": "Click Submit to start video generation",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Submit"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Submit"
+        }
+      },
+      "value": null,
+      "wait_after": "network_idle",
+      "notes": "Click Submit in the Generate Video dialog to start the actual video generation. Default settings: 1080p, 25fps, MP4 format. After submission, HeyGen navigates to the Projects page showing the video in the selected folder."
+    },
+    {
+      "step_number": 19,
+      "action": "navigate",
+      "description": "Navigate back to Avatar page for next video",
+      "element_strategy": {
+        "primary": {
+          "method": "role_and_name",
+          "role": "button",
+          "name_pattern": "Avatar"
+        },
+        "fallback": {
+          "method": "text_content",
+          "text": "Avatar"
+        }
+      },
+      "value": null,
+      "wait_after": "network_idle",
+      "notes": "After Submit, HeyGen redirects to the Projects page. Click 'Avatar' in the left navigation bar to return to the Avatar home page, ready to start the next video. The Avatar page shows 'Open in AI Studio' which is step 3 of the playbook."
+    }
+  ]
+}

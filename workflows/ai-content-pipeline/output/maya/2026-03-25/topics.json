@@ -1,0 +1,30 @@
+{
+  "batch_date": "2026-03-25",
+  "avatar": "maya",
+  "version": 2,
+  "research_method": "v2_notebooklm",
+  "topics": [
+    {
+      "id": 1,
+      "title": "Don't Be a Chhuchhundar in the Year of the Dhurandhar — Why Small-Caps Beat Your Home Loan EMI",
+      "folder_name": "Topic_01_Dhurandhar_SmallCap_Strategy",
+      "source": "research_synthesis",
+      "angle": "Use the Dhurandhar cultural moment to challenge the 'play it safe with FDs and home loans' mindset. Show how small-cap SIPs can outperform a home loan EMI strategy, with real math from 1995-2026 data.",
+      "trend_context": "Dhurandhar 2 crossed Rs 559 Cr net in 6 days (approaching Rs 1000 Cr), India won back-to-back T20 World Cups — the national mood is aggressive and winning. Meanwhile, young professionals are trapped in 'Bad EMIs' for homes and cars.",
+      "general_hook": "Dhurandhar 2 just became the biggest Bollywood opener ever — and it teaches a finance lesson most people miss",
+      "genre": "comedy_satire",
+      "hook_fit": "high"
+    },
+    {
+      "id": 2,
+      "title": "Your Savings Account Is Quietly Robbing You — The 2026 Money Shield Every 20-Something Needs",
+      "folder_name": "Topic_02_Savings_Inflation_Shield",
+      "source": "research_synthesis",
+      "angle": "Expose the savings account as a 'leaking bucket' where inflation eats your money. With RBI repo rate at 5.25% and most savings accounts at 2.5-4%, your purchasing power is shrinking every month. Provide a 3-part 'Money Shield' — term insurance, inflation-beating SIP, and a 10% Memory Fund.",
+      "trend_context": "Iran War pushed oil to $170/barrel, Indian fuel prices rising, RBI repo at 5.25% but bank savings rates lagging behind real inflation. The general public is unknowingly losing money by 'saving' it.",
+      "general_hook": null,
+      "genre": "shock_and_awe",
+      "hook_fit": "none"
+    }
+  ]
+}

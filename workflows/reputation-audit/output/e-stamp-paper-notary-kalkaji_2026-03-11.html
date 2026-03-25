@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presence Audit — E-stamp paper, Notary, Affidavit and Ayushman Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --paper: #FAFAF8;
+  --white: #FFFFFF;
+  --ink: #111118;
+  --ink-2: #3C3C4E;
+  --ink-3: #7C7C96;
+  --ink-4: #B8B8CC;
+  --rule: #E4E4EE;
+  --amber-accent: #B45309;
+  --amber-mid: #D97706;
+  --amber-bg: #FFFBEB;
+  --amber-border: rgba(180,83,9,0.2);
+  --red-accent: #C0392B;
+  --red-bg: #FBF0EE;
+  --green-accent: #0F6E4A;
+  --green-bg: #EAF4EE;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: #D4CFC8;
+  display: flex;
+  justify-content: center;
+  padding: 48px 24px;
+  min-height: 100vh;
+}
+
+.page {
+  width: 760px;
+  background: var(--white);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 24px 64px rgba(0,0,0,0.14);
+}
+
+/* ─── MASTHEAD ─── */
+.masthead {
+  background: var(--ink);
+  padding: 0 44px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  min-height: 56px;
+}
+.masthead-brand { display: flex; align-items: center; gap: 10px; }
+.brand-logo { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; color: white; }
+.brand-logo span { color: #F59E0B; }
+.brand-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.2); }
+.brand-report-type { font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.masthead-meta { display: flex; align-items: center; gap: 16px; font-size: 11px; color: rgba(255,255,255,0.4); }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 36px 44px 32px;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  background: var(--paper);
+}
+
+.hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+.hero-name { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: var(--ink); line-height: 1.1; letter-spacing: -1px; margin-bottom: 10px; }
+.hero-details { display: flex; gap: 20px; flex-wrap: wrap; }
+.hero-detail { font-size: 12.5px; color: var(--ink-3); }
+
+/* PRESENCE METER */
+.presence-block {
+  padding-left: 32px;
+  border-left: 1px solid var(--rule);
+  text-align: center;
+}
+
+.meter-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+
+.meter-outer {
+  width: 120px;
+  height: 8px;
+  background: var(--rule);
+  margin: 0 auto 12px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.meter-inner {
+  height: 100%;
+  width: 65%;
+  background: linear-gradient(90deg, var(--amber-mid), var(--red-accent));
+  border-radius: 4px;
+}
+
+.meter-pct {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--amber-accent);
+  line-height: 1;
+}
+
+.meter-sub { font-size: 11px; color: var(--ink-3); margin-top: 4px; }
+
+.presence-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--amber-accent);
+  background: var(--amber-bg);
+  border: 1px solid var(--amber-border);
+  padding: 3px 12px;
+}
+
+/* ─── CRITICAL FINDINGS ─── */
+.critical-findings {
+  background: var(--amber-bg);
+  border-top: 3px solid var(--amber-mid);
+  border-bottom: 1px solid var(--amber-border);
+  padding: 24px 44px;
+}
+
+.cf-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.cf-icon {
+  width: 28px; height: 28px;
+  background: var(--amber-mid);
+  color: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; flex-shrink: 0;
+}
+.cf-title { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--amber-accent); }
+
+.cf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+.cf-item {
+  background: white;
+  border: 1px solid var(--amber-border);
+  padding: 14px 16px;
+}
+.cf-item-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+.cf-item-value { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: var(--amber-accent); line-height: 1.1; margin-bottom: 4px; }
+.cf-item-desc { font-size: 11.5px; color: var(--ink-2); line-height: 1.4; }
+
+/* ─── BODY ─── */
+.section { padding: 28px 44px; border-bottom: 1px solid var(--rule); }
+
+.section-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.section-title::before { content: ''; width: 14px; height: 2px; background: var(--ink-4); display: inline-block; }
+
+/* HEALTH CHECKLIST */
+.health-list { display: flex; flex-direction: column; gap: 2px; }
+
+.health-row {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 0;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  align-items: center;
+  background: var(--paper);
+}
+
+.health-icon-col {
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  padding: 14px 0;
+  border-right: 1px solid var(--rule);
+  align-self: stretch;
+}
+
+.health-row.status-missing .health-icon-col { background: var(--red-bg); }
+.health-row.status-partial .health-icon-col { background: var(--amber-bg); }
+.health-row.status-ok .health-icon-col { background: var(--green-bg); }
+
+.health-content { padding: 13px 16px; }
+
+.health-name { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.health-detail { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
+
+.health-badge-col { padding: 13px 16px; }
+
+.health-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.badge-missing { background: var(--red-bg); color: var(--red-accent); border: 1px solid rgba(192,57,43,0.2); }
+.badge-partial { background: var(--amber-bg); color: var(--amber-accent); border: 1px solid var(--amber-border); }
+.badge-ok { background: var(--green-bg); color: var(--green-accent); border: 1px solid rgba(15,110,74,0.2); }
+
+/* DORMANCY CALLOUT */
+.dormancy-callout {
+  background: var(--ink);
+  padding: 20px 44px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.dormancy-quote { font-family: 'Fraunces', serif; font-size: 44px; color: rgba(255,255,255,0.08); line-height: 1; margin-top: -6px; flex-shrink: 0; }
+.dormancy-text { font-size: 13.5px; color: rgba(255,255,255,0.8); line-height: 1.65; font-style: italic; }
+.dormancy-text strong { color: #F59E0B; font-style: normal; font-weight: 600; }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.comp-table thead tr { border-bottom: 2px solid var(--ink); }
+.comp-table th { text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-3); padding: 0 12px 10px; }
+.comp-table th:first-child { padding-left: 0; }
+.comp-table td { padding: 12px 12px; border-bottom: 1px solid var(--rule); color: var(--ink-2); vertical-align: middle; }
+.comp-table td:first-child { padding-left: 0; color: var(--ink); font-weight: 500; }
+.comp-table tr.you-row td { background: var(--amber-bg); font-weight: 600; color: var(--ink); }
+.comp-table tr.you-row td:first-child { padding-left: 12px; }
+
+.you-pill { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; background: var(--amber-mid); color: white; padding: 2px 7px; margin-left: 8px; border-radius: 2px; }
+
+.activity-badge { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; }
+.activity-active { background: var(--green-bg); color: var(--green-accent); border: 1px solid rgba(15,110,74,0.2); }
+.activity-dormant { background: var(--amber-bg); color: var(--amber-accent); border: 1px solid var(--amber-border); }
+
+/* LOST OPPORTUNITY */
+.lost-opps { display: flex; flex-direction: column; gap: 1px; }
+
+.lost-opp-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+}
+
+.opp-num-col {
+  background: var(--red-bg);
+  color: var(--red-accent);
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+  align-self: stretch;
+  border-right: 1px solid rgba(192,57,43,0.1);
+}
+
+.opp-content { padding: 13px 16px; }
+.opp-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.opp-desc { font-size: 12px; color: var(--ink-3); line-height: 1.45; }
+
+.opp-impact-col { padding: 13px 16px; text-align: right; }
+.opp-impact-val { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: var(--red-accent); }
+.opp-impact-label { font-size: 10px; color: var(--ink-4); margin-top: 2px; }
+
+/* ─── ENROLLMENT ─── */
+.enrollment {
+  background: var(--ink);
+  padding: 36px 44px;
+  position: relative;
+  overflow: hidden;
+}
+
+.enrollment::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 44px; right: 44px;
+  height: 3px;
+  background: linear-gradient(90deg, #F59E0B, var(--amber-mid));
+}
+
+.enrollment-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.enrollment-label { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #F59E0B; margin-bottom: 10px; }
+
+.enrollment-headline {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 14px;
+}
+.enrollment-headline em { font-style: italic; color: #F59E0B; }
+
+.enrollment-benefits { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+
+.benefit-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.4; }
+.benefit-check { width: 16px; height: 16px; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.4); color: #F59E0B; font-size: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+.enrollment-price { color: rgba(255,255,255,0.4); font-size: 12px; }
+.enrollment-price strong { color: white; font-size: 14px; }
+
+.enrollment-cta-col { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+.cta-button { display: inline-flex; flex-direction: column; align-items: center; background: #F59E0B; color: var(--ink); text-decoration: none; padding: 16px 28px; min-width: 180px; gap: 2px; }
+.cta-button-main { font-size: 14px; font-weight: 700; color: var(--ink); }
+.cta-button-sub { font-size: 10.5px; color: rgba(17,17,24,0.65); font-weight: 500; }
+
+.cta-trust { font-size: 10.5px; color: rgba(255,255,255,0.3); text-align: center; line-height: 1.5; }
+
+/* FOOTER */
+.footer {
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  padding: 10px 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-brand { font-family: 'Fraunces', serif; font-size: 12px; font-weight: 600; color: var(--ink-3); }
+.footer-brand span { color: #F59E0B; }
+.footer-meta { font-size: 10.5px; color: var(--ink-4); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-brand">
+      <div class="brand-logo">Reputation<span>Flow</span></div>
+      <div class="brand-divider"></div>
+      <div class="brand-report-type">Presence Audit · Scenario B</div>
+    </div>
+    <div class="masthead-meta">
+      <span>Kalkaji Extension, New Delhi</span>
+      <span>·</span>
+      <span>March 2026</span>
+      <span>·</span>
+      <span>Confidential</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">Digital Presence Report</div>
+      <div class="hero-name">E-stamp paper, Notary, Affidavit &amp; Ayushman Card</div>
+      <div class="hero-details">
+        <span class="hero-detail">📍 Kalkaji Extension, New Delhi</span>
+        <span class="hero-detail">📋 Notary &amp; Documentation Services</span>
+        <span class="hero-detail">🌐 Google Business · Dormant Listing</span>
+      </div>
+    </div>
+    <div class="presence-block">
+      <div class="meter-label">Presence Strength</div>
+      <div class="meter-outer"><div class="meter-inner"></div></div>
+      <div class="meter-pct">65%</div>
+      <div class="meter-sub">of full visibility potential</div>
+      <div class="presence-tag">Dormant Listing</div>
+    </div>
+  </div>
+
+  <!-- CRITICAL FINDINGS -->
+  <div class="critical-findings">
+    <div class="cf-header">
+      <div class="cf-icon">!</div>
+      <div class="cf-title">Critical Findings — Your Listing Is Working Against You</div>
+    </div>
+    <div class="cf-grid">
+      <div class="cf-item">
+        <div class="cf-item-label">Last Review</div>
+        <div class="cf-item-value">3 Years Ago</div>
+        <div class="cf-item-desc">Google treats listings with no recent reviews as inactive, pushing you below competitors in local search results.</div>
+      </div>
+      <div class="cf-item">
+        <div class="cf-item-label">Response Rate</div>
+        <div class="cf-item-value">0%</div>
+        <div class="cf-item-desc">Not a single customer review has received a reply. Google rewards businesses that engage with their reviewers.</div>
+      </div>
+      <div class="cf-item">
+        <div class="cf-item-label">Listing Status</div>
+        <div class="cf-item-value">Unclaimed</div>
+        <div class="cf-item-desc">"Own this business?" is visible — meaning no one is managing your Google profile. Anyone can suggest edits to your listing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LISTING HEALTH -->
+  <div class="section">
+    <div class="section-title">Listing Health — Item by Item</div>
+    <div class="health-list">
+      <div class="health-row status-ok">
+        <div class="health-icon-col">✅</div>
+        <div class="health-content">
+          <div class="health-name">Business Found on Google</div>
+          <div class="health-detail">Your listing exists on Google Maps with name, address, and phone number.</div>
+        </div>
+        <div class="health-badge-col"><span class="health-badge badge-ok">Found</span></div>
+      </div>
+      <div class="health-row status-missing">
+        <div class="health-icon-col">✗</div>
+        <div class="health-content">
+          <div class="health-name">Recent Reviews</div>
+          <div class="health-detail">Your last review was 3 years ago. Google prioritises businesses with fresh, recent reviews.</div>
+        </div>
+        <div class="health-badge-col"><span class="health-badge badge-missing">Stale</span></div>
+      </div>
+      <div class="health-row status-missing">
+        <div class="health-icon-col">✗</div>
+        <div class="health-content">
+          <div class="health-name">Owner Responses</div>
+          <div class="health-detail">Zero responses to any of your 13 reviews. Customers and Google both notice this silence.</div>
+        </div>
+        <div class="health-badge-col"><span class="health-badge badge-missing">Missing</span></div>
+      </div>
+      <div class="health-row status-partial">
+        <div class="health-icon-col">△</div>
+        <div class="health-content">
+          <div class="health-name">Photos</div>
+          <div class="health-detail">Only a few photos exist, mostly user-submitted. Professional photos of your shop would build trust.</div>
+        </div>
+        <div class="health-badge-col"><span class="health-badge badge-partial">Minimal</span></div>
+      </div>
+      <div class="health-row status-missing">
+        <div class="health-icon-col">✗</div>
+        <div class="health-content">
+          <div class="health-name">Services &amp; Pricing</div>
+          <div class="health-detail">No services listed on your profile. Customers searching for "notary near me" can't see what you offer.</div>
+        </div>
+        <div class="health-badge-col"><span class="health-badge badge-missing">Missing</span></div>
+      </div>
+      <div class="health-row status-ok">
+        <div class="health-icon-col">✅</div>
+        <div class="health-content">
+          <div class="health-name">Opening Hours</div>
+          <div class="health-detail">Hours are set (Opens 10:30 am, closes in the evening). This helps customers know when to visit.</div>
+        </div>
+        <div class="health-badge-col"><span class="health-badge badge-ok">Set</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DORMANCY CALLOUT -->
+  <div class="dormancy-callout">
+    <div class="dormancy-quote">"</div>
+    <div class="dormancy-text">
+      Your listing hasn't received a new review in <strong>over 3 years</strong>. Google interprets this as an inactive business and pushes you further down in "notary near me" searches. Meanwhile, <strong>SHREE DOCUMENTATION CENTER</strong> — located nearby — has a perfect <strong>5.0★ rating with 577 reviews</strong> and captures the vast majority of customers searching for notary and e-stamp services in your area. Your listing is also <strong>unclaimed</strong>, meaning you have zero control over what information appears.
+    </div>
+  </div>
+
+  <!-- COMPETITOR TABLE -->
+  <div class="section">
+    <div class="section-title">Nearby Businesses Outranking You Right Now</div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Business</th>
+          <th>Rating</th>
+          <th>Reviews</th>
+          <th>Last Review</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="you-row">
+          <td>E-stamp paper, Notary &amp; Affidavit <span class="you-pill">You</span></td>
+          <td>3.7★</td>
+          <td>13</td>
+          <td>3 years ago</td>
+          <td><span class="activity-badge activity-dormant">Dormant</span></td>
+        </tr>
+        <tr>
+          <td>SHREE DOCUMENTATION CENTER</td>
+          <td>5.0★</td>
+          <td>577</td>
+          <td>Recent</td>
+          <td><span class="activity-badge activity-active">Active</span></td>
+        </tr>
+        <tr>
+          <td>Indian Documentation: E-Stamp Paper &amp; Notary</td>
+          <td>4.8★</td>
+          <td>63</td>
+          <td>Recent</td>
+          <td><span class="activity-badge activity-active">Active</span></td>
+        </tr>
+        <tr>
+          <td>Dhingra Documentation Centre</td>
+          <td>4.0★</td>
+          <td>38</td>
+          <td>Recent</td>
+          <td><span class="activity-badge activity-active">Active</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WHAT IT'S COSTING -->
+  <div class="section">
+    <div class="section-title">What This Dormancy Is Costing You</div>
+    <div class="lost-opps">
+      <div class="lost-opp-row">
+        <div class="opp-num-col">1</div>
+        <div class="opp-content">
+          <div class="opp-title">You're invisible in "notary near me" searches</div>
+          <div class="opp-desc">With only 13 reviews (last one 3 years ago), Google ranks you well below SHREE DOCUMENTATION CENTER (577 reviews) and Indian Documentation (63 reviews). Customers searching for notary or e-stamp services never see you.</div>
+        </div>
+        <div class="opp-impact-col">
+          <div class="opp-impact-val">Page 2+</div>
+          <div class="opp-impact-label">Your search position</div>
+        </div>
+      </div>
+      <div class="lost-opp-row">
+        <div class="opp-num-col">2</div>
+        <div class="opp-content">
+          <div class="opp-title">Unclaimed listing = zero control</div>
+          <div class="opp-desc">Since the listing is unclaimed, you cannot respond to reviews, update photos, add services, or post offers. Worse, anyone can suggest edits to your hours, address, or even mark you as closed.</div>
+        </div>
+        <div class="opp-impact-col">
+          <div class="opp-impact-val">At Risk</div>
+          <div class="opp-impact-label">Profile accuracy</div>
+        </div>
+      </div>
+      <div class="lost-opp-row">
+        <div class="opp-num-col">3</div>
+        <div class="opp-content">
+          <div class="opp-title">Negative reviews are your first impression</div>
+          <div class="opp-desc">With a 3.7★ rating and reviews mentioning "charge extra" and "bad behaviour" left unanswered, new customers see complaints with no resolution — and choose competitors instead.</div>
+        </div>
+        <div class="opp-impact-col">
+          <div class="opp-impact-val">3.7★</div>
+          <div class="opp-impact-label">Below area average</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENROLLMENT -->
+  <div class="enrollment">
+    <div class="enrollment-inner">
+      <div>
+        <div class="enrollment-label">Enroll in ReputationFlow</div>
+        <div class="enrollment-headline">
+          We revive your listing —<br><em>and keep it active every week.</em>
+        </div>
+        <div class="enrollment-benefits">
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            Automated review collection messages sent to your customers via WhatsApp
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            AI-drafted responses to every review, ready in minutes
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            Profile completion — services, photos, and description written for you
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            Weekly activity report so you can watch your ranking climb
+          </div>
+        </div>
+        <div class="enrollment-price">Starts at <strong>₹999/month</strong> · Includes onboarding</div>
+      </div>
+      <div class="enrollment-cta-col">
+        <a class="cta-button" href="#">
+          <span class="cta-button-main">Revive My Listing</span>
+          <span class="cta-button-sub">Setup included · No card needed</span>
+        </a>
+        <div class="cta-trust">WhatsApp onboarding · No contract<br>First results visible in 2–3 weeks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Reputation<span>Flow</span> · reputationflow.in</div>
+    <div class="footer-meta">E-stamp paper, Notary, Affidavit &amp; Ayushman Card · Kalkaji Extension, New Delhi · March 2026 · Based on publicly available Google data</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "date": "2026-03-17",
+  "avatar": "maya",
+  "search_queries": [
+    "trending in India today March 2026 viral news",
+    "personal finance India trending this week March 2026 RBI SEBI news",
+    "most searched personal finance questions India 2026 common money questions",
+    "India stock market March 2026 Sensex Nifty IPL season spending",
+    "SEBI mutual fund regulations 2026 new rules BSBD savings account changes April"
+  ],
+  "general_trending": [
+    { "topic": "Indian stock market volatility — Sensex and Nifty down ~10% YTD", "reason": "Geopolitical tensions, crude oil above $92, FII selling causing major market drops; Nifty fell below 24,000" },
+    { "topic": "IPL 2026 season kicks off", "reason": "Cricket season beginning, massive consumer attention and spending spike across India" },
+    { "topic": "Electricity Amendment Bill protests", "reason": "Power engineers across India announced protests against the proposed bill, trending in news" },
+    { "topic": "LPG supply shortage and long queues at gas agencies", "reason": "Ongoing LPG supply crunch causing visible public frustration across cities" },
+    { "topic": "Netflix India trending — Dhurandhar and new releases", "reason": "OTT subscription content driving cultural conversation" },
+    { "topic": "Met Gala 2026 viral fashion moments", "reason": "Global cultural event trending on Indian social media" },
+    { "topic": "Crude oil above $92 per barrel", "reason": "Rising energy prices impacting inflation expectations and household budgets" },
+    { "topic": "Kumbh Mela viral moments", "reason": "Monalisa from Indore viral story and cultural event coverage" },
+    { "topic": "FII selling spree in Indian markets", "reason": "Foreign institutional investors pulling out money, contributing to market decline" },
+    { "topic": "Pokémon 30th Anniversary celebrations", "reason": "Global pop culture event trending on Indian social media" }
+  ],
+  "niche_trending": [
+    { "topic": "SEBI Mutual Fund Regulations 2026 — new expense ratio rules from April 1", "reason": "SEBI approved new MF regulations replacing 1996 rules; base expense ratio (BER) separated from brokerage/STT/stamp duty; brokerage limits halved (12bps to 6bps cash, 5bps to 2bps derivatives); effective April 1, 2026" },
+    { "topic": "RBI BSBD account upgrade — zero-balance with free digital services from April 1", "reason": "RBI announced major BSBD overhaul: unlimited free UPI/NEFT/RTGS/IMPS, free debit card, free chequebook (25 leaves/year), free internet/mobile banking; positioned as normal banking for all, not restricted category" },
+    { "topic": "SEBI voluntary lock-in facility for mutual fund folios", "reason": "New SEBI facility allows investors to voluntarily lock-in or debit freeze their MF folios for both demat and non-demat accounts" },
+    { "topic": "MoneyView fintech IPO filing — INR 1,500 crore DRHP with SEBI", "reason": "Fintech lending platform filed for IPO, signals fintech maturation in India" },
+    { "topic": "Stock market crash — Nifty below 24,000, Sensex down 10% YTD", "reason": "Market correction driven by FII outflows, geopolitical tensions, crude oil spike; investors panicking" },
+    { "topic": "RBI Consumer Confidence Survey March 2026 — rural and urban", "reason": "RBI launched both rural and urban consumer confidence surveys to gauge household sentiment on economy, employment, prices, income, spending" },
+    { "topic": "New SEBI equity mutual fund classification rules", "reason": "SEBI announced revised classification framework for equity MF schemes, changing how funds are categorized" },
+    { "topic": "Credit card and gold/silver loan rule changes from April 2026", "reason": "8 key personal finance rules changing in 2026 including credit card regulations and gold/silver loan norms" },
+    { "topic": "SEBI mutual fund intraday borrowing rules from April 2026", "reason": "New SEBI rules governing how mutual funds can borrow intraday, affecting liquidity management" },
+    { "topic": "Sensex rebound — 600+ point rally after sharp correction", "reason": "Markets bounced back sharply with Sensex gaining 600+ points and Nifty crossing 24,250 after previous week's selloff" }
+  ],
+  "niche_evergreen": [
+    { "topic": "How to start investing with a small salary in India", "intent": "aspiration — young professionals wanting to begin investing but feeling their salary is too low" },
+    { "topic": "SIP vs lump sum investing — which is better for beginners", "intent": "curiosity — new investors comparing approaches, heavily searched during market volatility" },
+    { "topic": "Emergency fund — how much do I actually need in India", "intent": "anxiety — people unsure about right amount (3-6 months vs 6-12 months debate)" },
+    { "topic": "50/30/20 budgeting rule — does it work in India", "intent": "curiosity — popular framework but skepticism about applicability to Indian cost structures" },
+    { "topic": "Health insurance — how much cover is enough in 2026", "intent": "anxiety — rising medical costs, confusion about sub-limits and waiting periods" },
+    { "topic": "Term insurance vs whole life insurance in India", "intent": "curiosity — common confusion, heavily marketed products with different value propositions" },
+    { "topic": "How to check and improve credit score in India", "intent": "anxiety — credit score anxiety especially among young borrowers applying for first loans" },
+    { "topic": "Tax saving investments under Section 80C — best options", "intent": "aspiration — annual tax planning season, people looking for optimal 80C allocation" },
+    { "topic": "FD vs mutual funds — where should I put my money", "intent": "curiosity — traditional vs modern investment debate, especially relevant for risk-averse Indians" },
+    { "topic": "NPS vs PPF vs ELSS — which retirement investment is best", "intent": "curiosity — comparison shopping for long-term retirement vehicles" }
+  ]
+}

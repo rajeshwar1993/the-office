@@ -1,0 +1,20 @@
+{
+  "heygen_url": "https://app.heygen.com",
+  "create_video_url": "https://app.heygen.com/create-v4",
+  "avatars": {
+    "maya": {
+      "heygen_avatar_name": "Maya",
+      "heygen_avatar_look_name": "Curly Cascade Beauty",
+      "heygen_voice_name": "Kanika",
+      "heygen_folder_name": "Finance-Maya",
+      "heygen_caption_style": "bold",
+      "heygen_motion_engine": "Avatar III"
+    }
+  },
+  "defaults": {
+    "short_form_aspect_ratio": "9:16",
+    "long_form_aspect_ratio": "16:9",
+    "caption_style": "bold",
+    "motion_engine": "Avatar III"
+  }
+}

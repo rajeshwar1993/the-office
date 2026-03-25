@@ -1,0 +1,50 @@
+{
+  "date": "2026-03-20",
+  "avatar": "maya",
+  "search_queries": [
+    "trending in India today March 2026",
+    "personal finance India trending this week March 2026 RBI SEBI news",
+    "most searched personal finance questions India 2026",
+    "India new Income Tax Act 2025 changes April 2026 what changes for salaried employees",
+    "SEBI mutual fund regulations 2026 expense ratio changes new rules",
+    "India rupee crash 2026 crude oil prices impact personal finance savings",
+    "sovereign gold bond SGB 312% returns India 2026 should you invest gold",
+    "best investment options India 2026 FD vs mutual fund vs SIP comparison"
+  ],
+  "general_trending": [
+    { "topic": "Gold and silver prices crashing amid Middle East tensions", "reason": "Gold rates fell sharply across India on March 19, 2026 amid strong dollar and geopolitical volatility between US-Israel-Iran" },
+    { "topic": "Crude oil surging past $100/barrel — petrol price hike fears", "reason": "Brent crude climbed to $100-115/barrel as Iran escalated Middle East attacks, India imports 88% of its crude — fuel price hikes expected" },
+    { "topic": "Indian rupee hits record low of 92.94 against USD", "reason": "Oil surge and FII outflows of ₹60,000 crore in March 2026 pushed rupee to historic lows" },
+    { "topic": "Sensex crashes 2,500 points amid geopolitical tensions", "reason": "Stock market crash triggered by Middle East crisis, crude oil spike, and massive FII selling" },
+    { "topic": "Eid-ul-Fitr celebrations and bank holidays March 21", "reason": "Eid being celebrated across India, moon sighting confirmed for March 21" },
+    { "topic": "PM Modi to inaugurate Noida International Airport March 28", "reason": "Major infrastructure event — new Jewar airport near Delhi NCR" },
+    { "topic": "Netflix trending: Dhurandhar, Made in Korea topping charts", "reason": "New Indian OTT content dominating streaming charts in India" },
+    { "topic": "India GDP growth faces risks amid oil crisis", "reason": "Rising import bill from oil prices threatens India's economic growth trajectory" },
+    { "topic": "New Income Tax Act 2025 takes effect April 1, 2026", "reason": "Major tax law overhaul replacing 1961 Act — simplified from 800+ to 536 sections, new 'Tax Year' terminology" },
+    { "topic": "RBI launches March 2026 consumer confidence surveys", "reason": "Rural and Urban consumer confidence surveys launched to gauge economic sentiment" }
+  ],
+  "niche_trending": [
+    { "topic": "SEBI's new mutual fund regulations 2026 — expense ratio overhaul from April 1", "reason": "SEBI approved new Mutual Fund Regulations replacing 1996 rules. Base Expense Ratio concept introduced, TER restructured, 10-15 bps reduction in costs, brokerage limits halved" },
+    { "topic": "Sovereign Gold Bond investors get 312% returns — but tax rules changing", "reason": "SGB 2019-20 Series IV premature redemption at ₹15,814/gram (bought at ₹3,840). But Budget 2026 removes tax exemption for secondary market SGB buyers from April 1" },
+    { "topic": "New Income Tax Act 2025 — 8 major changes for salaried employees from April 1", "reason": "Tax Year replaces Assessment Year, HRA expanded to Bengaluru/Hyderabad/Pune, home-to-office travel now non-taxable, sections reduced from 800+ to 536" },
+    { "topic": "Rupee at record low — how rising crude oil prices hit your wallet", "reason": "Rupee at 92.94/USD, could reach 95-97 if oil stays at $100+. Higher fuel costs → inflation → higher cost of living for Indians" },
+    { "topic": "FII selling ₹60,000 crore in March — should you panic-sell your mutual funds?", "reason": "Massive foreign institutional investor outflows due to oil crisis and geopolitical risks, markets crashing" },
+    { "topic": "Gold price crash in March 2026 — buy the dip or stay away?", "reason": "Gold prices fell sharply amid dollar strength, but geopolitical uncertainty makes gold attractive as safe haven" },
+    { "topic": "New credit card rules and UPI changes effective 2026", "reason": "8 key personal finance rule changes in 2026 including credit card regulations and digital payment updates" },
+    { "topic": "FD vs SIP vs mutual funds — where to put your money in 2026", "reason": "Perennial comparison gets fresh relevance with market crash, FD rates still competitive, and new SEBI mutual fund rules" },
+    { "topic": "Emergency fund: how many months of expenses do you really need?", "reason": "Rising inflation and job market uncertainty making emergency fund sizing a trending question" },
+    { "topic": "RBI consumer confidence survey — what rural and urban Indians think about the economy", "reason": "RBI launched surveys to gauge perceptions on economic conditions, employment, prices, income and spending" }
+  ],
+  "niche_evergreen": [
+    { "topic": "How expense ratios silently eat your mutual fund returns", "intent": "curiosity — most investors don't understand TER and how it compounds against them" },
+    { "topic": "SIP vs lump sum investing — which actually works better", "intent": "anxiety — people with savings don't know the best way to deploy money" },
+    { "topic": "Health insurance: what your policy actually covers vs what you think it covers", "intent": "anxiety — most Indians are underinsured and discover gaps only during claims" },
+    { "topic": "How to build a 6-month emergency fund on an Indian salary", "intent": "aspiration — practical steps for salaried Indians to build financial safety net" },
+    { "topic": "Why your FD is losing you money after tax and inflation", "intent": "curiosity — most FD investors don't calculate real post-tax returns" },
+    { "topic": "Term insurance vs endowment plan — the ₹1 crore question", "intent": "anxiety — Indians routinely buy wrong insurance products sold by agents" },
+    { "topic": "Credit score myths that are costing you money", "intent": "curiosity — widespread misconceptions about CIBIL score and how it works" },
+    { "topic": "How compounding actually works — the math nobody shows you", "intent": "curiosity — concept everyone talks about but few truly understand the exponential math" },
+    { "topic": "Tax-saving investments beyond 80C that most people miss", "intent": "aspiration — maximizing tax savings through lesser-known deductions and instruments" },
+    { "topic": "NPS vs PPF vs ELSS — which retirement fund is right for you", "intent": "anxiety — confusion about long-term retirement savings vehicles in India" }
+  ]
+}

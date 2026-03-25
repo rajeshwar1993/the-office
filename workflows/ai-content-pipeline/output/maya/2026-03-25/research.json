@@ -1,0 +1,409 @@
+{
+  "date": "2026-03-25",
+  "avatar": "maya",
+  "version": 2,
+  "web_search": {
+    "queries": [
+      "top trending topics in India today March 2026",
+      "what is trending in the world right now March 2026",
+      "trending memes movies entertainment India March 2026",
+      "viral entertainment Bollywood India this week 2026"
+    ],
+    "hot_topics": [
+      {
+        "topic": "Iran-US-Israel war and Middle East conflict",
+        "reason": "Ongoing massive bombing campaign, 787 killed, US troops deploying",
+        "region": "global"
+      },
+      {
+        "topic": "Energy crisis and oil prices surge",
+        "reason": "Strait of Hormuz tensions, US eased Russia/Venezuela sanctions for oil",
+        "region": "global"
+      },
+      {
+        "topic": "India T20 World Cup 2026 win",
+        "reason": "India beat NZ by 96 runs, first back-to-back T20 WC, first win at home as hosts",
+        "region": "india"
+      },
+      {
+        "topic": "Dhurandhar: The Revenge box office",
+        "reason": "Ranveer Singh film, Rs 260 Cr advance bookings, Rs 240 Cr Day 1, Rs 500 Cr in 5 days",
+        "region": "india"
+      },
+      {
+        "topic": "Petrol/diesel price hike in India",
+        "reason": "Iran war driving up fuel costs, premium petrol rates increased",
+        "region": "india"
+      },
+      {
+        "topic": "Small Hydro Power Development Scheme",
+        "reason": "Union Cabinet approved Rs 2,584 Cr for 1500 MW capacity",
+        "region": "india"
+      },
+      {
+        "topic": "FCRA Amendment Bill",
+        "reason": "Strengthen oversight of foreign funds",
+        "region": "india"
+      },
+      {
+        "topic": "Jal Jeevan Mission 2.0",
+        "reason": "Union Cabinet approved, MoU signed with UP",
+        "region": "india"
+      },
+      {
+        "topic": "India-Canada trade relations",
+        "reason": "Agreed to strengthen ties, resolve past tensions",
+        "region": "india"
+      },
+      {
+        "topic": "Post Office new interest rates from April 2026",
+        "reason": "New rates effective April 1, 2026",
+        "region": "india"
+      },
+      {
+        "topic": "Ramayana movie anticipation",
+        "reason": "Ranbir Kapoor, Sai Pallavi, Yash, Hans Zimmer + AR Rahman — most anticipated Indian film",
+        "region": "india"
+      }
+    ],
+    "entertainment": [
+      {
+        "topic": "Dhurandhar 2 memes viral",
+        "reason": "Rakesh Bedi spy mission memes, Doraemon parodies flooding social media"
+      },
+      {
+        "topic": "Panchayat Season 3 memes",
+        "reason": "'1-1 cup chai aur bola jae' line became viral meme among tea lovers"
+      },
+      {
+        "topic": "Border 2 on Netflix",
+        "reason": "Sunny Deol, Varun Dhawan, Diljit Dosanjh war drama premiering March 20"
+      },
+      {
+        "topic": "Sai Pallavi #1 trending celebrity",
+        "reason": "1.19M engagement, Ramayana casting as Sita driving massive interest"
+      },
+      {
+        "topic": "ViRosh celebrity wedding viral",
+        "reason": "Celebrity wedding trending on Indian Instagram"
+      },
+      {
+        "topic": "Yo Yo Honey Singh comeback",
+        "reason": "Comeback narrative trending across platforms"
+      },
+      {
+        "topic": "Thalapathy Vijay political controversy",
+        "reason": "Political move generating social media debate"
+      }
+    ]
+  },
+  "youtube_search": {
+    "topic_videos": [
+      {
+        "query": "Iran US war oil crisis 2026",
+        "results": [
+          {
+            "title": "Iran War: Trump warns Israel not to hit oil and gas sites as energy crisis deepens",
+            "url": "https://www.youtube.com/watch?v=ydkxQjg_qEs",
+            "view_count": 609786,
+            "duration": 690,
+            "upload_date": "",
+            "channel": "BBC News"
+          },
+          {
+            "title": "Iran War & Strait of Hormuz Energy Crisis Reveal Decline of U.S. Empire",
+            "url": "https://www.youtube.com/watch?v=mE3AiFEkSP8",
+            "view_count": 242408,
+            "duration": 1245,
+            "upload_date": "",
+            "channel": "Democracy Now!"
+          },
+          {
+            "title": "Iran War Severely Aggravates Pakistan's Fragile Economy",
+            "url": "https://www.youtube.com/watch?v=1-04tt3hdms",
+            "view_count": 12375,
+            "duration": 126,
+            "upload_date": "",
+            "channel": "WION"
+          }
+        ]
+      },
+      {
+        "query": "India T20 World Cup 2026 win celebration",
+        "results": [
+          {
+            "title": "Pak Media Reaction After India Win T20 World Cup 2026 Final",
+            "url": "https://www.youtube.com/watch?v=bX6Bki4fOYM",
+            "view_count": 949939,
+            "duration": 1474,
+            "upload_date": "",
+            "channel": "Bharat Special Today"
+          },
+          {
+            "title": "Team India trophy lifting T20 ICC World Cup champions 2026",
+            "url": "https://www.youtube.com/watch?v=GRq1PApanCE",
+            "view_count": 912121,
+            "duration": 391,
+            "upload_date": "",
+            "channel": "Explore and Beyond"
+          },
+          {
+            "title": "An epic recap of the T20 World Cup 2026 Final",
+            "url": "https://www.youtube.com/watch?v=D5L2Esha4Ps",
+            "view_count": 467530,
+            "duration": 137,
+            "upload_date": "",
+            "channel": "ICC"
+          }
+        ]
+      },
+      {
+        "query": "Dhurandhar Ranveer Singh box office 2026",
+        "results": [
+          {
+            "title": "Dhurandhar 2 Box Office REPORT",
+            "url": "https://www.youtube.com/watch?v=XIdhI5vVtbU",
+            "view_count": 249290,
+            "duration": 233,
+            "upload_date": "",
+            "channel": "Filmi Indian"
+          },
+          {
+            "title": "Dhurandhar The Revenge ULTIMATE MEME REVIEW",
+            "url": "https://www.youtube.com/watch?v=n7sZ1ywPTp0",
+            "view_count": 576610,
+            "duration": 703,
+            "upload_date": "",
+            "channel": "The Sham Sharma Show"
+          }
+        ]
+      },
+      {
+        "query": "oil prices India impact petrol prices 2026",
+        "results": [
+          {
+            "title": "Petrol Diesel Price Hike: Iran War ka bada asar",
+            "url": "https://www.youtube.com/watch?v=nlYt99G8XrI",
+            "view_count": 118529,
+            "duration": 1270,
+            "upload_date": "",
+            "channel": "First India News"
+          },
+          {
+            "title": "Petrol Price Hike: Iran War ka bada asar, Premium Petrol Rate badhe",
+            "url": "https://www.youtube.com/watch?v=oELA5LYz7WM",
+            "view_count": 68332,
+            "duration": 246,
+            "upload_date": "",
+            "channel": "Live Hindustan"
+          },
+          {
+            "title": "Iran War Impact on India: Oil Prices & LPG Crisis",
+            "url": "https://www.youtube.com/watch?v=tteI3uhueQk",
+            "view_count": 30521,
+            "duration": 176,
+            "upload_date": "",
+            "channel": "TV9 Telugu Live"
+          }
+        ]
+      },
+      {
+        "query": "Sai Pallavi Ramayana movie 2026",
+        "results": [
+          {
+            "title": "Ramayana: The Introduction | Nitesh Tiwari | Ranbir, Yash, Hans Zimmer & AR Rahman",
+            "url": "https://www.youtube.com/watch?v=gzUu-FJ7s-Y",
+            "view_count": 25318626,
+            "duration": 184,
+            "upload_date": "",
+            "channel": "Sony Music India"
+          }
+        ]
+      }
+    ],
+    "finance_videos": [
+      {
+        "title": "Your 2026 Mutual Fund Strategy According to Salary - COMPLETE GUIDE!",
+        "url": "https://www.youtube.com/watch?v=FeYZBbMBgmY",
+        "view_count": 938518,
+        "duration": 1448,
+        "upload_date": "",
+        "channel": "warikoo"
+      },
+      {
+        "title": "Rich Secrets Disclosed | Personal Finance Tips | Sonu Sharma",
+        "url": "https://www.youtube.com/watch?v=PnF0u5l8D0E",
+        "view_count": 1794632,
+        "duration": 727,
+        "upload_date": "",
+        "channel": "SONU SHARMA"
+      },
+      {
+        "title": "How to invest your Money in 2026 | By Sandeep Maheshwari",
+        "url": "https://www.youtube.com/watch?v=V8B_pyuJ13A",
+        "view_count": 720808,
+        "duration": 2700,
+        "upload_date": "",
+        "channel": "Sandeep Maheshwari"
+      },
+      {
+        "title": "2026 ke liye Best SIP Strategy kya honi chahiye? | Sagar Sinha Podcast",
+        "url": "https://www.youtube.com/watch?v=AkdxZ75iRxQ",
+        "view_count": 620741,
+        "duration": 3372,
+        "upload_date": "",
+        "channel": "Sagar Sinha Podcast"
+      },
+      {
+        "title": "5 Best Money Rules - How to Get Rich in 2026 | Sonu Sharma",
+        "url": "https://www.youtube.com/watch?v=IKqy5MJSi4A",
+        "view_count": 383659,
+        "duration": 693,
+        "upload_date": "",
+        "channel": "SONU SHARMA"
+      },
+      {
+        "title": "Easy ways to build passive income in your 20s",
+        "url": "https://www.youtube.com/watch?v=KmUanriXrNo",
+        "view_count": 353597,
+        "duration": 796,
+        "upload_date": "",
+        "channel": "Moneytalks by Groww"
+      },
+      {
+        "title": "My TOP 4 Mutual Funds Inside My Rs 34 Crore Portfolio!",
+        "url": "https://www.youtube.com/watch?v=wLvah8pI9zE",
+        "view_count": 306754,
+        "duration": 2316,
+        "upload_date": "",
+        "channel": "The Money Podcast with Neeraj & Vrinda"
+      },
+      {
+        "title": "9 Passive Income Ideas Make Money 2026 | By Mahendra Dogney",
+        "url": "https://www.youtube.com/watch?v=q-LYadInUQA",
+        "view_count": 247694,
+        "duration": 903,
+        "upload_date": "",
+        "channel": "Mahendra Dogney"
+      },
+      {
+        "title": "BEST Stocks in 2026: Portfolio Strategy for Indian Investors",
+        "url": "https://www.youtube.com/watch?v=c_-FYLtg6A0",
+        "view_count": 196997,
+        "duration": 3254,
+        "upload_date": "",
+        "channel": "Finance With Sharan"
+      },
+      {
+        "title": "Where to Invest Money in 2026?",
+        "url": "https://www.youtube.com/watch?v=mXkwDUNGBRM",
+        "view_count": 191624,
+        "duration": 1724,
+        "upload_date": "",
+        "channel": "Pushkar Raj Thakur"
+      },
+      {
+        "title": "Best Savings Account 2026",
+        "url": "https://www.youtube.com/watch?v=C9FKRv7D7tA",
+        "view_count": 120902,
+        "duration": 744,
+        "upload_date": "",
+        "channel": "bekifaayati"
+      },
+      {
+        "title": "How to Invest Smarter in 2026 | ft. Top Finance Experts",
+        "url": "https://www.youtube.com/watch?v=5tkLgZthJOo",
+        "view_count": 46136,
+        "duration": 1257,
+        "upload_date": "",
+        "channel": "Moneytalks by Groww"
+      }
+    ],
+    "comedy_videos": [
+      {
+        "title": "Ambulance - Stand Up Comedy Ft. Anubhav Singh Bassi",
+        "url": "https://www.youtube.com/watch?v=mbOO0Z6ryO0",
+        "view_count": 17177664,
+        "duration": 1202,
+        "upload_date": "",
+        "channel": "Anubhav Singh Bassi"
+      },
+      {
+        "title": "ACCOUNTANT EXPLAINS: Money Habits Keeping You Poor",
+        "url": "https://www.youtube.com/watch?v=Q0uXGQu55GM",
+        "view_count": 11101626,
+        "duration": 486,
+        "upload_date": "",
+        "channel": "Nischa"
+      },
+      {
+        "title": "Desi Boyfriend - A Standup Comedy Special By Harsh Gujral",
+        "url": "https://www.youtube.com/watch?v=4Z-KLkjICoY",
+        "view_count": 5247036,
+        "duration": 2736,
+        "upload_date": "",
+        "channel": "Harsh gujral"
+      },
+      {
+        "title": "I wish I knew this in my 20s",
+        "url": "https://www.youtube.com/watch?v=BTOHpoC-XsE",
+        "view_count": 3471062,
+        "duration": 410,
+        "upload_date": "",
+        "channel": "Honestly by Tanmay Bhat"
+      },
+      {
+        "title": "Engineering | Crowd Work | Stand Up Comedy | Ft Anubhav Singh Bassi",
+        "url": "https://www.youtube.com/watch?v=ynS6X7kno3E",
+        "view_count": 3088736,
+        "duration": 456,
+        "upload_date": "",
+        "channel": "be_a_bassi"
+      },
+      {
+        "title": "GOOD ONE | Gaurav Kapoor | Stand Up Comedy",
+        "url": "https://www.youtube.com/watch?v=5hHM3LdKcRY",
+        "view_count": 2950335,
+        "duration": 1942,
+        "upload_date": "",
+        "channel": "Gaurav Kapoor"
+      },
+      {
+        "title": "EVOLUTION OF PAANI | Gaurav Kapoor | Stand Up Comedy",
+        "url": "https://www.youtube.com/watch?v=2PYpGGn4l7s",
+        "view_count": 1613508,
+        "duration": 619,
+        "upload_date": "",
+        "channel": "Gaurav Kapoor"
+      },
+      {
+        "title": "Hindi Comedy Short Film - Vacancy | Funny Interview",
+        "url": "https://www.youtube.com/watch?v=kZLtWw-t-LU",
+        "view_count": 1278987,
+        "duration": 305,
+        "upload_date": "",
+        "channel": "Pocket Films"
+      },
+      {
+        "title": "Men & Women | Stand up Comedy by Mohit Morani",
+        "url": "https://www.youtube.com/watch?v=bziorU0jozE",
+        "view_count": 1210695,
+        "duration": 786,
+        "upload_date": "",
+        "channel": "Mohit Morani"
+      },
+      {
+        "title": "Perfect Bahu - Stand Up Comedy ft. Priya Mishra",
+        "url": "https://www.youtube.com/watch?v=NFzfPGZ0A_g",
+        "view_count": 939925,
+        "duration": 852,
+        "upload_date": "",
+        "channel": "Priya Mishra"
+      }
+    ]
+  },
+  "notebooklm": {
+    "trends_finance_notebook_id": "ebcb7dd8-756f-4792-a8f9-a2662ef077da",
+    "comedy_notebook_id": "65b548fd-df87-4d58-b522-c124d7f43b97"
+  }
+}
