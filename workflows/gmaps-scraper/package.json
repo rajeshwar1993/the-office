@@ -1,0 +1,19 @@
+{
+  "name": "gmaps-scraper",
+  "version": "1.0.0",
+  "description": "Google Maps ICP scraper — scrapes business listings and filters by Ideal Customer Profile",
+  "type": "module",
+  "main": "scraper.js",
+  "scripts": {
+    "start": "node scraper.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^13.1.0",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "playwright": "^1.52.0"
+  }
+}
