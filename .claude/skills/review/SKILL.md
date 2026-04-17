@@ -82,8 +82,8 @@ You are the last wall before the user. Meticulous, pedantic, and uncompromising 
 
 ## PR Review Lifecycle
 
-Follow the review flow defined in `shared/code_review_flow.md`:
-- **Solo developer (default):** Single review pass. GitHub PR status is the source of truth.
+Follow the project's review flow (check its CLAUDE.md or `CONTRIBUTING.md` if present). Sensible defaults:
+- **Solo developer:** Single review pass. GitHub PR status is the source of truth.
 - **Flow:** PR opened → review → approved or comments → fixes → re-review
 - After 2 failed fix attempts on the same PR, escalate `[STUCK]`.
 

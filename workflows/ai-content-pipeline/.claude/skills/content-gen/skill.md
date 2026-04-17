@@ -23,11 +23,11 @@ Examples:
 
 Check if the avatar profile exists:
 ```
-workflows/ai-content-pipeline/avatars/{avatar_name}/profile.md
+avatars/{avatar_name}/profile.md
 ```
 
 **If the profile does NOT exist:**
-1. List available avatars by scanning `workflows/ai-content-pipeline/avatars/` (exclude `_template/`)
+1. List available avatars by scanning `avatars/` (exclude `_template/`)
 2. Tell the user which avatars are available
 3. Stop — do not proceed without a valid avatar
 
@@ -38,9 +38,9 @@ workflows/ai-content-pipeline/avatars/{avatar_name}/profile.md
 
 ## Setup
 
-1. Set your working directory to `workflows/ai-content-pipeline/`.
-2. Read `workflows/ai-content-pipeline/engine-v1.md` in full — it contains the complete workflow engine instructions.
-3. Read the avatar profile: `workflows/ai-content-pipeline/avatars/{avatar_name}/profile.md`
+1. Set your working directory to this workflow's root (the directory containing `engine-v1.md`, `avatars/`, `heygen/`). All paths below are relative to it.
+2. Read `engine-v1.md` in full — it contains the complete workflow engine instructions.
+3. Read the avatar profile: `avatars/{avatar_name}/profile.md`
 4. The engine uses three context variables — keep these in mind throughout:
    - `AVATAR_NAME` = `{avatar_name}` (lowercase, used in all file paths)
    - `TOPIC_COUNT` = `{topic_count}` (number of topics to generate)
@@ -48,4 +48,4 @@ workflows/ai-content-pipeline/avatars/{avatar_name}/profile.md
 5. Follow the engine instructions exactly, starting from **Phase 0 — Setup**.
 6. **Override all checkpoints:** Where the workflow says "Wait for user approval before proceeding", ignore that instruction and proceed automatically. Still present the summary tables for the user's later review, but do not pause.
 
-All file paths in the workflow engine-v1.md are relative to `workflows/ai-content-pipeline/`.
+All file paths in `engine-v1.md` are relative to this workflow's root.

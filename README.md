@@ -1,87 +1,68 @@
 # the-office
 
-A portable workspace root for AI-assisted software development with [Claude Code](https://claude.ai/code).
+A portable shell workspace for AI-assisted software development with [Claude Code](https://claude.ai/code).
 
-## What's Inside
+## What's inside
 
-- **`.claude/skills/`** — Shareable skill definitions that load automatically in Claude Code
-- **`shared/`** — Cross-cutting process docs (git strategy, code review flow)
-- **`workflows/`** — Automation workflows (fully git-tracked)
-- **`projects/`** — Clone your project repos here (separate repos, gitignored)
-- **`CLAUDE.md`** — Workspace-level instructions for Claude Code
+- **`.claude/skills/`** — generic SDLC skills loaded automatically at the root
+- **`workflows/`** — self-contained automations, each with its own `CLAUDE.md` and local skills
+- **`projects/`** — cloned product repos (each its own git repo, gitignored here)
+- **`CLAUDE.md`** — the orientation doc Claude Code reads when you open this directory
 
-## Getting Started
+There are no workspace-wide conventions (git strategy, review flow, etc.) — each project sets its own.
 
-1. Clone this repo:
-   ```bash
-   git clone <this-repo-url> the-office
-   ```
+## Getting started
 
-2. Clone your project repos into `projects/`:
-   ```bash
-   cd the-office
-   git clone <project-repo-url> projects/my-project
-   ```
+```bash
+git clone <this-repo-url> the-office
+cd the-office
+git clone <project-repo-url> projects/my-project
+```
 
-3. Open `the-office/` in Claude Code. Skills and conventions are loaded automatically.
+Open `the-office/` in Claude Code. Skills load automatically based on your current working directory.
 
-## Skill Catalog
+## Skill catalog
 
-### Core SDLC (any project)
+### Generic SDLC (available at root)
 
 | Skill | Command | Purpose |
-|-------|---------|---------|
+|---|---|---|
 | Architect | `/architect` | Product strategy & technical design |
 | Build | `/build` | Full-stack implementation with TDD |
 | Review | `/review` | Code review, security audit, QA |
 | AI-DLC Inception | `/aidlc-inception` | Structured feature planning lifecycle |
 
-### Content Pipeline (`workflows/ai-content-pipeline/`)
+### Workflow-local (load when you `cd` into the workflow)
 
-| Skill | Command | Purpose |
-|-------|---------|---------|
-| Content Gen v1 | `/content-gen` | Fast batch video script generation (WebSearch research) |
-| Content Gen v2 | `/content-gen-v2` | Deep batch with yt-dlp + NotebookLM research |
-| HeyGen Video | `/generate-heygen-video` | Automate HeyGen video generation via Playwright |
-
-### Business Audit (`workflows/reputation-audit/`)
-
-| Skill | Command | Purpose |
-|-------|---------|---------|
-| Business Audit | `/business-overview-audit` | PDF reputation reports for local businesses |
+| Workflow | Skills | Purpose |
+|---|---|---|
+| `workflows/ai-content-pipeline` | `/content-gen`, `/content-gen-v2`, `/generate-heygen-video` | Multi-avatar video scripts + HeyGen automation |
+| `workflows/reputation-audit` | `/business-overview-audit` | PDF reputation audits for local businesses |
+| `workflows/gmaps-scraper` | `/scrape-gmaps` | ICP-filtered Google Maps scraping + reports |
 
 ## Structure
 
 ```
 the-office/
 ├── .claude/
-│   ├── settings.json          # Agent Teams + Playwright plugin
-│   └── skills/                # All skills (8 total, grouped by domain)
+│   ├── settings.json            # Agent Teams + Playwright plugin
+│   └── skills/                  # 4 generic SDLC skills
 ├── CLAUDE.md
-├── shared/
-│   ├── git_strategy.md
-│   └── code_review_flow.md
-├── workflows/                 # Fully git-tracked automations
-│   ├── ai-content-pipeline/
-│   └── reputation-audit/
-└── projects/                  # Separate repos, gitignored
+├── workflows/                   # Self-contained automations
+│   ├── ai-content-pipeline/     # with local .claude/skills/
+│   ├── reputation-audit/        # with local .claude/skills/
+│   └── gmaps-scraper/           # with local .claude/skills/
+└── projects/                    # Separate repos, gitignored
     └── .gitkeep
 ```
 
-## Git Tracking Strategy
+## Git tracking
 
-| What | Tracked? | Details |
-|------|----------|---------|
-| Skills & shared docs | Yes | Core part of the-office repo |
-| Workflows | Yes | Everything tracked except `node_modules/` and tool caches |
-| Projects | No | Separate repos cloned into `projects/`, gitignored |
-
-## How It Works
-
-Each project repo cloned into `projects/` retains its own git history, branches, and can have its own `CLAUDE.md` with project-specific instructions. The workspace-level `CLAUDE.md` provides generic conventions that apply to all projects.
-
-Feature documentation (PRDs, tech specs, AIDLC artifacts) lives in the workspace root at `docs/<project-name>/<feature-name>/`.
+| What | Tracked? |
+|---|---|
+| Generic skills & workflows | Yes — everything except `node_modules/` and tool caches |
+| Projects under `projects/` | No — they're separate repos, gitignored here |
 
 ## Agent Teams
 
-Agent Teams is enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`). Spawn specialized teammates for complex tasks — each teammate picks up the appropriate skill and works in parallel. Best for multi-file features, cross-layer reviews, and competing debugging hypotheses.
+Agent Teams is enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`). Spawn specialized teammates for complex tasks — each picks up the appropriate skill and works in parallel. Best for multi-file features, cross-layer reviews, and competing debugging hypotheses.

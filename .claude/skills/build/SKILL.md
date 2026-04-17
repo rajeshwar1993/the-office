@@ -22,7 +22,7 @@ You don't just write code that works; you write code that is secure, performant,
 
 ## Phase 2: Environment & Git Setup
 
-- Read `shared/git_strategy.md` for branch and commit conventions.
+- Follow the project's git conventions (check the project's CLAUDE.md or `CONTRIBUTING.md` if present; otherwise default to scoped conventional commits — `type(scope): description` — and feature branches off `main`).
 - Create a task branch from the parent feature branch (if not already on one).
 - **[Backend]** Verify Supabase local stack is running (`supabase start`).
 - **[Web]** Verify dev server runs (`npm run dev`).

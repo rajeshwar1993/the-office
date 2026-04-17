@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GMaps Report — salons in Kalkaji New Delhi</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; background: #f8fafc; color: #1e293b; font-size: 14px; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── header ── */
+  .header { background: #1e293b; color: #f1f5f9; padding: 24px 32px 20px; }
+  .header h1 { margin: 0 0 6px; font-size: 1.4rem; font-weight: 700; }
+  .header .subtitle { font-size: 0.85rem; color: #94a3b8; }
+  .header .subtitle span { margin-right: 16px; }
+
+  /* ── stat cards ── */
+  .stats { display: flex; gap: 16px; padding: 20px 32px; background: #fff; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; }
+  .stat-card { background: #f1f5f9; border-radius: 10px; padding: 14px 20px; min-width: 140px; }
+  .stat-card .label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-card .value { font-size: 1.8rem; font-weight: 700; line-height: 1.1; margin-top: 4px; }
+  .stat-card.icp .value { color: #16a34a; }
+  .stat-card.rate .value { color: #2563eb; }
+
+  /* ── filters chip row ── */
+  .filter-chips { padding: 10px 32px; background: #fff; border-bottom: 1px solid #e2e8f0; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .chip-label { font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 4px; }
+  .chip { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 20px; padding: 3px 10px; font-size: 0.78rem; color: #475569; }
+
+  /* ── controls ── */
+  .controls { padding: 12px 32px; background: #fff; border-bottom: 1px solid #e2e8f0; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .controls input, .controls select { border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 10px; font-size: 0.85rem; color: #1e293b; background: #fff; outline: none; }
+  .controls input:focus, .controls select:focus { border-color: #2563eb; box-shadow: 0 0 0 2px #dbeafe; }
+  .controls input { width: 220px; }
+  .toggle-group { display: flex; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; }
+  .toggle-btn { border: none; background: #fff; padding: 6px 14px; font-size: 0.85rem; cursor: pointer; color: #475569; }
+  .toggle-btn.active { background: #2563eb; color: #fff; }
+  .row-count { margin-left: auto; font-size: 0.82rem; color: #64748b; }
+
+  /* ── table ── */
+  .table-wrap { overflow-x: auto; padding: 0 32px 40px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 16px; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+  thead tr { background: #1e293b; color: #f1f5f9; }
+  thead th { padding: 10px 12px; text-align: left; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; cursor: pointer; user-select: none; }
+  thead th:hover { background: #334155; }
+  thead th .sort-arrow { display: inline-block; width: 12px; color: #94a3b8; font-size: 0.7rem; }
+  tbody tr { border-bottom: 1px solid #f1f5f9; transition: background 0.1s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #f8fafc !important; }
+  tbody tr.row-icp { background: #f0fdf4; }
+  tbody td { padding: 9px 12px; vertical-align: top; }
+
+  /* ── column widths ── */
+  .col-idx { width: 36px; color: #94a3b8; font-size: 0.8rem; text-align: right; }
+  .col-name { min-width: 160px; max-width: 240px; font-weight: 500; }
+  .col-cat { min-width: 110px; color: #475569; }
+  .col-rating { min-width: 120px; white-space: nowrap; }
+  .col-reviews { min-width: 60px; text-align: right; }
+  .col-phone { min-width: 110px; font-size: 0.82rem; }
+  .col-web { width: 50px; text-align: center; }
+  .col-addr { min-width: 200px; max-width: 280px; font-size: 0.78rem; color: #475569; }
+  .col-hours, .col-photos, .col-reply { width: 60px; text-align: center; }
+  .col-icp { width: 60px; text-align: center; }
+
+  /* ── icons + badges ── */
+  .icon-yes { color: #16a34a; font-weight: 700; }
+  .icon-no { color: #dc2626; font-weight: 700; }
+  .icon-null { color: #94a3b8; }
+  .badge { display: inline-block; border-radius: 20px; padding: 2px 9px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; }
+  .badge-icp { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+  .badge-no { background: #f1f5f9; color: #94a3b8; border: 1px solid #e2e8f0; }
+
+  /* ── rating stars ── */
+  .stars { position: relative; display: inline-block; font-size: 0.85rem; line-height: 1; vertical-align: middle; margin-right: 3px; }
+  .stars-bg { color: #e2e8f0; }
+  .stars-fg { position: absolute; top: 0; left: 0; overflow: hidden; white-space: nowrap; color: #f59e0b; }
+  .rating { font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+
+  /* ── hidden rows ── */
+  tr.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📍 salons in Kalkaji New Delhi</h1>
+  <div class="subtitle">
+    <span>🕒 Scraped 13 Apr 2026, 6:59 pm IST</span>
+    <span>📂 Mode: single</span>
+    <span>📌 Kalkaji New Delhi</span>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat-card">
+    <div class="label">Total Scraped</div>
+    <div class="value">52</div>
+  </div>
+  <div class="stat-card icp">
+    <div class="label">ICP Matches</div>
+    <div class="value">4</div>
+  </div>
+  <div class="stat-card rate">
+    <div class="label">Match Rate</div>
+    <div class="value">7.7%</div>
+  </div>
+</div>
+
+<div class="filter-chips">
+  <span class="chip-label">ICP filters used:</span>
+  <span class="chip">Min rating: 3</span>
+  <span class="chip">Max rating: 4.2</span>
+  <span class="chip">Max reviews: 100</span>
+  <span class="chip">Incomplete only: no</span>
+</div>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search by name…" oninput="applyFilters()">
+  <div class="toggle-group">
+    <button class="toggle-btn active" id="btn-all" onclick="setIcpFilter('all')">All</button>
+    <button class="toggle-btn" id="btn-icp" onclick="setIcpFilter('icp')">ICP only</button>
+  </div>
+  
+  
+  <select id="cat-filter" onchange="applyFilters()">
+    <option value="">All categories</option>
+    <option value="Beauty Parlour">Beauty Parlour</option>
+<option value="Beauty supply store">Beauty supply store</option>
+<option value="Cosmetics store">Cosmetics store</option>
+<option value="Educational institution">Educational institution</option>
+<option value="Hair salon">Hair salon</option>
+<option value="Hairdresser">Hairdresser</option>
+<option value="Health and beauty shop">Health and beauty shop</option>
+<option value="Make-up artist">Make-up artist</option>
+<option value="Nail salon">Nail salon</option>
+<option value="Spa">Spa</option>
+  </select>
+  <span class="row-count" id="row-count">52 businesses</span>
+</div>
+
+<div class="table-wrap">
+  <table id="biz-table">
+    <thead>
+      <tr>
+        <th class="col-idx" onclick="sortTable(0)">#<span class="sort-arrow" id="sa0"></span></th>
+        <th class="col-name" onclick="sortTable(1)">Business<span class="sort-arrow" id="sa1"></span></th>
+        <th class="col-cat" onclick="sortTable(2)">Category<span class="sort-arrow" id="sa2"></span></th>
+        <th class="col-rating" onclick="sortTable(3)">Rating<span class="sort-arrow" id="sa3"></span></th>
+        <th class="col-reviews" onclick="sortTable(4)">Reviews<span class="sort-arrow" id="sa4"></span></th>
+        <th class="col-phone">Phone</th>
+        <th class="col-web">Web</th>
+        <th class="col-addr">Address</th>
+        <th class="col-hours" onclick="sortTable(8)">Hours<span class="sort-arrow" id="sa8"></span></th>
+        <th class="col-photos">Photos</th>
+        <th class="col-reply">Reply</th>
+        <th class="col-icp" onclick="sortTable(11)">ICP<span class="sort-arrow" id="sa11"></span></th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      <tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Hairdresser"
+      data-name="forever salon">
+      <td class="col-idx">1</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/FOREVER+SALON/@28.5417211,77.2459365,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3a8e1091527:0x66cb7c705e339fac!8m2!3d28.5417211!4d77.2549487!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSARJ1bmlzZXhfaGFpcmRyZXNzZXLgAQA!16s%2Fg%2F11kr9_04n8?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">FOREVER SALON</a></td>
+      <td class="col-cat">Hairdresser</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.8">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:96%">★★★★★</span>
+  </span> 4.8</span></td>
+      <td class="col-reviews">366</td>
+      <td class="col-phone">077039 67071</td>
+      <td class="col-web"><a href="https://instagram.com/foreversalonofficial_?igshid=OGQ5ZDc2ODk2ZA==" target="_blank" rel="noopener" title="https://instagram.com/foreversalonofficial_?igshid=OGQ5ZDc2ODk2ZA==">🔗</a></td>
+      <td class="col-addr">LG-2, E 11, Market, near Aggarwal Sweets, near The Burger Club, Block E, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="holy snip unisex salon">
+      <td class="col-idx">2</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Holy+Snip+Unisex+Salon/@28.5417211,77.2459365,16z/data=!3m1!5s0x390ce3d951defc21:0x1daf6c468632ccdd!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce31dc150d7ff:0xe2ced091aab8537d!8m2!3d28.5404516!4d77.2573195!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11gxwqpd_g?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Holy Snip Unisex Salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.7">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:94%">★★★★★</span>
+  </span> 4.7</span></td>
+      <td class="col-reviews">561</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">H-10/A,Basement,Kalkaji main Market,Near Macdonalds and Lenskart Kalka Ji, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="elite - a complete salon solution">
+      <td class="col-idx">3</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Elite+-+A+Complete+Salon+Solution/@28.5434171,77.2429996,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce33e74fa7da1:0x1ad01a7a7cf0c11d!8m2!3d28.5434171!4d77.2520118!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11yj2_dxp7?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Elite - A Complete Salon Solution</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:100%">★★★★★</span>
+  </span> 5</span></td>
+      <td class="col-reviews">36</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">B-43B, Block B, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="ki &amp; ka unisex salon by naveen">
+      <td class="col-idx">4</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Ki+%26+Ka+Unisex+Salon+By+Naveen/@28.5386084,77.2505439,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3a0c306c539:0x7b4b8c0c57c0d479!8m2!3d28.5386084!4d77.2595561!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11l6gsf7wb?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Ki &amp; Ka Unisex Salon By Naveen</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.2">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:84%">★★★★★</span>
+  </span> 4.2</span></td>
+      <td class="col-reviews">729</td>
+      <td class="col-phone">098186 33720</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">141, Gurudwara Road, Block K, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="aura beauty labs | best salon in kalkaji">
+      <td class="col-idx">5</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Aura+Beauty+Labs+%7C+Best+Salon+in+Kalkaji/@28.542307,77.2436728,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce31d18c01ead:0x7bb5a953fb5c92c!8m2!3d28.542307!4d77.252685!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11yjkrlhb2?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Aura Beauty Labs | Best Salon in Kalkaji</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:100%">★★★★★</span>
+  </span> 5</span></td>
+      <td class="col-reviews">92</td>
+      <td class="col-phone">092116 92002</td>
+      <td class="col-web"><a href="https://aurabeautylabs.com/" target="_blank" rel="noopener" title="https://aurabeautylabs.com/">🔗</a></td>
+      <td class="col-addr">B-99, Block B, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="jkm unisex salon">
+      <td class="col-idx">6</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/JKM+Unisex+Salon/@28.542307,77.2436728,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce34208070d33:0x45d3c74dab3b877b!8m2!3d28.544062!4d77.251672!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11vwn8pz29?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">JKM Unisex Salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.6">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:92%">★★★★★</span>
+  </span> 4.6</span></td>
+      <td class="col-reviews">30</td>
+      <td class="col-phone">096259 02020</td>
+      <td class="col-web"><a href="https://www.instagram.com/jkmunisexsalon_?igsh=MWEyb25veTgxMXlxZA==" target="_blank" rel="noopener" title="https://www.instagram.com/jkmunisexsalon_?igsh=MWEyb25veTgxMXlxZA==">🔗</a></td>
+      <td class="col-addr">B-49, Block B, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="decent hair salon">
+      <td class="col-idx">7</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Decent+Hair+Salon/@28.542307,77.2436728,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3d9284c3daf:0x2ebfffcb7990fd93!8m2!3d28.5399588!4d77.2575376!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11fy55gfpy?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Decent Hair Salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.7">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:94%">★★★★★</span>
+  </span> 4.7</span></td>
+      <td class="col-reviews">166</td>
+      <td class="col-phone">088601 36732</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">H- 32, Decent Hair salon, near MacDonald, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Hair salon"
+      data-name="mj salon by mohit &amp; jatin">
+      <td class="col-idx">8</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/MJ+SALON+BY+MOHIT+%26+JATIN/@28.5380434,77.2505092,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x81a15d50ad46360b:0xa8a0e5ed0fe26f81!8m2!3d28.5380434!4d77.2595214!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEKaGFpcl9zYWxvbuABAA!16s%2Fg%2F11wbtl0t6j?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">MJ SALON BY MOHIT &amp; JATIN</a></td>
+      <td class="col-cat">Hair salon</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.8">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:96%">★★★★★</span>
+  </span> 4.8</span></td>
+      <td class="col-reviews">337</td>
+      <td class="col-phone">085578 54703</td>
+      <td class="col-web"><a href="https://mjsalonbymohitjatin.in/" target="_blank" rel="noopener" title="https://mjsalonbymohitjatin.in/">🔗</a></td>
+      <td class="col-addr">Upper Ground, Near, M5, L-Block Rd, Gurudwara, Rampuri, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="aativa salon - best salon in kalkaji">
+      <td class="col-idx">9</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Aativa+salon+-+Best+salon+in+kalkaji/@28.5430418,77.242956,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce14995ca5f5d:0x2d9ccbdc26b3efc9!8m2!3d28.5430418!4d77.2519682!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11y5cw34pr?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Aativa salon - Best salon in kalkaji</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.3">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:86%">★★★★★</span>
+  </span> 4.3</span></td>
+      <td class="col-reviews">122</td>
+      <td class="col-phone">098109 52217</td>
+      <td class="col-web"><a href="http://aativasalon.com/" target="_blank" rel="noopener" title="http://aativasalon.com/">🔗</a></td>
+      <td class="col-addr">B-89/B, above 24 seven, Block B, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Hairdresser"
+      data-name="cosmo unisex salon">
+      <td class="col-idx">10</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Cosmo+Unisex+Salon/@28.5380149,77.2514391,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce32b9f87bd41:0x53b9ebf6e0c9aff1!8m2!3d28.5380149!4d77.2604513!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSARJ1bmlzZXhfaGFpcmRyZXNzZXLgAQA!16s%2Fg%2F11q3m97k5c?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Cosmo Unisex Salon</a></td>
+      <td class="col-cat">Hairdresser</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.8">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:96%">★★★★★</span>
+  </span> 4.8</span></td>
+      <td class="col-reviews">55</td>
+      <td class="col-phone">087438 62617</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">basement M, M-16, near Anil studio, Block M, belok, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty supply store"
+      data-name="lior unisex salon">
+      <td class="col-idx">11</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Lior+unisex+salon/@28.5380149,77.2514391,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce38f525807c9:0x35f36c66de8619c!8m2!3d28.54027!4d77.2576746!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSARNiZWF1dHlfc3VwcGx5X3N0b3Jl4AEA!16s%2Fg%2F11yqwkj4qx?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Lior unisex salon</a></td>
+      <td class="col-cat">Beauty supply store</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:100%">★★★★★</span>
+  </span> 5</span></td>
+      <td class="col-reviews">15</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">G 31 lgf, Main Rd, Block H, Kalkaji, New Delhi, Delhi, 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Hairdresser"
+      data-name="jawed habib unisex salon kalkaji">
+      <td class="col-idx">12</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Jawed+Habib+Unisex+Salon+Kalkaji/@28.5380149,77.2514391,16z/data=!3m1!5s0x390ce3d951d08185:0x1be68a44847cc110!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3d94e07f0a5:0x63c758bef442fa3d!8m2!3d28.5404646!4d77.2572913!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgESdW5pc2V4X2hhaXJkcmVzc2Vy4AEA!16s%2Fg%2F1261gx9br?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Jawed Habib Unisex Salon Kalkaji</a></td>
+      <td class="col-cat">Hairdresser</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:80%">★★★★★</span>
+  </span> 4</span></td>
+      <td class="col-reviews">700</td>
+      <td class="col-phone">095609 54054</td>
+      <td class="col-web"><a href="https://jawedhabib.com/" target="_blank" rel="noopener" title="https://jawedhabib.com/">🔗</a></td>
+      <td class="col-addr">H9A, Main Rd, Krishna Market, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="styla x tha unisex salon by arun nail artist - best salon in kalkaji">
+      <td class="col-idx">13</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Styla+X+tha+Unisex+Salon+by+Arun+nail+artist+-+best+salon+in+kalkaji/@28.5404646,77.2482791,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3489a663cc3:0x5a1d143794f8b067!8m2!3d28.5383196!4d77.2599528!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11l5q_lsxg?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Styla X tha Unisex Salon by Arun nail artist - best salon in kalkaji</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">94</td>
+      <td class="col-phone">088267 48553</td>
+      <td class="col-web"><a href="https://www.instagram.com/styla_x_unisex_salon_by_arun?igsh=MWkyOGFwZGJkd2dkOA==" target="_blank" rel="noopener" title="https://www.instagram.com/styla_x_unisex_salon_by_arun?igsh=MWkyOGFwZGJkd2dkOA==">🔗</a></td>
+      <td class="col-addr">M-10 besmant, L block gurudwara, near, Main Rd, Block K, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Nail salon"
+      data-name="charm_n_contour unisex salon">
+      <td class="col-idx">14</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Charm_n_contour+Unisex+Salon/@28.5404646,77.2482791,16z/data=!3m1!5s0x390ce3da7a879b4f:0xd9c2172e7069cf9a!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3032287c8bb:0x3f9b79310047534f!8m2!3d28.5427886!4d77.2525155!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEKbmFpbF9zYWxvbpoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQycGpNRlp1UVRGa1JHYzBZVlZLZDFwdE9WQmFWRUpUVVd0d1UxTlZSUkFC4AEA-gEECDwQNg!16s%2Fg%2F11xzskdlst?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Charm_n_contour Unisex Salon</a></td>
+      <td class="col-cat">Nail salon</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.7">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:94%">★★★★★</span>
+  </span> 4.7</span></td>
+      <td class="col-reviews">31</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">B 35 b, main market, Block B, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="muskan makeover unisex salon">
+      <td class="col-idx">15</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Muskan+Makeover+Unisex+Salon/@28.5379664,77.2515698,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce107054cb901:0xbece179c82e16106!8m2!3d28.5379664!4d77.260582!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9u4AEA!16s%2Fg%2F11w1q283rx?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Muskan Makeover Unisex Salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">87</td>
+      <td class="col-phone">081307 82775</td>
+      <td class="col-web"><a href="https://www.instagram.com/muskanmakeover91?igsh=MWdjZmh0bWUzcmx2bQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener" title="https://www.instagram.com/muskanmakeover91?igsh=MWdjZmh0bWUzcmx2bQ%3D%3D&amp;utm_source=qr">🔗</a></td>
+      <td class="col-addr">M, 17, Main Rd, near Punjab &amp; Sindh Bank, Block M, Rampuri, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="rk unisex salon ( best salon in kalkaji )">
+      <td class="col-idx">16</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Rk+unisex+salon+(+best+salon+in+Kalkaji+)/@28.5379664,77.2515698,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3d58bea54e3:0x96887fabb43a5b02!8m2!3d28.5399352!4d77.2585264!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11q2s5r0h_?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Rk unisex salon ( best salon in Kalkaji )</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.6">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:92%">★★★★★</span>
+  </span> 4.6</span></td>
+      <td class="col-reviews">12</td>
+      <td class="col-phone">096546 12407</td>
+      <td class="col-web"><a href="https://www.instagram.com/rksalonbyroopa?igsh=MTZzMng3ZWF3bnRzaQ==" target="_blank" rel="noopener" title="https://www.instagram.com/rksalonbyroopa?igsh=MTZzMng3ZWF3bnRzaQ==">🔗</a></td>
+      <td class="col-addr">H-18, b main market, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class="row-icp"
+      data-icp="1"
+      data-location="Kalkaji New Delhi"
+      data-category="Hair salon"
+      data-name="hq unisex salon">
+      <td class="col-idx">17</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/HQ+Unisex+Salon/@28.5429113,77.243882,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3da6f784d3f:0xeb71ee0a7d38de53!8m2!3d28.5429113!4d77.2528942!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQpoYWlyX3NhbG9u4AEA!16s%2Fg%2F12hy_jg2f?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">HQ Unisex Salon</a></td>
+      <td class="col-cat">Hair salon</td>
+      <td class="col-rating"><span class="rating" style="color:#d97706"><span class="stars" title="3.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:78%">★★★★★</span>
+  </span> 3.9</span></td>
+      <td class="col-reviews">63</td>
+      <td class="col-phone">098189 11157</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">Basement, E-158, opposite Kandy’s Pastry Parlour, Block B, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-icp">ICP</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Hair salon"
+      data-name="new hair style salon">
+      <td class="col-idx">18</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/New+Hair+Style+salon/@28.5429113,77.243882,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3d06cc2f421:0x30dd10368678fb03!8m2!3d28.54481!4d77.251113!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQpoYWlyX3NhbG9u4AEA!16s%2Fg%2F11c1v1x0sk?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">New Hair Style salon</a></td>
+      <td class="col-cat">Hair salon</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:90%">★★★★★</span>
+  </span> 4.5</span></td>
+      <td class="col-reviews">39</td>
+      <td class="col-phone">098918 22271</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">back side, R16, Nehru Enclave, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="savita &amp; sapan professional beauty salon ( best beauty parlour in kalkaji )">
+      <td class="col-idx">19</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Savita+%26+Sapan+professional+beauty+salon+(+best+beauty+parlour+in+kalkaji+)/@28.5316346,77.2492195,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce161f0233d9b:0x8f9b744e3d39a99b!8m2!3d28.5316346!4d77.2582317!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVVJ3ZFc5dVFVbFJFQUXgAQD6AQQIJhBH!16s%2Fg%2F1pp2tlnnt?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Savita &amp; Sapan professional beauty salon ( best beauty parlour in kalkaji )</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">395</td>
+      <td class="col-phone">098109 23022</td>
+      <td class="col-web"><a href="https://instagram.com/pinkyshuborna" target="_blank" rel="noopener" title="https://instagram.com/pinkyshuborna">🔗</a></td>
+      <td class="col-addr">B, 115, DDA Flats St, near Raju book deport, DDA Flats Kalkaji, Harijan Colony, Block A, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Health and beauty shop"
+      data-name="ritu khaneja salon.diet.wellness">
+      <td class="col-idx">20</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Ritu+Khaneja+Salon.Diet.Wellness/@28.5406476,77.2479197,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3a76d0fb04f:0xd73a1f8e39a26359!8m2!3d28.5406476!4d77.2569319!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEWaGVhbHRoX2FuZF9iZWF1dHlfc2hvcJoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQydzVkazlYWkZOVVZXczBVVzVTVWxGWVRuaGlhMnhGWW1rd2VWUldSUkFC4AEA-gEECAAQQw!16s%2Fg%2F11k60w39tc?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Ritu Khaneja Salon.Diet.Wellness</a></td>
+      <td class="col-cat">Health and beauty shop</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.8">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:96%">★★★★★</span>
+  </span> 4.8</span></td>
+      <td class="col-reviews">107</td>
+      <td class="col-phone">070420 90949</td>
+      <td class="col-web"><a href="http://www.ritukhaneja.com/" target="_blank" rel="noopener" title="http://www.ritukhaneja.com/">🔗</a></td>
+      <td class="col-addr">H-3/b, Main Rd, Krishna Market, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="shimmer &#39;n&#39; shine salon">
+      <td class="col-idx">21</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Shimmer+&#39;N&#39;+Shine+salon/@28.5406476,77.2479197,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3dbd976c623:0xc43e851ae7965f08!8m2!3d28.5437083!4d77.2550408!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWS04wSTBaV1YyTlY5UU9FVkJFQUXgAQD6AQUIjAEQRw!16s%2Fg%2F1tflktl6?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Shimmer &#39;N&#39; Shine salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:90%">★★★★★</span>
+  </span> 4.5</span></td>
+      <td class="col-reviews">55</td>
+      <td class="col-phone">011 4109 8019</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">Ground Floor, Block E, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Make-up artist"
+      data-name="rose unisex salon">
+      <td class="col-idx">22</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Rose+Unisex+Salon/@28.5322541,77.2507589,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce1ec93195ff9:0x9e0743a52b7a399c!8m2!3d28.5322541!4d77.2597711!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgENbWFrZXVwX2FydGlzdJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VORU1tRlBObWxCUlJBQuABAPoBBAgAED4!16s%2Fg%2F11vwkcn3tx?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Rose Unisex Salon</a></td>
+      <td class="col-cat">Make-up artist</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.8">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:96%">★★★★★</span>
+  </span> 4.8</span></td>
+      <td class="col-reviews">37</td>
+      <td class="col-phone">087504 07845</td>
+      <td class="col-web"><a href="https://www.instagram.com/roseunisexsalon__?igsh=MTk3N2JodThiNTVkYQ==" target="_blank" rel="noopener" title="https://www.instagram.com/roseunisexsalon__?igsh=MTk3N2JodThiNTVkYQ==">🔗</a></td>
+      <td class="col-addr">M, 17, Main Rd, near Punjab &amp; Sindh Bank, DDA Flats Kalkaji, Jawaharlal Nehru Camp, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="lakme salon for him and her in cr park,delhi">
+      <td class="col-idx">23</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Lakme+Salon+For+Him+and+Her+in+CR+Park,Delhi/@28.5422081,77.2386608,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3370bdcd4e3:0xd7b6ad58d922aeab!8m2!3d28.5422081!4d77.247673!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9u4AEA!16s%2Fg%2F11t0pwd9np?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Lakme Salon For Him and Her in CR Park,Delhi</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.8">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:96%">★★★★★</span>
+  </span> 4.8</span></td>
+      <td class="col-reviews">1166</td>
+      <td class="col-phone">082910 75321</td>
+      <td class="col-web"><a href="https://salons.lakmesalon.in/lakme-salon-for-him-and-her-in-cr-park-delhi-beauty-parlour-chittaranjan-park-new-delhi-344854/Home" target="_blank" rel="noopener" title="https://salons.lakmesalon.in/lakme-salon-for-him-and-her-in-cr-park-delhi-beauty-parlour-chittaranjan-park-new-delhi-344854/Home">🔗</a></td>
+      <td class="col-addr">Upper Ground Floor, No B/315, Block B, Chittaranjan Park, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Nail salon"
+      data-name="file &amp; style">
+      <td class="col-idx">24</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/File+%26+Style/@28.5402746,77.2485476,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3c5de38fb67:0xcacebe7892ff3938!8m2!3d28.5402746!4d77.2575598!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEKbmFpbF9zYWxvbuABAA!16s%2Fg%2F11vy6k_lhc?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">File &amp; Style</a></td>
+      <td class="col-cat">Nail salon</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">149</td>
+      <td class="col-phone">070425 99796</td>
+      <td class="col-web"><a href="http://fileandstyle.in/" target="_blank" rel="noopener" title="http://fileandstyle.in/">🔗</a></td>
+      <td class="col-addr">H-11 C basement, Main Rd, near McDonalds, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="bn beauty unisex salon">
+      <td class="col-idx">25</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Bn+Beauty+unisex+salon/@28.5402746,77.2485476,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3f605773c49:0xa3311c2632ad88f2!8m2!3d28.5399324!4d77.2584081!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVVE1ZG1aNmIxWjNFQUXgAQD6AQQIABA6!16s%2Fg%2F11vf1kc_7p?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Bn Beauty unisex salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">29</td>
+      <td class="col-phone">085955 28224</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">H_18a basement, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="master harry unisex salon">
+      <td class="col-idx">26</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Master+Harry+Unisex+Salon/@28.5402746,77.2485476,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce31104f1e737:0xa4156b96081d871d!8m2!3d28.5368367!4d77.2581108!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVVJzT0hZM2NtSkJFQUXgAQD6AQQIABBD!16s%2Fg%2F11fklh16n8?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Master Harry Unisex Salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.6">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:92%">★★★★★</span>
+  </span> 4.6</span></td>
+      <td class="col-reviews">108</td>
+      <td class="col-phone">099994 56769</td>
+      <td class="col-web"><a href="https://www.justdial.com/Delhi/Master-Harry-Unisex-Salon-Next-to-Bandhan-Bank-Kalkaji/011PXX11-XX11-171214143208-T9U9_BZDET" target="_blank" rel="noopener" title="https://www.justdial.com/Delhi/Master-Harry-Unisex-Salon-Next-to-Bandhan-Bank-Kalkaji/011PXX11-XX11-171214143208-T9U9_BZDET">🔗</a></td>
+      <td class="col-addr">L-12, Block L, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="js unisex salon">
+      <td class="col-idx">27</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/JS+Unisex+Salon/@28.5402746,77.2485476,16z/data=!3m1!5s0x390ce3d95a5b8f85:0x84b3fe521558318a!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce390f1fce341:0x82ad5a7120d5b24!8m2!3d28.540619!4d77.2569364!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU14Y2xCTE1sTlJFQUXgAQD6AQQIABA6!16s%2Fg%2F11lm96h9lv?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">JS Unisex Salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.3">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:86%">★★★★★</span>
+  </span> 4.3</span></td>
+      <td class="col-reviews">27</td>
+      <td class="col-phone">079820 99463</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">basement, H-4A, near by anjali jewellersb, Krishna Market, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Make-up artist"
+      data-name="shivani ralhan makeovers">
+      <td class="col-idx">28</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Shivani+Ralhan+Makeovers/@28.540619,77.2479242,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3f14ea3e1bb:0x6fe0d303d121df83!8m2!3d28.5429281!4d77.2530528!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgENbWFrZXVwX2FydGlzdOABAA!16s%2Fg%2F11qmnvff08?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Shivani Ralhan Makeovers</a></td>
+      <td class="col-cat">Make-up artist</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.8">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:96%">★★★★★</span>
+  </span> 4.8</span></td>
+      <td class="col-reviews">152</td>
+      <td class="col-phone">099105 38020</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">GOL CHAKKAR, E-157, opp. KANDY PASTRY PARLOUR, Block B, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="jd unisex salon kalkaji">
+      <td class="col-idx">29</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/JD+Unisex+Salon+kalkaji/@28.543903,77.2426725,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce11c0184804b:0x1a8153462b6e5da!8m2!3d28.543903!4d77.2516847!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11rqgg6h8b?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">JD Unisex Salon kalkaji</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#dc2626"><span class="stars" title="2.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:58%">★★★★★</span>
+  </span> 2.9</span></td>
+      <td class="col-reviews">11</td>
+      <td class="col-phone">098189 08561</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">Building 49, Ground floor, near HDFC Bank, Block B, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="krasiva hair &amp; makeup studio">
+      <td class="col-idx">30</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/KRASIVA+hair+%26+makeup+studio/@28.543903,77.2426725,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3d9c32f9df1:0x5988b094286f4082!8m2!3d28.5393136!4d77.2527674!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU13YlRSTVJGVm5FQUXgAQD6AQUI2QEQSw!16s%2Fg%2F11b6pzklt5?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">KRASIVA hair &amp; makeup studio</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.6">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:92%">★★★★★</span>
+  </span> 4.6</span></td>
+      <td class="col-reviews">494</td>
+      <td class="col-phone">099580 86099</td>
+      <td class="col-web"><a href="https://www.facebook.com/krasivastudio/" target="_blank" rel="noopener" title="https://www.facebook.com/krasivastudio/">🔗</a></td>
+      <td class="col-addr">K-1/18, Chittaranjan Park, Near Deshbandhu College, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="the grand unisex salon">
+      <td class="col-idx">31</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/The+grand+unisex+salon/@28.537311,77.2552391,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce378740754c1:0x2627f7c4846f75a5!8m2!3d28.537311!4d77.2642513!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU0zWjA1NVZYWlJSUkFC4AEA-gEFCIgBEEI!16s%2Fg%2F11t2c1n01r?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">The grand unisex salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">94</td>
+      <td class="col-phone">083778 83308</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">Deepal jewelers, 271/4, Govindpuri, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Make-up artist"
+      data-name="anjali makeover salon &amp; academy">
+      <td class="col-idx">32</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Anjali+Makeover+Salon+%26+Academy/@28.532438,77.2438038,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3d01a1a0509:0xd4969f6235a09861!8m2!3d28.532438!4d77.252816!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgENbWFrZXVwX2FydGlzdJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VReWFVOUVOblJuUlJBQuABAPoBBQjRAhBG!16s%2Fg%2F11mn7x9cj4?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Anjali Makeover Salon &amp; Academy</a></td>
+      <td class="col-cat">Make-up artist</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:100%">★★★★★</span>
+  </span> 5</span></td>
+      <td class="col-reviews">160</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">M 6, opposite L block, gurudwara, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="payla&#39;s glam, unisex salon">
+      <td class="col-idx">33</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Payla&#39;s+Glam,+Unisex+Salon/@28.5406961,77.2481906,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce30010de65c1:0x5732ea98ac9ee07a!8m2!3d28.5406961!4d77.2572028!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJreGNXRlVUbUZVYWxadVdWZG9NVlF4UWpCaGJYaEVVVmRXUWxvd1JSQULgAQD6AQQIABA6!16s%2Fg%2F11mkcy16tb?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Payla&#39;s Glam, Unisex Salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:100%">★★★★★</span>
+  </span> 5</span></td>
+      <td class="col-reviews">9</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">G 16, A, Main Rd, Krishna Market, Block G, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Hair salon"
+      data-name="tn salon">
+      <td class="col-idx">34</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/TN+Salon/@28.5406961,77.2481906,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3da14c5611b:0xb779db3822e20890!8m2!3d28.5422329!4d77.2532532!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEKaGFpcl9zYWxvbpoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQycGFhMUpWYjNSbFIyUjBXRE5OZDA1SGREWmhiRUpQVWpBNU0xVlhZeEFC4AEA-gEFCJsDEEQ!16s%2Fg%2F11c7503007?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">TN Salon</a></td>
+      <td class="col-cat">Hair salon</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.8">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:96%">★★★★★</span>
+  </span> 4.8</span></td>
+      <td class="col-reviews">9</td>
+      <td class="col-phone">098101 05992</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">1st Floor, F-3, Main Rd, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Cosmetics store"
+      data-name="purplle - kalkaji">
+      <td class="col-idx">35</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Purplle+-+Kalkaji/@28.5406961,77.2481906,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce300313b25eb:0x328ae480b9a7b0b8!8m2!3d28.5406433!4d77.2572183!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEPY29zbWV0aWNzX3N0b3Jl4AEA!16s%2Fg%2F11ww68h58c?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Purplle - Kalkaji</a></td>
+      <td class="col-cat">Cosmetics store</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">1442</td>
+      <td class="col-phone">011 4802 9089</td>
+      <td class="col-web"><a href="https://www.purplle.com/" target="_blank" rel="noopener" title="https://www.purplle.com/">🔗</a></td>
+      <td class="col-addr">Purplle 8-A, Main Rd, Krishna Market, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Nail salon"
+      data-name="glam factory by komal">
+      <td class="col-idx">36</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Glam+Factory+by+komal/@28.5406961,77.2481906,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce349d3a1df0b:0xc8b08e4fa54a72f8!8m2!3d28.5402088!4d77.2579126!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEKbmFpbF9zYWxvbuABAA!16s%2Fg%2F11h0bpyp0t?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Glam Factory by komal</a></td>
+      <td class="col-cat">Nail salon</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.2">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:84%">★★★★★</span>
+  </span> 4.2</span></td>
+      <td class="col-reviews">398</td>
+      <td class="col-phone">085270 68402</td>
+      <td class="col-web"><a href="https://glamfactory.in/" target="_blank" rel="noopener" title="https://glamfactory.in/">🔗</a></td>
+      <td class="col-addr">G-32 lgf, Main Rd, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="jrs unisex salon and academy">
+      <td class="col-idx">37</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/JRS+UNISEX+SALON+AND+ACADEMY/@28.5406961,77.2481906,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce302965b4d63:0x894fbaa3134e0e!8m2!3d28.5424078!4d77.253308!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9u4AEA!16s%2Fg%2F11w1zf2007?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">JRS UNISEX SALON AND ACADEMY</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:100%">★★★★★</span>
+  </span> 5</span></td>
+      <td class="col-reviews">8</td>
+      <td class="col-phone">088519 23361</td>
+      <td class="col-web"><a href="https://www.jrsunisex.com/" target="_blank" rel="noopener" title="https://www.jrsunisex.com/">🔗</a></td>
+      <td class="col-addr">E- 154, LGF, Main Market, near Healthkart, Block E, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="athenian unisex salon delhi - best salon in delhi | hair colouring | makeup | keratin | permanent human hair extensions">
+      <td class="col-idx">38</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Athenian+Unisex+Salon+Delhi+-+Best+Salon+in+Delhi+%7C+Hair+Colouring+%7C+Makeup+%7C+Keratin+%7C+Permanent+Human+Hair+Extensions/@28.570968,77.2107418,16z/data=!4m10!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m5!1s0x390ce3343c674e3f:0x4b46a6cb3a134ee9!8m2!3d28.570968!4d77.2197536!16s%2Fg%2F11xg7g72wn?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Athenian Unisex Salon Delhi - Best Salon in Delhi | Hair Colouring | Makeup | Keratin | Permanent Human Hair Extensions</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">510</td>
+      <td class="col-phone">092209 73268</td>
+      <td class="col-web"><a href="https://www.atheniansalon.com/" target="_blank" rel="noopener" title="https://www.atheniansalon.com/">🔗</a></td>
+      <td class="col-addr">ground floor, F-18, South Extension I, Block F, New Delhi, Delhi 110049</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Spa"
+      data-name="nature green spa &amp; salon">
+      <td class="col-idx">39</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Nature+Green+Spa+%26+Salon/@28.538043,77.2505088,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3b73bbbbfd3:0xe241bb5c6bab801f!8m2!3d28.5404671!4d77.2572914!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEDc3BhmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU5sYVdVdFpWTjNFQUXgAQD6AQQIFxA9!16s%2Fg%2F11j36n3jmq?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Nature Green Spa &amp; Salon</a></td>
+      <td class="col-cat">Spa</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:100%">★★★★★</span>
+  </span> 5</span></td>
+      <td class="col-reviews">13</td>
+      <td class="col-phone">088263 77757</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">B, 36, Main Rd, Krishna Market, Block H, Market, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="roshni makeover studio">
+      <td class="col-idx">40</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Roshni+Makeover+Studio/@28.538043,77.2505088,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3dee1aab85d:0x2d312ad3e65c14b1!8m2!3d28.5386069!4d77.2595553!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU5hT0dJemVWSjNFQUXgAQD6AQQIShBF!16s%2Fg%2F11rqslv_4k?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Roshni Makeover Studio</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.6">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:92%">★★★★★</span>
+  </span> 4.6</span></td>
+      <td class="col-reviews">81</td>
+      <td class="col-phone">088810 78672</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">K-141, Main Rd, Block K, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class="row-icp"
+      data-icp="1"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="orra unisex hair and makeover studio">
+      <td class="col-idx">41</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/ORRA+Unisex+Hair+And+Makeover+Studio/@28.5423324,77.2444416,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3a52d007c2d:0xc8bf425bd921a003!8m2!3d28.5423324!4d77.2534538!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVVJtYmkxWFFsaG5FQUXgAQD6AQQIABBG!16s%2Fg%2F11h91lqnjr?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">ORRA Unisex Hair And Makeover Studio</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#d97706"><span class="stars" title="3.3">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:66%">★★★★★</span>
+  </span> 3.3</span></td>
+      <td class="col-reviews">36</td>
+      <td class="col-phone">088823 33189</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">H-6/B, Main Rd, near desbandhu colloge, Block E, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-icp">ICP</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Hair salon"
+      data-name="sameer ansari salon">
+      <td class="col-idx">42</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Sameer+Ansari+Salon/@28.5423324,77.2444416,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce376cdbaabab:0xcdebe9f9eb549000!8m2!3d28.5429028!4d77.2570787!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQpoYWlyX3NhbG9u4AEA!16s%2Fg%2F11vpdgc69y?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Sameer Ansari Salon</a></td>
+      <td class="col-cat">Hair salon</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:100%">★★★★★</span>
+  </span> 5</span></td>
+      <td class="col-reviews">5</td>
+      <td class="col-phone">096345 38931</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">Shop No 54 Poket 8, Kalkaji Extension, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Make-up artist"
+      data-name="mk salon and academy">
+      <td class="col-idx">43</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Mk+salon+and+academy/@28.5423324,77.2444416,16z/data=!3m1!5s0x390ce3deb87a1185:0xbe85d0baa7dfacb7!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390d1ddf7b4560db:0x314e8c96271e1a35!8m2!3d28.5398456!4d77.2586214!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgENbWFrZXVwX2FydGlzdJoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyeGFlbUZFYkdoV01uYzFWbGRrVkZKc2FIUlZWbU14VDFWR2NGcEdSUkFC4AEA-gEECGgQLw!16s%2Fg%2F11yhn6dkrs?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Mk salon and academy</a></td>
+      <td class="col-cat">Make-up artist</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">25</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><a href="https://www.instagram.com/p/DNV4hdlTxEh/?igsh=MTdkc3Ewa3Brbjh1eg==" target="_blank" rel="noopener" title="https://www.instagram.com/p/DNV4hdlTxEh/?igsh=MTdkc3Ewa3Brbjh1eg==">🔗</a></td>
+      <td class="col-addr">Shop No 5B, First Floor, Block H, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="hair wizard’s salon">
+      <td class="col-idx">44</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Hair+Wizard%E2%80%99s+Salon/@28.5391388,77.2435703,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3cc8ecec497:0x38dd5132190cf1d1!8m2!3d28.5391388!4d77.2525825!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGmSAQxiZWF1dHlfc2Fsb27gAQA!16s%2Fg%2F11hdb7mc00?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Hair Wizard’s Salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.7">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:94%">★★★★★</span>
+  </span> 4.7</span></td>
+      <td class="col-reviews">26</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">L-15, Block K 1, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class="row-icp"
+      data-icp="1"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="prana beauty salon">
+      <td class="col-idx">45</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Prana+Beauty+Salon/@28.542554,77.2447406,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3df117f72cd:0x5215653f34be12c6!8m2!3d28.542554!4d77.2537528!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVVJsTWpWMlMyVjNFQUXgAQD6AQQIABA0!16s%2Fg%2F11c86ptwfq?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Prana Beauty Salon</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.2">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:84%">★★★★★</span>
+  </span> 4.2</span></td>
+      <td class="col-reviews">10</td>
+      <td class="col-phone">011 2621 4650</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">E 13, Block E, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-icp">ICP</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="affinity express hair &amp; beauty studio, cr park">
+      <td class="col-idx">46</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Affinity+Express+Hair+%26+Beauty+Studio,+CR+Park/@28.541184,77.2401808,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3d0d87b0c5d:0xf420c5166f14de3c!8m2!3d28.541184!4d77.249193!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9u4AEA!16s%2Fg%2F11bw3dnp9j?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Affinity Express Hair &amp; Beauty Studio, CR Park</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.1">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:82%">★★★★★</span>
+  </span> 4.1</span></td>
+      <td class="col-reviews">414</td>
+      <td class="col-phone">088908 90890</td>
+      <td class="col-web"><a href="http://www.theaffinitysalon.com/" target="_blank" rel="noopener" title="http://www.theaffinitysalon.com/">🔗</a></td>
+      <td class="col-addr">40/45, CR Park Main Rd, Pocket 40, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class="row-icp"
+      data-icp="1"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="the beauty lab">
+      <td class="col-idx">47</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/The+Beauty+Lab/@28.5390692,77.2508801,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3188701accb:0x482bff483a04db40!8m2!3d28.5390692!4d77.2598923!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVVJzZEV0WFdrZEJFQUXgAQD6AQQIHhAo!16s%2Fg%2F11k3tmbjtp?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">The Beauty Lab</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.1">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:82%">★★★★★</span>
+  </span> 4.1</span></td>
+      <td class="col-reviews">58</td>
+      <td class="col-phone">099581 08128</td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">K-81 B LGF, Block K, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-icp">ICP</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Hairdresser"
+      data-name="hair by parvej unisex salon kalka ji">
+      <td class="col-idx">48</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Hair+by+Parvej+Unisex+salon+kalka+ji/@28.5434898,77.2408074,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce1d8160c36ed:0xdc1591051f629224!8m2!3d28.5434898!4d77.2498196!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgESdW5pc2V4X2hhaXJkcmVzc2Vy4AEA!16s%2Fg%2F11vppnpgn9?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Hair by Parvej Unisex salon kalka ji</a></td>
+      <td class="col-cat">Hairdresser</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.9">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:98%">★★★★★</span>
+  </span> 4.9</span></td>
+      <td class="col-reviews">191</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">Double Storey, Gate-5,Nehru enclave Metro Station, A-225, near Nehru enclave, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Hair salon"
+      data-name="verma hair dressers">
+      <td class="col-idx">49</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Verma+Hair+Dressers/@28.5434898,77.2408074,16z/data=!3m1!5s0x390ce3da68ea61b1:0x3253bbd83e5fae24!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3da692c9a99:0xcfa8410536bba272!8m2!3d28.5427373!4d77.2531369!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEKaGFpcl9zYWxvbpoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VSR2NYUjZlV3hCUlJBQuABAPoBBAgAECI!16s%2Fg%2F11c5h2jmxd?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Verma Hair Dressers</a></td>
+      <td class="col-cat">Hair salon</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.3">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:86%">★★★★★</span>
+  </span> 4.3</span></td>
+      <td class="col-reviews">7</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><span class="icon-null">—</span></td>
+      <td class="col-addr">28, Shyam Sunder Malhotra Marg, Block B, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Educational institution"
+      data-name="lakmé academy, kalkaji">
+      <td class="col-idx">50</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/Lakm%C3%A9+Academy,+Kalkaji/@28.5427373,77.2441247,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce3898a9a0bf7:0xc6926dc4263019f!8m2!3d28.5422306!4d77.2530746!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEXZWR1Y2F0aW9uYWxfaW5zdGl0dXRpb26aASRDaGREU1VoTk1HOW5TMFZKUTBGblNVTnlkMjlJYTJwM1JSQULgAQD6AQUIqQEQSw!16s%2Fg%2F11h0t5shrk?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Lakmé Academy, Kalkaji</a></td>
+      <td class="col-cat">Educational institution</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.1">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:82%">★★★★★</span>
+  </span> 4.1</span></td>
+      <td class="col-reviews">141</td>
+      <td class="col-phone">098998 90931</td>
+      <td class="col-web"><a href="https://www.lakme-academy.com/locate-a-centre/new-delhi/delhi-kalkaji" target="_blank" rel="noopener" title="https://www.lakme-academy.com/locate-a-centre/new-delhi/delhi-kalkaji">🔗</a></td>
+      <td class="col-addr">3rd Floor, F 2, Block F, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="la pearls unisex salon ( trt....beauty....hair....makeup )">
+      <td class="col-idx">51</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/La+Pearls+Unisex+Salon+(+TRT....Beauty....Hair....Makeup+)/@28.5427373,77.2441247,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce39bd350f76b:0x606be39a10134dcc!8m2!3d28.5361169!4d77.2577515!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5VTm5SUFVqaDNSUkFC4AEA-gEECCwQSw!16s%2Fg%2F11sts1_tzf?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">La Pearls Unisex Salon ( TRT....Beauty....Hair....Makeup )</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="4.7">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:94%">★★★★★</span>
+  </span> 4.7</span></td>
+      <td class="col-reviews">72</td>
+      <td class="col-phone">072899 15391</td>
+      <td class="col-web"><a href="https://instagram.com/salonlapearls_23?igshid=MmIzYWVlNDQ5Yg==" target="_blank" rel="noopener" title="https://instagram.com/salonlapearls_23?igshid=MmIzYWVlNDQ5Yg==">🔗</a></td>
+      <td class="col-addr">1914B, 19, Vishwakarma Mandir Marg, near ICICI Bank, Govindpuri Extension, Block E, Chittaranjan Park, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-yes">✓</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+<tr class=""
+      data-icp="0"
+      data-location="Kalkaji New Delhi"
+      data-category="Beauty Parlour"
+      data-name="getlook salon at home delhi">
+      <td class="col-idx">52</td>
+      <td class="col-name"><a href="https://www.google.com/maps/place/GetLook+Salon+At+Home+Delhi/@28.540182,77.2511508,16z/data=!4m11!1m3!2m2!1ssalons+in+Kalkaji+New+Delhi!6e1!3m6!1s0x390ce304790c6bf9:0xfba2768324d81f36!8m2!3d28.540182!4d77.260163!15sChtzYWxvbnMgaW4gS2Fsa2FqaSBOZXcgRGVsaGlaHSIbc2Fsb25zIGluIGthbGthamkgbmV3IGRlbGhpkgEMYmVhdXR5X3NhbG9umgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJ0MGIwMUlhRUpqUkVZd1lVaHdUMkZJU2pSa01Wa3hVa1JPZDJWV1JSQULgAQD6AQQIfhAo!16s%2Fg%2F11ym8y72x3?entry=ttu&amp;g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">GetLook Salon At Home Delhi</a></td>
+      <td class="col-cat">Beauty Parlour</td>
+      <td class="col-rating"><span class="rating" style="color:#16a34a"><span class="stars" title="5">
+    <span class="stars-bg">★★★★★</span>
+    <span class="stars-fg" style="width:100%">★★★★★</span>
+  </span> 5</span></td>
+      <td class="col-reviews">2</td>
+      <td class="col-phone"><span class="icon-null">—</span></td>
+      <td class="col-web"><a href="https://getlook.in/salon-at-home/delhi" target="_blank" rel="noopener" title="https://getlook.in/salon-at-home/delhi">🔗</a></td>
+      <td class="col-addr">61B, Block K, Kalkaji, New Delhi, Delhi 110019</td>
+      <td class="col-hours"><span class="icon-yes">✓</span></td>
+      <td class="col-photos"><span class="icon-no" title="No photos">✗</span></td>
+      <td class="col-reply"><span class="icon-no">✗</span></td>
+      <td class="col-icp"><span class="badge badge-no">No</span></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+let icpFilter = 'all';
+let sortCol = -1;
+let sortDir = 1;
+
+function setIcpFilter(val) {
+  icpFilter = val;
+  document.getElementById('btn-all').classList.toggle('active', val === 'all');
+  document.getElementById('btn-icp').classList.toggle('active', val === 'icp');
+  applyFilters();
+}
+
+function applyFilters() {
+  const q = (document.getElementById('search').value || '').toLowerCase().trim();
+  const loc = (document.getElementById('loc-filter') || {}).value || '';
+  const cat = (document.getElementById('cat-filter') || {}).value || '';
+  const rows = document.querySelectorAll('#tbody tr');
+  let visible = 0;
+  rows.forEach(row => {
+    const nameMatch = !q || row.dataset.name.includes(q);
+    const icpMatch = icpFilter === 'all' || row.dataset.icp === '1';
+    const locMatch = !loc || row.dataset.location === loc;
+    const catMatch = !cat || row.dataset.category === cat;
+    const show = nameMatch && icpMatch && locMatch && catMatch;
+    row.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+  const total = rows.length;
+  document.getElementById('row-count').textContent =
+    visible === total ? `${total} businesses` : `${visible} of ${total} businesses`;
+}
+
+function sortTable(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = 1; }
+
+  // Update arrows
+  document.querySelectorAll('[id^="sa"]').forEach(el => el.textContent = '');
+  const arrowEl = document.getElementById('sa' + col);
+  if (arrowEl) arrowEl.textContent = sortDir === 1 ? ' ▲' : ' ▼';
+
+  const tbody = document.getElementById('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+
+  rows.sort((a, b) => {
+    const ac = a.cells[col], bc = b.cells[col];
+    if (!ac || !bc) return 0;
+    const at = ac.textContent.trim();
+    const bt = bc.textContent.trim();
+    const an = parseFloat(at), bn = parseFloat(bt);
+    if (!isNaN(an) && !isNaN(bn)) return (an - bn) * sortDir;
+    return at.localeCompare(bt) * sortDir;
+  });
+
+  rows.forEach(r => tbody.appendChild(r));
+  // Re-number index column
+  let idx = 1;
+  rows.forEach(r => { r.cells[0].textContent = idx++; });
+}
+</script>
+
+</body>
+</html>

@@ -68,8 +68,7 @@ Continue where you left off, or review a previous stage?
 
 ### 3. Load References
 
-- Read `shared/git_strategy.md` for branch and commit conventions.
-- Read the target project's CLAUDE.md (`projects/<project-name>/CLAUDE.md`) for project-specific conventions, tech stack, and architecture. If the project repo doesn't exist yet (greenfield with no repo), skip this — conventions will be established during Requirements Analysis.
+- Read the target project's CLAUDE.md (`projects/<project-name>/CLAUDE.md`) for project-specific conventions, tech stack, architecture, and git/branch conventions. If the project repo doesn't exist yet (greenfield with no repo), skip this — conventions will be established during Requirements Analysis.
 
 ### 4. Initialize Feature Docs Structure
 

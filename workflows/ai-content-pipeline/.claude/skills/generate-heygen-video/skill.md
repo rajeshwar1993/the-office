@@ -8,7 +8,7 @@ user-invocable: true
 
 You are automating video generation on HeyGen using Playwright browser automation.
 
-**Working directory:** `workflows/ai-content-pipeline/`
+**Working directory:** this workflow's root (the directory containing `heygen/`, `avatars/`, `engine-v1.md`). All paths below are relative to it.
 
 ## Parse Arguments
 
@@ -81,7 +81,7 @@ For single-file mode, build a one-item queue using the same structure. Derive `l
 
 ## Config Files
 
-All config lives in `workflows/ai-content-pipeline/heygen/`:
+All config lives in `heygen/`:
 
 | File | Purpose |
 |------|---------|
@@ -96,8 +96,8 @@ All config lives in `workflows/ai-content-pipeline/heygen/`:
 Walk the user through HeyGen step-by-step. At each step, take a browser snapshot, ask what to do, execute the action, and record the step into `playbook.json`.
 
 ### Pre-flight
-1. Read `workflows/ai-content-pipeline/heygen/config.json`
-2. Read `workflows/ai-content-pipeline/heygen/playbook.json`
+1. Read `heygen/config.json`
+2. Read `heygen/playbook.json`
 3. If playbook already has steps, warn: "A playbook already exists with N steps. This will overwrite it. Continue?"
 
 ### Procedure
@@ -209,7 +209,7 @@ Mark variable steps with `{{variable_name}}` in the value field:
 
 **Step 4 — Save Playbook**
 
-Write the final playbook to `workflows/ai-content-pipeline/heygen/playbook.json`:
+Write the final playbook to `heygen/playbook.json`:
 
 ```json
 {
@@ -231,11 +231,11 @@ Tell the user: "Playbook saved with N steps. You can now use `/generate-heygen-v
 
 ### Pre-flight Checks
 
-1. Read `workflows/ai-content-pipeline/heygen/playbook.json`
+1. Read `heygen/playbook.json`
    - If `status` is `"not_recorded"` → tell user to run learn mode first, stop
    - If `steps` is empty → tell user to run learn mode first, stop
 
-2. Read `workflows/ai-content-pipeline/heygen/config.json`
+2. Read `heygen/config.json`
 
 3. **Resolve Input Path** (see section above) to determine single-file or batch mode
 
@@ -528,8 +528,8 @@ When an expected element can't be found during any prescriptive step (3A–3P):
 
 ### Procedure
 
-1. Read `workflows/ai-content-pipeline/heygen/config.json`
-2. List available avatars by scanning `workflows/ai-content-pipeline/avatars/` (exclude `_template/`)
+1. Read `heygen/config.json`
+2. List available avatars by scanning `avatars/` (exclude `_template/`)
 3. For each avatar, show current HeyGen mapping:
    ```
    Avatar: maya
